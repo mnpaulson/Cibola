@@ -3,7 +3,24 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
-@import "variables";
+// @import "variables";
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+.cdb-app-drawer {
+    a {
+        text-decoration: none;
+    }
+    
+}
+
+.cdb-toolbar-icon {
+    height: 48px;
+}
+
+.card {
+    margin-left: 3px;
+    margin-right: 3px;
+    
+}

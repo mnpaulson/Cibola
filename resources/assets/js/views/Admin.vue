@@ -1,3 +1,3 @@
 <template>
-  <p>admin page</p>
+  <employee-form></employee-form>
 </template>

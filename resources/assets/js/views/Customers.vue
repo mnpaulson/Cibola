@@ -1,3 +1,3 @@
 <template>
-  <p>Customers Page</p>
+  <customer-form></customer-form>
 </template>
