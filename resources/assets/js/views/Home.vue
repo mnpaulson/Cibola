@@ -1,6 +1,14 @@
 <template>
 <v-layout row>
-    <customer-form v-bind:id="1"></customer-form>
+    <customer-form :id.sync="id"></customer-form>
     <job-lookup></job-lookup>
 </v-layout>
 </template>
+
+<script>
+    export default {
+        data: () => ({
+            id: 1
+        })
+    }
+</script>

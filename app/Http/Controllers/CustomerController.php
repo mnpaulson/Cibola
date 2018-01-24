@@ -26,16 +26,26 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        echo $request;
-        $customer = new Customer([
-            'fname' => $request->get('fname'),
-            'lname' => $request->get('lname'),
-            'phone' => $request->get('phone'),
-            'email' => $request->get('email'),
-            'address' => $request->get('address')
-        ]);
+        // echo $request;
+        // $customer = new Customer([
+        //     'fname' => $request->get('fname'),
+        //     'lname' => $request->get('lname'),
+        //     'phone' => $request->get('phone'),
+        //     'email' => $request->get('email'),
+        //     'address' => $request->get('address')
+        // ]);
+        // $customer->save();
+        // return response("Customer Added");
+        $customer = new Customer;
+
+        $customer->fname = $request->fname;
+        $customer->lname = $request->lname;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->address = $request->address;
+
         $customer->save();
-        return response("Customer Added");
+        return response()->json($customer->id);
     }
 
     /**
@@ -44,10 +54,10 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $customers = Customer::table('customers')->where('id', $id)->first();
-        echo $customers;
+        $customer = \App\Customer::where('id', $request->id)->get();
+        return response()->json($customer);
     }
 
 
