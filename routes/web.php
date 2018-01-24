@@ -10,6 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
+Route::post('customers/store', 'CustomerController@store')->name('customers.store');
+Route::get('customers/show', 'CustomerController@show')->name('customers.show');
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');
