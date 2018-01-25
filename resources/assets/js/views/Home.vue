@@ -8,7 +8,7 @@
 <script>
     export default {
         data: () => ({
-            id: 1
+            id: null
         })
     }
 </script>

@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Customer Routes
 Route::post('customers/store', 'CustomerController@store')->name('customers.store');
 Route::post('customers/show', 'CustomerController@show')->name('customers.show');
+Route::post('customers/update', 'CustomerController@update')->name('customers.update');
+Route::get('customers/index', 'CustomerController@index')->name('customers.index');
+
+//Everything else vue
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');

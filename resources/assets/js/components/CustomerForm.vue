@@ -42,7 +42,7 @@
         </div>
         <div v-show="isForm">
           <v-btn v-show="customer.id == null" color="primary" @click="storeCustomer()">Add Customer</v-btn>
-          <v-btn v-show="customer.id" color="primary" @click="storeCustomer()">Update Customer</v-btn>
+          <v-btn v-show="customer.id" color="primary" @click="updateCustomer()">Update Customer</v-btn>
           <v-btn color="error" @click="setFormState(false)">Cancel</v-btn>
         </div>
         <div v-show="isInfo" class="cdb-bottom-right">
@@ -84,8 +84,13 @@
     methods: {
 
       searchName() {
-        console.log(this.name);
-        console.log(this.id);
+        axios.get('customers/index')
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });        
       },
 
       //Sets the state of the customer card
@@ -123,6 +128,17 @@
           .then((response) => {
             console.log(response);
             this.customer.id = response.data;
+            this.setFormState(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+
+      updateCustomer() {
+        axios.post('customers/update', this.customer)
+          .then((response) => {
+            console.log(response);
             this.setFormState(false);
           })
           .catch((error) => {

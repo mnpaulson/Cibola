@@ -68,9 +68,20 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $customer = new Customer;
+
+        $customer = \App\Customer::where('id', $request->id)->first();
+
+        $customer->fname = $request->fname;
+        $customer->lname = $request->lname;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->address = $request->address;
+
+        $customer->save();
+        return response()->json($customer->id);
     }
 
     /**
