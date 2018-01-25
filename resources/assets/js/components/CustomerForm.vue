@@ -84,7 +84,7 @@
     methods: {
 
       searchName() {
-        axios.get('customers/index')
+        axios.get('customers/searchList')
           .then((response) => {
             console.log(response.data);
           })

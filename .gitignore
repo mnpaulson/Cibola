@@ -13,3 +13,7 @@ yarn-error.log
 config/app.php
 config/app.php
 config/app.php
+
+package-lock.json
+
+config/app.php

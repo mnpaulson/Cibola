@@ -18,6 +18,12 @@ class CustomerController extends Controller
         return response()->json($customers);
     }
 
+    public function searchList()
+    {
+        $customers = Customer::all(['fname', 'lname', 'id']);
+        return response()->json($customers);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
