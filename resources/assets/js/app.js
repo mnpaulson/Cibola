@@ -10,7 +10,7 @@ require('./bootstrap');
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
-
+import VueFuse from 'vue-fuse'
 
 Vue.use(VueRouter)
 // Vue.use(Vuetify)
@@ -65,6 +65,8 @@ const router = new VueRouter({
         },
     ],
 });
+
+Vue.use(VueFuse)
 
 const app = new Vue({
     el: '#app',

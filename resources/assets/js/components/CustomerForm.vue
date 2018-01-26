@@ -7,7 +7,17 @@
       </v-toolbar>
       <v-card-text>
         <v-flex xs12 v-if="isSearch">
-          <v-text-field label="Customer Search" v-model="customer.name" xs12 @keyup="searchName"></v-text-field>
+          <!-- <v-text-field label="Customer Search" v-model="name" xs12 @keyup="searchName"></v-text-field> -->
+          <v-select
+              v-model="searchSelect"
+              :search-input.sync="search"
+              label="Customer Search"
+              combobox
+              cache-items
+              :items="searchResults"
+              item-text="name"
+              item-value="id"
+            ></v-select>
         </v-flex>
         <v-flex xs12 v-if="isInfo">
           <p>
@@ -62,6 +72,19 @@
       isSearch: false,
       isInfo: false,
       header: "",
+      searchSelect: "",
+      searchResults: [],
+      searchList: null,
+      search: [],
+      searchOptions: {
+          shouldSort: true,
+          threshold: 0.6,
+          location: 0,
+          distance: 100,
+          maxPatternLength: 32,
+          minMatchCharLength: 1,
+        keys: ["fname", "lname"]
+      },
       customer: {
         fname: null,
         lname: null,
@@ -81,16 +104,40 @@
       id: Number
     },
 
+    watch: {
+      search (val) {
+        val && this.searchName(val)
+      },
+      searchSelect (val) {
+        // console.log(val);
+        if (!isNaN(val)) {
+          // console.log(val);
+          this.getCustomer(val);
+          this.$emit('update:id', val);
+        }
+      }
+    },
+
     methods: {
 
       searchName() {
-        axios.get('customers/searchList')
+        axios.get('/customers/searchList')
           .then((response) => {
-            console.log(response.data);
+            this.searchList = response.data;
+            this.fuseMatch();
           })
           .catch((error) => {
             console.log(error);
           });        
+      },
+
+      fuseMatch() {
+        this.$search(this.search, this.searchList, this.searchOptions).then(results => {
+          results.forEach(result => {
+            this.searchResults = [];
+            this.searchResults.push({name: result.fname + " " + result.lname, id: result.id});
+          });
+        })
       },
 
       //Sets the state of the customer card
@@ -126,7 +173,6 @@
       storeCustomer() {
         axios.post('customers/store', this.customer)
           .then((response) => {
-            console.log(response);
             this.customer.id = response.data;
             this.setFormState(false);
           })
@@ -138,7 +184,6 @@
       updateCustomer() {
         axios.post('customers/update', this.customer)
           .then((response) => {
-            console.log(response);
             this.setFormState(false);
           })
           .catch((error) => {
@@ -155,6 +200,8 @@
         this.customer.id = null;
         this.$emit('update:id', null);
         this.setFormState(false);
+        this.searchResults = [];
+        this.searchSelect = null;
         
       },
 
@@ -178,7 +225,7 @@
 
     mounted() {
       if (this.id !== null) this.getCustomer(this.id);
-      this.setFormState(false);
+      else this.setFormState(false);
         
     }
 
