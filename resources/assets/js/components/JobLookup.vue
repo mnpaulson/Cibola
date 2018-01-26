@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm6>
+  <v-flex xs12 sm12 md3>
     <v-card>
       <v-toolbar color="indigo" dark clipped-left flat>
         <v-toolbar-title>Job Bag Lookup</v-toolbar-title>

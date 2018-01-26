@@ -17,3 +17,4 @@ config/app.php
 package-lock.json
 
 config/app.php
+public/js/app.js

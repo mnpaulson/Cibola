@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm6>
+  <v-flex xs12 sm12 md4>
     <v-card>
       <v-toolbar color="indigo" dark clipped-left flat>
         <v-toolbar-title>{{ header }}</v-toolbar-title>
@@ -7,26 +7,28 @@
       </v-toolbar>
       <v-card-text>
         <v-flex xs12 v-if="isSearch">
-          <!-- <v-text-field label="Customer Search" v-model="name" xs12 @keyup="searchName"></v-text-field> -->
           <v-select
               v-model="searchSelect"
               :search-input.sync="search"
               label="Customer Search"
               combobox
               cache-items
-              :items="searchResults"
+              :items="fuseList"
               item-text="name"
               item-value="id"
             ></v-select>
         </v-flex>
         <v-flex xs12 v-if="isInfo">
-          <p>
-            Name: 
+          <h3 class="headline mb-0">
+            <v-icon large>person</v-icon>
             <span>{{ customer.fname }}</span>
             <span>{{ customer.lname }}</span>
+          </h3>
+          <p>
+            <v-icon>phone</v-icon> {{ customer.phone }} <br>
+            <v-icon>email</v-icon> {{ customer.email }} <br>
+            <v-icon>home</v-icon> {{ customer.address }}
           </p>
-          <p>Phone: {{ customer.phone }} Email: {{ customer.email }}</p>
-          <p>Address: {{ customer.address }}</p>
         </v-flex>
         <v-form>
           <v-layout row wrap v-if="isForm">
@@ -72,8 +74,8 @@
       isSearch: false,
       isInfo: false,
       header: "",
-      searchSelect: "",
-      searchResults: [],
+      searchSelect: "", //name after selection is made
+      fuseList: [],
       searchList: null,
       search: [],
       searchOptions: {
@@ -109,9 +111,7 @@
         val && this.searchName(val)
       },
       searchSelect (val) {
-        // console.log(val);
         if (!isNaN(val)) {
-          // console.log(val);
           this.getCustomer(val);
           this.$emit('update:id', val);
         }
@@ -121,21 +121,27 @@
     methods: {
 
       searchName() {
-        axios.get('/customers/searchList')
-          .then((response) => {
-            this.searchList = response.data;
-            this.fuseMatch();
-          })
-          .catch((error) => {
-            console.log(error);
-          });        
+        if (this.searchList == null) {
+          axios.get('/customers/searchList')
+            .then((response) => {
+              this.searchList = response.data;
+              this.fuseMatch();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          console.log("Skipping Query Running fuse");
+          this.fuseMatch();
+        }       
       },
 
       fuseMatch() {
+        this.fuseList = [];
         this.$search(this.search, this.searchList, this.searchOptions).then(results => {
           results.forEach(result => {
-            this.searchResults = [];
-            this.searchResults.push({name: result.fname + " " + result.lname, id: result.id});
+            this.fuseList.push({name: result.fname + " " + result.lname, id: result.id});
+            console.log(this.fuseList);
           });
         })
       },
@@ -175,6 +181,8 @@
           .then((response) => {
             this.customer.id = response.data;
             this.setFormState(false);
+            //Empty search list so new customer will show up
+            this.searchList = null;
           })
           .catch((error) => {
             console.log(error);
@@ -200,7 +208,7 @@
         this.customer.id = null;
         this.$emit('update:id', null);
         this.setFormState(false);
-        this.searchResults = [];
+        this.fuseList = [];
         this.searchSelect = null;
         
       },
