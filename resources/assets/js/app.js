@@ -30,18 +30,20 @@ Vue.use(Vuetify, {
 import App from './views/App'
 import Job from './views/Job'
 import Home from './views/Home'
-import Customers from './views/Customers'
+import Customer from './views/Customer'
 import Admin from './views/Admin'
 import CustomerForm from './components/CustomerForm'
 import JobLookup from './components/JobLookup'
 import EmployeeForm from './components/EmployeeForm'
+import CustomerList from './components/CustomerList'
 
 Vue.component('CustomerForm', require('./components/CustomerForm.vue'));
 Vue.component('JobLookup', require('./components/JobLookup.vue'));
 Vue.component('EmployeeForm', require('./components/EmployeeForm.vue'));
+Vue.component('CustomerList', require('./components/CustomerList.vue'));
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes: [
         {
             path: '/',
@@ -54,15 +56,20 @@ const router = new VueRouter({
             component: Job,
         },
         {
-            path: '/customers',
-            name: 'customers',
-            component: Customers,
-        },
-        {
             path: '/admin',
             name: 'admin',
             component: Admin,
         },
+        {
+            path: '/customer',
+            name: 'customers',
+            component: Customer
+        },
+        {
+            path: '/customer/:id',
+            name: 'customer',
+            component: Customer
+        }
     ],
 });
 

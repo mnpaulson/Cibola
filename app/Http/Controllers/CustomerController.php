@@ -24,6 +24,15 @@ class CustomerController extends Controller
         return response()->json($customers);
     }
 
+    public function recentCustomerList()
+    {
+        $customer = \App\Customer::orderBy('updated_at', 'desc')
+            ->take(10)
+            ->get();
+        
+        return response()->json($customer);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -96,8 +105,11 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        // $customer = \App\customer::find($request);
+        // $customer->delete();
+        \App\customer::destroy($request->id);
+        echo response()->json($request->id);
     }
 }

@@ -10,8 +10,8 @@
           <v-select
               v-model="searchSelect"
               :search-input.sync="search"
+              autocomplete
               label="Customer Search"
-              combobox
               cache-items
               :items="fuseList"
               item-text="name"
@@ -55,7 +55,7 @@
         <div v-show="isForm">
           <v-btn v-show="customer.id == null" color="primary" @click="storeCustomer()">Add Customer</v-btn>
           <v-btn v-show="customer.id" color="primary" @click="updateCustomer()">Update Customer</v-btn>
-          <v-btn color="error" @click="setFormState(false)">Cancel</v-btn>
+          <v-btn color="error" @click="clearCustomer()">Cancel</v-btn>
         </div>
         <div v-show="isInfo" class="cdb-bottom-right">
           <v-btn fab dark small color="primary" @click="setFormState(true)"><v-icon dark>edit</v-icon></v-btn>
@@ -111,10 +111,16 @@
         val && this.searchName(val)
       },
       searchSelect (val) {
-        if (!isNaN(val)) {
+        if (!isNaN(val) && val != null) {
           this.getCustomer(val);
           this.$emit('update:id', val);
         }
+      },
+      id (val) {
+        if (!isNaN(this.id) && this.id !== null) {
+          this.getCustomer(this.id);
+        }
+        else this.setFormState(false);
       }
     },
 
@@ -131,7 +137,6 @@
               console.log(error);
             });
         } else {
-          console.log("Skipping Query Running fuse");
           this.fuseMatch();
         }       
       },
@@ -141,7 +146,6 @@
         this.$search(this.search, this.searchList, this.searchOptions).then(results => {
           results.forEach(result => {
             this.fuseList.push({name: result.fname + " " + result.lname, id: result.id});
-            console.log(this.fuseList);
           });
         })
       },
@@ -160,12 +164,17 @@
           } else {
             this.header = "Add New Customer";
           }
-          
-        } else if (this.customer.id == null){
+        } else if (this.id == null){
           this.isForm = false;
           this.isSearch = true;
           this.isInfo = false;
           this.header = "Customer Lookup";
+          this.customer.fname = null;
+          this.customer.lname = null;
+          this.customer.phone = null;
+          this.customer.email = null;
+          this.customer.address = null;
+          this.customer.id = null;
         } else {
           this.isForm = false;
           this.isSearch = false;
@@ -183,6 +192,7 @@
             this.setFormState(false);
             //Empty search list so new customer will show up
             this.searchList = null;
+            this.$emit('newCustomer');
           })
           .catch((error) => {
             console.log(error);
@@ -232,7 +242,10 @@
     },
 
     mounted() {
-      if (this.id !== null) this.getCustomer(this.id);
+      console.log("mounted: " + this.id);
+      if (this.id !== null) {
+        this.getCustomer(this.id);
+      }
       else this.setFormState(false);
         
     }
