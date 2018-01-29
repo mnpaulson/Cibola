@@ -4,11 +4,6 @@
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 // Customer Routes
 Route::post('customers/store', 'CustomerController@store')->name('customers.store');
@@ -18,6 +13,14 @@ Route::post('customers/update', 'CustomerController@update')->name('customers.up
 Route::get('customers/index', 'CustomerController@index')->name('customers.index');
 Route::get('customers/searchList', 'CustomerController@searchList')->name('customers.searchList');
 Route::get('customers/recentCustomerList', 'CustomerController@recentCustomerList')->name('customers.recentCustomerList');
+
+//Employee Routes
+Route::post('employees/create', 'EmployeeController@create')->name('employees.create');
+Route::post('employees/update', 'EmployeeController@update')->name('employees.update');
+Route::post('employees/delete', 'EmployeeController@delete')->name('employees.delete');
+Route::get('employees/index', 'EmployeeController@index')->name('employees.index');
+
+
 
 //Everything else vue
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');

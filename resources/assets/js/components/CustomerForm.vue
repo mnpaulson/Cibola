@@ -199,6 +199,7 @@
           });
       },
 
+      //Updates the customer with current information
       updateCustomer() {
         axios.post('customers/update', this.customer)
           .then((response) => {
@@ -209,6 +210,7 @@
           });
       },
 
+      //Clears customer data and updates parent that there is no customer selected
       clearCustomer() {
         this.customer.fname = null;
         this.customer.lname = null;

@@ -64951,6 +64951,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(error);
       });
     },
+
+
+    //Updates the customer with current information
     updateCustomer: function updateCustomer() {
       var _this4 = this;
 
@@ -64960,6 +64963,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(error);
       });
     },
+
+
+    //Clears customer data and updates parent that there is no customer selected
     clearCustomer: function clearCustomer() {
       this.customer.fname = null;
       this.customer.lname = null;
@@ -65511,24 +65517,139 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            name: null,
-            // Placeholder hard coded names
-            employees: [{ name: 'Graham', id: 1 }, { name: 'Elliot', id: 2 }, { name: 'Amanda', id: 3 }, { name: 'Carly', id: 4 }]
+            currentEmployee: {
+                id: null,
+                name: null,
+                active: null
+            },
+            employees: [],
+            deleteId: null, //Holds ID of employee to be deleted
+            deleteDialog: false
         };
     },
     methods: {
-        addEmployee: function addEmployee() {
-            var nextId = this.employees[this.employees.length - 1].id + 1;
-            this.employees.push({ name: this.name, id: nextId });
-            this.name = null;
+        //create new employee
+        createEmployee: function createEmployee() {
+            var _this = this;
+
+            axios.post('employees/create', this.currentEmployee).then(function (response) {
+                // this.currentEmployee.id = response.data;
+                _this.currentEmployee.name = null;
+                _this.getEmployees();
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
-        deleteEmployee: function deleteEmployee(id) {
-            console.log(id);
+
+        //delete employee
+        deleteEmployee: function deleteEmployee() {
+            var _this2 = this;
+
+            axios.post('employees/delete', {
+                id: this.deleteId
+            }).then(function (response) {
+                _this2.deleteId = null;
+                _this2.deleteDialog = false;
+                _this2.getEmployees();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+
+        //Update employee name
+        updateEmployee: function updateEmployee() {
+            var _this3 = this;
+
+            axios.post('employees/update', this.currentEmployee).then(function (response) {
+                _this3.clearCurrentEmployee();
+                _this3.getEmployees();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+
+        //Toggles an employees active state
+        toggleActive: function toggleActive(active, id, name) {
+            var _this4 = this;
+
+            axios.post('employees/update', {
+                id: id,
+                active: active,
+                name: name
+            }).then(function (response) {
+                _this4.getEmployees();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+
+        //Get all employees
+        getEmployees: function getEmployees() {
+            var _this5 = this;
+
+            axios.get('/employees/index').then(function (response) {
+                _this5.employees = [];
+                _this5.employees = response.data;
+                console.log(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+
+        //Sets the current employee for editing
+        setCurrentEmployee: function setCurrentEmployee(id, name, active) {
+            this.currentEmployee.id = id;
+            this.currentEmployee.name = name;
+            this.currentEmployee.active = active;
+        },
+
+        //Clears the active employee
+        clearCurrentEmployee: function clearCurrentEmployee() {
+            this.currentEmployee.id = null;
+            this.currentEmployee.name = null;
+            this.currentEmployee.active = null;
+        },
+
+        //Shows the delete dialog and set deleteID
+        toggleDeleteDialog: function toggleDeleteDialog(id) {
+            this.deleteId = id;
+            this.deleteDialog = true;
         }
+    },
+    mounted: function mounted() {
+        this.getEmployees();
     }
 });
 
@@ -65561,25 +65682,48 @@ var render = function() {
             [
               _c("v-text-field", {
                 attrs: { label: "Add Employee", xs12: "" },
-                nativeOn: {
-                  keyup: function($event) {
-                    if (
-                      !("button" in $event) &&
-                      _vm._k($event.keyCode, "enter", 13, $event.key)
-                    ) {
-                      return null
-                    }
-                    _vm.addEmployee($event)
-                  }
-                },
                 model: {
-                  value: _vm.name,
+                  value: _vm.currentEmployee.name,
                   callback: function($$v) {
-                    _vm.name = $$v
+                    _vm.$set(_vm.currentEmployee, "name", $$v)
                   },
-                  expression: "name"
+                  expression: "currentEmployee.name"
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.currentEmployee.id,
+                      expression: "!currentEmployee.id"
+                    }
+                  ],
+                  attrs: { small: "", color: "primary" },
+                  on: { click: _vm.createEmployee }
+                },
+                [_vm._v("Add")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.currentEmployee.id,
+                      expression: "currentEmployee.id"
+                    }
+                  ],
+                  attrs: { small: "", color: "primary" },
+                  on: { click: _vm.updateEmployee }
+                },
+                [_vm._v("Update")]
+              )
             ],
             1
           ),
@@ -65616,10 +65760,77 @@ var render = function() {
                                   _c(
                                     "v-btn",
                                     {
+                                      attrs: { small: "", color: "secondary" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.setCurrentEmployee(
+                                            employee.id,
+                                            employee.name,
+                                            employee.active
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Edit")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: !employee.active,
+                                          expression: "!employee.active"
+                                        }
+                                      ],
+                                      attrs: { small: "", color: "primary" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.toggleActive(
+                                            true,
+                                            employee.id,
+                                            employee.name
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Activate")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: employee.active,
+                                          expression: "employee.active"
+                                        }
+                                      ],
+                                      attrs: { small: "", color: "grey" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.toggleActive(
+                                            false,
+                                            employee.id,
+                                            employee.name
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Deactivate")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
                                       attrs: { small: "", color: "error" },
                                       on: {
                                         click: function($event) {
-                                          _vm.deleteEmployee(employee.id)
+                                          _vm.toggleDeleteDialog(employee.id)
                                         }
                                       }
                                     },
@@ -65636,12 +65847,109 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       index + 1 < _vm.employees.length
-                        ? _c("v-divider", { key: employee.id })
+                        ? _c("v-divider", { key: employee.name })
                         : _vm._e()
                     ]
                   })
                 ],
                 2
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "500px" },
+          model: {
+            value: _vm.deleteDialog,
+            callback: function($$v) {
+              _vm.deleteDialog = $$v
+            },
+            expression: "deleteDialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-toolbar",
+                {
+                  attrs: {
+                    color: "error",
+                    dark: "",
+                    "clipped-left": "",
+                    flat: ""
+                  }
+                },
+                [
+                  _c(
+                    "v-toolbar-title",
+                    [
+                      _c("v-icon", [_vm._v("warning")]),
+                      _vm._v(" Delete Employee")
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n                Are you sure you want to delete this employee?\n                "
+                ),
+                _c("br"),
+                _vm._v(
+                  " This will also remove them from any associated jobs.\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "error" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.deleteEmployee()
+                        }
+                      }
+                    },
+                    [
+                      _c("v-icon", [_vm._v("delete")]),
+                      _vm._v("\n                    Delete\n                ")
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "primary", right: "", absolute: "" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.deleteDialog = false
+                        }
+                      }
+                    },
+                    [
+                      _c("v-icon", [_vm._v("cancel")]),
+                      _vm._v("\n                    Cancel\n                ")
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1
@@ -65844,6 +66152,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.getCustomers();
         }
     },
+
     mounted: function mounted() {
         this.id = Number(this.$route.params.id);
         this.getCustomers();

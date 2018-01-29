@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Employee extends Model
 {
     protected $fillable = ['name', 'active'];
     
-    public function Employee() {
+    public function Employee() 
+    {
         return $this->belongsTo(Employee::class);
     }
 }

@@ -92,6 +92,7 @@
         },
 
         methods: {
+
             getCustomers() {
                 axios.get('/customers/index')
                     .then((response) => {
@@ -104,6 +105,7 @@
             setId(val) {
                 this.id = Number(val);
             },
+
             deleteCustomer() {
                 this.deleteDialog = false;
                 axios.post('/customers/delete', {id: this.id})
@@ -115,10 +117,12 @@
                         console.log(error);
                     }); 
             },
+
             update() {
                 this.getCustomers();
             }
         },
+        
         mounted() {
             this.id = Number(this.$route.params.id);
             this.getCustomers();
