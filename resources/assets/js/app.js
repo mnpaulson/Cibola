@@ -34,11 +34,13 @@ import Customer from './views/Customer'
 import Admin from './views/Admin'
 import CustomerForm from './components/CustomerForm'
 import JobLookup from './components/JobLookup'
+import JobForm from './components/JobForm'
 import EmployeeForm from './components/EmployeeForm'
 import CustomerList from './components/CustomerList'
 
 Vue.component('CustomerForm', require('./components/CustomerForm.vue'));
 Vue.component('JobLookup', require('./components/JobLookup.vue'));
+Vue.component('JobForm', require('./components/JobForm.vue'));
 Vue.component('EmployeeForm', require('./components/EmployeeForm.vue'));
 Vue.component('CustomerList', require('./components/CustomerList.vue'));
 
