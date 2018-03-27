@@ -1,6 +1,7 @@
 <template>
     <div>
         <customer-form :id.sync="id" v-on:newCustomer="update()"></customer-form>
+        <v-fade-transition>                  
         <v-flex v-show="id" class="mt-4">
             <v-btn color="primary">
                 <v-icon>add</v-icon>
@@ -11,8 +12,10 @@
                 Delete Customer
             </v-btn>
         </v-flex>
+        </v-fade-transition>   
+        <transition name="component-fade" appear>                                
         <v-layout v-show="!id" xs12 row class="mt-4">
-            <v-card>
+            <v-card class="mx-3">
                 <v-toolbar color="indigo" dark clipped-left flat>
                     <v-toolbar-title>Customers</v-toolbar-title>
                 </v-toolbar>
@@ -30,6 +33,7 @@
                 </template>
             </v-card>
         </v-layout>
+        </transition>               
         <v-dialog v-model="deleteDialog" max-width="500px">
             <v-card>
                 <v-toolbar color="error" dark clipped-left flat>

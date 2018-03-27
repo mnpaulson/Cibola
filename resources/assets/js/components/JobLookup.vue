@@ -1,6 +1,7 @@
 <template>
   <v-flex xs12 sm12 md3>
-    <v-card>
+    <transition name="component-fade" appear>    
+    <v-card class="ma-3">
       <v-toolbar color="indigo" dark clipped-left flat>
         <v-toolbar-title>Job Bag Lookup</v-toolbar-title>
       </v-toolbar>
@@ -10,6 +11,7 @@
         </v-form>
       </v-card-text>
     </v-card>
+    </transition>
   </v-flex>
 </template>
 

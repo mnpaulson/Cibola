@@ -13,21 +13,21 @@
     "axios": "^0.17",
     "babel-preset-stage-2": "^6.24.1",
     "bootstrap-sass": "^3.3.7",
-    "cross-env": "^5.1",
+    "cross-env": "^5.1.4",
     "jquery": "^3.2",
     "laravel-mix": "^1.0",
-    "lodash": "^4.17.4",
-    "vue": "^2.5.7",
-    "vue-axios": "^2.0.2",
-    "vue-loader": "^13.7.0",
+    "lodash": "^4.17.5",
+    "vue": "^2.5.16",
+    "vue-axios": "^2.1.0",
+    "vue-loader": "^13.7.1",
     "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.5.13"
+    "vue-template-compiler": "^2.5.16"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
     "vue-cropperjs": "^2.2.0",
-    "vue-fuse": "^1.4.0",
+    "vue-fuse": "^1.5.1",
     "vue-web-cam": "^1.0.4",
-    "vuetify": "^0.17.6"
+    "vuetify": "^1.0.11"
   }
 }

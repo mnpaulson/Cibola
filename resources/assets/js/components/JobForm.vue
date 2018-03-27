@@ -1,114 +1,120 @@
 <template>
     <div>
         <v-flex xs12 sm12 md4>
-            <v-card>
+            <transition name="component-fade" appear>
+            <v-card class="ma-3">
                 <v-card-text>
+                <div>
                     <v-select
                     autocomplete
                     label="Employee Select"
                     cache-items
                     prepend-icon="person_pin"
+                    :items="employeeList"
+                    v-model="employee"
+                    item-text="name"
+                    item-value="id"
                     ></v-select>
                 <v-text-field label="Estimate" prepend-icon="attach_money"></v-text-field>
-                <v-menu lazy :close-on-content-click="false" v-model="dateMenu" transition="scale-transition" offset-y full-width :nudge-right="40"
-                    max-width="290px" min-width="290px">
-                    <v-text-field slot="activator" label="Due Date" v-model="date" prepend-icon="event" readonly></v-text-field>
-                    <v-date-picker v-model="date" no-title scrollable actions autosave>
-                        <template slot-scope="{ save, cancel }">
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-                                <v-btn flat color="primary" @click="save">OK</v-btn>
-                            </v-card-actions>
-                        </template>
+                <v-menu
+                    ref="dateMenu"
+                    lazy
+                    :close-on-content-click="false"
+                    v-model="dateMenu"
+                    transition="scale-transition"
+                    offset-y
+                    full-width
+                    :nudge-right="40"
+                    min-width="290px"
+                    :return-value.sync="date"
+                >
+                    <v-text-field
+                    slot="activator"
+                    label="Due Date"
+                    v-model="date"
+                    prepend-icon="event"
+                    readonly
+                    ></v-text-field>
+                    <v-date-picker v-model="date" no-title scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="primary" @click="dateMenu = false">Cancel</v-btn>
+                    <v-btn flat color="primary" @click="$refs.dateMenu.save(date)">OK</v-btn>
                     </v-date-picker>
                 </v-menu>
-                </v-card-text>
+                </div>
                 <div class="cdb-bottom-right">
-                    <v-btn fab dark small color="primary" @click="dialog = true"><v-icon dark>camera_alt</v-icon></v-btn>                    
-                </div>             
+                    <v-btn fab small bottom right dark color="primary" @click="dialog = true"><v-icon class="fab-fix" dark>camera_alt</v-icon></v-btn>                    
+                </div> 
+                </v-card-text>
             </v-card>
+            </transition>
         </v-flex>
             <v-layout>
             <template v-for="(image, index) in jobImages" >
                 <v-flex :key="image.image" md4>
-                    <v-card>
+                    <transition name="component-fade" appear>                    
+                    <v-card class="ma-3">
                         <v-card-media :src="image.image" height="200px">
                         </v-card-media>
                         <v-text-field v-show="image.note" name="input-1" label=" Note" multi-line rows="5"></v-text-field>
                         <div class="cdb-bottom-right">
-                            <v-btn v-show="!image.note" fab dark small color="primary" @click="image.note = ' '"><v-icon dark>edit</v-icon></v-btn>
-                            <v-btn v-show="image.note" fab dark small color="primary" @click="image.note = null"><v-icon dark>close</v-icon></v-btn>                            
-                            <v-btn fab dark small color="error" @click="removeImage(index)" ><v-icon dark>delete</v-icon></v-btn>
+                            <v-btn v-show="!image.note" fab dark small color="primary" @click="image.note = ' '"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
+                            <v-btn v-show="image.note" fab dark small color="primary" @click="image.note = null"><v-icon class="fab-fix" dark>close</v-icon></v-btn>                            
+                            <v-btn fab dark small color="error" @click="removeImage(index)" ><v-icon class="fab-fix" dark>delete</v-icon></v-btn>
                         </div>
                     </v-card>
+                    </transition>
                 </v-flex>
             </template>
             </v-layout>
-            <v-btn color="primary"><v-icon>save</v-icon>Save Job</v-btn>
-            <v-btn color="white"><v-icon>print</v-icon>Print</v-btn>
+            <transition name="component-fade" appear>                                
+            <div>
+                <v-btn color="primary"><v-icon>save</v-icon>Save Job</v-btn>
+                <v-btn color="white"><v-icon>print</v-icon>Print</v-btn>
+            </div>
+            </transition>
 
 
-        <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition">
+        <v-dialog width="50%" v-model="dialog" transition="dialog-transition">
             <v-card>
                 <v-toolbar style="flex: 0 0 auto;" dark class="primary">
                     <v-btn icon @click.native="dialog = false" dark>
                         <v-icon>close</v-icon>
                     </v-btn>
                     <v-toolbar-title>New Job Bag Image</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-items>
-                        <v-btn dark flat @click.native="dialog = false">Save</v-btn>
-                    </v-toolbar-items>
                 </v-toolbar>
-                <div :style="{transform: 'translate(20%, 0%)'}">
+                <div >
                     <webcam v-show="!img" ref="webcam" :height="600" :width="800"></webcam>
-                </div>
-                <div>
-                    <vue-cropper v-show="img" ref='cropper' :guides=true :view-mode=2 drag-mode="crop" :auto-crop-area=0.5 :min-container-width=400
-                        :min-container-height=300 :background=false :aspectRatio=4/3 :modal=false :src="this.img" alt="Source Image">
-                    </vue-cropper>
+                    <img v-show="img" v-bind:src="img" alt="">
                 </div>
                 <v-btn color="primary" @click="photo()">Capture</v-btn>
-                <v-btn color="primary" @click="cropImage()">Crop</v-btn>
+                <v-btn color="primary" @click="saveImage()">Save</v-btn>
                 <v-btn color="error" @click="discardCapture()">discard</v-btn>
-                
-                <v-card-text>
-                    <v-divider></v-divider>
-                </v-card-text>
-
-                <div style="flex: 1 1 auto;"></div>
             </v-card>
         </v-dialog>
     </div>
 </template>
 
-<script src="/path/to/cropper.js"></script>
 <script>
     import Webcam from 'vue-web-cam/src/webcam'
-    import VueCropper from 'vue-cropperjs';
 
     export default {
         data: () => ({
             date: null,
             dateMenu: false,
             dialog: false,
+            employee: null,
+            employeeList: [],
             img: null,
-            cropImg: null,
             jobImages: []
         }),
         methods: {
             photo() {
                 this.img = this.$refs.webcam.capture();
-                this.cropper();
             },
-            cropper() {
-                this.$refs.cropper.replace(this.img);
-            },
-            cropImage() {
-                this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
+            saveImage() {
                 this.jobImages.push({
-                    image: this.cropImg,
+                    image: this.img,
                     note: null
                 });
                 this.img = null;
@@ -119,10 +125,22 @@
             },
             removeImage(index) {
                 this.jobImages.splice(index, 1);
+            },
+            getEmployees() {
+                axios.get('/employees/index')
+                    .then((response) => {
+                        this.employeeList = response.data;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             }
         },
         components: {
             Webcam
+        },
+        mounted() {
+            this.getEmployees();
         }
     }
 </script>

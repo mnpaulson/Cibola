@@ -1,6 +1,7 @@
 <template>
     <v-flex xs12 md6>
-        <v-card>
+        <transition name="component-fade" appear>          
+        <v-card class="ma-3">
             <v-toolbar color="indigo" dark clipped-left flat>
                 <v-toolbar-title>Recent Customers</v-toolbar-title>
             </v-toolbar>
@@ -19,6 +20,7 @@
             </template>
         </v-list>
         </v-card>
+        </transition>       
     </v-flex>
 </template>
 

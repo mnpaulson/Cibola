@@ -6,16 +6,32 @@
   height: 48px;
 }
 
-.card {
-  margin-left: 3px;
-  margin-right: 3px;
-  margin-top: 3px;
-  margin-bottom: 30px;
-}
-
 .cdb-bottom-right {
   position: absolute;
-  bottom: -20px;
   right: 0;
+}
+
+/* TRANSITION */
+
+.component-fade-enter-active {
+  -webkit-transition: opacity 0.5s ease, -webkit-transform 0.3s ease;
+  transition: opacity 0.5s ease, -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.5s ease;
+  transition: transform 0.3s ease, opacity 0.5s ease, -webkit-transform 0.3s ease;
+}
+
+.component-fade-enter,
+.component-fade-leave-to,
+.component-fade-leave-active {
+  -webkit-transition: opacity 0s ease;
+  transition: opacity 0s ease;
+  -webkit-transform: translateX(-20%);
+          transform: translateX(-20%);
+  opacity: 0;
+}
+
+.fab-fix {
+  line-height: 1.5em !important;
+  font-size: 2em !important;
 }
 

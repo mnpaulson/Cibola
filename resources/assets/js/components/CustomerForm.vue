@@ -1,9 +1,8 @@
 <template>
-  <v-flex xs12 sm12 md4>
-    <v-card>
+  <v-flex xs12 sm12 md4>                             
+    <v-card class="ma-3"> 
       <v-toolbar color="indigo" dark clipped-left flat>
         <v-toolbar-title>{{ header }}</v-toolbar-title>
-
       </v-toolbar>
       <v-card-text>
         <v-flex xs12 v-if="isSearch">
@@ -29,7 +28,7 @@
             <v-icon>email</v-icon> {{ customer.email }} <br>
             <v-icon>home</v-icon> {{ customer.address }}
           </p>
-        </v-flex>
+        </v-flex>   
         <v-form>
           <v-layout row wrap v-if="isForm">
             <v-flex xs12 sm6>
@@ -49,7 +48,7 @@
         </v-form>
         <div v-show="isSearch">
         <v-btn color="primary" dark small absolute bottom right fab @click="setFormState(true)" >
-          <v-icon>add</v-icon>
+          <v-icon class="fab-fix">add</v-icon>
         </v-btn>
         </div>
         <div v-show="isForm">
@@ -57,19 +56,18 @@
           <v-btn v-show="customer.id" color="primary" @click="updateCustomer()">Update Customer</v-btn>
           <v-btn color="error" @click="clearCustomer()">Cancel</v-btn>
         </div>
-        <div v-show="isInfo" class="cdb-bottom-right">
-          <v-btn fab dark small color="primary" @click="setFormState(true)"><v-icon dark>edit</v-icon></v-btn>
-          <v-btn fab dark small color="error" @click="clearCustomer()"><v-icon dark>close</v-icon></v-btn>
+        <div v-show="isInfo" class="cdb-bottom-right">          
+          <v-btn dark small bottom right fab color="primary" @click="setFormState(true)"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
+          <v-btn dark small bottom right fab color="error" @click="clearCustomer()"><v-icon class="fab-fix" dark>close</v-icon></v-btn>
         </div>
       </v-card-text>
-    </v-card>
+    </v-card>                                
   </v-flex>
 </template>
 
 <script>
   export default {
     data: () => ({
-
       isForm: false,
       isSearch: false,
       isInfo: false,
@@ -244,7 +242,6 @@
     },
 
     mounted() {
-      console.log("mounted: " + this.id);
       if (this.id !== null) {
         this.getCustomer(this.id);
       }
