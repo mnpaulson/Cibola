@@ -15,7 +15,14 @@
                     item-text="name"
                     item-value="id"
                     ></v-select>
-                <v-text-field label="Estimate" prepend-icon="attach_money"></v-text-field>
+                    <v-layout>
+                <v-flex xs12 sm3>                    
+                    <v-text-field label="Est" prepend-icon="attach_money"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm9>                    
+                    <v-text-field class="ml-1" label="Estimate Note"></v-text-field>
+                </v-flex>
+                </v-layout>
                 <v-menu
                     ref="dateMenu"
                     lazy

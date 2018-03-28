@@ -42,3 +42,9 @@
     line-height: 1.5em !important;
     font-size: 2em !important;
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
