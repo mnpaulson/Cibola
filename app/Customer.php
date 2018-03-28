@@ -12,4 +12,9 @@ class Customer extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function jobs()
+    {
+        return $this->hasMany('App\Job');
+    }
 }

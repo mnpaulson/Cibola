@@ -65407,7 +65407,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            id: null
+            customer_id: null,
+            job_id: null
         };
     }
 });
@@ -65426,17 +65427,27 @@ var render = function() {
       _c(
         "customer-form",
         {
-          attrs: { id: _vm.id },
+          attrs: { id: _vm.customer_id },
           on: {
             "update:id": function($event) {
-              _vm.id = $event
+              _vm.customer_id = $event
             }
           }
         },
         [_vm._v(">")]
       ),
       _vm._v(" "),
-      _c("job-form")
+      _c("job-form", {
+        attrs: { job_id: _vm.job_id, customer_id: _vm.customer_id },
+        on: {
+          "update:job_id": function($event) {
+            _vm.job_id = $event
+          },
+          "update:customer_id": function($event) {
+            _vm.customer_id = $event
+          }
+        }
+      })
     ],
     1
   )
@@ -67014,7 +67025,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             employee: null,
             employeeList: [],
             img: null,
-            jobImages: []
+            job: {
+                id: null,
+                customer_id: null,
+                employee_id: null,
+                estimate: null,
+                est_note: null,
+                appraisal: false,
+                due_date: null,
+                completed_at: null,
+                job_images: []
+            }
         };
     },
     methods: {
@@ -67022,9 +67043,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.img = this.$refs.webcam.capture();
         },
         saveImage: function saveImage() {
-            this.jobImages.push({
+            this.job.job_images.push({
                 image: this.img,
-                note: null
+                note: null,
+                job_image_id: null
             });
             this.img = null;
             this.dialog = false;
@@ -67033,13 +67055,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.img = null;
         },
         removeImage: function removeImage(index) {
-            this.jobImages.splice(index, 1);
+            this.job.job_images.splice(index, 1);
         },
         getEmployees: function getEmployees() {
             var _this = this;
 
             axios.get('/employees/index').then(function (response) {
                 _this.employeeList = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        createJob: function createJob() {
+            var _this2 = this;
+
+            console.log('creating');
+            axios.post('jobs/create', this.job).then(function (response) {
+                _this2.job.id = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -67050,6 +67082,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.getEmployees();
+    },
+
+    props: {
+        customer_id: Number,
+        job_id: Number
+    },
+    watch: {
+        customer_id: function customer_id(val) {
+            if (!isNaN(this.customer_id) && this.customer_id !== null) {
+                this.job.customer_id = val;
+            }
+        },
+        job_id: function job_id(val) {
+            if (!isNaN(this.job_id) && this.job_id !== null) {
+                this.job.id = val;
+            }
+        }
     }
 });
 
@@ -67262,11 +67311,11 @@ var render = function() {
                             "item-value": "id"
                           },
                           model: {
-                            value: _vm.employee,
+                            value: _vm.job.employee_id,
                             callback: function($$v) {
-                              _vm.employee = $$v
+                              _vm.$set(_vm.job, "employee_id", $$v)
                             },
-                            expression: "employee"
+                            expression: "job.employee_id"
                           }
                         }),
                         _vm._v(" "),
@@ -67281,6 +67330,13 @@ var render = function() {
                                   attrs: {
                                     label: "Est",
                                     "prepend-icon": "attach_money"
+                                  },
+                                  model: {
+                                    value: _vm.job.estimate,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.job, "estimate", $$v)
+                                    },
+                                    expression: "job.estimate"
                                   }
                                 })
                               ],
@@ -67293,7 +67349,14 @@ var render = function() {
                               [
                                 _c("v-text-field", {
                                   staticClass: "ml-1",
-                                  attrs: { label: "Estimate Note" }
+                                  attrs: { label: "Estimate Note" },
+                                  model: {
+                                    value: _vm.job.est_note,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.job, "est_note", $$v)
+                                    },
+                                    expression: "job.est_note"
+                                  }
                                 })
                               ],
                               1
@@ -67339,11 +67402,11 @@ var render = function() {
                               },
                               slot: "activator",
                               model: {
-                                value: _vm.date,
+                                value: _vm.job.due_date,
                                 callback: function($$v) {
-                                  _vm.date = $$v
+                                  _vm.$set(_vm.job, "due_date", $$v)
                                 },
-                                expression: "date"
+                                expression: "job.due_date"
                               }
                             }),
                             _vm._v(" "),
@@ -67352,11 +67415,11 @@ var render = function() {
                               {
                                 attrs: { "no-title": "", scrollable: "" },
                                 model: {
-                                  value: _vm.date,
+                                  value: _vm.job.due_date,
                                   callback: function($$v) {
-                                    _vm.date = $$v
+                                    _vm.$set(_vm.job, "due_date", $$v)
                                   },
-                                  expression: "date"
+                                  expression: "job.due_date"
                                 }
                               },
                               [
@@ -67444,7 +67507,7 @@ var render = function() {
       _c(
         "v-layout",
         [
-          _vm._l(_vm.jobImages, function(image, index) {
+          _vm._l(_vm.job.job_images, function(image, index) {
             return [
               _c(
                 "v-flex",
@@ -67476,6 +67539,13 @@ var render = function() {
                               label: " Note",
                               "multi-line": "",
                               rows: "5"
+                            },
+                            model: {
+                              value: image.note,
+                              callback: function($$v) {
+                                _vm.$set(image, "note", $$v)
+                              },
+                              expression: "image.note"
                             }
                           }),
                           _vm._v(" "),
@@ -67606,7 +67676,14 @@ var render = function() {
           [
             _c(
               "v-btn",
-              { attrs: { color: "primary" } },
+              {
+                attrs: { color: "primary" },
+                on: {
+                  click: function($event) {
+                    _vm.createJob()
+                  }
+                }
+              },
               [_c("v-icon", [_vm._v("save")]), _vm._v("Save Job")],
               1
             ),

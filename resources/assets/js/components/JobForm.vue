@@ -11,16 +11,16 @@
                     cache-items
                     prepend-icon="person_pin"
                     :items="employeeList"
-                    v-model="employee"
+                    v-model="job.employee_id"
                     item-text="name"
                     item-value="id"
                     ></v-select>
                     <v-layout>
                 <v-flex xs12 sm3>                    
-                    <v-text-field label="Est" prepend-icon="attach_money"></v-text-field>
+                    <v-text-field v-model="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm9>                    
-                    <v-text-field class="ml-1" label="Estimate Note"></v-text-field>
+                    <v-text-field v-model="job.est_note" class="ml-1" label="Estimate Note"></v-text-field>
                 </v-flex>
                 </v-layout>
                 <v-menu
@@ -38,11 +38,11 @@
                     <v-text-field
                     slot="activator"
                     label="Due Date"
-                    v-model="date"
+                    v-model="job.due_date"
                     prepend-icon="event"
                     readonly
                     ></v-text-field>
-                    <v-date-picker v-model="date" no-title scrollable>
+                    <v-date-picker v-model="job.due_date" no-title scrollable>
                     <v-spacer></v-spacer>
                     <v-btn flat color="primary" @click="dateMenu = false">Cancel</v-btn>
                     <v-btn flat color="primary" @click="$refs.dateMenu.save(date)">OK</v-btn>
@@ -57,13 +57,13 @@
             </transition>
         </v-flex>
             <v-layout>
-            <template v-for="(image, index) in jobImages" >
+            <template v-for="(image, index) in job.job_images" >
                 <v-flex :key="image.image" md4>
                     <transition name="component-fade" appear>                    
                     <v-card class="ma-3">
                         <v-card-media :src="image.image" height="200px">
                         </v-card-media>
-                        <v-text-field v-show="image.note" name="input-1" label=" Note" multi-line rows="5"></v-text-field>
+                        <v-text-field v-show="image.note" v-model="image.note" name="input-1" label=" Note" multi-line rows="5"></v-text-field>
                         <div class="cdb-bottom-right">
                             <v-btn v-show="!image.note" fab dark small color="primary" @click="image.note = ' '"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
                             <v-btn v-show="image.note" fab dark small color="primary" @click="image.note = null"><v-icon class="fab-fix" dark>close</v-icon></v-btn>                            
@@ -76,7 +76,7 @@
             </v-layout>
             <transition name="component-fade" appear>                                
             <div>
-                <v-btn color="primary"><v-icon>save</v-icon>Save Job</v-btn>
+                <v-btn color="primary" @click="createJob()" ><v-icon>save</v-icon>Save Job</v-btn>
                 <v-btn color="white"><v-icon>print</v-icon>Print</v-btn>
             </div>
             </transition>
@@ -113,16 +113,27 @@
             employee: null,
             employeeList: [],
             img: null,
-            jobImages: []
+            job: {
+                id: null,
+                customer_id: null,
+                employee_id: null,
+                estimate: null,
+                est_note: null,
+                appraisal: false,
+                due_date: null,
+                completed_at: null,
+                job_images: []
+            }
         }),
         methods: {
             photo() {
                 this.img = this.$refs.webcam.capture();
             },
             saveImage() {
-                this.jobImages.push({
+                this.job.job_images.push({
                     image: this.img,
-                    note: null
+                    note: null,
+                    job_image_id: null
                 });
                 this.img = null;
                 this.dialog = false;
@@ -131,12 +142,22 @@
                 this.img = null;
             },
             removeImage(index) {
-                this.jobImages.splice(index, 1);
+                this.job.job_images.splice(index, 1);
             },
             getEmployees() {
                 axios.get('/employees/index')
                     .then((response) => {
                         this.employeeList = response.data;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+            createJob() {
+                console.log('creating');
+                axios.post('jobs/create', this.job)
+                    .then((response) => {
+                        this.job.id = response.data;
                     })
                     .catch((error) => {
                         console.log(error);
@@ -148,6 +169,22 @@
         },
         mounted() {
             this.getEmployees();
+        },
+        props: {
+            customer_id: Number,
+            job_id: Number
+        },
+        watch: {
+            customer_id (val) {
+                if (!isNaN(this.customer_id) && this.customer_id !== null) {
+                    this.job.customer_id = val;
+                }
+            },
+            job_id (val) {
+                if (!isNaN(this.job_id) && this.job_id !== null) {
+                    this.job.id = val;
+                }
+            }                
         }
     }
 </script>
