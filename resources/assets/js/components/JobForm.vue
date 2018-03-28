@@ -91,7 +91,7 @@
                     <v-toolbar-title>New Job Bag Image</v-toolbar-title>
                 </v-toolbar>
                 <div >
-                    <webcam v-show="!img" ref="webcam" :height="600" :width="800"></webcam>
+                    <webcam v-show="!img" ref="webcam" :height="600" :width="800" screenshotFormat="image/png"></webcam>
                     <img v-show="img" v-bind:src="img" alt="">
                 </div>
                 <v-btn color="primary" @click="photo()">Capture</v-btn>

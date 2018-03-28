@@ -31,14 +31,15 @@ class JobController extends Controller
         $job->save();
 
         $images = $request->job_images;
-        $images = json_decode($images, true);
+        // $images = json_decode($images, true);
+        
 
         foreach ($images as $key => $image) 
         {
-            return $image;
-            $image = json_decode($image, true);
-            // Storage::disk('local')->put($job->id . "-" . $key . ".jpg", $jobImage->image);
-            return $image;
+            // return print_r($image);
+            // $image = json_decode($image, true);
+            Storage::disk('local')->put($job->id . "-" . $key . ".png", base64_decode($image["image"]));
+            // return $image;
         }        
 
         return response()->json($job->id);
