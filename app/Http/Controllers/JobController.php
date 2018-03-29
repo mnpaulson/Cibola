@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Job;
+use App\Job_image;
 use Storage;
 
 class JobController extends Controller
@@ -31,20 +32,33 @@ class JobController extends Controller
         $job->save();
 
         $images = $request->job_images;
-        // $images = json_decode($images, true);
+        $image_ids = array();
         
-
+        // Save images
         foreach ($images as $key => $image) 
         {
-            // return print_r($image);
-            // $image = json_decode($image, true);
+            //Get proper file stream
             $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
-            $filename = $job->id . "-" . $key . ".png";
-            Storage::disk('local')->put("public/" . $filename, base64_decode($image["image"]));
-            // return $image;
+            
+            //set filename
+            $filename = "public/job" . $job->id . "-" . $key . ".png";
+
+            //Write image to disk
+            Storage::disk('local')->put($filename, base64_decode($image["image"]));
+
+            //Get file url
+            $url = Storage::url($filename);
+
+            //Prepare job_image object
+            $job_image = new Job_image(['image' => $url, 'note' => $image["note"]]);
+
+            //Save job_image to DB
+            $job->job_image()->save($job_image);
+            array_push($image_ids, $job_image->id);            
+
         }        
 
-        return response()->json($job->id);
+        return response()->json(['id' => $job->id, 'image_ids' => $image_ids]);
     }
 
     public function update(Request $request) 
@@ -61,8 +75,48 @@ class JobController extends Controller
         $job->due_date = $request->due_date;
         $job->completed_at = $request->completed_at;
 
+
         $job->save();
-        return response()->json($job->id);
+
+        $images = $request->job_images;
+        $image_ids = array();
+        
+        // Save images
+        foreach ($images as $key => $image) 
+        {
+
+            if (!is_null($image["job_image_id"])) {
+                $job_image = new Job_image;
+                $job_image = Job_image::where('id', $image["job_image_id"])->first();
+                $job_image->note = $image["note"];
+    
+            } else {
+
+                //Get proper file stream
+                $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
+                
+                //set filename
+                $filename = "public/job" . $job->id . "-" . $key . ".png";
+
+                //Write image to disk
+                Storage::disk('local')->put($filename, base64_decode($image["image"]));
+
+                //Get file url
+                $url = Storage::url($filename);
+
+                //Prepare job_image object
+                $job_image = new Job_image(['image' => $url, 'note' => $image["note"]]);
+
+            }
+
+
+            //Save job_image to DB
+            $job->job_image()->save($job_image);
+            array_push($image_ids, $job_image->id);
+
+        }        
+
+        return response()->json(['id' => $job->id, 'image_ids' => $image_ids]);
     }
 
     public function delete(Request $request) 

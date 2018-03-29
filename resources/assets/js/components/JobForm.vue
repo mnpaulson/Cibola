@@ -76,7 +76,8 @@
             </v-layout>
             <transition name="component-fade" appear>                                
             <div>
-                <v-btn color="primary" @click="createJob()" ><v-icon>save</v-icon>Save Job</v-btn>
+                <v-btn v-show="!job.id" color="primary" @click="createJob()" ><v-icon>save</v-icon>Save Job</v-btn>
+                <v-btn v-show="job.id" color="success" @click="updateJob()" ><v-icon>save</v-icon>Update Job</v-btn>                
                 <v-btn color="white"><v-icon>print</v-icon>Print</v-btn>
             </div>
             </transition>
@@ -154,10 +155,29 @@
                     });
             },
             createJob() {
-                console.log('creating');
                 axios.post('jobs/create', this.job)
                     .then((response) => {
-                        this.job.id = response.data;
+                        this.job.id = response.data.id;
+                        var i = 0;
+                        response.data.image_ids.forEach(id => {
+                            this.job.job_images[i].job_image_id = id;
+                            i++;
+                        });
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+            updateJob() {
+                axios.post('jobs/update', this.job)
+                    .then((response) => {
+                        this.job.id = response.data.id;
+                        var i = 0;
+                        response.data.image_ids.forEach(id => {
+                            console.log(i);
+                            this.job.job_images[i].job_image_id = id;
+                            i++;
+                        });
                     })
                     .catch((error) => {
                         console.log(error);

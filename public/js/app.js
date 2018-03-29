@@ -67013,6 +67013,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -67069,9 +67070,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createJob: function createJob() {
             var _this2 = this;
 
-            console.log('creating');
             axios.post('jobs/create', this.job).then(function (response) {
-                _this2.job.id = response.data;
+                _this2.job.id = response.data.id;
+                var i = 0;
+                response.data.image_ids.forEach(function (id) {
+                    _this2.job.job_images[i].job_image_id = id;
+                    i++;
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        updateJob: function updateJob() {
+            var _this3 = this;
+
+            axios.post('jobs/update', this.job).then(function (response) {
+                _this3.job.id = response.data.id;
+                var i = 0;
+                response.data.image_ids.forEach(function (id) {
+                    console.log(i);
+                    _this3.job.job_images[i].job_image_id = id;
+                    i++;
+                });
             }).catch(function (error) {
                 console.log(error);
             });
@@ -67677,6 +67697,14 @@ var render = function() {
             _c(
               "v-btn",
               {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.job.id,
+                    expression: "!job.id"
+                  }
+                ],
                 attrs: { color: "primary" },
                 on: {
                   click: function($event) {
@@ -67685,6 +67713,28 @@ var render = function() {
                 }
               },
               [_c("v-icon", [_vm._v("save")]), _vm._v("Save Job")],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-btn",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.job.id,
+                    expression: "job.id"
+                  }
+                ],
+                attrs: { color: "success" },
+                on: {
+                  click: function($event) {
+                    _vm.updateJob()
+                  }
+                }
+              },
+              [_c("v-icon", [_vm._v("save")]), _vm._v("Update Job")],
               1
             ),
             _vm._v(" "),
@@ -67755,7 +67805,11 @@ var render = function() {
                       }
                     ],
                     ref: "webcam",
-                    attrs: { height: 600, width: 800 }
+                    attrs: {
+                      height: 600,
+                      width: 800,
+                      screenshotFormat: "image/png"
+                    }
                   }),
                   _vm._v(" "),
                   _c("img", {
