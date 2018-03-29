@@ -38,7 +38,9 @@ class JobController extends Controller
         {
             // return print_r($image);
             // $image = json_decode($image, true);
-            Storage::disk('local')->put($job->id . "-" . $key . ".png", base64_decode($image["image"]));
+            $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
+            $filename = $job->id . "-" . $key . ".png";
+            Storage::disk('local')->put("public/" . $filename, base64_decode($image["image"]));
             // return $image;
         }        
 
