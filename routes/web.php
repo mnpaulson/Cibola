@@ -25,6 +25,11 @@ Route::post('jobs/create', 'JobController@create')->name('jobs.create');
 Route::post('jobs/update', 'JobController@update')->name('jobs.update');
 Route::post('jobs/delete', 'JobController@create')->name('jobs.delete');
 Route::post('jobs/index', 'JobController@create')->name('jobs.index');
+Route::post('jobs/show', 'JobController@show')->name('jobs.show');
+
+Route::post('job_images/delete', 'Job_imageController@delete')->name('jobs.delete');
+
+
 
 
 

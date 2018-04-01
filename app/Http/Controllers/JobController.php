@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Job;
 use App\Job_image;
 use Storage;
+use DB;
 
 class JobController extends Controller
 {
@@ -35,28 +36,32 @@ class JobController extends Controller
         $image_ids = array();
         
         // Save images
-        foreach ($images as $key => $image) 
-        {
-            //Get proper file stream
-            $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
-            
-            //set filename
-            $filename = "public/job" . $job->id . "-" . $key . ".png";
+        if (sizeof($images))
+        {     
+        $nextId = DB::table('job_images')->max('id') + 1;        
+            foreach ($images as $key => $image) 
+            {
+                //Get proper file stream
+                $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
+                
+                //set filename
+                $filename = "public/job" . $job->id . "-" . $nextId++ . ".png";
 
-            //Write image to disk
-            Storage::disk('local')->put($filename, base64_decode($image["image"]));
+                //Write image to disk
+                Storage::disk('local')->put($filename, base64_decode($image["image"]));
 
-            //Get file url
-            $url = Storage::url($filename);
+                //Get file url
+                $url = Storage::url($filename);
 
-            //Prepare job_image object
-            $job_image = new Job_image(['image' => $url, 'note' => $image["note"]]);
+                //Prepare job_image object
+                $job_image = new Job_image(['image' => $url, 'note' => $image["note"]]);
 
-            //Save job_image to DB
-            $job->job_image()->save($job_image);
-            array_push($image_ids, $job_image->id);            
+                //Save job_image to DB
+                $job->job_images()->save($job_image);
+                array_push($image_ids, $job_image->id);            
 
-        }        
+            }
+        }      
 
         return response()->json(['id' => $job->id, 'image_ids' => $image_ids]);
     }
@@ -82,37 +87,52 @@ class JobController extends Controller
         $image_ids = array();
         
         // Save images
-        foreach ($images as $key => $image) 
+        if (sizeof($images))
         {
+            $nextId = DB::table('job_images')->max('id') + 1;                
+            foreach ($images as $key => $image) 
+            {
 
-            if (!is_null($image["job_image_id"])) {
-                $job_image = new Job_image;
-                $job_image = Job_image::where('id', $image["job_image_id"])->first();
-                $job_image->note = $image["note"];
-    
-            } else {
+                if (!is_null($image["id"])) 
+                {
+                    $job_image = new Job_image;
+                    $job_image = Job_image::where('id', $image["id"])->first();
+                    if (is_null($image["note"])) $image["note"] = "";
+                    $job_image->note = $image["note"];
+        
+                } 
+                else 
+                {
 
-                //Get proper file stream
-                $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
-                
-                //set filename
-                $filename = "public/job" . $job->id . "-" . $key . ".png";
+                    //Get proper file stream
+                    $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
+                    
+                    //set filename
+                    $filename = "public/job" . $job->id . "-" . $nextId++ . ".png";
 
-                //Write image to disk
-                Storage::disk('local')->put($filename, base64_decode($image["image"]));
+                    while (file_exists(public_path() . $filename)) {
+                        $filename = "public/job" . $job->id . "-" . $nextId++ . ".png";                    
+                    }
 
-                //Get file url
-                $url = Storage::url($filename);
+                    //Write image to disk
+                    Storage::disk('local')->put($filename, base64_decode($image["image"]));
 
-                //Prepare job_image object
-                $job_image = new Job_image(['image' => $url, 'note' => $image["note"]]);
+                    //Get file url
+                    $url = Storage::url($filename);
+
+                    //Prepare job_image object
+                    $job_image = new Job_image(['image' => $url, 'note' => $image["note"]]);
+
+                }
+
+                //Save job_image to DB
+                $job->job_images()->save($job_image);
+                array_push($image_ids, $job_image->id);
 
             }
 
 
-            //Save job_image to DB
-            $job->job_image()->save($job_image);
-            array_push($image_ids, $job_image->id);
+
 
         }        
 
@@ -123,6 +143,16 @@ class JobController extends Controller
     {
         \App\Job::destroy($request->id);
         echo response()->json($request->id);
+    }
+
+    public function show(Request $request)
+    {
+        $job = \App\Job::where('id', $request->id)->first();
+        // $job = \App\Job::find(1);
+        // $job->job_images->get();
+        $job->job_images;        
+        return response()->json($job);
+        // return $request;
     }
 
 }

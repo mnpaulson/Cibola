@@ -23,7 +23,7 @@ class Job extends Model
         return $this->belongsTo('App\Employee');
     }
 
-    public function job_image() 
+    public function job_images() 
     {
         return $this->hasMany('App\Job_image');
     }

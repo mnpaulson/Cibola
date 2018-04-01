@@ -83,7 +83,7 @@
             </transition>
 
 
-        <v-dialog width="50%" v-model="dialog" transition="dialog-transition">
+        <v-dialog  v-model="dialog" transition="dialog-transition">
             <v-card>
                 <v-toolbar style="flex: 0 0 auto;" dark class="primary">
                     <v-btn icon @click.native="dialog = false" dark>
@@ -100,6 +100,29 @@
                 <v-btn color="error" @click="discardCapture()">discard</v-btn>
             </v-card>
         </v-dialog>
+
+        <v-dialog v-model="deleteDialog" max-width="500px">
+            <v-card>
+                <v-toolbar color="error" dark clipped-left flat>
+                    <v-toolbar-title><v-icon>warning</v-icon> Delete Job Image</v-toolbar-title>
+                </v-toolbar>
+                <v-card-text>
+                    Are you sure you want to delete this image? <br>
+                    This image was previously saved to this job. <br>
+                    This action is not reversable
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn color="error"  @click.stop="deleteImage()">
+                        <v-icon>delete</v-icon>
+                        Delete
+                    </v-btn>                    
+                    <v-btn color="primary" right absolute @click.stop="deleteDialog=false">
+                        <v-icon>cancel</v-icon>
+                        Cancel
+                        </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 
@@ -111,6 +134,9 @@
             date: null,
             dateMenu: false,
             dialog: false,
+            deleteDialog: false,
+            deleteImageId: null,
+            deleteImageIndex: null,
             employee: null,
             employeeList: [],
             img: null,
@@ -134,7 +160,7 @@
                 this.job.job_images.push({
                     image: this.img,
                     note: null,
-                    job_image_id: null
+                    id: null
                 });
                 this.img = null;
                 this.dialog = false;
@@ -143,7 +169,13 @@
                 this.img = null;
             },
             removeImage(index) {
-                this.job.job_images.splice(index, 1);
+                if (this.job.job_images[index].id !== null) {
+                    this.deleteImageId = this.job.job_images[index].id;
+                    this.deleteImageIndex = index;
+                    this.deleteDialog = true;
+                } else {
+                    this.job.job_images.splice(index, 1);                
+                }
             },
             getEmployees() {
                 axios.get('/employees/index')
@@ -160,7 +192,7 @@
                         this.job.id = response.data.id;
                         var i = 0;
                         response.data.image_ids.forEach(id => {
-                            this.job.job_images[i].job_image_id = id;
+                            this.job.job_images[i].id = id;
                             i++;
                         });
                     })
@@ -174,14 +206,44 @@
                         this.job.id = response.data.id;
                         var i = 0;
                         response.data.image_ids.forEach(id => {
-                            console.log(i);
-                            this.job.job_images[i].job_image_id = id;
+                            this.job.job_images[i].id = id;
                             i++;
                         });
                     })
                     .catch((error) => {
                         console.log(error);
                     });
+            },
+            getJob(id) {
+                axios.post('jobs/show', {id: id})
+                    .then((response) => {
+                        this.job.id = response.data.id;
+                        this.job.customer_id = response.data.customer_id;
+                        this.job.employee_id = response.data.employee_id;
+                        this.job.estimate = response.data.estimate;
+                        this.job.est_note = response.data.est_note;
+                        this.job.appraisal = response.data.appraisal;
+                        this.job.due_date = response.data.due_date;
+                        this.job.completed_at = response.data.completed_at;
+                        this.job.job_images = response.data.job_images;
+
+                        this.$emit('customerId', this.job.customer_id);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+            deleteImage() {
+                axios.post('job_images/delete', {id: this.deleteImageId})
+                    .then((response) => {
+                        this.job.job_images.splice(this.deleteImageIndex, 1);
+                        this.deleteImageId = null;
+                        this.deleteImageIndex = null;
+                        this.deleteDialog = false;                                                                                       
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
             }
         },
         components: {
@@ -202,7 +264,7 @@
             },
             job_id (val) {
                 if (!isNaN(this.job_id) && this.job_id !== null) {
-                    this.job.id = val;
+                    this.getJob(this.job_id);
                 }
             }                
         }

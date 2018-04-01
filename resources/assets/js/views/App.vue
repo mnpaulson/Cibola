@@ -22,13 +22,13 @@
             </v-list-tile-content>
             </v-list-tile>
         </router-link>
-        <router-link :to="{ name: 'job' }">
+        <router-link :to="{ name: 'jobs' }">
         <v-list-tile @click="">
           <v-list-tile-action>
             <v-icon>work</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>New Job Bag</v-list-tile-title>
+            <v-list-tile-title>Jobs</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         </router-link>
