@@ -124,6 +124,7 @@
             </v-card>
         </v-dialog>
     </div>
+
 </template>
 
 <script>
@@ -208,7 +209,7 @@
                         response.data.image_ids.forEach(id => {
                             this.job.job_images[i].id = id;
                             i++;
-                        });
+                        });                    
                     })
                     .catch((error) => {
                         console.log(error);

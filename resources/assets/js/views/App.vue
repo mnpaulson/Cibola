@@ -57,6 +57,7 @@
     <v-content>
       <v-container fluid>
           <router-view></router-view>
+          <alert></alert>
       </v-container>
     </v-content>
     <v-footer color="indigo" app>

@@ -18,7 +18,7 @@
     "laravel-mix": "^1.0",
     "lodash": "^4.17.5",
     "vue": "^2.5.16",
-    "vue-axios": "^2.1.0",
+    "vue-axios": "^2.1.1",
     "vue-loader": "^13.7.1",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.16"
@@ -28,6 +28,6 @@
     "vue-cropperjs": "^2.2.0",
     "vue-fuse": "^1.5.1",
     "vue-web-cam": "^1.0.4",
-    "vuetify": "^1.0.11"
+    "vuetify": "^1.0.12"
   }
 }

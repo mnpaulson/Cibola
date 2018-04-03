@@ -76,10 +76,20 @@ const router = new VueRouter({
 
 Vue.use(VueFuse)
 
+var store = {
+    alert: {
+        status: null,
+        msg: null
+    }
+};
+
 const app = new Vue({
     el: '#app',
     components: { App },
     router,
+    data: {
+        sharedStore: store.alert        
+    }
 });
 
 Vue.use(Vuetify, {
