@@ -37,6 +37,8 @@ Vue.component('JobLookup', require('./components/JobLookup.vue'));
 Vue.component('JobForm', require('./components/JobForm.vue'));
 Vue.component('EmployeeForm', require('./components/EmployeeForm.vue'));
 Vue.component('CustomerList', require('./components/CustomerList.vue'));
+Vue.component('Alert', require('./components/Alert.vue'));
+
 
 const router = new VueRouter({
     // mode: 'history',
@@ -79,7 +81,13 @@ Vue.use(VueFuse)
 var store = {
     alert: {
         status: null,
-        msg: null
+        msg: null,
+        type: null
+    },
+    setAlert(status, type, msg) {
+        this.alert.status = status;
+        this.alert.msg = msg;
+        this.alert.type = type;       
     }
 };
 
@@ -88,7 +96,7 @@ const app = new Vue({
     components: { App },
     router,
     data: {
-        sharedStore: store.alert        
+        store: store      
     }
 });
 

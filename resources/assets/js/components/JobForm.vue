@@ -196,9 +196,11 @@
                             this.job.job_images[i].id = id;
                             i++;
                         });
+                        this.store.setAlert(true, "success", "Job Create with ID: " + this.job.id);                                            
                     })
                     .catch((error) => {
                         console.log(error);
+                        this.store.setAlert(true, "error", error.message);                                                                    
                     });
             },
             updateJob() {
@@ -209,10 +211,12 @@
                         response.data.image_ids.forEach(id => {
                             this.job.job_images[i].id = id;
                             i++;
-                        });                    
+                        });
+                        this.store.setAlert(true, "success", "Job Upated Successfully");                    
                     })
                     .catch((error) => {
                         console.log(error);
+                        this.store.setAlert(true, "error", error.message);                                            
                     });
             },
             getJob(id) {
@@ -268,6 +272,11 @@
                     this.getJob(this.job_id);
                 }
             }                
+        },
+        computed: {
+            store() {
+                return this.$root.$data.store;
+            }
         }
     }
 </script>

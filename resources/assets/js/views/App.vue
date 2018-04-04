@@ -56,8 +56,8 @@
     </v-navigation-drawer>
     <v-content>
       <v-container fluid>
+          <alert></alert>                                
           <router-view></router-view>
-          <alert></alert>
       </v-container>
     </v-content>
     <v-footer color="indigo" app>

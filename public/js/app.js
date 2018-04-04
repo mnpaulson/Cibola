@@ -2382,6 +2382,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobLookup', __webpack_req
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobForm', __webpack_require__(13));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EmployeeForm', __webpack_require__(14));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('CustomerList', __webpack_require__(15));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Alert', __webpack_require__(83));
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     // mode: 'history',
@@ -2417,7 +2418,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
 var store = {
     alert: {
         status: null,
-        msg: null
+        msg: null,
+        type: null
+    },
+    setAlert: function setAlert(status, type, msg) {
+        this.alert.status = status;
+        this.alert.msg = msg;
+        this.alert.type = type;
     }
 };
 
@@ -2426,7 +2433,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     components: { App: __WEBPACK_IMPORTED_MODULE_4__views_App___default.a },
     router: router,
     data: {
-        sharedStore: store.alert
+        store: store
     }
 });
 
@@ -65341,7 +65348,7 @@ var render = function() {
           _c(
             "v-container",
             { attrs: { fluid: "" } },
-            [_c("router-view"), _vm._v(" "), _c("alert")],
+            [_c("alert"), _vm._v(" "), _c("router-view")],
             1
           )
         ],
@@ -67142,8 +67149,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this2.job.job_images[i].id = id;
                     i++;
                 });
+                _this2.store.setAlert(true, "success", "Job Create with ID: " + _this2.job.id);
             }).catch(function (error) {
                 console.log(error);
+                _this2.store.setAlert(true, "error", error.message);
             });
         },
         updateJob: function updateJob() {
@@ -67156,8 +67165,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this3.job.job_images[i].id = id;
                     i++;
                 });
+                _this3.store.setAlert(true, "success", "Job Upated Successfully");
             }).catch(function (error) {
                 console.log(error);
+                _this3.store.setAlert(true, "error", error.message);
             });
         },
         getJob: function getJob(id) {
@@ -67213,6 +67224,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!isNaN(this.job_id) && this.job_id !== null) {
                 this.getJob(this.job_id);
             }
+        }
+    },
+    computed: {
+        store: function store() {
+            return this.$root.$data.store;
         }
     }
 });
@@ -68745,6 +68761,147 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(84)
+/* template */
+var __vue_template__ = __webpack_require__(85)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\Alert.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-11375e75", Component.options)
+  } else {
+    hotAPI.reload("data-v-11375e75", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 84 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {};
+    },
+    watch: {},
+    methods: {},
+    computed: {
+        status: {
+            get: function get() {
+                return this.$root.$data.store.alert.status;
+            },
+            set: function set(val) {
+                this.$root.$data.store.alert.status = val;
+            }
+        },
+        msg: function msg() {
+            return this.$root.$data.store.alert.msg;
+        },
+        type: function type() {
+            return this.$root.$data.store.alert.type;
+        }
+    }
+});
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-alert",
+        {
+          attrs: {
+            type: _vm.type,
+            dismissible: "",
+            outline: "",
+            transition: "slide-y-transition"
+          },
+          model: {
+            value: _vm.status,
+            callback: function($$v) {
+              _vm.status = $$v
+            },
+            expression: "status"
+          }
+        },
+        [_vm._v("\r\n" + _vm._s(_vm.msg) + "\r\n")]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-11375e75", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

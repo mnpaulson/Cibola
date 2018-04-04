@@ -1,12 +1,13 @@
 <template>
 <div>
 <v-alert
-type="success"
+:type="type"
 dismissible
-:value="saveSuccess"
-transition="scale-transition"
+v-model="status"
+outline
+transition="slide-y-transition"
 >
-{{ successMessage }}
+{{ msg }}
 </v-alert>
 </div>
 </template>
@@ -15,13 +16,28 @@ transition="scale-transition"
 <script>
 export default {
   data: () => ({
-    sharedStore: store.alert       
   }),
   watch: {
-
+      
   },
   methods: {
 
+  },
+  computed: {
+      status: {
+          get: function() {
+              return this.$root.$data.store.alert.status;
+          },
+          set: function(val) {
+              this.$root.$data.store.alert.status = val;
+          }
+      },
+      msg() {
+          return this.$root.$data.store.alert.msg;
+      },
+      type() {
+          return this.$root.$data.store.alert.type;          
+      }
   }
 }
 </script>
