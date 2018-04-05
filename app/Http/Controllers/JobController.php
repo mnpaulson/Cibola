@@ -17,6 +17,19 @@ class JobController extends Controller
         return response()->json($job);
     }
 
+    public function recentJobsList()
+    {
+        $job = \App\Job::with('job_images')
+            ->with('customer')
+            ->orderBy('updated_at', 'desc')
+            ->take(10)
+            ->get();    
+
+   
+
+        return response()->json($job);
+    }
+
     public function create(Request $request) 
     {
         $job = new Job;
@@ -148,11 +161,8 @@ class JobController extends Controller
     public function show(Request $request)
     {
         $job = \App\Job::where('id', $request->id)->first();
-        // $job = \App\Job::find(1);
-        // $job->job_images->get();
         $job->job_images;        
         return response()->json($job);
-        // return $request;
     }
 
 }

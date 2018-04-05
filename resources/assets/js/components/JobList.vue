@@ -3,20 +3,22 @@
         <transition name="component-fade" appear>          
         <v-card class="ma-3">
             <v-toolbar color="indigo" dark clipped-left flat>
-                <v-toolbar-title>Recent Customers</v-toolbar-title>
+                <v-toolbar-title>Recent Jobs</v-toolbar-title>
             </v-toolbar>
         <v-list dense>
-            <template v-for="(customer, index) in customers">
+            <template v-for="(job, index) in jobs">
+            <!-- <router-link @click="setId(job.id)" :key="job.id" :to="{ name: 'job', params: {id: job.id}}">                 -->
                 <v-list-tile
                 ripple
-                :key="customer.id"
-                :href="'#/customer/' + customer.id"                
+                :key="job.id"
+                :href="'#/job/' + job.id"
                 >
                     <v-list-tile-title>
-                            {{customer.fname}} {{customer.lname}}
+                            {{job.customer.fname}} {{job.customer.lname}} Job ID: {{job.id}}
                     </v-list-tile-title>
                 </v-list-tile>
-                <v-divider v-if="index + 1 < customers.length" :key="customer.id"></v-divider>
+                <v-divider v-if="index + 1 < jobs.length" :key="job.id"></v-divider>
+            <!-- </router-link>                 -->
             </template>
         </v-list>
         </v-card>
@@ -27,13 +29,14 @@
 <script>
     export default {
         data: () => ({
-            customers: []
+            jobs: []
         }),
         methods: {
-            getCustomerList() {
-                axios.get('/customers/recentCustomerList')
+            getJobList() {
+                axios.get('/jobs/recentJobsList')
                     .then((response) => {
-                        this.customers = response.data;
+                        this.jobs = response.data;
+                        console.log(response.data);
                     })
                     .catch((error) => {
                         console.log(error);
@@ -49,7 +52,7 @@
             id: Number
         },
         mounted() {
-            this.getCustomerList();
+            this.getJobList();
         }
     }
 </script>

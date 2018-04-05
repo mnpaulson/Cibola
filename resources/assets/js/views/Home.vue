@@ -6,6 +6,7 @@
 </v-layout>
 <v-layout row class="mt-4">    
     <customer-list></customer-list>
+    <job-list></job-list>
 </v-layout>
 </div>
 </template>

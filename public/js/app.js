@@ -2343,6 +2343,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_EmployeeForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_EmployeeForm__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_CustomerList__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_CustomerList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_CustomerList__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_JobList__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_JobList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_JobList__);
 
 __webpack_require__(18);
 
@@ -2377,11 +2379,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuet
 
 
 
+
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('CustomerForm', __webpack_require__(11));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobLookup', __webpack_require__(12));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobForm', __webpack_require__(13));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EmployeeForm', __webpack_require__(14));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('CustomerList', __webpack_require__(15));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobList', __webpack_require__(86));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Alert', __webpack_require__(83));
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
@@ -65566,6 +65570,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65614,7 +65619,7 @@ var render = function() {
       _c(
         "v-layout",
         { staticClass: "mt-4", attrs: { row: "" } },
-        [_c("customer-list")],
+        [_c("customer-list"), _vm._v(" "), _c("job-list")],
         1
       )
     ],
@@ -68692,45 +68697,31 @@ var render = function() {
                   _vm._l(_vm.customers, function(customer, index) {
                     return [
                       _c(
-                        "router-link",
+                        "v-list-tile",
                         {
                           key: customer.id,
                           attrs: {
-                            to: {
-                              name: "customer",
-                              params: { id: customer.id }
-                            }
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.setId(customer.id)
-                            }
+                            ripple: "",
+                            href: "#/customer/" + customer.id
                           }
                         },
                         [
-                          _c(
-                            "v-list-tile",
-                            { attrs: { ripple: "" } },
-                            [
-                              _c("v-list-tile-title", [
-                                _vm._v(
-                                  "\n                        " +
-                                    _vm._s(customer.fname) +
-                                    " " +
-                                    _vm._s(customer.lname) +
-                                    "\n                "
-                                )
-                              ])
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          index + 1 < _vm.customers.length
-                            ? _c("v-divider", { key: customer.id })
-                            : _vm._e()
+                          _c("v-list-tile-title", [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(customer.fname) +
+                                " " +
+                                _vm._s(customer.lname) +
+                                "\n                "
+                            )
+                          ])
                         ],
                         1
-                      )
+                      ),
+                      _vm._v(" "),
+                      index + 1 < _vm.customers.length
+                        ? _c("v-divider", { key: customer.id })
+                        : _vm._e()
                     ]
                   })
                 ],
@@ -68900,6 +68891,208 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-11375e75", module.exports)
+  }
+}
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(87)
+/* template */
+var __vue_template__ = __webpack_require__(88)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\JobList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7db82958", Component.options)
+  } else {
+    hotAPI.reload("data-v-7db82958", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            jobs: []
+        };
+    },
+    methods: {
+        getJobList: function getJobList() {
+            var _this = this;
+
+            axios.get('/jobs/recentJobsList').then(function (response) {
+                _this.jobs = response.data;
+                console.log(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        setId: function setId(val) {
+            this.id = Number(val);
+        }
+    },
+
+    props: {
+        id: Number
+    },
+    mounted: function mounted() {
+        this.getJobList();
+    }
+});
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-flex",
+    { attrs: { xs12: "", md6: "" } },
+    [
+      _c(
+        "transition",
+        { attrs: { name: "component-fade", appear: "" } },
+        [
+          _c(
+            "v-card",
+            { staticClass: "ma-3" },
+            [
+              _c(
+                "v-toolbar",
+                {
+                  attrs: {
+                    color: "indigo",
+                    dark: "",
+                    "clipped-left": "",
+                    flat: ""
+                  }
+                },
+                [_c("v-toolbar-title", [_vm._v("Recent Jobs")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list",
+                { attrs: { dense: "" } },
+                [
+                  _vm._l(_vm.jobs, function(job, index) {
+                    return [
+                      _c(
+                        "v-list-tile",
+                        {
+                          key: job.id,
+                          attrs: { ripple: "", href: "#/job/" + job.id }
+                        },
+                        [
+                          _c("v-list-tile-title", [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(job.customer.fname) +
+                                " " +
+                                _vm._s(job.customer.lname) +
+                                " Job ID: " +
+                                _vm._s(job.id) +
+                                "\n                "
+                            )
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      index + 1 < _vm.jobs.length
+                        ? _c("v-divider", { key: job.id })
+                        : _vm._e()
+                    ]
+                  })
+                ],
+                2
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7db82958", module.exports)
   }
 }
 

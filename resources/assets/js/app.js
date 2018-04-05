@@ -31,12 +31,15 @@ import JobLookup from './components/JobLookup'
 import JobForm from './components/JobForm'
 import EmployeeForm from './components/EmployeeForm'
 import CustomerList from './components/CustomerList'
+import JobList from './components/JobList'
+
 
 Vue.component('CustomerForm', require('./components/CustomerForm.vue'));
 Vue.component('JobLookup', require('./components/JobLookup.vue'));
 Vue.component('JobForm', require('./components/JobForm.vue'));
 Vue.component('EmployeeForm', require('./components/EmployeeForm.vue'));
 Vue.component('CustomerList', require('./components/CustomerList.vue'));
+Vue.component('JobList', require('./components/JobList.vue'));
 Vue.component('Alert', require('./components/Alert.vue'));
 
 
