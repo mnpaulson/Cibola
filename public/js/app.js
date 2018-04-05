@@ -68975,6 +68975,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -69050,9 +69052,19 @@ var render = function() {
                         "v-list-tile",
                         {
                           key: job.id,
-                          attrs: { ripple: "", href: "#/job/" + job.id }
+                          attrs: {
+                            ripple: "",
+                            href: "#/job/" + job.id,
+                            avatar: ""
+                          }
                         },
                         [
+                          _c("v-list-tile-avatar", [
+                            _c("img", {
+                              attrs: { src: job.job_images[0].image }
+                            })
+                          ]),
+                          _vm._v(" "),
                           _c("v-list-tile-title", [
                             _vm._v(
                               "\n                        " +

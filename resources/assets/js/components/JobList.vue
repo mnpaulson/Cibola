@@ -7,18 +7,20 @@
             </v-toolbar>
         <v-list dense>
             <template v-for="(job, index) in jobs">
-            <!-- <router-link @click="setId(job.id)" :key="job.id" :to="{ name: 'job', params: {id: job.id}}">                 -->
                 <v-list-tile
                 ripple
                 :key="job.id"
                 :href="'#/job/' + job.id"
+                avatar
                 >
+                <v-list-tile-avatar>
+                    <img :src="job.job_images[0].image">
+                </v-list-tile-avatar>
                     <v-list-tile-title>
                             {{job.customer.fname}} {{job.customer.lname}} Job ID: {{job.id}}
                     </v-list-tile-title>
                 </v-list-tile>
                 <v-divider v-if="index + 1 < jobs.length" :key="job.id"></v-divider>
-            <!-- </router-link>                 -->
             </template>
         </v-list>
         </v-card>
