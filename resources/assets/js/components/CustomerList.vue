@@ -9,7 +9,7 @@
             <template v-for="(customer, index) in customers">
                 <v-list-tile
                 ripple
-                :key="customer.id"
+                :key="customer.id + 'key'"
                 :href="'#/customer/' + customer.id"                
                 >
                     <v-list-tile-title>

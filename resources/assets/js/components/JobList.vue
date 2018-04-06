@@ -9,16 +9,20 @@
             <template v-for="(job, index) in jobs">
                 <v-list-tile
                 ripple
-                :key="job.id"
+                :key="job.id + '-key'"
                 :href="'#/job/' + job.id"
                 avatar
                 >
                 <v-list-tile-avatar>
-                    <img :src="job.job_images[0].image">
+                    <img v-if="job.job_images[0]" :src="job.job_images[0].image">
                 </v-list-tile-avatar>
+                <v-list-tile-content>
                     <v-list-tile-title>
-                            {{job.customer.fname}} {{job.customer.lname}} Job ID: {{job.id}}
+                            {{job.customer.fname}} {{job.customer.lname}}
                     </v-list-tile-title>
+                    <v-list-tile-sub-title class="text--primary">Job #{{ job.id }} Due: {{job.due_date}}</v-list-tile-sub-title>
+                    <v-list-tile-sub-title>Est: ${{ job.estimate }}</v-list-tile-sub-title>
+                </v-list-tile-content>
                 </v-list-tile>
                 <v-divider v-if="index + 1 < jobs.length" :key="job.id"></v-divider>
             </template>
