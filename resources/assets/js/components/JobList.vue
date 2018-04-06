@@ -33,32 +33,33 @@
 </template>
 
 <script>
-    export default {
-        data: () => ({
-            jobs: []
-        }),
-        methods: {
-            getJobList() {
-                axios.get('/jobs/recentJobsList')
-                    .then((response) => {
-                        this.jobs = response.data;
-                        console.log(response.data);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            },
+export default {
+  data: () => ({
+    jobs: []
+  }),
+  methods: {
+    getJobList() {
+      axios
+        .get("/jobs/recentJobsList")
+        .then(response => {
+          this.jobs = response.data;
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
 
-            setId(val) {
-                this.id = Number(val);
-            }
-        },
-
-        props: {
-            id: Number
-        },
-        mounted() {
-            this.getJobList();
-        }
+    setId(val) {
+      this.id = Number(val);
     }
+  },
+
+  props: {
+    id: Number
+  },
+  mounted() {
+    this.getJobList();
+  }
+};
 </script>

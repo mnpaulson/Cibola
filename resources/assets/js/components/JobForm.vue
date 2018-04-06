@@ -50,7 +50,7 @@
                 </v-menu>
                 </div>
                 <div class="cdb-bottom-right">
-                    <v-btn fab small bottom right dark color="primary" @click="dialog = true"><v-icon class="fab-fix" dark>camera_alt</v-icon></v-btn>                    
+                    <v-btn fab small bottom right dark color="primary" @click="caputureDialog = true"><v-icon class="fab-fix" dark>camera_alt</v-icon></v-btn>                    
                 </div> 
                 </v-card-text>
             </v-card>
@@ -61,7 +61,7 @@
                 <v-flex :key="image.image" md4>
                     <transition name="component-fade" appear>                    
                     <v-card class="ma-3">
-                        <v-card-media :src="image.image" height="200px">
+                        <v-card-media :src="image.image" height="200px" @click="showLightBox(image.image)">
                         </v-card-media>
                         <v-text-field v-show="image.note" v-model="image.note" name="input-1" label=" Note" multi-line rows="5"></v-text-field>
                         <div class="cdb-bottom-right">
@@ -83,10 +83,10 @@
             </transition>
 
 
-        <v-dialog  v-model="dialog" transition="dialog-transition">
+        <v-dialog  v-model="caputureDialog" transition="dialog-transition">
             <v-card>
                 <v-toolbar style="flex: 0 0 auto;" dark class="primary">
-                    <v-btn icon @click.native="dialog = false" dark>
+                    <v-btn icon @click.native="caputureDialog = false" dark>
                         <v-icon>close</v-icon>
                     </v-btn>
                     <v-toolbar-title>New Job Bag Image</v-toolbar-title>
@@ -123,6 +123,16 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+        <v-dialog max-width="50%" v-model="lightboxDialog" transition="dialog-transition">
+            <v-card>
+                <v-layout row justify-center>
+                <v-flex xs2>
+                    <img  v-bind:src="lightBoxImage" alt="">
+                </v-flex>
+                </v-layout>
+            </v-card>
+        </v-dialog>
+        
     </div>
 
 </template>
@@ -134,8 +144,10 @@
         data: () => ({
             date: null,
             dateMenu: false,
-            dialog: false,
+            caputureDialog: false,
             deleteDialog: false,
+            lightboxDialog: false,
+            lightBoxImage: null,
             deleteImageId: null,
             deleteImageIndex: null,
             employee: null,
@@ -164,7 +176,7 @@
                     id: null
                 });
                 this.img = null;
-                this.dialog = false;
+                this.caputureDialog = false;
             },
             discardCapture() {
                 this.img = null;
@@ -177,6 +189,10 @@
                 } else {
                     this.job.job_images.splice(index, 1);                
                 }
+            },
+            showLightBox(image) {
+                this.lightBoxImage = image;
+                this.lightboxDialog = true;
             },
             getEmployees() {
                 axios.get('/employees/index')

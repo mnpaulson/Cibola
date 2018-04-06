@@ -15,29 +15,28 @@ transition="slide-y-transition"
 
 <script>
 export default {
-  data: () => ({
-  }),
+  data: () => ({}),
   watch: {
-      
+    $route(to, from) {
+      this.status = false;
+    }
   },
-  methods: {
-
-  },
+  methods: {},
   computed: {
-      status: {
-          get: function() {
-              return this.$root.$data.store.alert.status;
-          },
-          set: function(val) {
-              this.$root.$data.store.alert.status = val;
-          }
+    status: {
+      get: function() {
+        return this.$root.$data.store.alert.status;
       },
-      msg() {
-          return this.$root.$data.store.alert.msg;
-      },
-      type() {
-          return this.$root.$data.store.alert.type;          
+      set: function(val) {
+        this.$root.$data.store.alert.status = val;
       }
+    },
+    msg() {
+      return this.$root.$data.store.alert.msg;
+    },
+    type() {
+      return this.$root.$data.store.alert.type;
+    }
   }
-}
+};
 </script>
