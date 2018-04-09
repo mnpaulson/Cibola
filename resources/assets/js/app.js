@@ -62,6 +62,11 @@ const router = new VueRouter({
             component: Job
         },
         {
+            path: '/job/:id/:cus',
+            name: 'jobcus',
+            component: Job
+        },
+        {
             path: '/admin',
             name: 'admin',
             component: Admin,

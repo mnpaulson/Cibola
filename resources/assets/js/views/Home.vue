@@ -1,10 +1,10 @@
 <template>
 <div>
-<v-layout row>
+<v-layout>
     <customer-form :id.sync="id"></customer-form>
     <job-lookup></job-lookup>
 </v-layout>
-<v-layout row class="mt-4">    
+<v-layout  class="mt-4">    
     <customer-list></customer-list>
     <job-list></job-list>
 </v-layout>
@@ -16,6 +16,9 @@
         data: () => ({
             id: null
         }),
+        methods: {
+
+        },
         watch: {
             id(val) {
                 // if(this.id == null) this.$router.replace("/customer");            

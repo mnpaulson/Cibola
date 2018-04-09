@@ -1,10 +1,10 @@
 <template>
     <v-flex xs12 md6>
         <transition name="component-fade" appear>          
-        <v-card class="ma-3">
-            <v-toolbar color="indigo" dark clipped-left flat>
+        <v-card class="ml-3">
+            <!-- <v-toolbar color="indigo" dark clipped-left flat>
                 <v-toolbar-title>Recent Jobs</v-toolbar-title>
-            </v-toolbar>
+            </v-toolbar> -->
         <v-list dense>
             <template v-for="(job, index) in jobs">
                 <v-list-tile
@@ -43,7 +43,6 @@ export default {
         .get("/jobs/recentJobsList")
         .then(response => {
           this.jobs = response.data;
-          console.log(response.data);
         })
         .catch(error => {
           console.log(error);

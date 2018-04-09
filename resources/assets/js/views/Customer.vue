@@ -3,7 +3,7 @@
         <customer-form :id.sync="id" v-on:newCustomer="update()"></customer-form>
         <v-fade-transition>                  
         <v-flex v-show="id" class="mt-4">
-            <v-btn color="primary">
+            <v-btn color="primary" :href="'#/job/0/' + id">
                 <v-icon>add</v-icon>
                 New Job Bag
             </v-btn>
@@ -15,12 +15,25 @@
         </v-fade-transition>   
         <transition name="component-fade" appear>                                
         <v-layout v-show="!id" xs12 row class="mt-4">
-            <v-card class="mx-3">
-                <v-toolbar color="indigo" dark clipped-left flat>
+            <v-card class="mt-3">
+                <!-- <v-toolbar color="indigo" dark clipped-left flat>
                     <v-toolbar-title>Customers</v-toolbar-title>
-                </v-toolbar>
+                </v-toolbar> -->
+                <v-card-title>
+                    <v-card-title primary-title>
+                        <h3 class="headline mb-0">Customers</h3>
+                    </v-card-title>
+                    <v-spacer></v-spacer>
+                    <v-text-field
+                        append-icon="search"
+                        label="Search"
+                        single-line
+                        hide-details
+                        v-model="search"
+                    ></v-text-field>
+                </v-card-title>
                 <template>
-                    <v-data-table v-bind:headers="headers" :items="items" v-bind:pagination.sync="pagination" class="elevation-1">
+                    <v-data-table v-bind:headers="headers" :items="items" v-bind:pagination.sync="pagination" class="elevation-1" :search="search">
                         <template slot="items" slot-scope="props">
                             <tr @click="setId(props.item.id)">
                                 <td class="text-xs-right">{{ props.item.fname }}</td>
@@ -62,6 +75,7 @@
     export default {
         data: () => ({
             id: null,
+            search: null,
             deleteDialog: false,
             items: [],
             headers: [{
@@ -89,9 +103,12 @@
         }),
         watch: {
             id(val) {
-                if(isNaN(this.id)) this.id = null;
-                if (this.id == null) this.$router.replace("/customer");
-                else if (!isNaN(this.id)) this.$router.replace("/customer/" + this.id);
+                if (this.id == null) this.$router.push("/customer");
+            },
+            // Handle changing between customer view and no customer selected
+            '$route' (to, from) {
+                if (!to.params.id) this.id = null;
+                else this.id = Number(to.params.id);
             }
         },
 
@@ -108,6 +125,7 @@
             },
             setId(val) {
                 this.id = Number(val);
+                this.$router.push("/customer/" + val);
             },
 
             deleteCustomer() {
@@ -126,9 +144,8 @@
                 this.getCustomers();
             }
         },
-        
         mounted() {
-            this.id = Number(this.$route.params.id);
+            if (this.$route.params.id) this.id = Number(this.$route.params.id);
             this.getCustomers();
         }
     }

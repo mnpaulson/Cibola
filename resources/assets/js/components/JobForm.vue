@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <span>
         <v-flex xs12 sm12 md4>
             <transition name="component-fade" appear>
-            <v-card class="ma-3">
+            <v-card class="mt-3">
                 <v-card-text>
                 <div>
                     <v-select
@@ -60,7 +60,7 @@
             <template v-for="(image, index) in job.job_images" >
                 <v-flex :key="image.image" md4>
                     <transition name="component-fade" appear>                    
-                    <v-card class="ma-3">
+                    <v-card class="mt-3 mr-3">
                         <v-card-media :src="image.image" height="200px" @click="showLightBox(image.image)">
                         </v-card-media>
                         <v-text-field v-show="image.note" v-model="image.note" name="input-1" label=" Note" multi-line rows="5"></v-text-field>
@@ -133,7 +133,7 @@
             </v-card>
         </v-dialog>
         
-    </div>
+    </span>
 
 </template>
 
@@ -195,7 +195,7 @@
                 this.lightboxDialog = true;
             },
             getEmployees() {
-                axios.get('/employees/index')
+                axios.get('/employees/active')
                     .then((response) => {
                         this.employeeList = response.data;
                     })
@@ -251,6 +251,7 @@
                         this.$emit('customerId', this.job.customer_id);
                     })
                     .catch((error) => {
+                        this.store.setAlert(true, "error", "Job ID " + id + " not found.");
                         console.log(error);
                     });
             },

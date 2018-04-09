@@ -1,13 +1,13 @@
 <template>
   <v-flex xs12 sm12 md3>
     <transition name="component-fade" appear>    
-    <v-card class="ma-3">
-      <v-toolbar color="indigo" dark clipped-left flat>
+    <v-card class="ml-3">
+      <!-- <v-toolbar color="indigo" dark clipped-left flat>
         <v-toolbar-title>Job Bag Lookup</v-toolbar-title>
-      </v-toolbar>
+      </v-toolbar> -->
       <v-card-text>
-        <v-form>
-              <v-text-field label="Job Bag Search" v-model="job" xs12 @keyup="searchJob"></v-text-field>
+        <v-form @submit="searchJob">
+              <v-text-field label="Job Lookup" v-model="job" xs12></v-text-field>
         </v-form>
       </v-card-text>
     </v-card>
@@ -22,7 +22,7 @@
     }),
     methods: {
       searchJob() {
-        console.log(this.job);
+        this.$router.push('job/' + this.job);
       }
     }
   }

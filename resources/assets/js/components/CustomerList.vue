@@ -1,15 +1,15 @@
 <template>
     <v-flex xs12 md6>
         <transition name="component-fade" appear>          
-        <v-card class="ma-3">
-            <v-toolbar color="indigo" dark clipped-left flat>
+        <v-card>
+            <!-- <v-toolbar color="indigo" dark clipped-left flat>
                 <v-toolbar-title>Recent Customers</v-toolbar-title>
-            </v-toolbar>
+            </v-toolbar> -->
         <v-list dense>
             <template v-for="(customer, index) in customers">
                 <v-list-tile
                 ripple
-                :key="customer.id + 'key'"
+                :key="customer.id  + '-key'"
                 :href="'#/customer/' + customer.id"                
                 >
                     <v-list-tile-title>
@@ -25,31 +25,32 @@
 </template>
 
 <script>
-    export default {
-        data: () => ({
-            customers: []
-        }),
-        methods: {
-            getCustomerList() {
-                axios.get('/customers/recentCustomerList')
-                    .then((response) => {
-                        this.customers = response.data;
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            },
+export default {
+  data: () => ({
+    customers: []
+  }),
+  methods: {
+    getCustomerList() {
+      axios
+        .get("/customers/recentCustomerList")
+        .then(response => {
+          this.customers = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
 
-            setId(val) {
-                this.id = Number(val);
-            }
-        },
-
-        props: {
-            id: Number
-        },
-        mounted() {
-            this.getCustomerList();
-        }
+    setId(val) {
+      this.id = Number(val);
     }
+  },
+
+  props: {
+    id: Number
+  },
+  mounted() {
+    this.getCustomerList();
+  }
+};
 </script>

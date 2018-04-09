@@ -1,11 +1,11 @@
 <template>
   <v-flex xs12 sm12 md4>                             
-    <v-card class="ma-3"> 
-      <v-toolbar color="indigo" dark clipped-left flat>
+    <v-card> 
+      <!-- <v-toolbar color="indigo" dark clipped-left flat>
         <v-toolbar-title>{{ header }}</v-toolbar-title>
-      </v-toolbar>
+      </v-toolbar> -->
       <v-card-text>
-        <v-flex xs12 v-if="isSearch">
+        <v-flex v-if="isSearch">
           <v-select
               v-model="searchSelect"
               :search-input.sync="search"
@@ -15,9 +15,10 @@
               :items="fuseList"
               item-text="name"
               item-value="id"
+              autofocus          
             ></v-select>
         </v-flex>
-        <v-flex xs12 v-if="isInfo">
+        <v-flex v-if="isInfo">
           <h3 class="headline mb-0">
             <v-icon large>person</v-icon>
             <span>{{ customer.fname }}</span>
@@ -191,6 +192,7 @@
             //Empty search list so new customer will show up
             this.searchList = null;
             this.$emit('newCustomer');
+            this.$emit('update:id', response.data);
           })
           .catch((error) => {
             console.log(error);

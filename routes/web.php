@@ -19,6 +19,8 @@ Route::post('employees/create', 'EmployeeController@create')->name('employees.cr
 Route::post('employees/update', 'EmployeeController@update')->name('employees.update');
 Route::post('employees/delete', 'EmployeeController@delete')->name('employees.delete');
 Route::get('employees/index', 'EmployeeController@index')->name('employees.index');
+Route::get('employees/active', 'EmployeeController@active')->name('employees.active');
+
 
 //Job Routes
 Route::post('jobs/create', 'JobController@create')->name('jobs.create');

@@ -2450,6 +2450,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         name: 'job',
         component: __WEBPACK_IMPORTED_MODULE_5__views_Job___default.a
     }, {
+        path: '/job/:id/:cus',
+        name: 'jobcus',
+        component: __WEBPACK_IMPORTED_MODULE_5__views_Job___default.a
+    }, {
         path: '/admin',
         name: 'admin',
         component: __WEBPACK_IMPORTED_MODULE_8__views_Admin___default.a
@@ -65492,7 +65496,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        this.job_id = Number(this.$route.params.id);
+        //If job ID 0 then no job, used for linking with customer ID set
+        //Only preset customer ID if job is 0
+        if (Number(this.$route.params.id) !== 0) this.job_id = Number(this.$route.params.id);else this.customer_id = Number(this.$route.params.cus);
     },
 
     methods: {
@@ -65625,6 +65631,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             id: null
         };
     },
+    methods: {},
     watch: {
         id: function id(val) {
             // if(this.id == null) this.$router.replace("/customer");            
@@ -65647,7 +65654,6 @@ var render = function() {
     [
       _c(
         "v-layout",
-        { attrs: { row: "" } },
         [
           _c("customer-form", {
             attrs: { id: _vm.id },
@@ -65665,7 +65671,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-layout",
-        { staticClass: "mt-4", attrs: { row: "" } },
+        { staticClass: "mt-4" },
         [_c("customer-list"), _vm._v(" "), _c("job-list")],
         1
       )
@@ -65796,11 +65802,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             id: null,
+            search: null,
             deleteDialog: false,
             items: [],
             headers: [{
@@ -65825,8 +65845,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     watch: {
         id: function id(val) {
-            if (isNaN(this.id)) this.id = null;
-            if (this.id == null) this.$router.replace("/customer");else if (!isNaN(this.id)) this.$router.replace("/customer/" + this.id);
+            if (this.id == null) this.$router.push("/customer");
+        },
+
+        // Handle changing between customer view and no customer selected
+        '$route': function $route(to, from) {
+            if (!to.params.id) this.id = null;else this.id = Number(to.params.id);
         }
     },
 
@@ -65842,6 +65866,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         setId: function setId(val) {
             this.id = Number(val);
+            this.$router.push("/customer/" + val);
         },
         deleteCustomer: function deleteCustomer() {
             var _this2 = this;
@@ -65858,9 +65883,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.getCustomers();
         }
     },
-
     mounted: function mounted() {
-        this.id = Number(this.$route.params.id);
+        if (this.$route.params.id) this.id = Number(this.$route.params.id);
         this.getCustomers();
     }
 });
@@ -65907,7 +65931,7 @@ var render = function() {
             [
               _c(
                 "v-btn",
-                { attrs: { color: "primary" } },
+                { attrs: { color: "primary", href: "#/job/0/" + _vm.id } },
                 [
                   _c("v-icon", [_vm._v("add")]),
                   _vm._v("\n            New Job Bag\n        ")
@@ -65959,19 +65983,35 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { staticClass: "mx-3" },
+                { staticClass: "mt-3" },
                 [
                   _c(
-                    "v-toolbar",
-                    {
-                      attrs: {
-                        color: "indigo",
-                        dark: "",
-                        "clipped-left": "",
-                        flat: ""
-                      }
-                    },
-                    [_c("v-toolbar-title", [_vm._v("Customers")])],
+                    "v-card-title",
+                    [
+                      _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                        _c("h3", { staticClass: "headline mb-0" }, [
+                          _vm._v("Customers")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          "append-icon": "search",
+                          label: "Search",
+                          "single-line": "",
+                          "hide-details": ""
+                        },
+                        model: {
+                          value: _vm.search,
+                          callback: function($$v) {
+                            _vm.search = $$v
+                          },
+                          expression: "search"
+                        }
+                      })
+                    ],
                     1
                   ),
                   _vm._v(" "),
@@ -65981,7 +66021,8 @@ var render = function() {
                       attrs: {
                         headers: _vm.headers,
                         items: _vm.items,
-                        pagination: _vm.pagination
+                        pagination: _vm.pagination,
+                        search: _vm.search
                       },
                       on: {
                         "update:pagination": function($event) {
@@ -66288,6 +66329,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66417,6 +66459,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //Empty search list so new customer will show up
         _this3.searchList = null;
         _this3.$emit('newCustomer');
+        _this3.$emit('update:id', response.data);
       }).catch(function (error) {
         console.log(error);
       });
@@ -66486,24 +66529,13 @@ var render = function() {
     [
       _c(
         "v-card",
-        { staticClass: "ma-3" },
         [
-          _c(
-            "v-toolbar",
-            {
-              attrs: { color: "indigo", dark: "", "clipped-left": "", flat: "" }
-            },
-            [_c("v-toolbar-title", [_vm._v(_vm._s(_vm.header))])],
-            1
-          ),
-          _vm._v(" "),
           _c(
             "v-card-text",
             [
               _vm.isSearch
                 ? _c(
                     "v-flex",
-                    { attrs: { xs12: "" } },
                     [
                       _c("v-select", {
                         attrs: {
@@ -66513,7 +66545,8 @@ var render = function() {
                           "cache-items": "",
                           items: _vm.fuseList,
                           "item-text": "name",
-                          "item-value": "id"
+                          "item-value": "id",
+                          autofocus: ""
                         },
                         on: {
                           "update:searchInput": function($event) {
@@ -66534,7 +66567,7 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.isInfo
-                ? _c("v-flex", { attrs: { xs12: "" } }, [
+                ? _c("v-flex", [
                     _c(
                       "h3",
                       { staticClass: "headline mb-0" },
@@ -66910,7 +66943,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     searchJob: function searchJob() {
-      console.log(this.job);
+      this.$router.push('job/' + this.job);
     }
   }
 });
@@ -66933,31 +66966,17 @@ var render = function() {
         [
           _c(
             "v-card",
-            { staticClass: "ma-3" },
+            { staticClass: "ml-3" },
             [
-              _c(
-                "v-toolbar",
-                {
-                  attrs: {
-                    color: "indigo",
-                    dark: "",
-                    "clipped-left": "",
-                    flat: ""
-                  }
-                },
-                [_c("v-toolbar-title", [_vm._v("Job Bag Lookup")])],
-                1
-              ),
-              _vm._v(" "),
               _c(
                 "v-card-text",
                 [
                   _c(
                     "v-form",
+                    { on: { submit: _vm.searchJob } },
                     [
                       _c("v-text-field", {
-                        attrs: { label: "Job Bag Search", xs12: "" },
-                        on: { keyup: _vm.searchJob },
+                        attrs: { label: "Job Lookup", xs12: "" },
                         model: {
                           value: _vm.job,
                           callback: function($$v) {
@@ -67201,7 +67220,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getEmployees: function getEmployees() {
             var _this = this;
 
-            axios.get('/employees/index').then(function (response) {
+            axios.get('/employees/active').then(function (response) {
                 _this.employeeList = response.data;
             }).catch(function (error) {
                 console.log(error);
@@ -67255,6 +67274,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 _this4.$emit('customerId', _this4.job.customer_id);
             }).catch(function (error) {
+                _this4.store.setAlert(true, "error", "Job ID " + id + " not found.");
                 console.log(error);
             });
         },
@@ -67481,7 +67501,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "span",
     [
       _c(
         "v-flex",
@@ -67493,7 +67513,7 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { staticClass: "ma-3" },
+                { staticClass: "mt-3" },
                 [
                   _c("v-card-text", [
                     _c(
@@ -67718,7 +67738,7 @@ var render = function() {
                     [
                       _c(
                         "v-card",
-                        { staticClass: "ma-3" },
+                        { staticClass: "mt-3 mr-3" },
                         [
                           _c("v-card-media", {
                             attrs: { src: image.image, height: "200px" },
@@ -68729,32 +68749,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            customers: []
-        };
-    },
-    methods: {
-        getCustomerList: function getCustomerList() {
-            var _this = this;
+  data: function data() {
+    return {
+      customers: []
+    };
+  },
+  methods: {
+    getCustomerList: function getCustomerList() {
+      var _this = this;
 
-            axios.get('/customers/recentCustomerList').then(function (response) {
-                _this.customers = response.data;
-            }).catch(function (error) {
-                console.log(error);
-            });
-        },
-        setId: function setId(val) {
-            this.id = Number(val);
-        }
+      axios.get("/customers/recentCustomerList").then(function (response) {
+        _this.customers = response.data;
+      }).catch(function (error) {
+        console.log(error);
+      });
     },
-
-    props: {
-        id: Number
-    },
-    mounted: function mounted() {
-        this.getCustomerList();
+    setId: function setId(val) {
+      this.id = Number(val);
     }
+  },
+
+  props: {
+    id: Number
+  },
+  mounted: function mounted() {
+    this.getCustomerList();
+  }
 });
 
 /***/ }),
@@ -68775,22 +68795,7 @@ var render = function() {
         [
           _c(
             "v-card",
-            { staticClass: "ma-3" },
             [
-              _c(
-                "v-toolbar",
-                {
-                  attrs: {
-                    color: "indigo",
-                    dark: "",
-                    "clipped-left": "",
-                    flat: ""
-                  }
-                },
-                [_c("v-toolbar-title", [_vm._v("Recent Customers")])],
-                1
-              ),
-              _vm._v(" "),
               _c(
                 "v-list",
                 { attrs: { dense: "" } },
@@ -68800,7 +68805,7 @@ var render = function() {
                       _c(
                         "v-list-tile",
                         {
-                          key: customer.id + "key",
+                          key: customer.id + "-key",
                           attrs: {
                             ripple: "",
                             href: "#/customer/" + customer.id
@@ -68901,7 +68906,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get("/jobs/recentJobsList").then(function (response) {
         _this.jobs = response.data;
-        console.log(response.data);
       }).catch(function (error) {
         console.log(error);
       });
@@ -68937,22 +68941,8 @@ var render = function() {
         [
           _c(
             "v-card",
-            { staticClass: "ma-3" },
+            { staticClass: "ml-3" },
             [
-              _c(
-                "v-toolbar",
-                {
-                  attrs: {
-                    color: "indigo",
-                    dark: "",
-                    "clipped-left": "",
-                    flat: ""
-                  }
-                },
-                [_c("v-toolbar-title", [_vm._v("Recent Jobs")])],
-                1
-              ),
-              _vm._v(" "),
               _c(
                 "v-list",
                 { attrs: { dense: "" } },

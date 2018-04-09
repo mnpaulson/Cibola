@@ -12,7 +12,11 @@
             job_id: null
         }),
         mounted() {
-            this.job_id = Number(this.$route.params.id);
+            //If job ID 0 then no job, used for linking with customer ID set
+            //Only preset customer ID if job is 0
+            if (Number(this.$route.params.id) !== 0) this.job_id = Number(this.$route.params.id);
+            else this.customer_id = Number(this.$route.params.cus);
+            
         },
         methods: {
             setCustomerId(id) {

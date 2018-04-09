@@ -14,6 +14,12 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
+    public function active()
+    {
+        $employee = Employee::where('active', 1)->get();
+        return response()->json($employee);
+    }
+
     public function create(Request $request) 
     {
         $employee = new Employee;
