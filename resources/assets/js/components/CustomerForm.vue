@@ -1,6 +1,9 @@
 <template>
-  <v-flex xs12 sm12 md4>                             
-    <v-card> 
+  <v-flex d-flex xs12 sm12 md4>                             
+    <v-card>
+      <span v-show="isInfo" class="">          
+        <v-btn style="z-index:0" class="close-btn" dark small right absolute outline fab color="grey" @click="clearCustomer()"><v-icon class="fab-fix" dark>close</v-icon></v-btn>
+      </span>
       <!-- <v-toolbar color="indigo" dark clipped-left flat>
         <v-toolbar-title>{{ header }}</v-toolbar-title>
       </v-toolbar> -->
@@ -47,20 +50,17 @@
             <v-text-field label="Address" v-model="customer.address" xs12 ></v-text-field>
           </v-layout>
         </v-form>
-        <div v-show="isSearch">
-        <v-btn color="primary" dark small absolute bottom right fab @click="setFormState(true)" >
-          <v-icon class="fab-fix">add</v-icon>
-        </v-btn>
+        <div>
         </div>
         <div v-show="isForm">
-          <v-btn v-show="customer.id == null" color="primary" @click="storeCustomer()">Add Customer</v-btn>
-          <v-btn v-show="customer.id" color="primary" @click="updateCustomer()">Update Customer</v-btn>
-          <v-btn color="error" @click="clearCustomer()">Cancel</v-btn>
+          <v-flex d-flex row>
+            <v-flex xs8 class="" v-show="customer.id == null"><v-btn xs6 block color="primary" @click="storeCustomer()">Create Customer</v-btn></v-flex>
+            <v-flex xs8 class="" v-show="customer.id"><v-btn xs6 block  color="primary" @click="updateCustomer()">Save Changes</v-btn></v-flex>
+            <v-flex xs4 class="ml-2"><v-btn xs6 block color="error" @click="clearCustomer()">Cancel</v-btn></v-flex>
+          </v-flex>
         </div>
-        <div v-show="isInfo" class="cdb-bottom-right">          
-          <v-btn dark small bottom right fab color="primary" @click="setFormState(true)"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
-          <v-btn dark small bottom right fab color="error" @click="clearCustomer()"><v-icon class="fab-fix" dark>close</v-icon></v-btn>
-        </div>
+        <v-btn style="z-index:0" v-show="isSearch" color="primary" dark small absolute bottom right fab @click="setFormState(true)" ><v-icon class="fab-fix">add</v-icon></v-btn>        
+        <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
       </v-card-text>
     </v-card>                                
   </v-flex>

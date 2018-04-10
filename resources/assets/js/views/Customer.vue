@@ -2,20 +2,22 @@
     <div>
         <customer-form :id.sync="id" v-on:newCustomer="update()"></customer-form>
         <v-fade-transition>                  
-        <v-flex v-show="id" class="mt-4">
-            <v-btn color="primary" :href="'#/job/0/' + id">
-                <v-icon>add</v-icon>
-                New Job Bag
-            </v-btn>
-            <v-btn color="error" @click="deleteDialog = true">
-                <v-icon>delete</v-icon>
-                Delete Customer
-            </v-btn>
+        <v-flex d-flex class="">
+            <div v-show="id"  class="my-1">
+                <v-btn color="primary" :href="'#/job/0/' + id">
+                    <v-icon>add</v-icon>
+                    New Job
+                </v-btn>
+                <v-btn color="error" @click="deleteDialog = true">
+                    <v-icon>delete</v-icon>
+                    Delete Customer
+                </v-btn>
+            </div>
         </v-flex>
         </v-fade-transition>   
         <transition name="component-fade" appear>                                
-        <v-layout v-show="!id" xs12 row class="mt-4">
-            <v-card class="mt-3">
+        <v-flex d-flex xs12 md6  class="mt-2">
+            <v-card v-show="!id" class="">
                 <!-- <v-toolbar color="indigo" dark clipped-left flat>
                     <v-toolbar-title>Customers</v-toolbar-title>
                 </v-toolbar> -->
@@ -45,10 +47,10 @@
                     </v-data-table>
                 </template>
             </v-card>
-        </v-layout>
+        </v-flex>
         </transition>               
         <v-dialog v-model="deleteDialog" max-width="500px">
-            <v-card>
+            <v-card xs12 md6>
                 <v-toolbar color="error" dark clipped-left flat>
                     <v-toolbar-title><v-icon>warning</v-icon> Delete Customer</v-toolbar-title>
                 </v-toolbar>

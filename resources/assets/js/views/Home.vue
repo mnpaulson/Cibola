@@ -1,10 +1,10 @@
 <template>
 <div>
-<v-layout>
+<v-layout row wrap>
     <customer-form :id.sync="id"></customer-form>
     <job-lookup></job-lookup>
 </v-layout>
-<v-layout  class="mt-4">    
+<v-layout row wrap class="">    
     <customer-list></customer-list>
     <job-list></job-list>
 </v-layout>

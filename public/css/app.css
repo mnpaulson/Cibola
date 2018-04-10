@@ -11,6 +11,20 @@
   right: 0;
 }
 
+.close-btn {
+  border: none !important;
+  right: -5px !important;
+  top: -5px !important;
+}
+
+.redText > div > input {
+  color: red !important;
+}
+
+.est-note-align {
+  padding-top: 21px !important;
+}
+
 /* TRANSITION */
 
 .component-fade-enter-active {
@@ -33,5 +47,6 @@
 .fab-fix {
   line-height: 1.5em !important;
   font-size: 2em !important;
+  z-index: 0 !important;
 }
 

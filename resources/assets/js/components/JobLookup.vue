@@ -1,7 +1,7 @@
 <template>
-  <v-flex xs12 sm12 md3>
+  <v-flex d-flex xs12 sm12 md3>
     <transition name="component-fade" appear>    
-    <v-card class="ml-3">
+    <v-card class="">
       <!-- <v-toolbar color="indigo" dark clipped-left flat>
         <v-toolbar-title>Job Bag Lookup</v-toolbar-title>
       </v-toolbar> -->

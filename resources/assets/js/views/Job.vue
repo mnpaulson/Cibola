@@ -1,8 +1,10 @@
 <template>
     <div>
-        <customer-form :id.sync="customer_id">></customer-form>
-        <job-form :job_id.sync="job_id" :customer_id.sync="customer_id" v-on:customerId="setCustomerId"></job-form>
-    </div>
+    <v-layout row wrap>
+        <customer-form :id.sync="customer_id"></customer-form>
+    </v-layout>  
+    <job-form :job_id.sync="job_id" :customer_id.sync="customer_id" v-on:customerId="setCustomerId"></job-form>
+    </div>  
 </template>
 
 <script>

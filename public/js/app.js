@@ -65293,7 +65293,6 @@ var render = function() {
                 [
                   _c(
                     "v-list-tile",
-                    { on: { click: function($event) {} } },
                     [
                       _c(
                         "v-list-tile-action",
@@ -65319,7 +65318,6 @@ var render = function() {
                 [
                   _c(
                     "v-list-tile",
-                    { on: { click: function($event) {} } },
                     [
                       _c(
                         "v-list-tile-action",
@@ -65345,7 +65343,6 @@ var render = function() {
                 [
                   _c(
                     "v-list-tile",
-                    { on: { click: function($event) {} } },
                     [
                       _c(
                         "v-list-tile-action",
@@ -65371,7 +65368,6 @@ var render = function() {
                 [
                   _c(
                     "v-list-tile",
-                    { on: { click: function($event) {} } },
                     [
                       _c(
                         "v-list-tile-action",
@@ -65402,7 +65398,7 @@ var render = function() {
         [
           _c(
             "v-container",
-            { attrs: { fluid: "" } },
+            { attrs: { fluid: "", "grid-list-md": "" } },
             [_c("alert"), _vm._v(" "), _c("router-view")],
             1
           )
@@ -65487,6 +65483,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65520,16 +65518,19 @@ var render = function() {
     "div",
     [
       _c(
-        "customer-form",
-        {
-          attrs: { id: _vm.customer_id },
-          on: {
-            "update:id": function($event) {
-              _vm.customer_id = $event
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c("customer-form", {
+            attrs: { id: _vm.customer_id },
+            on: {
+              "update:id": function($event) {
+                _vm.customer_id = $event
+              }
             }
-          }
-        },
-        [_vm._v(">")]
+          })
+        ],
+        1
       ),
       _vm._v(" "),
       _c("job-form", {
@@ -65654,6 +65655,7 @@ var render = function() {
     [
       _c(
         "v-layout",
+        { attrs: { row: "", wrap: "" } },
         [
           _c("customer-form", {
             attrs: { id: _vm.id },
@@ -65671,7 +65673,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-layout",
-        { staticClass: "mt-4" },
+        { attrs: { row: "", wrap: "" } },
         [_c("customer-list"), _vm._v(" "), _c("job-list")],
         1
       )
@@ -65742,6 +65744,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -65915,49 +65919,51 @@ var render = function() {
       _c(
         "v-fade-transition",
         [
-          _c(
-            "v-flex",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.id,
-                  expression: "id"
-                }
-              ],
-              staticClass: "mt-4"
-            },
-            [
-              _c(
-                "v-btn",
-                { attrs: { color: "primary", href: "#/job/0/" + _vm.id } },
-                [
-                  _c("v-icon", [_vm._v("add")]),
-                  _vm._v("\n            New Job Bag\n        ")
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "error" },
-                  on: {
-                    click: function($event) {
-                      _vm.deleteDialog = true
-                    }
+          _c("v-flex", { attrs: { "d-flex": "" } }, [
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.id,
+                    expression: "id"
                   }
-                },
-                [
-                  _c("v-icon", [_vm._v("delete")]),
-                  _vm._v("\n            Delete Customer\n        ")
                 ],
-                1
-              )
-            ],
-            1
-          )
+                staticClass: "my-1"
+              },
+              [
+                _c(
+                  "v-btn",
+                  { attrs: { color: "primary", href: "#/job/0/" + _vm.id } },
+                  [
+                    _c("v-icon", [_vm._v("add")]),
+                    _vm._v("\n                New Job\n            ")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "error" },
+                    on: {
+                      click: function($event) {
+                        _vm.deleteDialog = true
+                      }
+                    }
+                  },
+                  [
+                    _c("v-icon", [_vm._v("delete")]),
+                    _vm._v("\n                Delete Customer\n            ")
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ])
         ],
         1
       ),
@@ -65967,23 +65973,21 @@ var render = function() {
         { attrs: { name: "component-fade", appear: "" } },
         [
           _c(
-            "v-layout",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: !_vm.id,
-                  expression: "!id"
-                }
-              ],
-              staticClass: "mt-4",
-              attrs: { xs12: "", row: "" }
-            },
+            "v-flex",
+            { staticClass: "mt-2", attrs: { "d-flex": "", xs12: "", md6: "" } },
             [
               _c(
                 "v-card",
-                { staticClass: "mt-3" },
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.id,
+                      expression: "!id"
+                    }
+                  ]
+                },
                 [
                   _c(
                     "v-card-title",
@@ -66092,6 +66096,7 @@ var render = function() {
         [
           _c(
             "v-card",
+            { attrs: { xs12: "", md6: "" } },
             [
               _c(
                 "v-toolbar",
@@ -66525,11 +66530,57 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-flex",
-    { attrs: { xs12: "", sm12: "", md4: "" } },
+    { attrs: { "d-flex": "", xs12: "", sm12: "", md4: "" } },
     [
       _c(
         "v-card",
         [
+          _c(
+            "span",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.isInfo,
+                  expression: "isInfo"
+                }
+              ]
+            },
+            [
+              _c(
+                "v-btn",
+                {
+                  staticClass: "close-btn",
+                  staticStyle: { "z-index": "0" },
+                  attrs: {
+                    dark: "",
+                    small: "",
+                    right: "",
+                    absolute: "",
+                    outline: "",
+                    fab: "",
+                    color: "grey"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.clearCustomer()
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "v-icon",
+                    { staticClass: "fab-fix", attrs: { dark: "" } },
+                    [_vm._v("close")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c(
             "v-card-text",
             [
@@ -66712,43 +66763,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.isSearch,
-                      expression: "isSearch"
-                    }
-                  ]
-                },
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        color: "primary",
-                        dark: "",
-                        small: "",
-                        absolute: "",
-                        bottom: "",
-                        right: "",
-                        fab: ""
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.setFormState(true)
-                        }
-                      }
-                    },
-                    [_c("v-icon", { staticClass: "fab-fix" }, [_vm._v("add")])],
-                    1
-                  )
-                ],
-                1
-              ),
+              _c("div"),
               _vm._v(" "),
               _c(
                 "div",
@@ -66764,65 +66779,128 @@ var render = function() {
                 },
                 [
                   _c(
-                    "v-btn",
-                    {
-                      directives: [
+                    "v-flex",
+                    { attrs: { "d-flex": "", row: "" } },
+                    [
+                      _c(
+                        "v-flex",
                         {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.customer.id == null,
-                          expression: "customer.id == null"
-                        }
-                      ],
-                      attrs: { color: "primary" },
-                      on: {
-                        click: function($event) {
-                          _vm.storeCustomer()
-                        }
-                      }
-                    },
-                    [_vm._v("Add Customer")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      directives: [
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.customer.id == null,
+                              expression: "customer.id == null"
+                            }
+                          ],
+                          attrs: { xs8: "" }
+                        },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { xs6: "", block: "", color: "primary" },
+                              on: {
+                                click: function($event) {
+                                  _vm.storeCustomer()
+                                }
+                              }
+                            },
+                            [_vm._v("Create Customer")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
                         {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.customer.id,
-                          expression: "customer.id"
-                        }
-                      ],
-                      attrs: { color: "primary" },
-                      on: {
-                        click: function($event) {
-                          _vm.updateCustomer()
-                        }
-                      }
-                    },
-                    [_vm._v("Update Customer")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "error" },
-                      on: {
-                        click: function($event) {
-                          _vm.clearCustomer()
-                        }
-                      }
-                    },
-                    [_vm._v("Cancel")]
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.customer.id,
+                              expression: "customer.id"
+                            }
+                          ],
+                          attrs: { xs8: "" }
+                        },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { xs6: "", block: "", color: "primary" },
+                              on: {
+                                click: function($event) {
+                                  _vm.updateCustomer()
+                                }
+                              }
+                            },
+                            [_vm._v("Save Changes")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { staticClass: "ml-2", attrs: { xs4: "" } },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { xs6: "", block: "", color: "error" },
+                              on: {
+                                click: function($event) {
+                                  _vm.clearCustomer()
+                                }
+                              }
+                            },
+                            [_vm._v("Cancel")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
               ),
               _vm._v(" "),
               _c(
-                "div",
+                "v-btn",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isSearch,
+                      expression: "isSearch"
+                    }
+                  ],
+                  staticStyle: { "z-index": "0" },
+                  attrs: {
+                    color: "primary",
+                    dark: "",
+                    small: "",
+                    absolute: "",
+                    bottom: "",
+                    right: "",
+                    fab: ""
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.setFormState(true)
+                    }
+                  }
+                },
+                [_c("v-icon", { staticClass: "fab-fix" }, [_vm._v("add")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
                 {
                   directives: [
                     {
@@ -66832,61 +66910,27 @@ var render = function() {
                       expression: "isInfo"
                     }
                   ],
-                  staticClass: "cdb-bottom-right"
+                  staticStyle: { "z-index": "0" },
+                  attrs: {
+                    dark: "",
+                    small: "",
+                    bottom: "",
+                    right: "",
+                    absolute: "",
+                    fab: "",
+                    color: "primary"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.setFormState(true)
+                    }
+                  }
                 },
                 [
                   _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        dark: "",
-                        small: "",
-                        bottom: "",
-                        right: "",
-                        fab: "",
-                        color: "primary"
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.setFormState(true)
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "v-icon",
-                        { staticClass: "fab-fix", attrs: { dark: "" } },
-                        [_vm._v("edit")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        dark: "",
-                        small: "",
-                        bottom: "",
-                        right: "",
-                        fab: "",
-                        color: "error"
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.clearCustomer()
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "v-icon",
-                        { staticClass: "fab-fix", attrs: { dark: "" } },
-                        [_vm._v("close")]
-                      )
-                    ],
-                    1
+                    "v-icon",
+                    { staticClass: "fab-fix", attrs: { dark: "" } },
+                    [_vm._v("edit")]
                   )
                 ],
                 1
@@ -66958,7 +67002,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-flex",
-    { attrs: { xs12: "", sm12: "", md3: "" } },
+    { attrs: { "d-flex": "", xs12: "", sm12: "", md3: "" } },
     [
       _c(
         "transition",
@@ -66966,7 +67010,7 @@ var render = function() {
         [
           _c(
             "v-card",
-            { staticClass: "ml-3" },
+            {},
             [
               _c(
                 "v-card-text",
@@ -67158,6 +67202,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -67166,6 +67227,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             date: null,
             dateMenu: false,
+            dateRed: false,
             caputureDialog: false,
             deleteDialog: false,
             lightboxDialog: false,
@@ -67182,6 +67244,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 estimate: null,
                 est_note: null,
                 appraisal: false,
+                note: null,
                 due_date: null,
                 completed_at: null,
                 job_images: []
@@ -67501,11 +67564,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "span",
+    "v-layout",
+    { attrs: { row: "", wrap: "" } },
     [
       _c(
         "v-flex",
-        { attrs: { xs12: "", sm12: "", md4: "" } },
+        { attrs: { "d-flex": "", xs12: "", md6: "" } },
         [
           _c(
             "transition",
@@ -67513,368 +67577,275 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { staticClass: "mt-3" },
-                [
-                  _c("v-card-text", [
-                    _c(
-                      "div",
-                      [
-                        _c("v-select", {
-                          attrs: {
-                            autocomplete: "",
-                            label: "Employee Select",
-                            "cache-items": "",
-                            "prepend-icon": "person_pin",
-                            items: _vm.employeeList,
-                            "item-text": "name",
-                            "item-value": "id"
-                          },
-                          model: {
-                            value: _vm.job.employee_id,
-                            callback: function($$v) {
-                              _vm.$set(_vm.job, "employee_id", $$v)
-                            },
-                            expression: "job.employee_id"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "v-layout",
-                          [
-                            _c(
-                              "v-flex",
-                              { attrs: { xs12: "", sm3: "" } },
-                              [
-                                _c("v-text-field", {
-                                  attrs: {
-                                    label: "Est",
-                                    "prepend-icon": "attach_money"
-                                  },
-                                  model: {
-                                    value: _vm.job.estimate,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.job, "estimate", $$v)
-                                    },
-                                    expression: "job.estimate"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-flex",
-                              { attrs: { xs12: "", sm9: "" } },
-                              [
-                                _c("v-text-field", {
-                                  staticClass: "ml-1",
-                                  attrs: { label: "Estimate Note" },
-                                  model: {
-                                    value: _vm.job.est_note,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.job, "est_note", $$v)
-                                    },
-                                    expression: "job.est_note"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-menu",
-                          {
-                            ref: "dateMenu",
-                            attrs: {
-                              lazy: "",
-                              "close-on-content-click": false,
-                              transition: "scale-transition",
-                              "offset-y": "",
-                              "full-width": "",
-                              "nudge-right": 40,
-                              "min-width": "290px",
-                              "return-value": _vm.date
-                            },
-                            on: {
-                              "update:returnValue": function($event) {
-                                _vm.date = $event
-                              }
-                            },
-                            model: {
-                              value: _vm.dateMenu,
-                              callback: function($$v) {
-                                _vm.dateMenu = $$v
-                              },
-                              expression: "dateMenu"
-                            }
-                          },
-                          [
-                            _c("v-text-field", {
-                              attrs: {
-                                slot: "activator",
-                                label: "Due Date",
-                                "prepend-icon": "event",
-                                readonly: ""
-                              },
-                              slot: "activator",
-                              model: {
-                                value: _vm.job.due_date,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.job, "due_date", $$v)
-                                },
-                                expression: "job.due_date"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "v-date-picker",
-                              {
-                                attrs: { "no-title": "", scrollable: "" },
-                                model: {
-                                  value: _vm.job.due_date,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.job, "due_date", $$v)
-                                  },
-                                  expression: "job.due_date"
-                                }
-                              },
-                              [
-                                _c("v-spacer"),
-                                _vm._v(" "),
-                                _c(
-                                  "v-btn",
-                                  {
-                                    attrs: { flat: "", color: "primary" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.dateMenu = false
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Cancel")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-btn",
-                                  {
-                                    attrs: { flat: "", color: "primary" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.$refs.dateMenu.save(_vm.date)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("OK")]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "cdb-bottom-right" },
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: {
-                              fab: "",
-                              small: "",
-                              bottom: "",
-                              right: "",
-                              dark: "",
-                              color: "primary"
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.caputureDialog = true
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "v-icon",
-                              { staticClass: "fab-fix", attrs: { dark: "" } },
-                              [_vm._v("camera_alt")]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        [
-          _vm._l(_vm.job.job_images, function(image, index) {
-            return [
-              _c(
-                "v-flex",
-                { key: image.image, attrs: { md4: "" } },
                 [
                   _c(
-                    "transition",
-                    { attrs: { name: "component-fade", appear: "" } },
+                    "v-card-text",
                     [
                       _c(
-                        "v-card",
-                        { staticClass: "mt-3 mr-3" },
+                        "v-layout",
+                        { attrs: { row: "", wrap: "" } },
                         [
-                          _c("v-card-media", {
-                            attrs: { src: image.image, height: "200px" },
-                            on: {
-                              click: function($event) {
-                                _vm.showLightBox(image.image)
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("v-text-field", {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: image.note,
-                                expression: "image.note"
-                              }
+                          _c(
+                            "v-flex",
+                            { attrs: { row: "", xs12: "", md6: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Est",
+                                  "prepend-icon": "attach_money"
+                                },
+                                model: {
+                                  value: _vm.job.estimate,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.job, "estimate", $$v)
+                                  },
+                                  expression: "job.estimate"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-select", {
+                                attrs: {
+                                  autocomplete: "",
+                                  label: "Employee Select",
+                                  "cache-items": "",
+                                  "prepend-icon": "person_pin",
+                                  items: _vm.employeeList,
+                                  "item-text": "name",
+                                  "item-value": "id"
+                                },
+                                model: {
+                                  value: _vm.job.employee_id,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.job, "employee_id", $$v)
+                                  },
+                                  expression: "job.employee_id"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-menu",
+                                {
+                                  ref: "dateMenu",
+                                  attrs: {
+                                    lazy: "",
+                                    "close-on-content-click": false,
+                                    transition: "scale-transition",
+                                    "offset-y": "",
+                                    "full-width": "",
+                                    "nudge-right": 40,
+                                    "min-width": "290px",
+                                    "return-value": _vm.date
+                                  },
+                                  on: {
+                                    "update:returnValue": function($event) {
+                                      _vm.date = $event
+                                    }
+                                  },
+                                  model: {
+                                    value: _vm.dateMenu,
+                                    callback: function($$v) {
+                                      _vm.dateMenu = $$v
+                                    },
+                                    expression: "dateMenu"
+                                  }
+                                },
+                                [
+                                  _c("v-text-field", {
+                                    class: { redText: _vm.dateRed },
+                                    attrs: {
+                                      slot: "activator",
+                                      label: "Due Date",
+                                      "prepend-icon": "event",
+                                      readonly: "",
+                                      color: "red"
+                                    },
+                                    slot: "activator",
+                                    model: {
+                                      value: _vm.job.due_date,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.job, "due_date", $$v)
+                                      },
+                                      expression: "job.due_date"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-date-picker",
+                                    {
+                                      attrs: { "no-title": "", scrollable: "" },
+                                      model: {
+                                        value: _vm.job.due_date,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.job, "due_date", $$v)
+                                        },
+                                        expression: "job.due_date"
+                                      }
+                                    },
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.dateMenu = false
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Cancel")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.$refs.dateMenu.save(_vm.date)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("OK")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
                             ],
-                            attrs: {
-                              name: "input-1",
-                              label: " Note",
-                              "multi-line": "",
-                              rows: "5"
-                            },
-                            model: {
-                              value: image.note,
-                              callback: function($$v) {
-                                _vm.$set(image, "note", $$v)
-                              },
-                              expression: "image.note"
-                            }
-                          }),
+                            1
+                          ),
                           _vm._v(" "),
                           _c(
-                            "div",
-                            { staticClass: "cdb-bottom-right" },
+                            "v-flex",
+                            { attrs: { row: "", xs12: "", md6: "" } },
                             [
                               _c(
-                                "v-btn",
-                                {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: !image.note,
-                                      expression: "!image.note"
-                                    }
-                                  ],
-                                  attrs: {
-                                    fab: "",
-                                    dark: "",
-                                    small: "",
-                                    color: "primary"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      image.note = " "
-                                    }
-                                  }
-                                },
+                                "v-layout",
+                                { attrs: { row: "", wrap: "" } },
                                 [
                                   _c(
-                                    "v-icon",
-                                    {
-                                      staticClass: "fab-fix",
-                                      attrs: { dark: "" }
-                                    },
-                                    [_vm._v("edit")]
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        staticClass: "mt-2 est-note-align",
+                                        attrs: {
+                                          "multi-line": "",
+                                          "no-resize": "",
+                                          rows: "3",
+                                          label: "Estimate Details"
+                                        },
+                                        model: {
+                                          value: _vm.job.est_note,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.job, "est_note", $$v)
+                                          },
+                                          expression: "job.est_note"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "" } },
+                                    [
+                                      _c("v-switch", {
+                                        attrs: { label: "Appraisal" },
+                                        model: {
+                                          value: _vm.job.apparisal,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.job, "apparisal", $$v)
+                                          },
+                                          expression: "job.apparisal"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "" } },
+                                    [
+                                      _c("v-switch", {
+                                        attrs: { label: "Hard Date" },
+                                        model: {
+                                          value: _vm.dateRed,
+                                          callback: function($$v) {
+                                            _vm.dateRed = $$v
+                                          },
+                                          expression: "dateRed"
+                                        }
+                                      })
+                                    ],
+                                    1
                                   )
                                 ],
                                 1
-                              ),
-                              _vm._v(" "),
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  "multi-line": "",
+                                  "no-resize": "",
+                                  label: "Job Note"
+                                },
+                                model: {
+                                  value: _vm.job.note,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.job, "note", $$v)
+                                  },
+                                  expression: "job.note"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {},
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              staticStyle: { "z-index": "0" },
+                              attrs: {
+                                absolute: "",
+                                fab: "",
+                                small: "",
+                                bottom: "",
+                                right: "",
+                                dark: "",
+                                color: "primary"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.caputureDialog = true
+                                }
+                              }
+                            },
+                            [
                               _c(
-                                "v-btn",
-                                {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: image.note,
-                                      expression: "image.note"
-                                    }
-                                  ],
-                                  attrs: {
-                                    fab: "",
-                                    dark: "",
-                                    small: "",
-                                    color: "primary"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      image.note = null
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "v-icon",
-                                    {
-                                      staticClass: "fab-fix",
-                                      attrs: { dark: "" }
-                                    },
-                                    [_vm._v("close")]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: {
-                                    fab: "",
-                                    dark: "",
-                                    small: "",
-                                    color: "error"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.removeImage(index)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "v-icon",
-                                    {
-                                      staticClass: "fab-fix",
-                                      attrs: { dark: "" }
-                                    },
-                                    [_vm._v("delete")]
-                                  )
-                                ],
-                                1
+                                "v-icon",
+                                { staticClass: "fab-fix", attrs: { dark: "" } },
+                                [_vm._v("camera_alt")]
                               )
                             ],
                             1
@@ -67888,11 +67859,100 @@ var render = function() {
                 ],
                 1
               )
-            ]
-          })
+            ],
+            1
+          )
         ],
-        2
+        1
       ),
+      _vm._v(" "),
+      _c("v-flex", { attrs: { xs12: "" } }),
+      _vm._v(" "),
+      _vm._l(_vm.job.job_images, function(image, index) {
+        return [
+          _c(
+            "v-flex",
+            { key: image.image, attrs: { md4: "" } },
+            [
+              _c(
+                "transition",
+                { attrs: { name: "component-fade", appear: "" } },
+                [
+                  _c(
+                    "v-card",
+                    { attrs: { width: "400px" } },
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "close-btn",
+                          attrs: {
+                            dark: "",
+                            small: "",
+                            right: "",
+                            absolute: "",
+                            outline: "",
+                            fab: "",
+                            color: "grey"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.removeImage(index)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "v-icon",
+                            { staticClass: "fab-fix", attrs: { dark: "" } },
+                            [_vm._v("delete")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-card-media", {
+                        attrs: {
+                          contain: "",
+                          src: image.image,
+                          height: "200px"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.showLightBox(image.image)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          name: "input-1",
+                          label: " Note",
+                          "multi-line": "",
+                          rows: "5",
+                          "no-resize": ""
+                        },
+                        model: {
+                          value: image.note,
+                          callback: function($$v) {
+                            _vm.$set(image, "note", $$v)
+                          },
+                          expression: "image.note"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ]
+      }),
+      _vm._v(" "),
+      _c("v-flex", { attrs: { xs12: "" } }),
       _vm._v(" "),
       _c("transition", { attrs: { name: "component-fade", appear: "" } }, [
         _c(
@@ -68212,7 +68272,7 @@ var render = function() {
         1
       )
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -68941,7 +69001,7 @@ var render = function() {
         [
           _c(
             "v-card",
-            { staticClass: "ml-3" },
+            {},
             [
               _c(
                 "v-list",

@@ -1,86 +1,103 @@
 <template>
-    <span>
-        <v-flex xs12 sm12 md4>
+    <v-layout row wrap>
+        <v-flex d-flex xs12 md6>
             <transition name="component-fade" appear>
-            <v-card class="mt-3">
+            <v-card>
                 <v-card-text>
-                <div>
-                    <v-select
-                    autocomplete
-                    label="Employee Select"
-                    cache-items
-                    prepend-icon="person_pin"
-                    :items="employeeList"
-                    v-model="job.employee_id"
-                    item-text="name"
-                    item-value="id"
-                    ></v-select>
-                    <v-layout>
-                <v-flex xs12 sm3>                    
-                    <v-text-field v-model="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm9>                    
-                    <v-text-field v-model="job.est_note" class="ml-1" label="Estimate Note"></v-text-field>
-                </v-flex>
-                </v-layout>
-                <v-menu
-                    ref="dateMenu"
-                    lazy
-                    :close-on-content-click="false"
-                    v-model="dateMenu"
-                    transition="scale-transition"
-                    offset-y
-                    full-width
-                    :nudge-right="40"
-                    min-width="290px"
-                    :return-value.sync="date"
-                >
-                    <v-text-field
-                    slot="activator"
-                    label="Due Date"
-                    v-model="job.due_date"
-                    prepend-icon="event"
-                    readonly
-                    ></v-text-field>
-                    <v-date-picker v-model="job.due_date" no-title scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="dateMenu = false">Cancel</v-btn>
-                    <v-btn flat color="primary" @click="$refs.dateMenu.save(date)">OK</v-btn>
-                    </v-date-picker>
-                </v-menu>
-                </div>
-                <div class="cdb-bottom-right">
-                    <v-btn fab small bottom right dark color="primary" @click="caputureDialog = true"><v-icon class="fab-fix" dark>camera_alt</v-icon></v-btn>                    
-                </div> 
+                    <v-layout row wrap>
+                        <v-flex row xs12 md6>
+                            <v-text-field v-model="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
+                            <v-select
+                            autocomplete
+                            label="Employee Select"
+                            cache-items
+                            prepend-icon="person_pin"
+                            :items="employeeList"
+                            v-model="job.employee_id"
+                            item-text="name"
+                            item-value="id"
+                            ></v-select>
+                            <v-menu
+                            ref="dateMenu"
+                            lazy
+                            :close-on-content-click="false"
+                            v-model="dateMenu"
+                            transition="scale-transition"
+                            offset-y
+                            full-width
+                            :nudge-right="40"
+                            min-width="290px"
+                            :return-value.sync="date"                    
+                            >
+                                <v-text-field
+                                slot="activator"
+                                label="Due Date"
+                                v-model="job.due_date"
+                                prepend-icon="event"
+                                readonly
+                                color="red"
+                                :class="{redText: dateRed}"                        
+                                ></v-text-field>
+                                <v-date-picker v-model="job.due_date" no-title scrollable>
+                                <v-spacer></v-spacer>
+                                <v-btn flat color="primary" @click="dateMenu = false">Cancel</v-btn>
+                                <v-btn flat color="primary" @click="$refs.dateMenu.save(date)">OK</v-btn>
+                                </v-date-picker>
+                            </v-menu>
+
+
+                        </v-flex>
+                        <v-flex row xs12 md6>
+                            <v-layout row wrap>   
+                            <v-flex xs12>                 
+                                <v-text-field multi-line no-resize rows="3" v-model="job.est_note" class="mt-2 est-note-align" label="Estimate Details"></v-text-field>
+                            </v-flex>
+                            <v-flex xs5 class="">                                     
+                                <v-switch
+                                :label="'Appraisal'"
+                                v-model="job.apparisal"
+                                ></v-switch>
+                            </v-flex>                    
+                            <v-flex xs5>                                     
+                                <v-switch
+                                :label="'Hard Date'"
+                                v-model="dateRed"
+                                ></v-switch>
+                            </v-flex>
+                            </v-layout>             
+                        </v-flex>
+                        <v-flex xs12>
+                                <v-text-field multi-line no-resize v-model="job.note" class="" label="Job Note"></v-text-field>                    
+                        </v-flex>
+                    </v-layout>
+                    <div class="">
+                        <v-btn style="z-index:0" absolute fab small bottom right dark color="primary" @click="caputureDialog = true"><v-icon class="fab-fix" dark>camera_alt</v-icon></v-btn>                    
+                    </div> 
                 </v-card-text>
             </v-card>
             </transition>
         </v-flex>
-            <v-layout>
-            <template v-for="(image, index) in job.job_images" >
-                <v-flex :key="image.image" md4>
-                    <transition name="component-fade" appear>                    
-                    <v-card class="mt-3 mr-3">
-                        <v-card-media :src="image.image" height="200px" @click="showLightBox(image.image)">
-                        </v-card-media>
-                        <v-text-field v-show="image.note" v-model="image.note" name="input-1" label=" Note" multi-line rows="5"></v-text-field>
-                        <div class="cdb-bottom-right">
-                            <v-btn v-show="!image.note" fab dark small color="primary" @click="image.note = ' '"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
-                            <v-btn v-show="image.note" fab dark small color="primary" @click="image.note = null"><v-icon class="fab-fix" dark>close</v-icon></v-btn>                            
-                            <v-btn fab dark small color="error" @click="removeImage(index)" ><v-icon class="fab-fix" dark>delete</v-icon></v-btn>
-                        </div>
-                    </v-card>
-                    </transition>
-                </v-flex>
-            </template>
-            </v-layout>
-            <transition name="component-fade" appear>                                
-            <div>
-                <v-btn v-show="!job.id" color="primary" @click="createJob()" ><v-icon>save</v-icon>Save Job</v-btn>
-                <v-btn v-show="job.id" color="success" @click="updateJob()" ><v-icon>save</v-icon>Update Job</v-btn>                
-                <v-btn color="white"><v-icon>print</v-icon>Print</v-btn>
-            </div>
-            </transition>
+        <v-flex xs12></v-flex>
+        <template v-for="(image, index) in job.job_images" >
+            <v-flex :key="image.image" md4>
+                <transition name="component-fade" appear>                    
+                <v-card class="" width="400px">
+                    <v-btn class="close-btn" dark small right absolute outline fab color="grey" @click="removeImage(index)"><v-icon class="fab-fix" dark>delete</v-icon></v-btn>                    
+                    <v-card-media contain :src="image.image" height="200px" @click="showLightBox(image.image)">
+                    </v-card-media>
+                    <v-text-field v-model="image.note" name="input-1" label=" Note" multi-line rows="5" no-resize></v-text-field>
+                </v-card>
+                </transition>
+            </v-flex>
+        </template>
+        <v-flex xs12></v-flex>        
+        <transition name="component-fade" appear>                                
+        <div>
+            <v-btn v-show="!job.id" color="primary" @click="createJob()" ><v-icon>save</v-icon>Save Job</v-btn>
+            <v-btn v-show="job.id" color="success" @click="updateJob()" ><v-icon>save</v-icon>Update Job</v-btn>                
+            <v-btn color="white"><v-icon>print</v-icon>Print</v-btn>
+        </div>
+        </transition>
 
 
         <v-dialog  v-model="caputureDialog" transition="dialog-transition">
@@ -133,7 +150,7 @@
             </v-card>
         </v-dialog>
         
-    </span>
+    </v-layout>
 
 </template>
 
@@ -144,6 +161,7 @@
         data: () => ({
             date: null,
             dateMenu: false,
+            dateRed: false,
             caputureDialog: false,
             deleteDialog: false,
             lightboxDialog: false,
@@ -160,6 +178,7 @@
                 estimate: null,
                 est_note: null,
                 appraisal: false,
+                note: null,
                 due_date: null,
                 completed_at: null,
                 job_images: []

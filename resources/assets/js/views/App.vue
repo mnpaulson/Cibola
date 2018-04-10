@@ -13,7 +13,7 @@
     >
       <v-list dense class="cdb-app-drawer">
         <router-link :to="{ name: 'home' }">
-        <v-list-tile @click="">
+        <v-list-tile>
             <v-list-tile-action>
                 <v-icon>dashboard</v-icon>
             </v-list-tile-action>
@@ -23,7 +23,7 @@
             </v-list-tile>
         </router-link>
         <router-link :to="{ name: 'jobs' }">
-        <v-list-tile @click="">
+        <v-list-tile>
           <v-list-tile-action>
             <v-icon>work</v-icon>
           </v-list-tile-action>
@@ -33,7 +33,7 @@
         </v-list-tile>
         </router-link>
         <router-link :to="{ name: 'customers' }">
-        <v-list-tile @click="">
+        <v-list-tile>
           <v-list-tile-action>
             <v-icon>person</v-icon>
           </v-list-tile-action>
@@ -43,7 +43,7 @@
         </v-list-tile>
         </router-link>
         <router-link :to="{ name: 'admin' }">
-        <v-list-tile @click="">
+        <v-list-tile>
           <v-list-tile-action>
             <v-icon>list</v-icon>
           </v-list-tile-action>
@@ -55,7 +55,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-content>
-      <v-container fluid>
+      <v-container fluid grid-list-md>
           <alert></alert>                                
           <router-view></router-view>
       </v-container>

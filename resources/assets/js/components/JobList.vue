@@ -1,7 +1,7 @@
 <template>
     <v-flex xs12 md6>
         <transition name="component-fade" appear>          
-        <v-card class="ml-3">
+        <v-card class="">
             <!-- <v-toolbar color="indigo" dark clipped-left flat>
                 <v-toolbar-title>Recent Jobs</v-toolbar-title>
             </v-toolbar> -->
