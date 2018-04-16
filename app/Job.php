@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
 {
-    protected $fillable = ['estimate', 'est_note', 'appraisal', 'due_date', 'completed_at'];
+    protected $fillable = ['estimate', 'est_note', 'appraisal', 'due_date', 'completed_at', 'note', 'vital_date'];
     
     public function job()
     {

@@ -38,9 +38,11 @@ class JobController extends Controller
         $job->employee_id = $request->employee_id;
         $job->estimate = $request->estimate;
         $job->est_note = $request->est_note;
-        $job->appraisal = $request->appraisal;
+        $job->note = $request->note;
+        $job->appraisal = $request->appraisal;        
         $job->due_date = $request->due_date;
         $job->completed_at = $request->completed_at;
+        $job->vital_date = $request->vital_date;  
 
 
         $job->save();
@@ -89,9 +91,11 @@ class JobController extends Controller
         $job->employee_id = $request->employee_id;
         $job->estimate = $request->estimate;
         $job->est_note = $request->est_note;
-        $job->appraisal = $request->appraisal;
+        $job->note = $request->note;
+        $job->appraisal = $request->appraisal;        
         $job->due_date = $request->due_date;
         $job->completed_at = $request->completed_at;
+        $job->vital_date = $request->vital_date;        
 
 
         $job->save();

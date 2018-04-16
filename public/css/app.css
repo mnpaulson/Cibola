@@ -25,6 +25,19 @@
   padding-top: 21px !important;
 }
 
+.bottom-nav {
+  -webkit-box-pack: left !important;
+      -ms-flex-pack: left !important;
+          justify-content: left !important;
+  margin-left: -4px;
+}
+
+.bottom-nav > .btn {
+  opacity: 1 !important;
+  -webkit-filter: none !important;
+          filter: none !important;
+}
+
 /* TRANSITION */
 
 .component-fade-enter-active {
@@ -48,5 +61,13 @@
   line-height: 1.5em !important;
   font-size: 2em !important;
   z-index: 0 !important;
+}
+
+.fab-up {
+  bottom: 5px !important;
+}
+
+.new-cus-btn {
+  bottom: -8px;
 }
 

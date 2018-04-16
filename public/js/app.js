@@ -65212,9 +65212,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -65404,11 +65401,7 @@ var render = function() {
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("v-footer", { attrs: { color: "indigo", app: "" } }, [
-        _c("span", { staticClass: "white--text" }, [_vm._v("© 2018")])
-      ])
+      )
     ],
     1
   )
@@ -66335,6 +66328,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66584,38 +66581,85 @@ var render = function() {
           _c(
             "v-card-text",
             [
-              _vm.isSearch
-                ? _c(
+              _c(
+                "v-layout",
+                [
+                  _vm.isSearch
+                    ? _c(
+                        "v-flex",
+                        { attrs: { "d-flex": "", sm11: "" } },
+                        [
+                          _c("v-select", {
+                            attrs: {
+                              "search-input": _vm.search,
+                              autocomplete: "",
+                              label: "Customer Search",
+                              "cache-items": "",
+                              items: _vm.fuseList,
+                              "item-text": "name",
+                              "item-value": "id",
+                              autofocus: ""
+                            },
+                            on: {
+                              "update:searchInput": function($event) {
+                                _vm.search = $event
+                              }
+                            },
+                            model: {
+                              value: _vm.searchSelect,
+                              callback: function($$v) {
+                                _vm.searchSelect = $$v
+                              },
+                              expression: "searchSelect"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
                     "v-flex",
+                    { attrs: { "d-flex": "" } },
                     [
-                      _c("v-select", {
-                        attrs: {
-                          "search-input": _vm.search,
-                          autocomplete: "",
-                          label: "Customer Search",
-                          "cache-items": "",
-                          items: _vm.fuseList,
-                          "item-text": "name",
-                          "item-value": "id",
-                          autofocus: ""
-                        },
-                        on: {
-                          "update:searchInput": function($event) {
-                            _vm.search = $event
+                      _c(
+                        "v-btn",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.isSearch,
+                              expression: "isSearch"
+                            }
+                          ],
+                          staticClass: "new-cus-btn",
+                          staticStyle: { "z-index": "0" },
+                          attrs: {
+                            color: "primary",
+                            fab: "",
+                            dark: "",
+                            small: ""
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.setFormState(true)
+                            }
                           }
                         },
-                        model: {
-                          value: _vm.searchSelect,
-                          callback: function($$v) {
-                            _vm.searchSelect = $$v
-                          },
-                          expression: "searchSelect"
-                        }
-                      })
+                        [
+                          _c("v-icon", { staticClass: "fab-fix" }, [
+                            _vm._v("add")
+                          ])
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
-                : _vm._e(),
+                ],
+                1
+              ),
               _vm._v(" "),
               _vm.isInfo
                 ? _c("v-flex", [
@@ -66875,41 +66919,11 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.isSearch,
-                      expression: "isSearch"
-                    }
-                  ],
-                  staticStyle: { "z-index": "0" },
-                  attrs: {
-                    color: "primary",
-                    dark: "",
-                    small: "",
-                    absolute: "",
-                    bottom: "",
-                    right: "",
-                    fab: ""
-                  },
-                  on: {
-                    click: function($event) {
-                      _vm.setFormState(true)
-                    }
-                  }
-                },
-                [_c("v-icon", { staticClass: "fab-fix" }, [_vm._v("add")])],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
                       value: _vm.isInfo,
                       expression: "isInfo"
                     }
                   ],
+                  staticClass: "fab-up",
                   staticStyle: { "z-index": "0" },
                   attrs: {
                     dark: "",
@@ -67219,6 +67233,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -67226,8 +67288,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             date: null,
+            completeDate: null,
             dateMenu: false,
-            dateRed: false,
+            completeMenu: false,
+            complete: false,
             caputureDialog: false,
             deleteDialog: false,
             lightboxDialog: false,
@@ -67247,6 +67311,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 note: null,
                 due_date: null,
                 completed_at: null,
+                vital_date: false,
                 job_images: []
             }
         };
@@ -67330,12 +67395,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this4.job.employee_id = response.data.employee_id;
                 _this4.job.estimate = response.data.estimate;
                 _this4.job.est_note = response.data.est_note;
+                _this4.job.note = response.data.note;
                 _this4.job.appraisal = response.data.appraisal;
                 _this4.job.due_date = response.data.due_date;
                 _this4.job.completed_at = response.data.completed_at;
+                _this4.job.vital_date = response.data.vital_date;
                 _this4.job.job_images = response.data.job_images;
 
                 _this4.$emit('customerId', _this4.job.customer_id);
+
+                if (_this4.job.completed_at !== null) _this4.complete = true;
             }).catch(function (error) {
                 _this4.store.setAlert(true, "error", "Job ID " + id + " not found.");
                 console.log(error);
@@ -67375,11 +67444,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!isNaN(this.job_id) && this.job_id !== null) {
                 this.getJob(this.job_id);
             }
+        },
+        complete: function complete(val) {
+            if (val && this.job.completed_at == null) this.job.completed_at = this.today;
+            if (!val) this.job.completed_at = null;
         }
     },
     computed: {
         store: function store() {
             return this.$root.$data.store;
+        },
+        today: function today() {
+            // Date = new Date();
+            var today = new Date();
+            var yyyy = today.getFullYear();
+            var mm = 1 + today.getMonth();
+            var dd = today.getDate();
+
+            if (mm < 10) {
+                mm = "0" + mm;
+            }
+            if (dd < 10) {
+                dd = "0" + dd;
+            }
+
+            return yyyy + "-" + mm + "-" + dd;
         }
     }
 });
@@ -67651,13 +67740,12 @@ var render = function() {
                                 },
                                 [
                                   _c("v-text-field", {
-                                    class: { redText: _vm.dateRed },
+                                    class: { redText: _vm.job.vital_date },
                                     attrs: {
                                       slot: "activator",
                                       label: "Due Date",
                                       "prepend-icon": "event",
-                                      readonly: "",
-                                      color: "red"
+                                      readonly: ""
                                     },
                                     slot: "activator",
                                     model: {
@@ -67714,6 +67802,108 @@ var render = function() {
                                   )
                                 ],
                                 1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-menu",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: _vm.complete,
+                                      expression: "complete"
+                                    }
+                                  ],
+                                  ref: "completeMenu",
+                                  attrs: {
+                                    lazy: "",
+                                    "close-on-content-click": false,
+                                    transition: "scale-transition",
+                                    "offset-y": "",
+                                    "full-width": "",
+                                    "nudge-right": 40,
+                                    "min-width": "290px",
+                                    "return-value": _vm.date
+                                  },
+                                  on: {
+                                    "update:returnValue": function($event) {
+                                      _vm.date = $event
+                                    }
+                                  },
+                                  model: {
+                                    value: _vm.completeMenu,
+                                    callback: function($$v) {
+                                      _vm.completeMenu = $$v
+                                    },
+                                    expression: "completeMenu"
+                                  }
+                                },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      slot: "activator",
+                                      label: "Completed Date",
+                                      "prepend-icon": "event",
+                                      readonly: ""
+                                    },
+                                    slot: "activator",
+                                    model: {
+                                      value: _vm.job.completed_at,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.job, "completed_at", $$v)
+                                      },
+                                      expression: "job.completed_at"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-date-picker",
+                                    {
+                                      attrs: { "no-title": "", scrollable: "" },
+                                      model: {
+                                        value: _vm.job.completed_at,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.job, "completed_at", $$v)
+                                        },
+                                        expression: "job.completed_at"
+                                      }
+                                    },
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.completeMenu = false
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Cancel")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.$refs.completeMenu.save(
+                                                _vm.completeDate
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("OK")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
                               )
                             ],
                             1
@@ -67755,14 +67945,14 @@ var render = function() {
                                     "v-flex",
                                     { attrs: { xs5: "" } },
                                     [
-                                      _c("v-switch", {
+                                      _c("v-checkbox", {
                                         attrs: { label: "Appraisal" },
                                         model: {
-                                          value: _vm.job.apparisal,
+                                          value: _vm.job.appraisal,
                                           callback: function($$v) {
-                                            _vm.$set(_vm.job, "apparisal", $$v)
+                                            _vm.$set(_vm.job, "appraisal", $$v)
                                           },
-                                          expression: "job.apparisal"
+                                          expression: "job.appraisal"
                                         }
                                       })
                                     ],
@@ -67773,14 +67963,32 @@ var render = function() {
                                     "v-flex",
                                     { attrs: { xs5: "" } },
                                     [
-                                      _c("v-switch", {
-                                        attrs: { label: "Hard Date" },
+                                      _c("v-checkbox", {
+                                        attrs: { label: "Vital Date" },
                                         model: {
-                                          value: _vm.dateRed,
+                                          value: _vm.job.vital_date,
                                           callback: function($$v) {
-                                            _vm.dateRed = $$v
+                                            _vm.$set(_vm.job, "vital_date", $$v)
                                           },
-                                          expression: "dateRed"
+                                          expression: "job.vital_date"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs5: "" } },
+                                    [
+                                      _c("v-checkbox", {
+                                        attrs: { label: "Complete" },
+                                        model: {
+                                          value: _vm.complete,
+                                          callback: function($$v) {
+                                            _vm.complete = $$v
+                                          },
+                                          expression: "complete"
                                         }
                                       })
                                     ],
@@ -67811,42 +68019,6 @@ var render = function() {
                                   expression: "job.note"
                                 }
                               })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {},
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              staticStyle: { "z-index": "0" },
-                              attrs: {
-                                absolute: "",
-                                fab: "",
-                                small: "",
-                                bottom: "",
-                                right: "",
-                                dark: "",
-                                color: "primary"
-                              },
-                              on: {
-                                click: function($event) {
-                                  _vm.caputureDialog = true
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "v-icon",
-                                { staticClass: "fab-fix", attrs: { dark: "" } },
-                                [_vm._v("camera_alt")]
-                              )
                             ],
                             1
                           )
@@ -67954,64 +68126,104 @@ var render = function() {
       _vm._v(" "),
       _c("v-flex", { attrs: { xs12: "" } }),
       _vm._v(" "),
-      _c("transition", { attrs: { name: "component-fade", appear: "" } }, [
-        _c(
-          "div",
-          [
-            _c(
-              "v-btn",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: !_vm.job.id,
-                    expression: "!job.id"
-                  }
-                ],
-                attrs: { color: "primary" },
-                on: {
-                  click: function($event) {
-                    _vm.createJob()
-                  }
+      _c(
+        "v-bottom-nav",
+        { staticClass: "elevation-1", attrs: { fixed: "", value: true } },
+        [
+          _c(
+            "v-btn",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.job.id,
+                  expression: "!job.id"
                 }
-              },
-              [_c("v-icon", [_vm._v("save")]), _vm._v("Save Job")],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "v-btn",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.job.id,
-                    expression: "job.id"
-                  }
-                ],
-                attrs: { color: "success" },
-                on: {
-                  click: function($event) {
-                    _vm.updateJob()
-                  }
+              ],
+              staticClass: "primary--text",
+              on: {
+                click: function($event) {
+                  _vm.createJob()
                 }
-              },
-              [_c("v-icon", [_vm._v("save")]), _vm._v("Update Job")],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "v-btn",
-              { attrs: { color: "white" } },
-              [_c("v-icon", [_vm._v("print")]), _vm._v("Print")],
-              1
-            )
-          ],
-          1
-        )
-      ]),
+              }
+            },
+            [
+              _c("span", [_vm._v("Save Job")]),
+              _vm._v(" "),
+              _c("v-icon", [_vm._v("save")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.job.id,
+                  expression: "job.id"
+                }
+              ],
+              staticClass: "success--text",
+              on: {
+                click: function($event) {
+                  _vm.updateJob()
+                }
+              }
+            },
+            [
+              _c("span", [_vm._v("Update Job")]),
+              _vm._v(" "),
+              _c("v-icon", [_vm._v("save")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            { staticClass: "info--text" },
+            [
+              _c("span", [_vm._v("Print")]),
+              _vm._v(" "),
+              _c("v-icon", [_vm._v("print")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "accent--text",
+              on: {
+                click: function($event) {
+                  _vm.caputureDialog = true
+                }
+              }
+            },
+            [
+              _c("span", [_vm._v("Capture")]),
+              _vm._v(" "),
+              _c("v-icon", [_vm._v("camera_alt")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            { staticClass: "error--text" },
+            [
+              _c("span", [_vm._v("Delete Job")]),
+              _vm._v(" "),
+              _c("v-icon", [_vm._v("delete")])
+            ],
+            1
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-dialog",

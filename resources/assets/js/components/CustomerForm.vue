@@ -8,7 +8,8 @@
         <v-toolbar-title>{{ header }}</v-toolbar-title>
       </v-toolbar> -->
       <v-card-text>
-        <v-flex v-if="isSearch">
+        <v-layout>
+        <v-flex v-if="isSearch" d-flex sm11>
           <v-select
               v-model="searchSelect"
               :search-input.sync="search"
@@ -21,6 +22,10 @@
               autofocus          
             ></v-select>
         </v-flex>
+        <v-flex d-flex>
+            <v-btn style="z-index:0" v-show="isSearch" color="primary" fab dark small @click="setFormState(true)" class="new-cus-btn"><v-icon class="fab-fix">add</v-icon></v-btn>                    
+        </v-flex>
+        </v-layout>
         <v-flex v-if="isInfo">
           <h3 class="headline mb-0">
             <v-icon large>person</v-icon>
@@ -59,8 +64,7 @@
             <v-flex xs4 class="ml-2"><v-btn xs6 block color="error" @click="clearCustomer()">Cancel</v-btn></v-flex>
           </v-flex>
         </div>
-        <v-btn style="z-index:0" v-show="isSearch" color="primary" dark small absolute bottom right fab @click="setFormState(true)" ><v-icon class="fab-fix">add</v-icon></v-btn>        
-        <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
+        <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)" class="fab-up"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
       </v-card-text>
     </v-card>                                
   </v-flex>

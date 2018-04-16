@@ -20,9 +20,11 @@ class CreateJobsTable extends Migration
             $table->integer('employee_id')->nullable();
             $table->float('estimate')->nullable();
             $table->string('est_note')->nullable();
+            $table->string('note')->nullable();            
             $table->boolean('appraisal');
+            $table->boolean('vital_date');            
             $table->date('due_date')->nullable();
-            $table->dateTime('completed_at')->nullable();
+            $table->date('completed_at')->nullable();
 
         });
     }

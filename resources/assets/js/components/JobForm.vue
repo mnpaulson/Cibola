@@ -35,13 +35,38 @@
                                 v-model="job.due_date"
                                 prepend-icon="event"
                                 readonly
-                                color="red"
-                                :class="{redText: dateRed}"                        
+                                :class="{redText: job.vital_date}"                        
                                 ></v-text-field>
                                 <v-date-picker v-model="job.due_date" no-title scrollable>
                                 <v-spacer></v-spacer>
                                 <v-btn flat color="primary" @click="dateMenu = false">Cancel</v-btn>
                                 <v-btn flat color="primary" @click="$refs.dateMenu.save(date)">OK</v-btn>
+                                </v-date-picker>
+                            </v-menu>
+                            <v-menu
+                            ref="completeMenu"
+                            lazy
+                            :close-on-content-click="false"
+                            v-model="completeMenu"
+                            transition="scale-transition"
+                            offset-y
+                            full-width
+                            :nudge-right="40"
+                            min-width="290px"
+                            :return-value.sync="date"
+                            v-show="complete"            
+                            >
+                                <v-text-field
+                                slot="activator"
+                                label="Completed Date"
+                                v-model="job.completed_at"
+                                prepend-icon="event"
+                                readonly
+                                ></v-text-field>
+                                <v-date-picker v-model="job.completed_at" no-title scrollable>
+                                <v-spacer></v-spacer>
+                                <v-btn flat color="primary" @click="completeMenu = false">Cancel</v-btn>
+                                <v-btn flat color="primary" @click="$refs.completeMenu.save(completeDate)">OK</v-btn>
                                 </v-date-picker>
                             </v-menu>
 
@@ -52,17 +77,23 @@
                             <v-flex xs12>                 
                                 <v-text-field multi-line no-resize rows="3" v-model="job.est_note" class="mt-2 est-note-align" label="Estimate Details"></v-text-field>
                             </v-flex>
-                            <v-flex xs5 class="">                                     
-                                <v-switch
+                            <v-flex xs5>                                     
+                                <v-checkbox
                                 :label="'Appraisal'"
-                                v-model="job.apparisal"
-                                ></v-switch>
+                                v-model="job.appraisal"
+                                ></v-checkbox>
                             </v-flex>                    
                             <v-flex xs5>                                     
-                                <v-switch
-                                :label="'Hard Date'"
-                                v-model="dateRed"
-                                ></v-switch>
+                                <v-checkbox
+                                :label="'Vital Date'"
+                                v-model="job.vital_date"
+                                ></v-checkbox>
+                            </v-flex>
+                            <v-flex xs5>                                     
+                                <v-checkbox
+                                :label="'Complete'"
+                                v-model="complete"
+                                ></v-checkbox>
                             </v-flex>
                             </v-layout>             
                         </v-flex>
@@ -70,9 +101,6 @@
                                 <v-text-field multi-line no-resize v-model="job.note" class="" label="Job Note"></v-text-field>                    
                         </v-flex>
                     </v-layout>
-                    <div class="">
-                        <v-btn style="z-index:0" absolute fab small bottom right dark color="primary" @click="caputureDialog = true"><v-icon class="fab-fix" dark>camera_alt</v-icon></v-btn>                    
-                    </div> 
                 </v-card-text>
             </v-card>
             </transition>
@@ -91,13 +119,33 @@
             </v-flex>
         </template>
         <v-flex xs12></v-flex>        
-        <transition name="component-fade" appear>                                
-        <div>
-            <v-btn v-show="!job.id" color="primary" @click="createJob()" ><v-icon>save</v-icon>Save Job</v-btn>
-            <v-btn v-show="job.id" color="success" @click="updateJob()" ><v-icon>save</v-icon>Update Job</v-btn>                
-            <v-btn color="white"><v-icon>print</v-icon>Print</v-btn>
-        </div>
-        </transition>
+
+            <v-bottom-nav
+                fixed
+                :value="true"
+                class="elevation-1"
+            >
+                <v-btn v-show="!job.id" @click="createJob()" class="primary--text">
+                <span>Save Job</span>
+                <v-icon>save</v-icon>
+                </v-btn>
+                <v-btn v-show="job.id" @click="updateJob()" class="success--text">
+                <span>Update Job</span>
+                <v-icon>save</v-icon>
+                </v-btn>
+                <v-btn class="info--text">
+                <span>Print</span>
+                <v-icon>print</v-icon>
+                </v-btn>
+                <v-btn @click="caputureDialog = true" class="accent--text">
+                <span>Capture</span>
+                <v-icon>camera_alt</v-icon>
+                </v-btn>
+                <v-btn class="error--text">
+                <span>Delete Job</span>
+                <v-icon>delete</v-icon>
+                </v-btn>
+            </v-bottom-nav>
 
 
         <v-dialog  v-model="caputureDialog" transition="dialog-transition">
@@ -160,8 +208,10 @@
     export default {
         data: () => ({
             date: null,
+            completeDate: null,
             dateMenu: false,
-            dateRed: false,
+            completeMenu: false,
+            complete: false,
             caputureDialog: false,
             deleteDialog: false,
             lightboxDialog: false,
@@ -181,6 +231,7 @@
                 note: null,
                 due_date: null,
                 completed_at: null,
+                vital_date: false,
                 job_images: []
             }
         }),
@@ -262,12 +313,16 @@
                         this.job.employee_id = response.data.employee_id;
                         this.job.estimate = response.data.estimate;
                         this.job.est_note = response.data.est_note;
+                        this.job.note = response.data.note;                        
                         this.job.appraisal = response.data.appraisal;
                         this.job.due_date = response.data.due_date;
                         this.job.completed_at = response.data.completed_at;
+                        this.job.vital_date = response.data.vital_date;                        
                         this.job.job_images = response.data.job_images;
 
                         this.$emit('customerId', this.job.customer_id);
+
+                        if (this.job.completed_at !== null) this.complete = true;
                     })
                     .catch((error) => {
                         this.store.setAlert(true, "error", "Job ID " + id + " not found.");
@@ -307,11 +362,32 @@
                 if (!isNaN(this.job_id) && this.job_id !== null) {
                     this.getJob(this.job_id);
                 }
+            },
+            complete (val) {
+                if (val && this.job.completed_at == null) this.job.completed_at = this.today;
+                if (!val) this.job.completed_at = null;
+                
             }                
         },
         computed: {
             store() {
                 return this.$root.$data.store;
+            },
+            today() {
+                // Date = new Date();
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = (1+today.getMonth());
+                var dd = today.getDate();
+
+                if (mm < 10 ) {
+                    mm = "0" + mm;
+                }
+                if (dd < 10 ) {
+                    dd = "0" + dd;
+                }
+
+                return yyyy + "-" + mm + "-" + dd;
             }
         }
     }
