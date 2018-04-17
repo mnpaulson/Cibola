@@ -32,4 +32,14 @@ class Job_imageController extends Controller
         echo response()->json(public_path() . "/app" . $image->image);
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        Job_image::deleting(function ($item) {
+            if (file_exists(public_path() . $item->image)) unlink(public_path() . $item->image);
+            Log::debug('deleting fired');      
+        });
+    }
+
 }

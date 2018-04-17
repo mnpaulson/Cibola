@@ -2094,7 +2094,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\CustomerForm.vue"
+Component.options.__file = "resources/assets/js/components/CustomerForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2103,9 +2103,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6a9e4fb9", Component.options)
+    hotAPI.createRecord("data-v-1f934279", Component.options)
   } else {
-    hotAPI.reload("data-v-6a9e4fb9", Component.options)
+    hotAPI.reload("data-v-1f934279", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2141,7 +2141,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\JobLookup.vue"
+Component.options.__file = "resources/assets/js/components/JobLookup.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2150,9 +2150,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7e87c6b0", Component.options)
+    hotAPI.createRecord("data-v-2535cbf0", Component.options)
   } else {
-    hotAPI.reload("data-v-7e87c6b0", Component.options)
+    hotAPI.reload("data-v-2535cbf0", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2188,7 +2188,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\JobForm.vue"
+Component.options.__file = "resources/assets/js/components/JobForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2197,9 +2197,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e5aa770c", Component.options)
+    hotAPI.createRecord("data-v-93cdcc8c", Component.options)
   } else {
-    hotAPI.reload("data-v-e5aa770c", Component.options)
+    hotAPI.reload("data-v-93cdcc8c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2235,7 +2235,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\EmployeeForm.vue"
+Component.options.__file = "resources/assets/js/components/EmployeeForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2244,9 +2244,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8f1832ee", Component.options)
+    hotAPI.createRecord("data-v-6d68d949", Component.options)
   } else {
-    hotAPI.reload("data-v-8f1832ee", Component.options)
+    hotAPI.reload("data-v-6d68d949", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2282,7 +2282,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\CustomerList.vue"
+Component.options.__file = "resources/assets/js/components/CustomerList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2291,9 +2291,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c2d112da", Component.options)
+    hotAPI.createRecord("data-v-538c6953", Component.options)
   } else {
-    hotAPI.reload("data-v-c2d112da", Component.options)
+    hotAPI.reload("data-v-538c6953", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2329,7 +2329,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\JobList.vue"
+Component.options.__file = "resources/assets/js/components/JobList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2338,9 +2338,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7db82958", Component.options)
+    hotAPI.createRecord("data-v-2bdb7ed8", Component.options)
   } else {
-    hotAPI.reload("data-v-7db82958", Component.options)
+    hotAPI.reload("data-v-2bdb7ed8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -64871,7 +64871,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "node_modules\\vue-fuse\\src\\VueFuse.vue"
+Component.options.__file = "node_modules/vue-fuse/src/VueFuse.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -64880,9 +64880,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0da684e2", Component.options)
+    hotAPI.createRecord("data-v-885dbb08", Component.options)
   } else {
-    hotAPI.reload("data-v-0da684e2", Component.options)
+    hotAPI.reload("data-v-885dbb08", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65090,7 +65090,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0da684e2", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-885dbb08", module.exports)
   }
 }
 
@@ -65120,7 +65120,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\App.vue"
+Component.options.__file = "resources/assets/js/views/App.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65129,9 +65129,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7cca96b8", Component.options)
+    hotAPI.createRecord("data-v-50e73d1e", Component.options)
   } else {
-    hotAPI.reload("data-v-7cca96b8", Component.options)
+    hotAPI.reload("data-v-50e73d1e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65412,7 +65412,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7cca96b8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-50e73d1e", module.exports)
   }
 }
 
@@ -65442,7 +65442,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\Job.vue"
+Component.options.__file = "resources/assets/js/views/Job.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65451,9 +65451,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c98eaf80", Component.options)
+    hotAPI.createRecord("data-v-2a8530ba", Component.options)
   } else {
-    hotAPI.reload("data-v-c98eaf80", Component.options)
+    hotAPI.reload("data-v-2a8530ba", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65548,7 +65548,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c98eaf80", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2a8530ba", module.exports)
   }
 }
 
@@ -65578,7 +65578,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\Home.vue"
+Component.options.__file = "resources/assets/js/views/Home.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65587,9 +65587,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-11c5acec", Component.options)
+    hotAPI.createRecord("data-v-6c0a33b2", Component.options)
   } else {
-    hotAPI.reload("data-v-11c5acec", Component.options)
+    hotAPI.reload("data-v-6c0a33b2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65680,7 +65680,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-11c5acec", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-6c0a33b2", module.exports)
   }
 }
 
@@ -65710,7 +65710,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\Customer.vue"
+Component.options.__file = "resources/assets/js/views/Customer.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65719,9 +65719,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-56411deb", Component.options)
+    hotAPI.createRecord("data-v-59b8d1b1", Component.options)
   } else {
-    hotAPI.reload("data-v-56411deb", Component.options)
+    hotAPI.reload("data-v-59b8d1b1", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66183,7 +66183,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-56411deb", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-59b8d1b1", module.exports)
   }
 }
 
@@ -66213,7 +66213,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\Admin.vue"
+Component.options.__file = "resources/assets/js/views/Admin.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66222,9 +66222,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a6c6efdc", Component.options)
+    hotAPI.createRecord("data-v-ca2e4be8", Component.options)
   } else {
-    hotAPI.reload("data-v-a6c6efdc", Component.options)
+    hotAPI.reload("data-v-ca2e4be8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66250,7 +66250,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a6c6efdc", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-ca2e4be8", module.exports)
   }
 }
 
@@ -66965,7 +66965,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6a9e4fb9", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1f934279", module.exports)
   }
 }
 
@@ -67065,7 +67065,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7e87c6b0", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2535cbf0", module.exports)
   }
 }
 
@@ -67077,6 +67077,29 @@ if (false) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_web_cam_src_webcam__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_web_cam_src_webcam___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_web_cam_src_webcam__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -67293,7 +67316,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             completeMenu: false,
             complete: false,
             caputureDialog: false,
-            deleteDialog: false,
+            imageDeleteDialog: false,
+            jobDeleteDialog: false,
             lightboxDialog: false,
             lightBoxImage: null,
             deleteImageId: null,
@@ -67336,7 +67360,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.job.job_images[index].id !== null) {
                 this.deleteImageId = this.job.job_images[index].id;
                 this.deleteImageIndex = index;
-                this.deleteDialog = true;
+                this.imageDeleteDialog = true;
             } else {
                 this.job.job_images.splice(index, 1);
             }
@@ -67365,6 +67389,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     i++;
                 });
                 _this2.store.setAlert(true, "success", "Job Create with ID: " + _this2.job.id);
+                _this2.$router.replace("/job/" + _this2.job.id);
             }).catch(function (error) {
                 console.log(error);
                 _this2.store.setAlert(true, "error", error.message);
@@ -67417,7 +67442,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this5.job.job_images.splice(_this5.deleteImageIndex, 1);
                 _this5.deleteImageId = null;
                 _this5.deleteImageIndex = null;
-                _this5.deleteDialog = false;
+                _this5.imageDeleteDialog = false;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        deleteJob: function deleteJob() {
+            var _this6 = this;
+
+            axios.post('jobs/delete', { id: this.job.id }).then(function (response) {
+                _this6.$router.push("/");
             }).catch(function (error) {
                 console.log(error);
             });
@@ -67499,7 +67533,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "node_modules\\vue-web-cam\\src\\webcam.vue"
+Component.options.__file = "node_modules/vue-web-cam/src/webcam.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -67508,9 +67542,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1d9ce514", Component.options)
+    hotAPI.createRecord("data-v-1297d9cd", Component.options)
   } else {
-    hotAPI.reload("data-v-1d9ce514", Component.options)
+    hotAPI.reload("data-v-1297d9cd", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -67640,7 +67674,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1d9ce514", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1297d9cd", module.exports)
   }
 }
 
@@ -67658,7 +67692,7 @@ var render = function() {
     [
       _c(
         "v-flex",
-        { attrs: { "d-flex": "", xs12: "", md6: "" } },
+        { attrs: { "d-flex": "", xs12: "", lg8: "", xl6: "" } },
         [
           _c(
             "transition",
@@ -67680,13 +67714,14 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
+                                  type: "number",
                                   label: "Est",
                                   "prepend-icon": "attach_money"
                                 },
                                 model: {
                                   value: _vm.job.estimate,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.job, "estimate", $$v)
+                                    _vm.$set(_vm.job, "estimate", _vm._n($$v))
                                   },
                                   expression: "job.estimate"
                                 }
@@ -68044,7 +68079,7 @@ var render = function() {
         return [
           _c(
             "v-flex",
-            { key: image.image, attrs: { md4: "" } },
+            { key: image.image, attrs: { "d-flex": "", md4: "" } },
             [
               _c(
                 "transition",
@@ -68213,7 +68248,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-btn",
-            { staticClass: "error--text" },
+            {
+              staticClass: "error--text",
+              on: {
+                click: function($event) {
+                  _vm.jobDeleteDialog = true
+                }
+              }
+            },
             [
               _c("span", [_vm._v("Delete Job")]),
               _vm._v(" "),
@@ -68353,11 +68395,11 @@ var render = function() {
         {
           attrs: { "max-width": "500px" },
           model: {
-            value: _vm.deleteDialog,
+            value: _vm.imageDeleteDialog,
             callback: function($$v) {
-              _vm.deleteDialog = $$v
+              _vm.imageDeleteDialog = $$v
             },
-            expression: "deleteDialog"
+            expression: "imageDeleteDialog"
           }
         },
         [
@@ -68429,7 +68471,107 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.stopPropagation()
-                          _vm.deleteDialog = false
+                          _vm.imageDeleteDialog = false
+                        }
+                      }
+                    },
+                    [
+                      _c("v-icon", [_vm._v("cancel")]),
+                      _vm._v(
+                        "\n                    Cancel\n                    "
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "500px" },
+          model: {
+            value: _vm.jobDeleteDialog,
+            callback: function($$v) {
+              _vm.jobDeleteDialog = $$v
+            },
+            expression: "jobDeleteDialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-toolbar",
+                {
+                  attrs: {
+                    color: "error",
+                    dark: "",
+                    "clipped-left": "",
+                    flat: ""
+                  }
+                },
+                [
+                  _c(
+                    "v-toolbar-title",
+                    [_c("v-icon", [_vm._v("warning")]), _vm._v("Delete Job")],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n                Are you sure you want to delete this Job? "
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                This will also delete all images attached to this job "
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                This action is not reversable\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "error" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.deleteJob()
+                        }
+                      }
+                    },
+                    [
+                      _c("v-icon", [_vm._v("delete")]),
+                      _vm._v("\n                    Delete\n                ")
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "primary", right: "", absolute: "" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.jobDeleteDialog = false
                         }
                       }
                     },
@@ -68493,7 +68635,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e5aa770c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-93cdcc8c", module.exports)
   }
 }
 
@@ -68983,7 +69125,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-8f1832ee", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-6d68d949", module.exports)
   }
 }
 
@@ -69121,7 +69263,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c2d112da", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-538c6953", module.exports)
   }
 }
 
@@ -69300,7 +69442,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7db82958", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2bdb7ed8", module.exports)
   }
 }
 
@@ -69330,7 +69472,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Alert.vue"
+Component.options.__file = "resources/assets/js/components/Alert.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -69339,9 +69481,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-11375e75", Component.options)
+    hotAPI.createRecord("data-v-1f8bf896", Component.options)
   } else {
-    hotAPI.reload("data-v-11375e75", Component.options)
+    hotAPI.reload("data-v-1f8bf896", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -69429,7 +69571,7 @@ var render = function() {
             expression: "status"
           }
         },
-        [_vm._v("\r\n" + _vm._s(_vm.msg) + "\r\n")]
+        [_vm._v("\n" + _vm._s(_vm.msg) + "\n")]
       )
     ],
     1
@@ -69441,7 +69583,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-11375e75", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1f8bf896", module.exports)
   }
 }
 

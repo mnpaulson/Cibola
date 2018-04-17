@@ -158,8 +158,21 @@ class JobController extends Controller
 
     public function delete(Request $request) 
     {
-        \App\Job::destroy($request->id);
-        echo response()->json($request->id);
+        $job = \App\Job::where('id', $request->id)->first();
+        
+        $images = $job->job_images;
+        
+        // Save images
+        if (sizeof($images))
+        {
+            $nextId = DB::table('job_images')->max('id') + 1;                
+            foreach ($images as $key => $image) 
+            {
+             if (file_exists(public_path() . $image->image)) unlink(public_path() . $image->image);
+            }
+        }
+        \App\Job_image::where('job_id', $request->id)->delete();       
+        $job->delete();        
     }
 
     public function show(Request $request)

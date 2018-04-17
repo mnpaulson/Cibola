@@ -25,7 +25,7 @@ Route::get('employees/active', 'EmployeeController@active')->name('employees.act
 //Job Routes
 Route::post('jobs/create', 'JobController@create')->name('jobs.create');
 Route::post('jobs/update', 'JobController@update')->name('jobs.update');
-Route::post('jobs/delete', 'JobController@create')->name('jobs.delete');
+Route::post('jobs/delete', 'JobController@delete')->name('jobs.delete');
 Route::post('jobs/index', 'JobController@create')->name('jobs.index');
 Route::post('jobs/show', 'JobController@show')->name('jobs.show');
 Route::get('jobs/recentJobsList', 'JobController@recentJobsList')->name('jobs.recentJobsList');

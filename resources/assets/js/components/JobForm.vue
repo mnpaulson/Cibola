@@ -1,12 +1,12 @@
 <template>
     <v-layout row wrap>
-        <v-flex d-flex xs12 md6>
+        <v-flex d-flex xs12 lg8 xl6>
             <transition name="component-fade" appear>
             <v-card>
                 <v-card-text>
                     <v-layout row wrap>
                         <v-flex row xs12 md6>
-                            <v-text-field v-model="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
+                            <v-text-field type="number" v-model.number="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
                             <v-select
                             autocomplete
                             label="Employee Select"
@@ -107,7 +107,7 @@
         </v-flex>
         <v-flex xs12></v-flex>
         <template v-for="(image, index) in job.job_images" >
-            <v-flex :key="image.image" md4>
+            <v-flex d-flex :key="image.image" md4>
                 <transition name="component-fade" appear>                    
                 <v-card class="" width="400px">
                     <v-btn class="close-btn" dark small right absolute outline fab color="grey" @click="removeImage(index)"><v-icon class="fab-fix" dark>delete</v-icon></v-btn>                    
@@ -141,7 +141,7 @@
                 <span>Capture</span>
                 <v-icon>camera_alt</v-icon>
                 </v-btn>
-                <v-btn class="error--text">
+                <v-btn @click="jobDeleteDialog = true" class="error--text">
                 <span>Delete Job</span>
                 <v-icon>delete</v-icon>
                 </v-btn>
@@ -166,7 +166,7 @@
             </v-card>
         </v-dialog>
 
-        <v-dialog v-model="deleteDialog" max-width="500px">
+        <v-dialog v-model="imageDeleteDialog" max-width="500px">
             <v-card>
                 <v-toolbar color="error" dark clipped-left flat>
                     <v-toolbar-title><v-icon>warning</v-icon> Delete Job Image</v-toolbar-title>
@@ -181,7 +181,30 @@
                         <v-icon>delete</v-icon>
                         Delete
                     </v-btn>                    
-                    <v-btn color="primary" right absolute @click.stop="deleteDialog=false">
+                    <v-btn color="primary" right absolute @click.stop="imageDeleteDialog=false">
+                        <v-icon>cancel</v-icon>
+                        Cancel
+                        </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+        <v-dialog v-model="jobDeleteDialog" max-width="500px">
+            <v-card>
+                <v-toolbar color="error" dark clipped-left flat>
+                    <v-toolbar-title><v-icon>warning</v-icon>Delete Job</v-toolbar-title>
+                </v-toolbar>
+                <v-card-text>
+                    Are you sure you want to delete this Job? <br>
+                    This will also delete all images attached to this job <br>
+                    This action is not reversable
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn color="error"  @click.stop="deleteJob()">
+                        <v-icon>delete</v-icon>
+                        Delete
+                    </v-btn>                    
+                    <v-btn color="primary" right absolute @click.stop="jobDeleteDialog=false">
                         <v-icon>cancel</v-icon>
                         Cancel
                         </v-btn>
@@ -213,7 +236,8 @@
             completeMenu: false,
             complete: false,
             caputureDialog: false,
-            deleteDialog: false,
+            imageDeleteDialog: false,
+            jobDeleteDialog: false,
             lightboxDialog: false,
             lightBoxImage: null,
             deleteImageId: null,
@@ -255,7 +279,7 @@
                 if (this.job.job_images[index].id !== null) {
                     this.deleteImageId = this.job.job_images[index].id;
                     this.deleteImageIndex = index;
-                    this.deleteDialog = true;
+                    this.imageDeleteDialog = true;
                 } else {
                     this.job.job_images.splice(index, 1);                
                 }
@@ -282,7 +306,8 @@
                             this.job.job_images[i].id = id;
                             i++;
                         });
-                        this.store.setAlert(true, "success", "Job Create with ID: " + this.job.id);                                            
+                        this.store.setAlert(true, "success", "Job Create with ID: " + this.job.id);
+                        this.$router.replace("/job/" + this.job.id);                                                                                                                                
                     })
                     .catch((error) => {
                         console.log(error);
@@ -335,7 +360,16 @@
                         this.job.job_images.splice(this.deleteImageIndex, 1);
                         this.deleteImageId = null;
                         this.deleteImageIndex = null;
-                        this.deleteDialog = false;                                                                                       
+                        this.imageDeleteDialog = false;                                                                                       
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            },
+            deleteJob() {
+                axios.post('jobs/delete', {id: this.job.id})
+                    .then((response) => {
+                        this.$router.push("/");                                                            
                     })
                     .catch((error) => {
                         console.log(error);

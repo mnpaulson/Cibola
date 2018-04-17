@@ -18,3 +18,7 @@ package-lock.json
 
 config/app.php
 public/js/app.js
+resources/assets/.DS_Store
+resources/.DS_Store
+public/.DS_Store
+.DS_Store
