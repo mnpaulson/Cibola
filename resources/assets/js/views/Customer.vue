@@ -31,17 +31,45 @@
                         label="Search"
                         single-line
                         hide-details
-                        v-model="search"
+                        v-model="searchCus"
                     ></v-text-field>
                 </v-card-title>
                 <template>
-                    <v-data-table v-bind:headers="headers" :items="items" v-bind:pagination.sync="pagination" class="elevation-1" :search="search">
+                    <v-data-table v-bind:headers="customerHeaders" :items="customers" v-bind:pagination.sync="paginationCus" class="elevation-1" :search="searchCus">
                         <template slot="items" slot-scope="props">
                             <tr @click="setId(props.item.id)">
                                 <td class="text-xs-right">{{ props.item.fname }}</td>
                                 <td class="text-xs-right">{{ props.item.lname }}</td>
                                 <td class="text-xs-right">{{ props.item.created_at }}</td>
                                 <td class="text-xs-right">{{ props.item.updated_at }}</td>
+                            </tr>
+                        </template>
+                    </v-data-table>
+                </template>
+            </v-card>
+            <v-card v-show="id" class="">
+                <v-card-title>
+                    <v-card-title primary-title>
+                        <h3 class="headline mb-0">Jobs</h3>
+                    </v-card-title>
+                    <v-spacer></v-spacer>
+                    <v-text-field
+                        append-icon="search"
+                        label="Search"
+                        single-line
+                        hide-details
+                        v-model="searchJob"
+                    ></v-text-field>
+                </v-card-title>
+                <template>
+                    <v-data-table v-bind:headers="jobHeaders" :items="jobs" v-bind:pagination.sync="paginationJob" class="elevation-1" :search="searchJob">
+                        <template slot="items" slot-scope="props">
+                            <tr @click="goToJob(props.item.id)">
+                                <td class="text-xs-center">{{ props.item.id }}</td>
+                                <td class="text-xs-left">{{ props.item.estimate }}</td>
+                                <td class="text-xs-left">{{ props.item.created_at }}</td>
+                                <td class="text-xs-left">{{ props.item.due_date }}</td>
+                                <td class="text-xs-left">{{ props.item.completed_at }}</td>                                
                             </tr>
                         </template>
                     </v-data-table>
@@ -77,10 +105,33 @@
     export default {
         data: () => ({
             id: null,
-            search: null,
+            searchCus: null,
+            searchJob: null,            
             deleteDialog: false,
-            items: [],
-            headers: [{
+            customers: [],
+            jobs: [],
+            jobHeaders: [{
+                    text: 'ID',
+                    value: 'id'
+                },
+                {
+                    text: 'Estimate',
+                    value: 'estimate'
+                },
+                {
+                    text: 'Created',
+                    value: 'created_at'
+                },
+                {
+                    text: 'Due Date',
+                    value: 'due_date'
+                },
+                {
+                    text: 'Completed',
+                    value: 'completed_at'
+                }
+            ],
+            customerHeaders: [{
                     text: 'First Name',
                     value: 'fname'
                 },
@@ -97,15 +148,26 @@
                     value: 'updated_at'
                 },
             ],
-            pagination: {
+            paginationCus: {
               sortBy: 'created_at',
+              descending: true,
+              rowsPerPage: 10
+            },
+            paginationJob: {
+              sortBy: 'due_date',
               descending: true,
               rowsPerPage: 10
             },
         }),
         watch: {
             id(val) {
-                if (this.id == null) this.$router.push("/customer");
+                if (this.id == null) {
+                    this.$router.push("/customer");
+                    this.jobs = [];
+                    if (this.customers.length == 0) this.getCustomers();                                    
+                } else {
+                    this.getCustomerJobs();
+                }
             },
             // Handle changing between customer view and no customer selected
             '$route' (to, from) {
@@ -119,11 +181,20 @@
             getCustomers() {
                 axios.get('/customers/index')
                     .then((response) => {
-                        this.items = response.data;
+                        this.customers = response.data;
                     })
                     .catch((error) => {
                         console.log(error);
                     });
+            },
+            getCustomerJobs() {
+                axios.post('/jobs/customerJobs', {id: this.id})
+                    .then((response) => {
+                        this.jobs = response.data;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });     
             },
             setId(val) {
                 this.id = Number(val);
@@ -144,11 +215,18 @@
 
             update() {
                 this.getCustomers();
+            },
+            goToJob(id) {
+                this.$router.push('/job/' + id);
             }
         },
         mounted() {
-            if (this.$route.params.id) this.id = Number(this.$route.params.id);
-            this.getCustomers();
+            if (this.$route.params.id) {
+                this.id = Number(this.$route.params.id);
+                // this.getCustomerJobs();
+            } else {
+                this.getCustomers();
+            }
         }
     }
 </script>

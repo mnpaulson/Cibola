@@ -2094,7 +2094,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/CustomerForm.vue"
+Component.options.__file = "resources\\assets\\js\\components\\CustomerForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2103,9 +2103,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1f934279", Component.options)
+    hotAPI.createRecord("data-v-6a9e4fb9", Component.options)
   } else {
-    hotAPI.reload("data-v-1f934279", Component.options)
+    hotAPI.reload("data-v-6a9e4fb9", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2141,7 +2141,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/JobLookup.vue"
+Component.options.__file = "resources\\assets\\js\\components\\JobLookup.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2150,9 +2150,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2535cbf0", Component.options)
+    hotAPI.createRecord("data-v-7e87c6b0", Component.options)
   } else {
-    hotAPI.reload("data-v-2535cbf0", Component.options)
+    hotAPI.reload("data-v-7e87c6b0", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2188,7 +2188,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/JobForm.vue"
+Component.options.__file = "resources\\assets\\js\\components\\JobForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2197,9 +2197,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-93cdcc8c", Component.options)
+    hotAPI.createRecord("data-v-e5aa770c", Component.options)
   } else {
-    hotAPI.reload("data-v-93cdcc8c", Component.options)
+    hotAPI.reload("data-v-e5aa770c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2235,7 +2235,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/EmployeeForm.vue"
+Component.options.__file = "resources\\assets\\js\\components\\EmployeeForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2244,9 +2244,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6d68d949", Component.options)
+    hotAPI.createRecord("data-v-8f1832ee", Component.options)
   } else {
-    hotAPI.reload("data-v-6d68d949", Component.options)
+    hotAPI.reload("data-v-8f1832ee", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2282,7 +2282,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/CustomerList.vue"
+Component.options.__file = "resources\\assets\\js\\components\\CustomerList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2291,9 +2291,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-538c6953", Component.options)
+    hotAPI.createRecord("data-v-c2d112da", Component.options)
   } else {
-    hotAPI.reload("data-v-538c6953", Component.options)
+    hotAPI.reload("data-v-c2d112da", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2329,7 +2329,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/JobList.vue"
+Component.options.__file = "resources\\assets\\js\\components\\JobList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2338,9 +2338,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2bdb7ed8", Component.options)
+    hotAPI.createRecord("data-v-7db82958", Component.options)
   } else {
-    hotAPI.reload("data-v-2bdb7ed8", Component.options)
+    hotAPI.reload("data-v-7db82958", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -64871,7 +64871,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "node_modules/vue-fuse/src/VueFuse.vue"
+Component.options.__file = "node_modules\\vue-fuse\\src\\VueFuse.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -64880,9 +64880,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-885dbb08", Component.options)
+    hotAPI.createRecord("data-v-0da684e2", Component.options)
   } else {
-    hotAPI.reload("data-v-885dbb08", Component.options)
+    hotAPI.reload("data-v-0da684e2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65090,7 +65090,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-885dbb08", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0da684e2", module.exports)
   }
 }
 
@@ -65120,7 +65120,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/App.vue"
+Component.options.__file = "resources\\assets\\js\\views\\App.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65129,9 +65129,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-50e73d1e", Component.options)
+    hotAPI.createRecord("data-v-7cca96b8", Component.options)
   } else {
-    hotAPI.reload("data-v-50e73d1e", Component.options)
+    hotAPI.reload("data-v-7cca96b8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65412,7 +65412,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-50e73d1e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7cca96b8", module.exports)
   }
 }
 
@@ -65442,7 +65442,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/Job.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Job.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65451,9 +65451,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2a8530ba", Component.options)
+    hotAPI.createRecord("data-v-c98eaf80", Component.options)
   } else {
-    hotAPI.reload("data-v-2a8530ba", Component.options)
+    hotAPI.reload("data-v-c98eaf80", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65478,6 +65478,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65486,10 +65488,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             job_id: null
         };
     },
+    watch: {
+        // Handle changing between customer view and no customer selected
+        '$route': function $route(to, from) {
+            // if (!to.params.id) this.job_id = null;
+            // else this.job_id = Number(to.params.id);
+            if (isNaN(Number(to.params.id))) {
+                this.job_id = null;
+                this.customer_id = null;
+            } else if (Number(to.params.id) !== 0) this.job_id = Number(to.params.id);else this.customer_id = Number(to.params.cus);
+        }
+    },
     mounted: function mounted() {
         //If job ID 0 then no job, used for linking with customer ID set
         //Only preset customer ID if job is 0
-        if (Number(this.$route.params.id) !== 0) this.job_id = Number(this.$route.params.id);else this.customer_id = Number(this.$route.params.cus);
+        if (isNaN(Number(this.$route.params.id))) ; //Do Nothing
+        else if (Number(this.$route.params.id) !== 0) this.job_id = Number(this.$route.params.id);else this.customer_id = Number(this.$route.params.cus);
     },
 
     methods: {
@@ -65512,7 +65526,17 @@ var render = function() {
     [
       _c(
         "v-layout",
-        { attrs: { row: "", wrap: "" } },
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.job_id !== null || _vm.customer_id !== null,
+              expression: "job_id !== null || customer_id !== null"
+            }
+          ],
+          attrs: { row: "", wrap: "" }
+        },
         [
           _c("customer-form", {
             attrs: { id: _vm.customer_id },
@@ -65527,6 +65551,14 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("job-form", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.job_id !== null || _vm.customer_id !== null,
+            expression: "job_id !== null || customer_id !== null"
+          }
+        ],
         attrs: { job_id: _vm.job_id, customer_id: _vm.customer_id },
         on: {
           "update:job_id": function($event) {
@@ -65537,7 +65569,9 @@ var render = function() {
           },
           customerId: _vm.setCustomerId
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.job_id == null && _vm.customer_id == null ? _c("job-list") : _vm._e()
     ],
     1
   )
@@ -65548,7 +65582,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2a8530ba", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-c98eaf80", module.exports)
   }
 }
 
@@ -65578,7 +65612,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/Home.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Home.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65587,9 +65621,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6c0a33b2", Component.options)
+    hotAPI.createRecord("data-v-11c5acec", Component.options)
   } else {
-    hotAPI.reload("data-v-6c0a33b2", Component.options)
+    hotAPI.reload("data-v-11c5acec", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65680,7 +65714,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6c0a33b2", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-11c5acec", module.exports)
   }
 }
 
@@ -65710,7 +65744,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/Customer.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Customer.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65719,9 +65753,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-59b8d1b1", Component.options)
+    hotAPI.createRecord("data-v-56411deb", Component.options)
   } else {
-    hotAPI.reload("data-v-59b8d1b1", Component.options)
+    hotAPI.reload("data-v-56411deb", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65812,15 +65846,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             id: null,
-            search: null,
+            searchCus: null,
+            searchJob: null,
             deleteDialog: false,
-            items: [],
-            headers: [{
+            customers: [],
+            jobs: [],
+            jobHeaders: [{
+                text: 'ID',
+                value: 'id'
+            }, {
+                text: 'Estimate',
+                value: 'estimate'
+            }, {
+                text: 'Created',
+                value: 'created_at'
+            }, {
+                text: 'Due Date',
+                value: 'due_date'
+            }, {
+                text: 'Completed',
+                value: 'completed_at'
+            }],
+            customerHeaders: [{
                 text: 'First Name',
                 value: 'fname'
             }, {
@@ -65833,8 +65913,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 text: 'Updated',
                 value: 'updated_at'
             }],
-            pagination: {
+            paginationCus: {
                 sortBy: 'created_at',
+                descending: true,
+                rowsPerPage: 10
+            },
+            paginationJob: {
+                sortBy: 'due_date',
                 descending: true,
                 rowsPerPage: 10
             }
@@ -65842,7 +65927,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     watch: {
         id: function id(val) {
-            if (this.id == null) this.$router.push("/customer");
+            if (this.id == null) {
+                this.$router.push("/customer");
+                this.jobs = [];
+                if (this.customers.length == 0) this.getCustomers();
+            } else {
+                this.getCustomerJobs();
+            }
         },
 
         // Handle changing between customer view and no customer selected
@@ -65856,7 +65947,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get('/customers/index').then(function (response) {
-                _this.items = response.data;
+                _this.customers = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getCustomerJobs: function getCustomerJobs() {
+            var _this2 = this;
+
+            axios.post('/jobs/customerJobs', { id: this.id }).then(function (response) {
+                _this2.jobs = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -65866,23 +65966,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$router.push("/customer/" + val);
         },
         deleteCustomer: function deleteCustomer() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.deleteDialog = false;
             axios.post('/customers/delete', { id: this.id }).then(function (response) {
-                _this2.id = null;
-                _this2.update();
+                _this3.id = null;
+                _this3.update();
             }).catch(function (error) {
                 console.log(error);
             });
         },
         update: function update() {
             this.getCustomers();
+        },
+        goToJob: function goToJob(id) {
+            this.$router.push('/job/' + id);
         }
     },
     mounted: function mounted() {
-        if (this.$route.params.id) this.id = Number(this.$route.params.id);
-        this.getCustomers();
+        if (this.$route.params.id) {
+            this.id = Number(this.$route.params.id);
+            // this.getCustomerJobs();
+        } else {
+            this.getCustomers();
+        }
     }
 });
 
@@ -66001,11 +66108,11 @@ var render = function() {
                           "hide-details": ""
                         },
                         model: {
-                          value: _vm.search,
+                          value: _vm.searchCus,
                           callback: function($$v) {
-                            _vm.search = $$v
+                            _vm.searchCus = $$v
                           },
-                          expression: "search"
+                          expression: "searchCus"
                         }
                       })
                     ],
@@ -66016,14 +66123,14 @@ var render = function() {
                     _c("v-data-table", {
                       staticClass: "elevation-1",
                       attrs: {
-                        headers: _vm.headers,
-                        items: _vm.items,
-                        pagination: _vm.pagination,
-                        search: _vm.search
+                        headers: _vm.customerHeaders,
+                        items: _vm.customers,
+                        pagination: _vm.paginationCus,
+                        search: _vm.searchCus
                       },
                       on: {
                         "update:pagination": function($event) {
-                          _vm.pagination = $event
+                          _vm.paginationCus = $event
                         }
                       },
                       scopedSlots: _vm._u([
@@ -66055,6 +66162,109 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("td", { staticClass: "text-xs-right" }, [
                                     _vm._v(_vm._s(props.item.updated_at))
+                                  ])
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ])
+                    })
+                  ]
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.id,
+                      expression: "id"
+                    }
+                  ]
+                },
+                [
+                  _c(
+                    "v-card-title",
+                    [
+                      _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                        _c("h3", { staticClass: "headline mb-0" }, [
+                          _vm._v("Jobs")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          "append-icon": "search",
+                          label: "Search",
+                          "single-line": "",
+                          "hide-details": ""
+                        },
+                        model: {
+                          value: _vm.searchJob,
+                          callback: function($$v) {
+                            _vm.searchJob = $$v
+                          },
+                          expression: "searchJob"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  [
+                    _c("v-data-table", {
+                      staticClass: "elevation-1",
+                      attrs: {
+                        headers: _vm.jobHeaders,
+                        items: _vm.jobs,
+                        pagination: _vm.paginationJob,
+                        search: _vm.searchJob
+                      },
+                      on: {
+                        "update:pagination": function($event) {
+                          _vm.paginationJob = $event
+                        }
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "items",
+                          fn: function(props) {
+                            return [
+                              _c(
+                                "tr",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      _vm.goToJob(props.item.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("td", { staticClass: "text-xs-center" }, [
+                                    _vm._v(_vm._s(props.item.id))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-xs-left" }, [
+                                    _vm._v(_vm._s(props.item.estimate))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-xs-left" }, [
+                                    _vm._v(_vm._s(props.item.created_at))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-xs-left" }, [
+                                    _vm._v(_vm._s(props.item.due_date))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-xs-left" }, [
+                                    _vm._v(_vm._s(props.item.completed_at))
                                   ])
                                 ]
                               )
@@ -66183,7 +66393,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-59b8d1b1", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-56411deb", module.exports)
   }
 }
 
@@ -66213,7 +66423,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/Admin.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Admin.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66222,9 +66432,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ca2e4be8", Component.options)
+    hotAPI.createRecord("data-v-a6c6efdc", Component.options)
   } else {
-    hotAPI.reload("data-v-ca2e4be8", Component.options)
+    hotAPI.reload("data-v-a6c6efdc", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66250,7 +66460,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-ca2e4be8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-a6c6efdc", module.exports)
   }
 }
 
@@ -66463,6 +66673,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this3.$emit('newCustomer');
         _this3.$emit('update:id', response.data);
       }).catch(function (error) {
+        _this3.store.setAlert(true, "error", error.message);
         console.log(error);
       });
     },
@@ -66514,7 +66725,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     if (this.id !== null) {
       this.getCustomer(this.id);
     } else this.setFormState(false);
+  },
+
+  computed: {
+    store: function store() {
+      return this.$root.$data.store;
+    }
   }
+
 });
 
 /***/ }),
@@ -66965,7 +67183,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1f934279", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-6a9e4fb9", module.exports)
   }
 }
 
@@ -67065,7 +67283,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2535cbf0", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7e87c6b0", module.exports)
   }
 }
 
@@ -67451,7 +67669,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this6 = this;
 
             axios.post('jobs/delete', { id: this.job.id }).then(function (response) {
-                _this6.$router.push("/");
+                // this.$router.push("/");
+                _this6.jobDeleteDialog = false;
+                _this6.store.setAlert(true, "warning", "Job ID " + _this6.job.id + " deleted.");
+                _this6.$router.go(-1);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -67533,7 +67754,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "node_modules/vue-web-cam/src/webcam.vue"
+Component.options.__file = "node_modules\\vue-web-cam\\src\\webcam.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -67542,9 +67763,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1297d9cd", Component.options)
+    hotAPI.createRecord("data-v-1d9ce514", Component.options)
   } else {
-    hotAPI.reload("data-v-1297d9cd", Component.options)
+    hotAPI.reload("data-v-1d9ce514", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -67674,7 +67895,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1297d9cd", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1d9ce514", module.exports)
   }
 }
 
@@ -68635,7 +68856,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-93cdcc8c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-e5aa770c", module.exports)
   }
 }
 
@@ -69125,7 +69346,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6d68d949", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-8f1832ee", module.exports)
   }
 }
 
@@ -69263,7 +69484,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-538c6953", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-c2d112da", module.exports)
   }
 }
 
@@ -69442,7 +69663,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2bdb7ed8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7db82958", module.exports)
   }
 }
 
@@ -69472,7 +69693,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Alert.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Alert.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -69481,9 +69702,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1f8bf896", Component.options)
+    hotAPI.createRecord("data-v-11375e75", Component.options)
   } else {
-    hotAPI.reload("data-v-1f8bf896", Component.options)
+    hotAPI.reload("data-v-11375e75", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -69521,7 +69742,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   watch: {
     $route: function $route(to, from) {
-      this.status = false;
+      var _this = this;
+
+      //Hide message 5 seconds after a route change if its not an error
+      if (this.type != "error") setTimeout(function () {
+        _this.status = false;
+      }, 5000);
     }
   },
   methods: {},
@@ -69571,7 +69797,7 @@ var render = function() {
             expression: "status"
           }
         },
-        [_vm._v("\n" + _vm._s(_vm.msg) + "\n")]
+        [_vm._v("\r\n" + _vm._s(_vm.msg) + "\r\n")]
       )
     ],
     1
@@ -69583,7 +69809,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1f8bf896", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-11375e75", module.exports)
   }
 }
 

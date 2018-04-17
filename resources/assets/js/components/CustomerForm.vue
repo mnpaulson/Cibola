@@ -199,7 +199,8 @@
             this.$emit('update:id', response.data);
           })
           .catch((error) => {
-            console.log(error);
+            this.store.setAlert(true, "error", error.message);
+            console.log(error);                        
           });
       },
 
@@ -253,6 +254,11 @@
       }
       else this.setFormState(false);
         
+    },
+    computed: {
+      store() {
+          return this.$root.$data.store;
+      }
     }
 
   }

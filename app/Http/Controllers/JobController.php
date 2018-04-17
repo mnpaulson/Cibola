@@ -182,4 +182,10 @@ class JobController extends Controller
         return response()->json($job);
     }
 
+    public function customerJobs(Request $request)
+    {
+        $jobs = \App\Job::where('customer_id', $request->id)->get();
+        return response()->json($jobs);
+    }
+
 }

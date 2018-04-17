@@ -148,7 +148,7 @@
             </v-bottom-nav>
 
 
-        <v-dialog  v-model="caputureDialog" transition="dialog-transition">
+        <v-dialog v-model="caputureDialog" transition="dialog-transition">
             <v-card>
                 <v-toolbar style="flex: 0 0 auto;" dark class="primary">
                     <v-btn icon @click.native="caputureDialog = false" dark>
@@ -369,7 +369,10 @@
             deleteJob() {
                 axios.post('jobs/delete', {id: this.job.id})
                     .then((response) => {
-                        this.$router.push("/");                                                            
+                        // this.$router.push("/");
+                        this.jobDeleteDialog = false;
+                        this.store.setAlert(true, "warning", "Job ID " + this.job.id + " deleted.");                        
+                        this.$router.go(-1);
                     })
                     .catch((error) => {
                         console.log(error);

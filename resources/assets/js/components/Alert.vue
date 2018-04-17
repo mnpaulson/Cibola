@@ -18,7 +18,8 @@ export default {
   data: () => ({}),
   watch: {
     $route(to, from) {
-      this.status = false;
+      //Hide message 5 seconds after a route change if its not an error
+      if (this.type != "error") setTimeout(()=>{ this.status = false; }, 5000);
     }
   },
   methods: {},
