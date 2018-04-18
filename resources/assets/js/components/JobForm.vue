@@ -148,23 +148,18 @@
             </v-bottom-nav>
 
 
-        <v-dialog v-model="caputureDialog" transition="dialog-transition">
+        <v-dialog v-model="caputureDialog" transition="dialog-transition" max-width="60%">
             <v-card>
-                <v-toolbar style="flex: 0 0 auto;" dark class="primary">
-                    <v-btn icon @click.native="caputureDialog = false" dark>
-                        <v-icon>close</v-icon>
-                    </v-btn>
-                    <v-toolbar-title>New Job Bag Image</v-toolbar-title>
-                </v-toolbar>
+                <v-flex d-flex xs12>
                 <div>
-                    <!-- <webcam v-show="!img" ref="webcam" :height="600" :width="800" screenshotFormat="image/png"></webcam> -->
-                    <!-- <img v-show="img" v-bind:src="img" alt=""> -->
-                    <video ref="video" id="video" width="640" height="480" autoplay></video>
-                    <canvas v-show="false" ref="img" id="img" width="640" height="480"></canvas>
+                    <video ref="video" id="video" width="100%" height="100%" autoplay></video>                    
+                    <canvas v-show="false" ref="img" id="img" width="1280" height="1024"></canvas>
                 </div>
+                </v-flex>
+                <v-flex d-flex xs12>                    
                 <v-btn color="primary" @click="saveImage()">Capture</v-btn>
-                <!-- <v-btn color="primary" @click="saveImage()">Save</v-btn> -->
                 <v-btn color="error" @click="discardCapture()">discard</v-btn>
+                </v-flex>
             </v-card>
         </v-dialog>
 
@@ -213,13 +208,15 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
-        <v-dialog max-width="50%" v-model="lightboxDialog" transition="dialog-transition">
+
+        <v-dialog max-width="75%" v-model="lightboxDialog" transition="dialog-transition">
             <v-card>
-                <v-layout row justify-center>
-                <v-flex xs2>
-                    <img  v-bind:src="lightBoxImage" alt="">
-                </v-flex>
-                </v-layout>
+                <v-card-media
+                contain="true"
+                height="1024"
+                v-bind:src="lightBoxImage"
+                >
+                </v-card-media>
             </v-card>
         </v-dialog>
         
@@ -228,7 +225,6 @@
 </template>
 
 <script>
-    // import Webcam from 'vue-web-cam/src/webcam'
 
     export default {
         data: () => ({
@@ -265,7 +261,7 @@
         methods: {
             saveImage() {
                 this.img = this.$refs.img;
-                var context = this.img.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
+                var context = this.img.getContext("2d").drawImage(this.video, 0, 0, 1280, 1024);
                 this.job.job_images.push({
                     image: this.img.toDataURL("image/png"),
                     note: null,
@@ -380,9 +376,6 @@
                         console.log(error);
                     })
             }
-        },
-        components: {
-            // Webcam
         },
         mounted() {
             this.getEmployees();
