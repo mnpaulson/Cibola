@@ -156,12 +156,14 @@
                     </v-btn>
                     <v-toolbar-title>New Job Bag Image</v-toolbar-title>
                 </v-toolbar>
-                <div >
-                    <webcam v-show="!img" ref="webcam" :height="600" :width="800" screenshotFormat="image/png"></webcam>
-                    <img v-show="img" v-bind:src="img" alt="">
+                <div>
+                    <!-- <webcam v-show="!img" ref="webcam" :height="600" :width="800" screenshotFormat="image/png"></webcam> -->
+                    <!-- <img v-show="img" v-bind:src="img" alt=""> -->
+                    <video ref="video" id="video" width="640" height="480" autoplay></video>
+                    <canvas v-show="false" ref="img" id="img" width="640" height="480"></canvas>
                 </div>
-                <v-btn color="primary" @click="photo()">Capture</v-btn>
-                <v-btn color="primary" @click="saveImage()">Save</v-btn>
+                <v-btn color="primary" @click="saveImage()">Capture</v-btn>
+                <!-- <v-btn color="primary" @click="saveImage()">Save</v-btn> -->
                 <v-btn color="error" @click="discardCapture()">discard</v-btn>
             </v-card>
         </v-dialog>
@@ -226,7 +228,7 @@
 </template>
 
 <script>
-    import Webcam from 'vue-web-cam/src/webcam'
+    // import Webcam from 'vue-web-cam/src/webcam'
 
     export default {
         data: () => ({
@@ -244,7 +246,8 @@
             deleteImageIndex: null,
             employee: null,
             employeeList: [],
-            img: null,
+            img: {},
+            video: {},
             job: {
                 id: null,
                 customer_id: null,
@@ -260,12 +263,11 @@
             }
         }),
         methods: {
-            photo() {
-                this.img = this.$refs.webcam.capture();
-            },
             saveImage() {
+                this.img = this.$refs.img;
+                var context = this.img.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
                 this.job.job_images.push({
-                    image: this.img,
+                    image: this.img.toDataURL("image/png"),
                     note: null,
                     id: null
                 });
@@ -380,10 +382,22 @@
             }
         },
         components: {
-            Webcam
+            // Webcam
         },
         mounted() {
             this.getEmployees();
+            this.video = this.$refs.video;
+
+            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                    try {
+                        this.video.srcObject = stream;
+                    } catch (error) {
+                        this.video.src = URL.createObjectURL(stream);
+                    }                   
+                    this.video.play();
+                });
+            }
         },
         props: {
             customer_id: Number,
