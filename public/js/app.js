@@ -2171,7 +2171,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(70)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(74)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2216,9 +2216,9 @@ module.exports = Component.exports
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(72)
+var __vue_script__ = __webpack_require__(75)
 /* template */
-var __vue_template__ = __webpack_require__(73)
+var __vue_template__ = __webpack_require__(76)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2263,9 +2263,9 @@ module.exports = Component.exports
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(74)
+var __vue_script__ = __webpack_require__(77)
 /* template */
-var __vue_template__ = __webpack_require__(75)
+var __vue_template__ = __webpack_require__(78)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2310,9 +2310,9 @@ module.exports = Component.exports
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(76)
+var __vue_script__ = __webpack_require__(79)
 /* template */
-var __vue_template__ = __webpack_require__(77)
+var __vue_template__ = __webpack_require__(80)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -2355,7 +2355,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(18);
-module.exports = __webpack_require__(81);
+module.exports = __webpack_require__(84);
 
 
 /***/ }),
@@ -2433,7 +2433,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobForm', __webpack_requi
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EmployeeForm', __webpack_require__(14));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('CustomerList', __webpack_require__(15));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobList', __webpack_require__(16));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Alert', __webpack_require__(78));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Alert', __webpack_require__(81));
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     // mode: 'history',
@@ -49016,7 +49016,6 @@ function validateAttachTarget(val) {
   methods: {
     save: function save(value) {
       this.originalValue = value;
-      this.$emit('update:returnValue', value);
       this.isActive = false;
     }
   }
@@ -52588,7 +52587,7 @@ function Vuetify(Vue, args) {
   }, args));
 }
 
-Vuetify.version = '1.0.11';
+Vuetify.version = '1.0.12';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Vuetify);
@@ -54461,7 +54460,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         children.push(this.$createElement(__WEBPACK_IMPORTED_MODULE_1__VProgressCircular__["a" /* default */], {
           props: {
             indeterminate: true,
-            size: 26
+            size: 23,
+            width: 2
           }
         }));
       } else {
@@ -62928,6 +62928,12 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       transitionTime: 300
     };
   },
+
+
+  watch: {
+    tabs: 'onResize'
+  },
+
   mounted: function mounted() {
     this.checkIcons();
   },
@@ -65474,12 +65480,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             customer_id: null,
-            job_id: null
+            job_id: null,
+            searchJob: null,
+            jobs: [],
+            totalJobs: 0,
+            loading: true,
+            jobHeaders: [{
+                text: 'ID',
+                value: 'id'
+            }, {
+                text: 'Estimate',
+                value: 'estimate'
+            }, {
+                text: 'Created',
+                value: 'created_at'
+            }, {
+                text: 'Due Date',
+                value: 'due_date'
+            }, {
+                text: 'Completed',
+                value: 'completed_at'
+            }],
+            paginationJob: {}
         };
     },
     watch: {
@@ -65491,6 +65543,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.job_id = null;
                 this.customer_id = null;
             } else if (Number(to.params.id) !== 0) this.job_id = Number(to.params.id);else this.customer_id = Number(to.params.cus);
+        },
+
+        paginationJob: {
+            handler: function handler() {
+                var _this = this;
+
+                this.getDataFromApi().then(function (data) {
+                    _this.jobs = data.jobs;
+                    _this.totalJobs = data.total;
+                });
+                deep: true;
+            }
         }
     },
     mounted: function mounted() {
@@ -65498,11 +65562,69 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //Only preset customer ID if job is 0
         if (isNaN(Number(this.$route.params.id))) ; //Do Nothing
         else if (Number(this.$route.params.id) !== 0) this.job_id = Number(this.$route.params.id);else this.customer_id = Number(this.$route.params.cus);
+        this.getAllJobs();
     },
 
     methods: {
         setCustomerId: function setCustomerId(id) {
             this.customer_id = id;
+        },
+        getAllJobs: function getAllJobs() {
+            axios.post('/jobs/allJobsDetails', this.paginationJob).then(function (response) {
+                return response.data.data;
+                // this.jobs = response.data.data;
+                // console.log(response.data.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getDataFromApi: function getDataFromApi() {
+            var _this2 = this;
+
+            this.loading = true;
+            return new Promise(function (resolve, reject) {
+                var _paginationJob = _this2.paginationJob,
+                    sortBy = _paginationJob.sortBy,
+                    descending = _paginationJob.descending,
+                    page = _paginationJob.page,
+                    rowsPerPage = _paginationJob.rowsPerPage;
+
+                // let jobs = new Promise(this.getAllJobs());
+
+                var jobs = new Promise(function (resolve, reject) {
+                    this.getAllJobs();
+                });
+                var totalJobs = jobs.length;
+
+                if (_this2.paginationJob.sortBy) {
+                    jobs = jobs.sort(function (a, b) {
+                        var sortA = a[sortBy];
+                        var sortB = b[sortBy];
+
+                        if (descending) {
+                            if (sortA < sortB) return 1;
+                            if (sortA > sortB) return -1;
+                            return 0;
+                        } else {
+                            if (sortA < sortB) return -1;
+                            if (sortA > sortB) return 1;
+                            return 0;
+                        }
+                    });
+                }
+
+                if (rowsPerPage > 0) {
+                    jobs = jobs.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+                }
+
+                setTimeout(function () {
+                    _this2.loading = false;
+                    resolve({
+                        jobs: jobs,
+                        totalJobs: totalJobs
+                    });
+                }, 1000);
+            });
         }
     }
 });
@@ -65565,7 +65687,100 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _vm.job_id == null && _vm.customer_id == null ? _c("job-list") : _vm._e()
+      _vm.job_id == null && _vm.customer_id == null ? _c("job-list") : _vm._e(),
+      _vm._v(" "),
+      _vm.job_id == null && _vm.customer_id == null
+        ? _c(
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                [
+                  _c("v-card-title", { attrs: { "primary-title": "" } }, [
+                    _c("h3", { staticClass: "headline mb-0" }, [_vm._v("Jobs")])
+                  ]),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: {
+                      "append-icon": "search",
+                      label: "Search",
+                      "single-line": "",
+                      "hide-details": ""
+                    },
+                    model: {
+                      value: _vm.searchJob,
+                      callback: function($$v) {
+                        _vm.searchJob = $$v
+                      },
+                      expression: "searchJob"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-data-table", {
+                staticClass: "elevation-1",
+                attrs: {
+                  headers: _vm.jobHeaders,
+                  items: _vm.jobs,
+                  pagination: _vm.paginationJob,
+                  search: _vm.searchJob,
+                  "total-items": _vm.totalJobs,
+                  loading: _vm.loading
+                },
+                on: {
+                  "update:pagination": function($event) {
+                    _vm.paginationJob = $event
+                  }
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "items",
+                    fn: function(props) {
+                      return [
+                        _c(
+                          "tr",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.goToJob(props.item.id)
+                              }
+                            }
+                          },
+                          [
+                            _c("td", { staticClass: "text-xs-center" }, [
+                              _vm._v(_vm._s(props.item.id))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.estimate))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.created_at))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.due_date))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.completed_at))
+                            ])
+                          ]
+                        )
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          )
+        : _vm._e()
     ],
     1
   )
@@ -65765,8 +65980,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //
@@ -66212,64 +66425,62 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  [
-                    _c("v-data-table", {
-                      staticClass: "elevation-1",
-                      attrs: {
-                        headers: _vm.jobHeaders,
-                        items: _vm.jobs,
-                        pagination: _vm.paginationJob,
-                        search: _vm.searchJob
-                      },
-                      on: {
-                        "update:pagination": function($event) {
-                          _vm.paginationJob = $event
-                        }
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "items",
-                          fn: function(props) {
-                            return [
-                              _c(
-                                "tr",
-                                {
-                                  on: {
-                                    click: function($event) {
-                                      _vm.goToJob(props.item.id)
-                                    }
+                  _c("v-data-table", {
+                    staticClass: "elevation-1",
+                    attrs: {
+                      headers: _vm.jobHeaders,
+                      items: _vm.jobs,
+                      pagination: _vm.paginationJob,
+                      search: _vm.searchJob
+                    },
+                    on: {
+                      "update:pagination": function($event) {
+                        _vm.paginationJob = $event
+                      }
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "items",
+                        fn: function(props) {
+                          return [
+                            _c(
+                              "tr",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.goToJob(props.item.id)
                                   }
-                                },
-                                [
-                                  _c("td", { staticClass: "text-xs-center" }, [
-                                    _vm._v(_vm._s(props.item.id))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-xs-left" }, [
-                                    _vm._v(_vm._s(props.item.estimate))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-xs-left" }, [
-                                    _vm._v(_vm._s(props.item.created_at))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-xs-left" }, [
-                                    _vm._v(_vm._s(props.item.due_date))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-xs-left" }, [
-                                    _vm._v(_vm._s(props.item.completed_at))
-                                  ])
-                                ]
-                              )
-                            ]
-                          }
+                                }
+                              },
+                              [
+                                _c("td", { staticClass: "text-xs-center" }, [
+                                  _vm._v(_vm._s(props.item.id))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.estimate))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.created_at))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.due_date))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "text-xs-left" }, [
+                                  _vm._v(_vm._s(props.item.completed_at))
+                                ])
+                              ]
+                            )
+                          ]
                         }
-                      ])
-                    })
-                  ]
+                      }
+                    ])
+                  })
                 ],
-                2
+                1
               )
             ],
             1
@@ -66536,6 +66747,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -66562,7 +66782,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         lname: null,
         phone: null,
         email: null,
-        address: null,
+        addr_st: null,
+        addr_city: null,
+        addr_prov: null,
+        addr_postal: null,
+        addr_country: null,
         id: null
       },
 
@@ -66644,7 +66868,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.customer.lname = null;
         this.customer.phone = null;
         this.customer.email = null;
-        this.customer.address = null;
+        this.customer.addr_st = null;
+        this.customer.addr_city = null;
+        this.customer.addr_prov = null;
+        this.customer.addr_postal = null;
+        this.customer.addr_country = null;
         this.customer.id = null;
       } else {
         this.isForm = false;
@@ -66691,7 +66919,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.customer.lname = null;
       this.customer.phone = null;
       this.customer.email = null;
-      this.customer.address = null;
+      this.customer.addr_st = null;
+      this.customer.addr_city = null;
+      this.customer.addr_prov = null;
+      this.customer.addr_postal = null;
+      this.customer.addr_country = null;
       this.customer.id = null;
       this.$emit('update:id', null);
       this.setFormState(false);
@@ -66707,7 +66939,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this5.customer.lname = response.data[0].lname;
         _this5.customer.phone = response.data[0].phone;
         _this5.customer.email = response.data[0].email;
-        _this5.customer.address = response.data[0].address;
+        _this5.customer.addr_st = response.data[0].addr_st;
+        _this5.customer.addr_city = response.data[0].addr_city;
+        _this5.customer.addr_prov = response.data[0].addr_prov;
+        _this5.customer.addr_postal = response.data[0].addr_postal;
+        _this5.customer.addr_country = response.data[0].addr_country;
         _this5.setFormState(false);
       }).catch(function (error) {
         console.log(error);
@@ -66874,41 +67110,69 @@ var render = function() {
               ),
               _vm._v(" "),
               _vm.isInfo
-                ? _c("v-flex", [
-                    _c(
-                      "h3",
-                      { staticClass: "headline mb-0" },
-                      [
-                        _c("v-icon", { attrs: { large: "" } }, [
-                          _vm._v("person")
-                        ]),
-                        _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(_vm.customer.fname))]),
-                        _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(_vm.customer.lname))])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      [
-                        _c("v-icon", [_vm._v("phone")]),
-                        _vm._v(" " + _vm._s(_vm.customer.phone) + " "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("v-icon", [_vm._v("email")]),
-                        _vm._v(" " + _vm._s(_vm.customer.email) + " "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("v-icon", [_vm._v("home")]),
-                        _vm._v(
-                          " " + _vm._s(_vm.customer.address) + "\n        "
-                        )
-                      ],
-                      1
-                    )
-                  ])
+                ? _c(
+                    "v-flex",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: { path: "/customer/" + _vm.customer.id }
+                          }
+                        },
+                        [
+                          _c(
+                            "h3",
+                            { staticClass: "headline mb-0" },
+                            [
+                              _c("v-icon", { attrs: { large: "" } }, [
+                                _vm._v("person")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", [_vm._v(_vm._s(_vm.customer.fname))]),
+                              _vm._v(" "),
+                              _c("span", [_vm._v(_vm._s(_vm.customer.lname))])
+                            ],
+                            1
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        [
+                          _c("v-icon", [_vm._v("phone")]),
+                          _vm._v(" " + _vm._s(_vm.customer.phone) + " "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("v-icon", [_vm._v("email")]),
+                          _vm._v(" " + _vm._s(_vm.customer.email) + " "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("v-icon", [_vm._v("home")]),
+                          _vm._v(" " + _vm._s(_vm.customer.addr_st) + " "),
+                          _c("br"),
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.customer.addr_city) +
+                              ", " +
+                              _vm._s(_vm.customer.addr_prov) +
+                              " " +
+                              _vm._s(_vm.customer.addr_postal) +
+                              " "
+                          ),
+                          _c("br"),
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.customer.addr_country) +
+                              "\n        "
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
                 : _vm._e(),
               _vm._v(" "),
               _c(
@@ -67001,16 +67265,95 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c("v-text-field", {
-                            attrs: { label: "Address", xs12: "" },
-                            model: {
-                              value: _vm.customer.address,
-                              callback: function($$v) {
-                                _vm.$set(_vm.customer, "address", $$v)
-                              },
-                              expression: "customer.address"
-                            }
-                          })
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Street Address", xs12: "" },
+                                model: {
+                                  value: _vm.customer.addr_st,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.customer, "addr_st", $$v)
+                                  },
+                                  expression: "customer.addr_st"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "City", xs12: "" },
+                                model: {
+                                  value: _vm.customer.addr_city,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.customer, "addr_city", $$v)
+                                  },
+                                  expression: "customer.addr_city"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Province", xs12: "" },
+                                model: {
+                                  value: _vm.customer.addr_prov,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.customer, "addr_prov", $$v)
+                                  },
+                                  expression: "customer.addr_prov"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Postal Code", xs12: "" },
+                                model: {
+                                  value: _vm.customer.addr_postal,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.customer, "addr_postal", $$v)
+                                  },
+                                  expression: "customer.addr_postal"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Country", xs12: "" },
+                                model: {
+                                  value: _vm.customer.addr_country,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.customer, "addr_country", $$v)
+                                  },
+                                  expression: "customer.addr_country"
+                                }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -67730,7 +68073,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 71 */
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68620,11 +68966,7 @@ var render = function() {
             "v-card",
             [
               _c("v-card-media", {
-                attrs: {
-                  contain: "true",
-                  height: "1024",
-                  src: _vm.lightBoxImage
-                }
+                attrs: { contain: "", height: "1024", src: _vm.lightBoxImage }
               })
             ],
             1
@@ -68647,7 +68989,7 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68819,7 +69161,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69137,7 +69479,7 @@ if (false) {
 }
 
 /***/ }),
-/* 74 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69199,7 +69541,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 75 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69275,7 +69617,7 @@ if (false) {
 }
 
 /***/ }),
-/* 76 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69345,7 +69687,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 77 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69454,15 +69796,15 @@ if (false) {
 }
 
 /***/ }),
-/* 78 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(79)
+var __vue_script__ = __webpack_require__(82)
 /* template */
-var __vue_template__ = __webpack_require__(80)
+var __vue_template__ = __webpack_require__(83)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69501,7 +69843,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 79 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69556,7 +69898,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 80 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -69600,7 +69942,7 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
+/* 84 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

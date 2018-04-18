@@ -188,4 +188,13 @@ class JobController extends Controller
         return response()->json($jobs);
     }
 
+    public function allJobsDetails(Request $request)
+    {
+        $job = \App\Job::with('customer')
+        ->orderBy('due_date', 'desc')
+        ->paginate(500);   
+
+        return response()->json($job);  
+    }
+
 }

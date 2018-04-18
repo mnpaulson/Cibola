@@ -20,7 +20,11 @@ class CreateCustomersTable extends Migration
             $table->string('lname');
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('address')->nullable();
+            $table->string('addr_st')->nullable();
+            $table->string('addr_city')->nullable();
+            $table->string('addr_prov')->nullable();
+            $table->string('addr_postal')->nullable();
+            $table->string('addr_country')->nullable();
         });
     }
 

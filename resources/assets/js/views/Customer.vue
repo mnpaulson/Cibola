@@ -61,7 +61,6 @@
                         v-model="searchJob"
                     ></v-text-field>
                 </v-card-title>
-                <template>
                     <v-data-table v-bind:headers="jobHeaders" :items="jobs" v-bind:pagination.sync="paginationJob" class="elevation-1" :search="searchJob">
                         <template slot="items" slot-scope="props">
                             <tr @click="goToJob(props.item.id)">
@@ -73,7 +72,6 @@
                             </tr>
                         </template>
                     </v-data-table>
-                </template>
             </v-card>
         </v-flex>
         </transition>               

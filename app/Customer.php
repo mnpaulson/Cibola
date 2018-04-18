@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    protected $fillable = ['fname', 'lname', 'phone', 'email', 'address'];
+    protected $fillable = ['fname', 'lname', 'phone', 'email', 'addr_st', 'addr_city', 'addr_prov', 'addr_postal', 'addr_country'];
     
     public function customer()
     {

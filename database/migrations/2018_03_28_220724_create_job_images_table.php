@@ -17,7 +17,7 @@ class CreateJobImagesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('job_id');
-            $table->string('note')->nullable();
+            $table->text('note')->nullable();
             $table->string('image');
         });
     }

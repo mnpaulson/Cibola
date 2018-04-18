@@ -27,15 +27,19 @@
         </v-flex>
         </v-layout>
         <v-flex v-if="isInfo">
-          <h3 class="headline mb-0">
-            <v-icon large>person</v-icon>
-            <span>{{ customer.fname }}</span>
-            <span>{{ customer.lname }}</span>
-          </h3>
+          <router-link :to="{ path: `/customer/${customer.id}` }">          
+            <h3 class="headline mb-0">
+              <v-icon large>person</v-icon>
+              <span>{{ customer.fname }}</span>
+              <span>{{ customer.lname }}</span>
+            </h3>
+          </router-link>
           <p>
             <v-icon>phone</v-icon> {{ customer.phone }} <br>
             <v-icon>email</v-icon> {{ customer.email }} <br>
-            <v-icon>home</v-icon> {{ customer.address }}
+            <v-icon>home</v-icon> {{ customer.addr_st }} <br>
+            {{ customer.addr_city }}, {{ customer.addr_prov }} {{ customer.addr_postal }} <br>
+            {{ customer.addr_country }}
           </p>
         </v-flex>   
         <v-form>
@@ -52,7 +56,12 @@
             <v-flex xs12 sm6>
               <v-text-field label="E-Mail" v-model="customer.email" xs12 ></v-text-field>
             </v-flex>
-            <v-text-field label="Address" v-model="customer.address" xs12 ></v-text-field>
+            <v-flex xs12><v-text-field label="Street Address" v-model="customer.addr_st" xs12 ></v-text-field></v-flex>
+            <v-flex xs12 sm6><v-text-field label="City" v-model="customer.addr_city" xs12 ></v-text-field></v-flex>
+            <v-flex xs12 sm6><v-text-field label="Province" v-model="customer.addr_prov" xs12 ></v-text-field></v-flex>
+            <v-flex xs12 sm6><v-text-field label="Postal Code" v-model="customer.addr_postal" xs12 ></v-text-field></v-flex>
+            <v-flex xs12 sm6><v-text-field label="Country" v-model="customer.addr_country" xs12 ></v-text-field></v-flex>
+            
           </v-layout>
         </v-form>
         <div>
@@ -95,7 +104,11 @@
         lname: null,
         phone: null,
         email: null,
-        address: null,
+        addr_st: null,
+        addr_city: null,
+        addr_prov: null,
+        addr_postal: null,
+        addr_country: null,
         id: null
       },
 
@@ -176,7 +189,11 @@
           this.customer.lname = null;
           this.customer.phone = null;
           this.customer.email = null;
-          this.customer.address = null;
+          this.customer.addr_st = null;
+          this.customer.addr_city = null;
+          this.customer.addr_prov = null;
+          this.customer.addr_postal = null;
+          this.customer.addr_country = null;
           this.customer.id = null;
         } else {
           this.isForm = false;
@@ -221,7 +238,11 @@
         this.customer.lname = null;
         this.customer.phone = null;
         this.customer.email = null;
-        this.customer.address = null;
+        this.customer.addr_st = null;
+        this.customer.addr_city = null;
+        this.customer.addr_prov = null;
+        this.customer.addr_postal = null;
+        this.customer.addr_country = null;
         this.customer.id = null;
         this.$emit('update:id', null);
         this.setFormState(false);
@@ -238,7 +259,11 @@
             this.customer.lname = response.data[0].lname;
             this.customer.phone = response.data[0].phone;
             this.customer.email = response.data[0].email;
-            this.customer.address = response.data[0].address;
+            this.customer.addr_st = response.data[0].addr_st;
+            this.customer.addr_city = response.data[0].addr_city;
+            this.customer.addr_prov = response.data[0].addr_prov;
+            this.customer.addr_postal = response.data[0].addr_postal;
+            this.customer.addr_country = response.data[0].addr_country;
             this.setFormState(false);
           })
           .catch((error) => {

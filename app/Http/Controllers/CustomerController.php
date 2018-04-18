@@ -41,23 +41,18 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        // echo $request;
-        // $customer = new Customer([
-        //     'fname' => $request->get('fname'),
-        //     'lname' => $request->get('lname'),
-        //     'phone' => $request->get('phone'),
-        //     'email' => $request->get('email'),
-        //     'address' => $request->get('address')
-        // ]);
-        // $customer->save();
-        // return response("Customer Added");
+
         $customer = new Customer;
 
         $customer->fname = $request->fname;
         $customer->lname = $request->lname;
         $customer->phone = $request->phone;
         $customer->email = $request->email;
-        $customer->address = $request->address;
+        $customer->addr_st = $request->addr_st;
+        $customer->addr_city = $request->addr_city;
+        $customer->addr_prov = $request->addr_prov;
+        $customer->addr_postal = $request->addr_postal;
+        $customer->addr_country = $request->addr_country;
 
         $customer->save();
         return response()->json($customer->id);
@@ -93,7 +88,11 @@ class CustomerController extends Controller
         $customer->lname = $request->lname;
         $customer->phone = $request->phone;
         $customer->email = $request->email;
-        $customer->address = $request->address;
+        $customer->addr_st = $request->addr_st;
+        $customer->addr_city = $request->addr_city;
+        $customer->addr_prov = $request->addr_prov;
+        $customer->addr_postal = $request->addr_postal;
+        $customer->addr_country = $request->addr_country; 
 
         $customer->save();
         return response()->json($customer->id);

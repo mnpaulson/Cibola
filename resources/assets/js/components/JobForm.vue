@@ -212,7 +212,7 @@
         <v-dialog max-width="75%" v-model="lightboxDialog" transition="dialog-transition">
             <v-card>
                 <v-card-media
-                contain="true"
+                contain
                 height="1024"
                 v-bind:src="lightBoxImage"
                 >
