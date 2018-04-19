@@ -5,33 +5,50 @@
     </v-layout>  
     <job-form v-show="job_id !== null || customer_id !== null" :job_id.sync="job_id" :customer_id.sync="customer_id" v-on:customerId="setCustomerId"></job-form>
     <!-- <job-list v-if="job_id == null && customer_id == null"></job-list> -->
-    <v-card v-if="job_id == null && customer_id == null">
-        <v-card-title>
-            <v-card-title primary-title>
-                <h3 class="headline mb-0">Jobs</h3>
-            </v-card-title>
-            <v-spacer></v-spacer>
-            <!-- <v-text-field
-                append-icon="search"
-                label="Search"
-                single-line
-                hide-details
-                v-model="searchJob"
-            ></v-text-field> -->
-        </v-card-title>
-            <v-data-table v-bind:headers="jobHeaders" :items="jobs" v-bind:pagination.sync="paginationJob" class="elevation-1" :search="searchJob" :total-items="totalJobs" :loading="loading">
-                <template slot="items" slot-scope="props">
-                    <tr @click="goToJob(props.item.id)">
-                        <td class="text-xs-center">{{ props.item.id }}</td>
-                        <td class="text-xs-left">{{ props.item.estimate }}</td>
-                        <td class="text-xs-left">{{ props.item.customer.fname }} {{ props.item.customer.lname }}</td>                        
-                        <td class="text-xs-left">{{ props.item.created_at }}</td>
-                        <td class="text-xs-left">{{ props.item.due_date }}</td>
-                        <td class="text-xs-left">{{ props.item.completed_at }}</td>                                
-                    </tr>
-                </template>
-            </v-data-table>
-    </v-card>
+    <v-layout v-if="job_id == null && customer_id == null">
+        <v-flex row wrap>
+            <job-lookup></job-lookup>    
+        </v-flex>
+    </v-layout>
+    <transition name="component-fade" appear>            
+    <v-layout v-if="job_id == null && customer_id == null">    
+        <v-flex row wrap xs12>
+            <v-card>
+                <v-card-title>
+                    <v-card-title primary-title>
+                        <h3 class="headline mb-0">Jobs</h3>
+                        <v-spacer></v-spacer>
+                        <v-btn color="primary" :href="'#/job/0/0'">
+                            <v-icon>add</v-icon>
+                            New Job
+                        </v-btn>
+                    </v-card-title>
+                    <v-spacer></v-spacer>
+                    <!-- <v-text-field
+                        append-icon="search"
+                        label="Search"
+                        single-line
+                        hide-details
+                        v-model="searchJob"
+                    ></v-text-field> -->
+                </v-card-title>
+                    <v-data-table v-bind:headers="jobHeaders" :items="jobs" v-bind:pagination.sync="paginationJob" class="elevation-1" :search="searchJob" :total-items="totalJobs" :loading="loading">
+                        <template slot="items" slot-scope="props">
+                            <tr @click="goToJob(props.item.id)">
+                                <td class="text-xs-left">{{ props.item.id }}</td>
+                                <td class="text-xs-right">${{ props.item.estimate.toLocaleString() }}</td>
+                                <td class="text-xs-left">{{ props.item.customer.fname }} {{ props.item.customer.lname }}</td>
+                                <td class="text-xs-left">{{ props.item.employee.name }}</td>                                                        
+                                <td class="text-xs-left">{{ props.item.created_at }}</td>
+                                <td class="text-xs-left" v-bind:class="{'vital-date': props.item.vital_date && !props.item.completed_at}">{{ props.item.due_date }}</td>
+                                <td class="text-xs-left">{{ props.item.completed_at }}</td>                                
+                            </tr>
+                        </template>
+                    </v-data-table>
+            </v-card>
+        </v-flex>
+    </v-layout>
+    </transition>
     </div>  
 </template>
 
@@ -50,11 +67,16 @@
                 },
                 {
                     text: 'Estimate',
-                    value: 'estimate'
+                    value: 'estimate',
+                    align: 'right'
                 },
                 {
                     text: 'Name',
                     value: 'fname'
+                },
+                {
+                    text: 'Employee',
+                    value: 'employee'
                 },
                 {
                     text: 'Created',

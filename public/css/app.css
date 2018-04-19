@@ -21,6 +21,10 @@
   color: red !important;
 }
 
+.vital-date {
+  color: red !important;
+}
+
 .est-note-align {
   padding-top: 21px !important;
 }
@@ -55,6 +59,10 @@
   -webkit-transform: translateX(-20%);
           transform: translateX(-20%);
   opacity: 0;
+}
+
+.test {
+  font-size: 3em !important;
 }
 
 .fab-fix {

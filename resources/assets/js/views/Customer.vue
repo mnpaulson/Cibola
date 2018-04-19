@@ -2,18 +2,24 @@
     <div>
         <customer-form :id.sync="id" v-on:newCustomer="update()"></customer-form>
         <v-fade-transition>                  
-        <v-flex d-flex class="">
-            <div v-show="id"  class="my-1">
-                <v-btn color="primary" :href="'#/job/0/' + id">
-                    <v-icon>add</v-icon>
-                    New Job
-                </v-btn>
-                <v-btn color="error" @click="deleteDialog = true">
-                    <v-icon>delete</v-icon>
-                    Delete Customer
-                </v-btn>
+        <!-- <v-flex d-flex class=""> -->
+            <div v-show="id" >
+                <v-layout>
+                <v-flex d-flex class="xs6 sm2">
+                    <v-btn color="primary" :href="'#/job/0/' + id">
+                        <v-icon>add</v-icon>
+                        New Job
+                    </v-btn>
+                </v-flex>
+                <v-flex d-flex class="xs6 sm2">
+                    <v-btn color="error" @click="deleteDialog = true" :style="{'font-size': '0.75em'}">
+                        <v-icon>delete</v-icon>
+                        Delete Customer
+                    </v-btn>
+                </v-flex>
+                </v-layout>
             </div>
-        </v-flex>
+        <!-- </v-flex> -->
         </v-fade-transition>   
         <transition name="component-fade" appear>                                
         <v-flex d-flex xs12 md12 lg8 xl6  class="mt-2">
@@ -35,13 +41,13 @@
                     ></v-text-field>
                 </v-card-title>
                 <template>
-                    <v-data-table v-bind:headers="customerHeaders" :items="customers" v-bind:pagination.sync="paginationCus" class="elevation-1" :search="searchCus">
+                    <v-data-table v-bind:headers="customerHeaders" :items="customers" v-bind:pagination.sync="paginationCus" class="elevation-1" :search="searchCus" :loading="loadingCustomers">
                         <template slot="items" slot-scope="props">
                             <tr @click="setId(props.item.id)">
-                                <td class="text-xs-right">{{ props.item.fname }}</td>
-                                <td class="text-xs-right">{{ props.item.lname }}</td>
-                                <td class="text-xs-right">{{ props.item.created_at }}</td>
-                                <td class="text-xs-right">{{ props.item.updated_at }}</td>
+                                <td class="text-xs-left">{{ props.item.fname }}</td>
+                                <td class="text-xs-left">{{ props.item.lname }}</td>
+                                <td class="text-xs-left">{{ props.item.created_at }}</td>
+                                <td class="text-xs-left">{{ props.item.updated_at }}</td>
                             </tr>
                         </template>
                     </v-data-table>
@@ -61,13 +67,13 @@
                         v-model="searchJob"
                     ></v-text-field>
                 </v-card-title>
-                    <v-data-table v-bind:headers="jobHeaders" :items="jobs" v-bind:pagination.sync="paginationJob" class="elevation-1" :search="searchJob">
+                    <v-data-table v-bind:headers="jobHeaders" :items="jobs" v-bind:pagination.sync="paginationJob" class="elevation-1" :search="searchJob" :loading="loadingJobs">
                         <template slot="items" slot-scope="props">
                             <tr @click="goToJob(props.item.id)">
                                 <td class="text-xs-center">{{ props.item.id }}</td>
-                                <td class="text-xs-left">{{ props.item.estimate }}</td>
-                                <td class="text-xs-left">{{ props.item.created_at }}</td>
-                                <td class="text-xs-left">{{ props.item.due_date }}</td>
+                                <td class="text-xs-left hidden-sm-and-down">${{ props.item.estimate.toLocaleString() }}</td>
+                                <td class="text-xs-left hidden-sm-and-down">{{ props.item.created_at }}</td>
+                                <td class="text-xs-left" v-bind:class="{'vital-date': props.item.vital_date && !props.item.completed_at}">{{ props.item.due_date }}</td>
                                 <td class="text-xs-left">{{ props.item.completed_at }}</td>                                
                             </tr>
                         </template>
@@ -106,6 +112,8 @@
             searchCus: null,
             searchJob: null,            
             deleteDialog: false,
+            loadingCustomers: false,
+            loadingJobs: false,
             customers: [],
             jobs: [],
             jobHeaders: [{
@@ -114,11 +122,13 @@
                 },
                 {
                     text: 'Estimate',
-                    value: 'estimate'
+                    value: 'estimate',
+                    class: 'hidden-sm-and-down'
                 },
                 {
                     text: 'Created',
-                    value: 'created_at'
+                    value: 'created_at',
+                    class: 'hidden-sm-and-down'
                 },
                 {
                     text: 'Due Date',
@@ -177,21 +187,27 @@
         methods: {
 
             getCustomers() {
+                this.loadingCustomers = true;
                 axios.get('/customers/index')
                     .then((response) => {
                         this.customers = response.data;
+                        this.loadingCustomers = false;
                     })
                     .catch((error) => {
                         console.log(error);
+                        this.loadingCustomers = false;                        
                     });
             },
             getCustomerJobs() {
+                this.loadingJobs = true;
                 axios.post('/jobs/customerJobs', {id: this.id})
                     .then((response) => {
                         this.jobs = response.data;
+                        this.loadingJobs = false;
                     })
                     .catch((error) => {
                         console.log(error);
+                        this.loadingJobs = false;                        
                     });     
             },
             setId(val) {

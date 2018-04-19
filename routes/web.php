@@ -20,6 +20,8 @@ Route::post('employees/update', 'EmployeeController@update')->name('employees.up
 Route::post('employees/delete', 'EmployeeController@delete')->name('employees.delete');
 Route::get('employees/index', 'EmployeeController@index')->name('employees.index');
 Route::get('employees/active', 'EmployeeController@active')->name('employees.active');
+Route::get('employees/outstandingJobs', 'EmployeeController@outstandingJobs')->name('employees.outstandingJobs');
+
 
 
 //Job Routes

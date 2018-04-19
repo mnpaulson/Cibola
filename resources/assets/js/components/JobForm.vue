@@ -6,7 +6,7 @@
                 <v-card-text>
                     <v-layout row wrap>
                         <v-flex row xs12 md6>
-                            <v-text-field type="number" v-model.number="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
+                            <v-text-field v-model="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
                             <v-select
                             autocomplete
                             label="Employee Select"
@@ -102,6 +102,7 @@
                         </v-flex>
                     </v-layout>
                 </v-card-text>
+                <v-progress-linear v-show="loading" :indeterminate="true" class="mb-0"></v-progress-linear>                      
             </v-card>
             </transition>
         </v-flex>
@@ -228,6 +229,7 @@
 
     export default {
         data: () => ({
+            loading: false,
             date: null,
             completeDate: null,
             dateMenu: false,
@@ -296,6 +298,7 @@
                     });
             },
             createJob() {
+                this.loading = true;                
                 axios.post('jobs/create', this.job)
                     .then((response) => {
                         this.job.id = response.data.id;
@@ -305,14 +308,17 @@
                             i++;
                         });
                         this.store.setAlert(true, "success", "Job Create with ID: " + this.job.id);
-                        this.$router.replace("/job/" + this.job.id);                                                                                                                                
+                        this.$router.replace("/job/" + this.job.id);
+                        this.loading = false;                                                                                                                                                        
                     })
                     .catch((error) => {
                         console.log(error);
+                        this.loading = false;
                         this.store.setAlert(true, "error", error.message);                                                                    
                     });
             },
             updateJob() {
+                this.loading = true;                
                 axios.post('jobs/update', this.job)
                     .then((response) => {
                         this.job.id = response.data.id;
@@ -321,14 +327,17 @@
                             this.job.job_images[i].id = id;
                             i++;
                         });
-                        this.store.setAlert(true, "success", "Job Upated Successfully");                    
+                        this.store.setAlert(true, "success", "Job Upated Successfully");
+                        this.loading = false;                                            
                     })
                     .catch((error) => {
                         console.log(error);
+                        this.loading = false;
                         this.store.setAlert(true, "error", error.message);                                            
                     });
             },
             getJob(id) {
+                this.loading = true;
                 axios.post('jobs/show', {id: id})
                     .then((response) => {
                         this.job.id = response.data.id;
@@ -346,9 +355,12 @@
                         this.$emit('customerId', this.job.customer_id);
 
                         if (this.job.completed_at !== null) this.complete = true;
+
+                        this.loading = false;
                     })
                     .catch((error) => {
                         this.store.setAlert(true, "error", "Job ID " + id + " not found.");
+                        this.loading = false;
                         console.log(error);
                     });
             },

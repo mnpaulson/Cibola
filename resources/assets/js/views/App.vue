@@ -10,6 +10,7 @@
       v-model="drawer"
       app
       clipped
+      width="200"
     >
       <v-list dense class="cdb-app-drawer">
         <router-link :to="{ name: 'home' }">
@@ -39,6 +40,16 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Customers</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        </router-link>
+        <router-link :to="{ name: 'employee' }">
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>folder</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Employee</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         </router-link>

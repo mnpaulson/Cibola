@@ -11,7 +11,7 @@ $factory->define(App\Job::class, function (Faker $faker) {
         'note' => $faker->text($maxNbChars = 200),
         'appraisal' => $faker->boolean($chanceOfGettingTrue = 10),
         'due_date' => $faker->date($format = 'Y-m-d', $max = '+ 2 months', $startDate = '-30 years'),
-        'completed_at' => $faker->optional($weight = 0.95)->date($format = 'Y-m-d', $max = 'now', $startDate = '-30 years'),
+        'completed_at' => $faker->optional($weight = 0.99)->date($format = 'Y-m-d', $max = 'now', $startDate = '-30 years'),
         'vital_date' => $faker->boolean($chanceOfGettingTrue = 20)
     ];
 });

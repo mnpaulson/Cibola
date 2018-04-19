@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Employee;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -48,6 +49,23 @@ class EmployeeController extends Controller
     {
         \App\Employee::destroy($request->id);
         echo response()->json($request->id);
+    }
+
+    public function outstandingJobs(Request $request)
+    {
+        $employees = \App\Employee::with(['jobs' => function ($query) {
+            $query->select('id', 'estimate', 'due_date', 'completed_at', 'employee_id', 'customer_id', 'vital_date')            
+            ->whereNull('completed_at')
+            ->with(['customer' => function ($query) {
+                $query->select(DB::raw('id, CONCAT(fname, " ", lname) AS name'));
+            }])            
+            ->orderby('due_date', 'asc');
+        }])
+        ->select('employees.id', 'employees.name')
+        ->where('active', 1)
+        ->get();
+
+        return response()->json($employees);  
     }
 
 }

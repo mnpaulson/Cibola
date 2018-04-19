@@ -194,6 +194,7 @@ class JobController extends Controller
         if ($request->descending) $desc = 'desc';
         else $desc = 'asc';
         $job = \App\Job::with('customer')
+        ->with('employee')
         ->orderBy($request->sortBy, $desc)        
         ->paginate($request->rowsPerPage);   
 

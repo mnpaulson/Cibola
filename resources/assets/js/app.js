@@ -26,6 +26,7 @@ import Job from './views/Job'
 import Home from './views/Home'
 import Customer from './views/Customer'
 import Admin from './views/Admin'
+import Employee from './views/Employee'
 import CustomerForm from './components/CustomerForm'
 import JobLookup from './components/JobLookup'
 import JobForm from './components/JobForm'
@@ -40,6 +41,7 @@ Vue.component('JobForm', require('./components/JobForm.vue'));
 Vue.component('EmployeeForm', require('./components/EmployeeForm.vue'));
 Vue.component('CustomerList', require('./components/CustomerList.vue'));
 Vue.component('JobList', require('./components/JobList.vue'));
+Vue.component('EmployeeJobs', require('./components/EmployeeJobs.vue'));
 Vue.component('Alert', require('./components/Alert.vue'));
 
 
@@ -80,6 +82,11 @@ const router = new VueRouter({
             path: '/customer/:id',
             name: 'customer',
             component: Customer
+        },
+        {
+            path: '/employee',
+            name: 'employee',
+            component: Employee
         }
     ],
 });

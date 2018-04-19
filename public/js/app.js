@@ -2094,7 +2094,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/CustomerForm.vue"
+Component.options.__file = "resources\\assets\\js\\components\\CustomerForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2103,9 +2103,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1f934279", Component.options)
+    hotAPI.createRecord("data-v-6a9e4fb9", Component.options)
   } else {
-    hotAPI.reload("data-v-1f934279", Component.options)
+    hotAPI.reload("data-v-6a9e4fb9", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2141,7 +2141,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/JobLookup.vue"
+Component.options.__file = "resources\\assets\\js\\components\\JobLookup.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2150,9 +2150,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2535cbf0", Component.options)
+    hotAPI.createRecord("data-v-7e87c6b0", Component.options)
   } else {
-    hotAPI.reload("data-v-2535cbf0", Component.options)
+    hotAPI.reload("data-v-7e87c6b0", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2188,7 +2188,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/JobForm.vue"
+Component.options.__file = "resources\\assets\\js\\components\\JobForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2197,9 +2197,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-93cdcc8c", Component.options)
+    hotAPI.createRecord("data-v-e5aa770c", Component.options)
   } else {
-    hotAPI.reload("data-v-93cdcc8c", Component.options)
+    hotAPI.reload("data-v-e5aa770c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2235,7 +2235,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/EmployeeForm.vue"
+Component.options.__file = "resources\\assets\\js\\components\\EmployeeForm.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2244,9 +2244,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6d68d949", Component.options)
+    hotAPI.createRecord("data-v-8f1832ee", Component.options)
   } else {
-    hotAPI.reload("data-v-6d68d949", Component.options)
+    hotAPI.reload("data-v-8f1832ee", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2282,7 +2282,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/CustomerList.vue"
+Component.options.__file = "resources\\assets\\js\\components\\CustomerList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2291,9 +2291,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-538c6953", Component.options)
+    hotAPI.createRecord("data-v-c2d112da", Component.options)
   } else {
-    hotAPI.reload("data-v-538c6953", Component.options)
+    hotAPI.reload("data-v-c2d112da", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2329,7 +2329,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/JobList.vue"
+Component.options.__file = "resources\\assets\\js\\components\\JobList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -2338,9 +2338,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2bdb7ed8", Component.options)
+    hotAPI.createRecord("data-v-7db82958", Component.options)
   } else {
-    hotAPI.reload("data-v-2bdb7ed8", Component.options)
+    hotAPI.reload("data-v-7db82958", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2380,18 +2380,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_Customer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_Customer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_Admin__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_Admin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__views_Admin__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_CustomerForm__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_CustomerForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_CustomerForm__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_JobLookup__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_JobLookup___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_JobLookup__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_JobForm__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_JobForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_JobForm__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_EmployeeForm__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_EmployeeForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_EmployeeForm__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_CustomerList__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_CustomerList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_CustomerList__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_JobList__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_JobList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_JobList__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_Employee__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_Employee___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__views_Employee__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_CustomerForm__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_CustomerForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_CustomerForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_JobLookup__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_JobLookup___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_JobLookup__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_JobForm__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_JobForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_JobForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_EmployeeForm__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_EmployeeForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_EmployeeForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_CustomerList__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_CustomerList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_CustomerList__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_JobList__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_JobList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_JobList__);
 
 __webpack_require__(19);
 
@@ -2427,12 +2429,14 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuet
 
 
 
+
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('CustomerForm', __webpack_require__(11));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobLookup', __webpack_require__(12));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobForm', __webpack_require__(13));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EmployeeForm', __webpack_require__(14));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('CustomerList', __webpack_require__(15));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobList', __webpack_require__(16));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EmployeeJobs', __webpack_require__(89));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Alert', __webpack_require__(81));
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
@@ -2465,6 +2469,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         path: '/customer/:id',
         name: 'customer',
         component: __WEBPACK_IMPORTED_MODULE_7__views_Customer___default.a
+    }, {
+        path: '/employee',
+        name: 'employee',
+        component: __WEBPACK_IMPORTED_MODULE_9__views_Employee___default.a
     }]
 });
 
@@ -64871,7 +64879,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "node_modules/vue-fuse/src/VueFuse.vue"
+Component.options.__file = "node_modules\\vue-fuse\\src\\VueFuse.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -64880,9 +64888,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-885dbb08", Component.options)
+    hotAPI.createRecord("data-v-0da684e2", Component.options)
   } else {
-    hotAPI.reload("data-v-885dbb08", Component.options)
+    hotAPI.reload("data-v-0da684e2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65090,7 +65098,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-885dbb08", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0da684e2", module.exports)
   }
 }
 
@@ -65120,7 +65128,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/App.vue"
+Component.options.__file = "resources\\assets\\js\\views\\App.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65129,9 +65137,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-50e73d1e", Component.options)
+    hotAPI.createRecord("data-v-7cca96b8", Component.options)
   } else {
-    hotAPI.reload("data-v-50e73d1e", Component.options)
+    hotAPI.reload("data-v-7cca96b8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65147,6 +65155,17 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -65270,7 +65289,7 @@ var render = function() {
       _c(
         "v-navigation-drawer",
         {
-          attrs: { fixed: "", app: "", clipped: "" },
+          attrs: { fixed: "", app: "", clipped: "", width: "200" },
           model: {
             value: _vm.drawer,
             callback: function($$v) {
@@ -65361,6 +65380,31 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "router-link",
+                { attrs: { to: { name: "employee" } } },
+                [
+                  _c(
+                    "v-list-tile",
+                    [
+                      _c(
+                        "v-list-tile-action",
+                        [_c("v-icon", [_vm._v("folder")])],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-tile-content",
+                        [_c("v-list-tile-title", [_vm._v("Employee")])],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
                 { attrs: { to: { name: "admin" } } },
                 [
                   _c(
@@ -65412,7 +65456,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-50e73d1e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7cca96b8", module.exports)
   }
 }
 
@@ -65442,7 +65486,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/Job.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Job.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65451,9 +65495,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2a8530ba", Component.options)
+    hotAPI.createRecord("data-v-c98eaf80", Component.options)
   } else {
-    hotAPI.reload("data-v-2a8530ba", Component.options)
+    hotAPI.reload("data-v-c98eaf80", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65506,6 +65550,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65521,10 +65582,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 value: 'id'
             }, {
                 text: 'Estimate',
-                value: 'estimate'
+                value: 'estimate',
+                align: 'right'
             }, {
                 text: 'Name',
                 value: 'fname'
+            }, {
+                text: 'Employee',
+                value: 'employee'
             }, {
                 text: 'Created',
                 value: 'created_at'
@@ -65669,88 +65734,199 @@ var render = function() {
       _vm._v(" "),
       _vm.job_id == null && _vm.customer_id == null
         ? _c(
-            "v-card",
+            "v-layout",
             [
               _c(
-                "v-card-title",
-                [
-                  _c("v-card-title", { attrs: { "primary-title": "" } }, [
-                    _c("h3", { staticClass: "headline mb-0" }, [_vm._v("Jobs")])
-                  ]),
-                  _vm._v(" "),
-                  _c("v-spacer")
-                ],
+                "v-flex",
+                { attrs: { row: "", wrap: "" } },
+                [_c("job-lookup")],
                 1
-              ),
-              _vm._v(" "),
-              _c("v-data-table", {
-                staticClass: "elevation-1",
-                attrs: {
-                  headers: _vm.jobHeaders,
-                  items: _vm.jobs,
-                  pagination: _vm.paginationJob,
-                  search: _vm.searchJob,
-                  "total-items": _vm.totalJobs,
-                  loading: _vm.loading
-                },
-                on: {
-                  "update:pagination": function($event) {
-                    _vm.paginationJob = $event
-                  }
-                },
-                scopedSlots: _vm._u([
-                  {
-                    key: "items",
-                    fn: function(props) {
-                      return [
-                        _c(
-                          "tr",
-                          {
-                            on: {
-                              click: function($event) {
-                                _vm.goToJob(props.item.id)
-                              }
-                            }
-                          },
-                          [
-                            _c("td", { staticClass: "text-xs-center" }, [
-                              _vm._v(_vm._s(props.item.id))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-xs-left" }, [
-                              _vm._v(_vm._s(props.item.estimate))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-xs-left" }, [
-                              _vm._v(
-                                _vm._s(props.item.customer.fname) +
-                                  " " +
-                                  _vm._s(props.item.customer.lname)
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-xs-left" }, [
-                              _vm._v(_vm._s(props.item.created_at))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-xs-left" }, [
-                              _vm._v(_vm._s(props.item.due_date))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "text-xs-left" }, [
-                              _vm._v(_vm._s(props.item.completed_at))
-                            ])
-                          ]
-                        )
-                      ]
-                    }
-                  }
-                ])
-              })
+              )
             ],
             1
           )
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "transition",
+        { attrs: { name: "component-fade", appear: "" } },
+        [
+          _vm.job_id == null && _vm.customer_id == null
+            ? _c(
+                "v-layout",
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { row: "", wrap: "", xs12: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c(
+                            "v-card-title",
+                            [
+                              _c(
+                                "v-card-title",
+                                { attrs: { "primary-title": "" } },
+                                [
+                                  _c("h3", { staticClass: "headline mb-0" }, [
+                                    _vm._v("Jobs")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("v-spacer"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        color: "primary",
+                                        href: "#/job/0/0"
+                                      }
+                                    },
+                                    [
+                                      _c("v-icon", [_vm._v("add")]),
+                                      _vm._v(
+                                        "\n                        New Job\n                    "
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-spacer")
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-data-table", {
+                            staticClass: "elevation-1",
+                            attrs: {
+                              headers: _vm.jobHeaders,
+                              items: _vm.jobs,
+                              pagination: _vm.paginationJob,
+                              search: _vm.searchJob,
+                              "total-items": _vm.totalJobs,
+                              loading: _vm.loading
+                            },
+                            on: {
+                              "update:pagination": function($event) {
+                                _vm.paginationJob = $event
+                              }
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "items",
+                                fn: function(props) {
+                                  return [
+                                    _c(
+                                      "tr",
+                                      {
+                                        on: {
+                                          click: function($event) {
+                                            _vm.goToJob(props.item.id)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [_vm._v(_vm._s(props.item.id))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [
+                                            _vm._v(
+                                              "$" +
+                                                _vm._s(
+                                                  props.item.estimate.toLocaleString()
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                props.item.customer.fname
+                                              ) +
+                                                " " +
+                                                _vm._s(
+                                                  props.item.customer.lname
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.employee.name)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.created_at)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          {
+                                            staticClass: "text-xs-left",
+                                            class: {
+                                              "vital-date":
+                                                props.item.vital_date &&
+                                                !props.item.completed_at
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(props.item.due_date))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.completed_at)
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                }
+                              }
+                            ])
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      )
     ],
     1
   )
@@ -65761,7 +65937,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2a8530ba", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-c98eaf80", module.exports)
   }
 }
 
@@ -65791,7 +65967,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/Home.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Home.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65800,9 +65976,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6c0a33b2", Component.options)
+    hotAPI.createRecord("data-v-11c5acec", Component.options)
   } else {
-    hotAPI.reload("data-v-6c0a33b2", Component.options)
+    hotAPI.reload("data-v-11c5acec", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -65831,6 +66007,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65838,7 +66017,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             id: null
         };
     },
-    methods: {},
+    methods: {
+        getOutstandingJobs: function getOutstandingJobs() {
+            axios.get("/employees/outstandingJobs").then(function (response) {
+                console.log(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    },
+    mounted: function mounted() {
+        // this.getOutstandingJobs();
+    },
+
     watch: {
         id: function id(val) {
             // if(this.id == null) this.$router.replace("/customer");            
@@ -65870,19 +66061,14 @@ var render = function() {
                 _vm.id = $event
               }
             }
-          }),
-          _vm._v(" "),
-          _c("job-lookup")
+          })
         ],
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
-        [_c("customer-list"), _vm._v(" "), _c("job-list")],
-        1
-      )
+      _c("v-layout", { attrs: { row: "", wrap: "" } }, [_c("job-lookup")], 1),
+      _vm._v(" "),
+      _c("v-layout", { attrs: { row: "", wrap: "" } })
     ],
     1
   )
@@ -65893,7 +66079,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6c0a33b2", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-11c5acec", module.exports)
   }
 }
 
@@ -65923,7 +66109,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/Customer.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Customer.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -65932,9 +66118,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-59b8d1b1", Component.options)
+    hotAPI.createRecord("data-v-56411deb", Component.options)
   } else {
-    hotAPI.reload("data-v-59b8d1b1", Component.options)
+    hotAPI.reload("data-v-56411deb", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66051,6 +66237,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -66059,6 +66251,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             searchCus: null,
             searchJob: null,
             deleteDialog: false,
+            loadingCustomers: false,
+            loadingJobs: false,
             customers: [],
             jobs: [],
             jobHeaders: [{
@@ -66066,10 +66260,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 value: 'id'
             }, {
                 text: 'Estimate',
-                value: 'estimate'
+                value: 'estimate',
+                class: 'hidden-sm-and-down'
             }, {
                 text: 'Created',
-                value: 'created_at'
+                value: 'created_at',
+                class: 'hidden-sm-and-down'
             }, {
                 text: 'Due Date',
                 value: 'due_date'
@@ -66123,19 +66319,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getCustomers: function getCustomers() {
             var _this = this;
 
+            this.loadingCustomers = true;
             axios.get('/customers/index').then(function (response) {
                 _this.customers = response.data;
+                _this.loadingCustomers = false;
             }).catch(function (error) {
                 console.log(error);
+                _this.loadingCustomers = false;
             });
         },
         getCustomerJobs: function getCustomerJobs() {
             var _this2 = this;
 
+            this.loadingJobs = true;
             axios.post('/jobs/customerJobs', { id: this.id }).then(function (response) {
                 _this2.jobs = response.data;
+                _this2.loadingJobs = false;
             }).catch(function (error) {
                 console.log(error);
+                _this2.loadingJobs = false;
             });
         },
         setId: function setId(val) {
@@ -66193,57 +66395,77 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c(
-        "v-fade-transition",
-        [
-          _c("v-flex", { attrs: { "d-flex": "" } }, [
-            _c(
-              "div",
+      _c("v-fade-transition", [
+        _c(
+          "div",
+          {
+            directives: [
               {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.id,
-                    expression: "id"
-                  }
-                ],
-                staticClass: "my-1"
-              },
+                name: "show",
+                rawName: "v-show",
+                value: _vm.id,
+                expression: "id"
+              }
+            ]
+          },
+          [
+            _c(
+              "v-layout",
               [
                 _c(
-                  "v-btn",
-                  { attrs: { color: "primary", href: "#/job/0/" + _vm.id } },
+                  "v-flex",
+                  { staticClass: "xs6 sm2", attrs: { "d-flex": "" } },
                   [
-                    _c("v-icon", [_vm._v("add")]),
-                    _vm._v("\n                New Job\n            ")
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: { color: "primary", href: "#/job/0/" + _vm.id }
+                      },
+                      [
+                        _c("v-icon", [_vm._v("add")]),
+                        _vm._v(
+                          "\n                    New Job\n                "
+                        )
+                      ],
+                      1
+                    )
                   ],
                   1
                 ),
                 _vm._v(" "),
                 _c(
-                  "v-btn",
-                  {
-                    attrs: { color: "error" },
-                    on: {
-                      click: function($event) {
-                        _vm.deleteDialog = true
-                      }
-                    }
-                  },
+                  "v-flex",
+                  { staticClass: "xs6 sm2", attrs: { "d-flex": "" } },
                   [
-                    _c("v-icon", [_vm._v("delete")]),
-                    _vm._v("\n                Delete Customer\n            ")
+                    _c(
+                      "v-btn",
+                      {
+                        style: { "font-size": "0.75em" },
+                        attrs: { color: "error" },
+                        on: {
+                          click: function($event) {
+                            _vm.deleteDialog = true
+                          }
+                        }
+                      },
+                      [
+                        _c("v-icon", [_vm._v("delete")]),
+                        _vm._v(
+                          "\n                    Delete Customer\n                "
+                        )
+                      ],
+                      1
+                    )
                   ],
                   1
                 )
               ],
               1
             )
-          ])
-        ],
-        1
-      ),
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _c(
         "transition",
@@ -66306,7 +66528,8 @@ var render = function() {
                         headers: _vm.customerHeaders,
                         items: _vm.customers,
                         pagination: _vm.paginationCus,
-                        search: _vm.searchCus
+                        search: _vm.searchCus,
+                        loading: _vm.loadingCustomers
                       },
                       on: {
                         "update:pagination": function($event) {
@@ -66328,19 +66551,19 @@ var render = function() {
                                   }
                                 },
                                 [
-                                  _c("td", { staticClass: "text-xs-right" }, [
+                                  _c("td", { staticClass: "text-xs-left" }, [
                                     _vm._v(_vm._s(props.item.fname))
                                   ]),
                                   _vm._v(" "),
-                                  _c("td", { staticClass: "text-xs-right" }, [
+                                  _c("td", { staticClass: "text-xs-left" }, [
                                     _vm._v(_vm._s(props.item.lname))
                                   ]),
                                   _vm._v(" "),
-                                  _c("td", { staticClass: "text-xs-right" }, [
+                                  _c("td", { staticClass: "text-xs-left" }, [
                                     _vm._v(_vm._s(props.item.created_at))
                                   ]),
                                   _vm._v(" "),
-                                  _c("td", { staticClass: "text-xs-right" }, [
+                                  _c("td", { staticClass: "text-xs-left" }, [
                                     _vm._v(_vm._s(props.item.updated_at))
                                   ])
                                 ]
@@ -66404,7 +66627,8 @@ var render = function() {
                       headers: _vm.jobHeaders,
                       items: _vm.jobs,
                       pagination: _vm.paginationJob,
-                      search: _vm.searchJob
+                      search: _vm.searchJob,
+                      loading: _vm.loadingJobs
                     },
                     on: {
                       "update:pagination": function($event) {
@@ -66430,17 +66654,43 @@ var render = function() {
                                   _vm._v(_vm._s(props.item.id))
                                 ]),
                                 _vm._v(" "),
-                                _c("td", { staticClass: "text-xs-left" }, [
-                                  _vm._v(_vm._s(props.item.estimate))
-                                ]),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "text-xs-left hidden-sm-and-down"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "$" +
+                                        _vm._s(
+                                          props.item.estimate.toLocaleString()
+                                        )
+                                    )
+                                  ]
+                                ),
                                 _vm._v(" "),
-                                _c("td", { staticClass: "text-xs-left" }, [
-                                  _vm._v(_vm._s(props.item.created_at))
-                                ]),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "text-xs-left hidden-sm-and-down"
+                                  },
+                                  [_vm._v(_vm._s(props.item.created_at))]
+                                ),
                                 _vm._v(" "),
-                                _c("td", { staticClass: "text-xs-left" }, [
-                                  _vm._v(_vm._s(props.item.due_date))
-                                ]),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "text-xs-left",
+                                    class: {
+                                      "vital-date":
+                                        props.item.vital_date &&
+                                        !props.item.completed_at
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(props.item.due_date))]
+                                ),
                                 _vm._v(" "),
                                 _c("td", { staticClass: "text-xs-left" }, [
                                   _vm._v(_vm._s(props.item.completed_at))
@@ -66571,7 +66821,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-59b8d1b1", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-56411deb", module.exports)
   }
 }
 
@@ -66601,7 +66851,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/views/Admin.vue"
+Component.options.__file = "resources\\assets\\js\\views\\Admin.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -66610,9 +66860,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ca2e4be8", Component.options)
+    hotAPI.createRecord("data-v-a6c6efdc", Component.options)
   } else {
-    hotAPI.reload("data-v-ca2e4be8", Component.options)
+    hotAPI.reload("data-v-a6c6efdc", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -66638,7 +66888,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-ca2e4be8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-a6c6efdc", module.exports)
   }
 }
 
@@ -66648,6 +66898,8 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -66741,6 +66993,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       fuseList: [],
       searchList: null,
       search: [],
+      loading: false,
       searchOptions: {
         shouldSort: true,
         threshold: 0.6,
@@ -66796,10 +67049,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       if (this.searchList == null) {
+        this.loading = true;
         axios.get('/customers/searchList').then(function (response) {
           _this.searchList = response.data;
+          _this.loading = false;
           _this.fuseMatch();
         }).catch(function (error) {
+          _this.loading = false;
           console.log(error);
         });
       } else {
@@ -66811,9 +67067,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.fuseList = [];
       this.$search(this.search, this.searchList, this.searchOptions).then(function (results) {
-        results.forEach(function (result) {
-          _this2.fuseList.push({ name: result.fname + " " + result.lname, id: result.id });
-        });
+        //Only load the 20 best matches into the display
+        var length = results.length;
+        console.log(length);
+        if (length > 20) length = 20;
+        for (var i = 0; i < length; i++) {
+          _this2.fuseList.push({ name: results[i].fname + " " + results[i].lname, id: results[i].id });
+        }
+        // results.forEach(result => {
+        //   this.fuseList.push({name: result.fname + " " + result.lname, id: result.id});
+        // });
       });
     },
 
@@ -66860,6 +67123,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     storeCustomer: function storeCustomer() {
       var _this3 = this;
 
+      this.loading = true;
       axios.post('customers/store', this.customer).then(function (response) {
         _this3.customer.id = response.data;
         _this3.setFormState(false);
@@ -66867,8 +67131,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this3.searchList = null;
         _this3.$emit('newCustomer');
         _this3.$emit('update:id', response.data);
+        _this3.loading = false;
       }).catch(function (error) {
         _this3.store.setAlert(true, "error", error.message);
+        _this3.loading = false;
         console.log(error);
       });
     },
@@ -66878,9 +67144,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     updateCustomer: function updateCustomer() {
       var _this4 = this;
 
+      this.loading = true;
       axios.post('customers/update', this.customer).then(function (response) {
         _this4.setFormState(false);
+        _this4.loading = false;
       }).catch(function (error) {
+        _this4.loading = false;
         console.log(error);
       });
     },
@@ -66907,6 +67176,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this5 = this;
 
       this.customer.id = id;
+      this.loading = true;
       axios.post('customers/show', this.customer).then(function (response) {
         _this5.customer.fname = response.data[0].fname;
         _this5.customer.lname = response.data[0].lname;
@@ -66918,7 +67188,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this5.customer.addr_postal = response.data[0].addr_postal;
         _this5.customer.addr_country = response.data[0].addr_country;
         _this5.setFormState(false);
+        _this5.loading = false;
       }).catch(function (error) {
+        _this5.loading = false;
         console.log(error);
       });
     }
@@ -67479,7 +67751,20 @@ var render = function() {
               )
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("v-progress-linear", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.loading,
+                expression: "loading"
+              }
+            ],
+            staticClass: "mb-0",
+            attrs: { indeterminate: true }
+          })
         ],
         1
       )
@@ -67493,7 +67778,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1f934279", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-6a9e4fb9", module.exports)
   }
 }
 
@@ -67503,13 +67788,6 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -67544,39 +67822,31 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-flex",
-    { attrs: { "d-flex": "", xs12: "", sm12: "", md3: "" } },
+    { attrs: { "d-flex": "", xs12: "", sm12: "", md4: "" } },
     [
       _c(
         "transition",
         { attrs: { name: "component-fade", appear: "" } },
         [
           _c(
-            "v-card",
-            {},
+            "v-form",
+            { on: { submit: _vm.searchJob } },
             [
-              _c(
-                "v-card-text",
-                [
-                  _c(
-                    "v-form",
-                    { on: { submit: _vm.searchJob } },
-                    [
-                      _c("v-text-field", {
-                        attrs: { label: "Job Lookup", xs12: "" },
-                        model: {
-                          value: _vm.job,
-                          callback: function($$v) {
-                            _vm.job = $$v
-                          },
-                          expression: "job"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+              _c("v-text-field", {
+                attrs: {
+                  "prepend-icon": "work",
+                  solo: "",
+                  label: "Enter Job Number",
+                  xs12: ""
+                },
+                model: {
+                  value: _vm.job,
+                  callback: function($$v) {
+                    _vm.job = $$v
+                  },
+                  expression: "job"
+                }
+              })
             ],
             1
           )
@@ -67593,7 +67863,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2535cbf0", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7e87c6b0", module.exports)
   }
 }
 
@@ -67829,11 +68099,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            loading: false,
             date: null,
             completeDate: null,
             dateMenu: false,
@@ -67905,6 +68177,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createJob: function createJob() {
             var _this2 = this;
 
+            this.loading = true;
             axios.post('jobs/create', this.job).then(function (response) {
                 _this2.job.id = response.data.id;
                 var i = 0;
@@ -67914,14 +68187,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
                 _this2.store.setAlert(true, "success", "Job Create with ID: " + _this2.job.id);
                 _this2.$router.replace("/job/" + _this2.job.id);
+                _this2.loading = false;
             }).catch(function (error) {
                 console.log(error);
+                _this2.loading = false;
                 _this2.store.setAlert(true, "error", error.message);
             });
         },
         updateJob: function updateJob() {
             var _this3 = this;
 
+            this.loading = true;
             axios.post('jobs/update', this.job).then(function (response) {
                 _this3.job.id = response.data.id;
                 var i = 0;
@@ -67930,14 +68206,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     i++;
                 });
                 _this3.store.setAlert(true, "success", "Job Upated Successfully");
+                _this3.loading = false;
             }).catch(function (error) {
                 console.log(error);
+                _this3.loading = false;
                 _this3.store.setAlert(true, "error", error.message);
             });
         },
         getJob: function getJob(id) {
             var _this4 = this;
 
+            this.loading = true;
             axios.post('jobs/show', { id: id }).then(function (response) {
                 _this4.job.id = response.data.id;
                 _this4.job.customer_id = response.data.customer_id;
@@ -67954,8 +68233,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this4.$emit('customerId', _this4.job.customer_id);
 
                 if (_this4.job.completed_at !== null) _this4.complete = true;
+
+                _this4.loading = false;
             }).catch(function (error) {
                 _this4.store.setAlert(true, "error", "Job ID " + id + " not found.");
+                _this4.loading = false;
                 console.log(error);
             });
         },
@@ -68084,14 +68366,13 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  type: "number",
                                   label: "Est",
                                   "prepend-icon": "attach_money"
                                 },
                                 model: {
                                   value: _vm.job.estimate,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.job, "estimate", _vm._n($$v))
+                                    _vm.$set(_vm.job, "estimate", $$v)
                                   },
                                   expression: "job.estimate"
                                 }
@@ -68432,7 +68713,20 @@ var render = function() {
                       )
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("v-progress-linear", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.loading,
+                        expression: "loading"
+                      }
+                    ],
+                    staticClass: "mb-0",
+                    attrs: { indeterminate: true }
+                  })
                 ],
                 1
               )
@@ -68957,7 +69251,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-93cdcc8c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-e5aa770c", module.exports)
   }
 }
 
@@ -69447,7 +69741,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6d68d949", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-8f1832ee", module.exports)
   }
 }
 
@@ -69585,7 +69879,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-538c6953", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-c2d112da", module.exports)
   }
 }
 
@@ -69764,7 +70058,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2bdb7ed8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7db82958", module.exports)
   }
 }
 
@@ -69794,7 +70088,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Alert.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Alert.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -69803,9 +70097,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1f8bf896", Component.options)
+    hotAPI.createRecord("data-v-11375e75", Component.options)
   } else {
-    hotAPI.reload("data-v-1f8bf896", Component.options)
+    hotAPI.reload("data-v-11375e75", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -69898,7 +70192,7 @@ var render = function() {
             expression: "status"
           }
         },
-        [_vm._v("\n" + _vm._s(_vm.msg) + "\n")]
+        [_vm._v("\r\n" + _vm._s(_vm.msg) + "\r\n")]
       )
     ],
     1
@@ -69910,7 +70204,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1f8bf896", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-11375e75", module.exports)
   }
 }
 
@@ -69919,6 +70213,436 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(90)
+/* template */
+var __vue_template__ = __webpack_require__(91)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\EmployeeJobs.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3cff9d1b", Component.options)
+  } else {
+    hotAPI.reload("data-v-3cff9d1b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 90 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            employees: null,
+            selected: 0
+        };
+    },
+    methods: {
+        getOutstandingJobs: function getOutstandingJobs() {
+            var _this = this;
+
+            axios.get("/employees/outstandingJobs").then(function (response) {
+                // console.log(response.data);
+                _this.employees = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        toggle: function toggle(id) {
+            if (this.selected) {
+                this.selected = 0;
+                localStorage.setItem('employee', Number(0));
+            } else {
+                this.selected = id;
+                localStorage.setItem('employee', Number(id));
+            }
+            console.log(localStorage.employee);
+        },
+        goTo: function goTo(id) {
+            this.$router.push('/job/' + id);
+        },
+        complete: function complete(id) {
+            console.log(id);
+        }
+    },
+    mounted: function mounted() {
+        this.getOutstandingJobs();
+        if (Number(localStorage.employee)) this.selected = Number(localStorage.employee);
+    },
+
+    watch: {}
+
+});
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", wrap: "", xs12: "" } },
+    [
+      _vm._l(_vm.employees, function(employee) {
+        return [
+          _vm.selected === 0 || _vm.selected === employee.id
+            ? _c(
+                "v-flex",
+                {
+                  key: employee.name + "-key",
+                  attrs: { "d-flex": "", xs12: "", sm4: "", md2: "" }
+                },
+                [
+                  _c(
+                    "transition",
+                    { attrs: { name: "component-fade", appear: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c(
+                            "v-toolbar",
+                            [
+                              _c("v-toolbar-title", [
+                                _vm._v(_vm._s(employee.name))
+                              ]),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { icon: "" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.toggle(employee.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm.selected === employee.id
+                                    ? _c("v-icon", [_vm._v("favorite")])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.selected !== employee.id
+                                    ? _c("v-icon", [_vm._v("favorite_border")])
+                                    : _vm._e()
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-toolbar-title", [
+                                _vm._v(_vm._s(employee.jobs.length))
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list",
+                            { attrs: { "two-line": "" } },
+                            [
+                              _vm._l(employee.jobs, function(job, index) {
+                                return [
+                                  _c(
+                                    "v-list-tile",
+                                    {
+                                      key: job.title,
+                                      attrs: { avatar: "", ripple: "" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.goTo(job.id)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "v-list-tile-content",
+                                        [
+                                          _c("v-list-tile-title", [
+                                            _vm._v(
+                                              _vm._s(job.id) +
+                                                " — " +
+                                                _vm._s(job.customer.name)
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("v-list-tile-sub-title", {}, [
+                                            _c(
+                                              "span",
+                                              {
+                                                class: {
+                                                  "vital-date": job.vital_date,
+                                                  "text--primary": !job.vital_date
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                  Due: " +
+                                                    _vm._s(job.due_date) +
+                                                    "\n                              "
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              " — For: $" +
+                                                _vm._s(
+                                                  job.estimate.toLocaleString()
+                                                )
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-tile-action",
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: { icon: "", ripple: "" },
+                                              on: {
+                                                click: function($event) {
+                                                  $event.stopPropagation()
+                                                  _vm.complete(job.id)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                {
+                                                  staticClass: "test",
+                                                  attrs: {
+                                                    color: "grey lighten-1"
+                                                  }
+                                                },
+                                                [_vm._v("check_circle")]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  index + 1 < employee.jobs.length
+                                    ? _c("v-divider", { key: index })
+                                    : _vm._e()
+                                ]
+                              })
+                            ],
+                            2
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            : _vm._e()
+        ]
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3cff9d1b", module.exports)
+  }
+}
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(93)
+/* template */
+var __vue_template__ = __webpack_require__(94)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\views\\Employee.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8cdac68a", Component.options)
+  } else {
+    hotAPI.reload("data-v-8cdac68a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 93 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {};
+    },
+    methods: {},
+    mounted: function mounted() {},
+
+    watch: {}
+
+});
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("employee-jobs")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8cdac68a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

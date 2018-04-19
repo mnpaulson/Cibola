@@ -17,6 +17,11 @@ class EmployeeTableSeeder extends Seeder
         ]);
 
         DB::table('employees')->insert([
+            'name' => 'Amanda',
+            'active' => true,
+        ]);
+
+        DB::table('employees')->insert([
             'name' => 'Elliot',
             'active' => true,
         ]);
@@ -46,9 +51,5 @@ class EmployeeTableSeeder extends Seeder
             'active' => false,
         ]);
 
-        DB::table('employees')->insert([
-            'name' => 'Christina',
-            'active' => false,
-        ]);
     }
 }

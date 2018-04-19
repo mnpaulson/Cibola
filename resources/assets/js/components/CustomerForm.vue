@@ -1,6 +1,6 @@
 <template>
   <v-flex d-flex xs12 sm12 md4>                             
-    <v-card>
+    <v-card>      
       <span v-show="isInfo" class="">          
         <v-btn style="z-index:0" class="close-btn" dark small right absolute outline fab color="grey" @click="clearCustomer()"><v-icon class="fab-fix" dark>close</v-icon></v-btn>
       </span>
@@ -9,6 +9,7 @@
       </v-toolbar> -->
       <v-card-text>
         <v-layout>
+        <!-- <v-progress-circular v-if="loading" indeterminate color="primary"></v-progress-circular> -->
         <v-flex v-if="isSearch" d-flex sm11>
           <v-select
               v-model="searchSelect"
@@ -75,6 +76,7 @@
         </div>
         <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)" class="fab-up"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
       </v-card-text>
+            <v-progress-linear v-show="loading" :indeterminate="true" class="mb-0"></v-progress-linear>      
     </v-card>                                
   </v-flex>
 </template>
@@ -90,6 +92,7 @@
       fuseList: [],
       searchList: null,
       search: [],
+      loading: false,
       searchOptions: {
           shouldSort: true,
           threshold: 0.6,
@@ -144,12 +147,15 @@
 
       searchName() {
         if (this.searchList == null) {
+          this.loading = true;
           axios.get('/customers/searchList')
             .then((response) => {
               this.searchList = response.data;
+              this.loading = false;              
               this.fuseMatch();
             })
             .catch((error) => {
+              this.loading = false;
               console.log(error);
             });
         } else {
@@ -160,9 +166,16 @@
       fuseMatch() {
         this.fuseList = [];
         this.$search(this.search, this.searchList, this.searchOptions).then(results => {
-          results.forEach(result => {
-            this.fuseList.push({name: result.fname + " " + result.lname, id: result.id});
-          });
+          //Only load the 20 best matches into the display
+          var length = results.length;
+          console.log(length);
+          if (length > 20) length = 20;
+          for (var i = 0; i < length; i++) {
+            this.fuseList.push({name: results[i].fname + " " + results[i].lname, id: results[i].id});
+          }
+          // results.forEach(result => {
+          //   this.fuseList.push({name: result.fname + " " + result.lname, id: result.id});
+          // });
         })
       },
 
@@ -206,6 +219,7 @@
 
       //Saves new customer to DB
       storeCustomer() {
+        this.loading = true;        
         axios.post('customers/store', this.customer)
           .then((response) => {
             this.customer.id = response.data;
@@ -214,20 +228,25 @@
             this.searchList = null;
             this.$emit('newCustomer');
             this.$emit('update:id', response.data);
+            this.loading = false;            
           })
           .catch((error) => {
             this.store.setAlert(true, "error", error.message);
+            this.loading = false;
             console.log(error);                        
           });
       },
 
       //Updates the customer with current information
       updateCustomer() {
+        this.loading = true;        
         axios.post('customers/update', this.customer)
           .then((response) => {
             this.setFormState(false);
+            this.loading = false;            
           })
           .catch((error) => {
+            this.loading = false;
             console.log(error);
           });
       },
@@ -253,6 +272,7 @@
 
       getCustomer(id) {
         this.customer.id = id;
+        this.loading = true;                    
         axios.post('customers/show', this.customer)
           .then((response) => {
             this.customer.fname = response.data[0].fname;
@@ -265,8 +285,10 @@
             this.customer.addr_postal = response.data[0].addr_postal;
             this.customer.addr_country = response.data[0].addr_country;
             this.setFormState(false);
+            this.loading = false;                        
           })
           .catch((error) => {
+            this.loading = false;
             console.log(error);
           });
         
