@@ -190,9 +190,12 @@ class JobController extends Controller
 
     public function allJobsDetails(Request $request)
     {
+        $order = "";
+        if ($request->descending) $desc = 'desc';
+        else $desc = 'asc';
         $job = \App\Job::with('customer')
-        ->orderBy('due_date', 'desc')
-        ->paginate(500);   
+        ->orderBy($request->sortBy, $desc)        
+        ->paginate($request->rowsPerPage);   
 
         return response()->json($job);  
     }

@@ -16,7 +16,7 @@
         </v-flex>
         </v-fade-transition>   
         <transition name="component-fade" appear>                                
-        <v-flex d-flex xs12 md6  class="mt-2">
+        <v-flex d-flex xs12 md12 lg8 xl6  class="mt-2">
             <v-card v-show="!id" class="">
                 <!-- <v-toolbar color="indigo" dark clipped-left flat>
                     <v-toolbar-title>Customers</v-toolbar-title>

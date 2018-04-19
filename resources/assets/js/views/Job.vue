@@ -4,26 +4,27 @@
         <customer-form :id.sync="customer_id"></customer-form>
     </v-layout>  
     <job-form v-show="job_id !== null || customer_id !== null" :job_id.sync="job_id" :customer_id.sync="customer_id" v-on:customerId="setCustomerId"></job-form>
-    <job-list v-if="job_id == null && customer_id == null"></job-list>
+    <!-- <job-list v-if="job_id == null && customer_id == null"></job-list> -->
     <v-card v-if="job_id == null && customer_id == null">
         <v-card-title>
             <v-card-title primary-title>
                 <h3 class="headline mb-0">Jobs</h3>
             </v-card-title>
             <v-spacer></v-spacer>
-            <v-text-field
+            <!-- <v-text-field
                 append-icon="search"
                 label="Search"
                 single-line
                 hide-details
                 v-model="searchJob"
-            ></v-text-field>
+            ></v-text-field> -->
         </v-card-title>
             <v-data-table v-bind:headers="jobHeaders" :items="jobs" v-bind:pagination.sync="paginationJob" class="elevation-1" :search="searchJob" :total-items="totalJobs" :loading="loading">
                 <template slot="items" slot-scope="props">
                     <tr @click="goToJob(props.item.id)">
                         <td class="text-xs-center">{{ props.item.id }}</td>
                         <td class="text-xs-left">{{ props.item.estimate }}</td>
+                        <td class="text-xs-left">{{ props.item.customer.fname }} {{ props.item.customer.lname }}</td>                        
                         <td class="text-xs-left">{{ props.item.created_at }}</td>
                         <td class="text-xs-left">{{ props.item.due_date }}</td>
                         <td class="text-xs-left">{{ props.item.completed_at }}</td>                                
@@ -52,6 +53,10 @@
                     value: 'estimate'
                 },
                 {
+                    text: 'Name',
+                    value: 'fname'
+                },
+                {
                     text: 'Created',
                     value: 'created_at'
                 },
@@ -64,7 +69,11 @@
                     value: 'completed_at'
                 }
             ],
-            paginationJob: {}
+            paginationJob: {
+                rowsPerPage: 25,
+                sortBy: 'id',
+                descending: true
+            }
         }),
         watch: {
             // Handle changing between customer view and no customer selected
@@ -80,10 +89,10 @@
             },
             paginationJob: {
                 handler () {
-                    this.getDataFromApi()
+                    this.getJobsPaginated()
                         .then(data => {
                         this.jobs = data.jobs
-                        this.totalJobs = data.total
+                        this.totalJobs = data.totalJobs
                     })
                     deep: true
                     }
@@ -95,63 +104,36 @@
             if (isNaN(Number(this.$route.params.id))); //Do Nothing
             else if (Number(this.$route.params.id) !== 0) this.job_id = Number(this.$route.params.id);
             else this.customer_id = Number(this.$route.params.cus);
-            this.getAllJobs();
             
         },
         methods: {
             setCustomerId(id) {
                 this.customer_id = id;
             },
-            getAllJobs() {
-                axios.post('/jobs/allJobsDetails', this.paginationJob)
-                    .then((response) => {
-                        return response.data.data;
-                        // this.jobs = response.data.data;
-                        // console.log(response.data.data);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });     
+            goToJob(id) {
+                this.$router.push('/job/' + id);
             },
-            getDataFromApi () {
+            getJobsPaginated() {
                 this.loading = true
                 return new Promise((resolve, reject) => {
                     const { sortBy, descending, page, rowsPerPage } = this.paginationJob
 
                     // let jobs = new Promise(this.getAllJobs());
-                    let jobs = new Promise(function(resolve, reject) {
-                            this.getAllJobs();
-                        });
-                    const totalJobs = jobs.length
+                    axios.post('/jobs/allJobsDetails', this.paginationJob)
+                        .then((response) => {
+                            let jobs = response.data.data;
+                            const totalJobs = response.data.total;
 
-                    if (this.paginationJob.sortBy) {
-                        jobs = jobs.sort((a, b) => {
-                        const sortA = a[sortBy]
-                        const sortB = b[sortBy]
-
-                        if (descending) {
-                            if (sortA < sortB) return 1
-                            if (sortA > sortB) return -1
-                            return 0
-                        } else {
-                            if (sortA < sortB) return -1
-                            if (sortA > sortB) return 1
-                            return 0
-                        }
+                            this.loading = false
+                            resolve({
+                                jobs,
+                                totalJobs
+                            })
                         })
-                    }
-
-                    if (rowsPerPage > 0) {
-                        jobs = jobs.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-                    }
-
-                    setTimeout(() => {
-                        this.loading = false
-                        resolve({
-                        jobs,
-                        totalJobs
-                        })
-                    }, 1000)
+                        .catch((error) => {
+                            console.log(error);
+                        });    
+                    
                 })
             },
         }
