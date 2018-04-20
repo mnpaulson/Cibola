@@ -1,7 +1,7 @@
 <template>
   <v-layout row wrap xs12>
-        <template v-for="(employee) in employees">
-            <v-flex d-flex xs12 sm4 md2 :key="employee.name + '-key'" v-if="selected === 0 || selected === employee.id">
+        <template v-for="(employee, emp_index) in employees">
+            <v-flex d-flex xs12 sm6 md4 lg3 xl2 :key="employee.name + '-key'" v-if="selected === 0 || selected === employee.id">
                 <transition name="component-fade" appear>                                    
                 <v-card>
                     <v-toolbar>
@@ -29,8 +29,9 @@
                                 </span> — For: ${{ job.estimate.toLocaleString() }}</v-list-tile-sub-title>
                         </v-list-tile-content>
                         <v-list-tile-action>
-                            <v-btn icon ripple @click.stop="complete(job.id)">
-                                <v-icon class="test" color="grey lighten-1">check_circle</v-icon>
+                            <v-btn color="" icon ripple @click.stop="completeToggle(job.id, emp_index, index)">
+                                <v-icon v-if="!job.completed_at" class="complete-btn" color="grey lighten-1">check_circle</v-icon>
+                                <v-icon v-if="job.completed_at" class="complete-btn" color="green lighten-2">check_circle</v-icon>                                
                             </v-btn>
                         </v-list-tile-action>
                         </v-list-tile>
@@ -76,8 +77,29 @@
             goTo(id) {
                 this.$router.push('/job/' + id);
             },
-            complete(id) {
-                console.log(id);
+            completeToggle(id, emp_index, job_index) {
+                if (!this.employees[emp_index].jobs[job_index].completed_at) {
+                    axios.post('jobs/complete', {id: id})
+                        .then((response) => {
+                            console.log(response);
+                            this.employees[emp_index].jobs[job_index].completed_at = true;
+                        })
+                        .catch((error) => {
+
+                            console.log(error);
+                    });
+                } else {
+                    axios.post('jobs/uncomplete', {id: id})
+                        .then((response) => {
+                            console.log(response);
+                            this.employees[emp_index].jobs[job_index].completed_at = false;
+                        })
+                        .catch((error) => {
+
+                            console.log(error);
+                    });
+                }
+
             }
         },
         mounted() {

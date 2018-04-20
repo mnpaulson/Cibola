@@ -68095,11 +68095,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -68114,7 +68109,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             caputureDialog: false,
             imageDeleteDialog: false,
             jobDeleteDialog: false,
-            lightboxDialog: false,
+            lightBoxDialog: false,
             lightBoxImage: null,
             deleteImageId: null,
             deleteImageIndex: null,
@@ -68163,7 +68158,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         showLightBox: function showLightBox(image) {
             this.lightBoxImage = image;
-            this.lightboxDialog = true;
+            this.lightBoxDialog = true;
         },
         getEmployees: function getEmployees() {
             var _this = this;
@@ -68934,7 +68929,7 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { transition: "dialog-transition", "max-width": "60%" },
+          attrs: { transition: "dialog-transition", "max-width": "65%" },
           model: {
             value: _vm.caputureDialog,
             callback: function($$v) {
@@ -69216,31 +69211,27 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-dialog",
-        {
-          attrs: { "max-width": "75%", transition: "dialog-transition" },
-          model: {
-            value: _vm.lightboxDialog,
-            callback: function($$v) {
-              _vm.lightboxDialog = $$v
-            },
-            expression: "lightboxDialog"
-          }
-        },
-        [
-          _c(
-            "v-card",
-            [
-              _c("v-card-media", {
-                attrs: { contain: "", height: "1024", src: _vm.lightBoxImage }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
+      _c("transition", { attrs: { name: "component-lightbox", appear: "" } }, [
+        _vm.lightBoxDialog
+          ? _c(
+              "div",
+              {
+                staticClass: "lightBoxWrapper",
+                on: {
+                  click: function($event) {
+                    _vm.lightBoxDialog = false
+                  }
+                }
+              },
+              [
+                _c("img", {
+                  staticClass: "lightBoxImage",
+                  attrs: { src: "https://placekitten.com/1280/1024", alt: "" }
+                })
+              ]
+            )
+          : _vm._e()
+      ])
     ],
     2
   )
@@ -70130,20 +70121,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
   },
   watch: {
-    $route: function $route(to, from) {
-      var _this = this;
-
-      //Hide message 5 seconds after a route change if its not an error
-      if (this.type != "error") setTimeout(function () {
-        _this.status = false;
-      }, 5000);
-    }
+    // $route(to, from) {
+    //   //Hide message 5 seconds after a route change if its not an error
+    //   if (this.type != "error") setTimeout(()=>{ this.status = false; }, 5000);
+    // }
   },
   methods: {},
   computed: {
@@ -70173,26 +70169,30 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-snackbar",
+    {
+      attrs: { timeout: 5000, top: "", color: _vm.type },
+      model: {
+        value: _vm.status,
+        callback: function($$v) {
+          _vm.status = $$v
+        },
+        expression: "status"
+      }
+    },
     [
+      _vm._v("\r\n  " + _vm._s(_vm.msg) + "\r\n  "),
       _c(
-        "v-alert",
+        "v-btn",
         {
-          attrs: {
-            type: _vm.type,
-            dismissible: "",
-            outline: "",
-            transition: "slide-y-transition"
-          },
-          model: {
-            value: _vm.status,
-            callback: function($$v) {
-              _vm.status = $$v
-            },
-            expression: "status"
+          attrs: { dark: "", flat: "" },
+          nativeOn: {
+            click: function($event) {
+              _vm.status = false
+            }
           }
         },
-        [_vm._v("\r\n" + _vm._s(_vm.msg) + "\r\n")]
+        [_vm._v("Close")]
       )
     ],
     1
@@ -70317,6 +70317,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -70349,8 +70350,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         goTo: function goTo(id) {
             this.$router.push('/job/' + id);
         },
-        complete: function complete(id) {
-            console.log(id);
+        completeToggle: function completeToggle(id, emp_index, job_index) {
+            var _this2 = this;
+
+            if (!this.employees[emp_index].jobs[job_index].completed_at) {
+                axios.post('jobs/complete', { id: id }).then(function (response) {
+                    console.log(response);
+                    _this2.employees[emp_index].jobs[job_index].completed_at = true;
+                }).catch(function (error) {
+
+                    console.log(error);
+                });
+            } else {
+                axios.post('jobs/uncomplete', { id: id }).then(function (response) {
+                    console.log(response);
+                    _this2.employees[emp_index].jobs[job_index].completed_at = false;
+                }).catch(function (error) {
+
+                    console.log(error);
+                });
+            }
         }
     },
     mounted: function mounted() {
@@ -70374,14 +70393,21 @@ var render = function() {
     "v-layout",
     { attrs: { row: "", wrap: "", xs12: "" } },
     [
-      _vm._l(_vm.employees, function(employee) {
+      _vm._l(_vm.employees, function(employee, emp_index) {
         return [
           _vm.selected === 0 || _vm.selected === employee.id
             ? _c(
                 "v-flex",
                 {
                   key: employee.name + "-key",
-                  attrs: { "d-flex": "", xs12: "", sm4: "", md2: "" }
+                  attrs: {
+                    "d-flex": "",
+                    xs12: "",
+                    sm6: "",
+                    md4: "",
+                    lg3: "",
+                    xl2: ""
+                  }
                 },
                 [
                   _c(
@@ -70492,25 +70518,50 @@ var render = function() {
                                           _c(
                                             "v-btn",
                                             {
-                                              attrs: { icon: "", ripple: "" },
+                                              attrs: {
+                                                color: "",
+                                                icon: "",
+                                                ripple: ""
+                                              },
                                               on: {
                                                 click: function($event) {
                                                   $event.stopPropagation()
-                                                  _vm.complete(job.id)
+                                                  _vm.completeToggle(
+                                                    job.id,
+                                                    emp_index,
+                                                    index
+                                                  )
                                                 }
                                               }
                                             },
                                             [
-                                              _c(
-                                                "v-icon",
-                                                {
-                                                  staticClass: "test",
-                                                  attrs: {
-                                                    color: "grey lighten-1"
-                                                  }
-                                                },
-                                                [_vm._v("check_circle")]
-                                              )
+                                              !job.completed_at
+                                                ? _c(
+                                                    "v-icon",
+                                                    {
+                                                      staticClass:
+                                                        "complete-btn",
+                                                      attrs: {
+                                                        color: "grey lighten-1"
+                                                      }
+                                                    },
+                                                    [_vm._v("check_circle")]
+                                                  )
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              job.completed_at
+                                                ? _c(
+                                                    "v-icon",
+                                                    {
+                                                      staticClass:
+                                                        "complete-btn",
+                                                      attrs: {
+                                                        color: "green lighten-2"
+                                                      }
+                                                    },
+                                                    [_vm._v("check_circle")]
+                                                  )
+                                                : _vm._e()
                                             ],
                                             1
                                           )

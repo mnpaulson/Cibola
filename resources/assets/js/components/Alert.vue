@@ -1,5 +1,5 @@
 <template>
-<div>
+<!-- <div>
 <v-alert
 :type="type"
 dismissible
@@ -9,7 +9,16 @@ transition="slide-y-transition"
 >
 {{ msg }}
 </v-alert>
-</div>
+</div> -->
+<v-snackbar
+  :timeout=5000
+  top
+  v-model="status"
+  :color=type
+>
+  {{ msg }}
+  <v-btn dark flat  @click.native="status = false">Close</v-btn>
+</v-snackbar>
 </template>
 
 
@@ -17,10 +26,10 @@ transition="slide-y-transition"
 export default {
   data: () => ({}),
   watch: {
-    $route(to, from) {
-      //Hide message 5 seconds after a route change if its not an error
-      if (this.type != "error") setTimeout(()=>{ this.status = false; }, 5000);
-    }
+    // $route(to, from) {
+    //   //Hide message 5 seconds after a route change if its not an error
+    //   if (this.type != "error") setTimeout(()=>{ this.status = false; }, 5000);
+    // }
   },
   methods: {},
   computed: {

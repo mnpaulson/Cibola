@@ -33,6 +33,10 @@ Route::post('jobs/show', 'JobController@show')->name('jobs.show');
 Route::post('jobs/customerJobs', 'JobController@customerJobs')->name('jobs.customerJobs');
 Route::get('jobs/recentJobsList', 'JobController@recentJobsList')->name('jobs.recentJobsList');
 Route::post('jobs/allJobsDetails', 'JobController@allJobsDetails')->name('jobs.allJobsDetails');
+Route::post('jobs/complete', 'JobController@complete')->name('jobs.complete');
+Route::post('jobs/uncomplete', 'JobController@uncomplete')->name('jobs.uncomplete');
+
+
 
 
 Route::post('job_images/delete', 'Job_imageController@delete')->name('jobs.delete');

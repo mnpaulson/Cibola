@@ -201,4 +201,24 @@ class JobController extends Controller
         return response()->json($job);  
     }
 
+    public function complete(Request $request)
+    {
+        $job = \App\Job::where('id', $request->id)->first();
+        $job->completed_at = date("Y-m-d");
+
+        $job->save();
+
+        return response()->json($job->id);
+    }
+
+    public function uncomplete(Request $request)
+    {
+        $job = \App\Job::where('id', $request->id)->first();
+        $job->completed_at = null;
+
+        $job->save();
+
+        return response()->json($job->id);
+    }
+
 }

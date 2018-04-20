@@ -149,7 +149,7 @@
             </v-bottom-nav>
 
 
-        <v-dialog v-model="caputureDialog" transition="dialog-transition" max-width="60%">
+        <v-dialog v-model="caputureDialog" transition="dialog-transition" max-width="65%">
             <v-card>
                 <v-flex d-flex xs12>
                 <div>
@@ -210,16 +210,11 @@
             </v-card>
         </v-dialog>
 
-        <v-dialog max-width="75%" v-model="lightboxDialog" transition="dialog-transition">
-            <v-card>
-                <v-card-media
-                contain
-                height="1024"
-                v-bind:src="lightBoxImage"
-                >
-                </v-card-media>
-            </v-card>
-        </v-dialog>
+        <transition name="component-lightbox" appear>                            
+            <div v-if="lightBoxDialog" class="lightBoxWrapper" @click="lightBoxDialog = false">
+                <img src='https://placekitten.com/1280/1024' alt="" class="lightBoxImage">
+            </div>
+        </transition>
         
     </v-layout>
 
@@ -238,7 +233,7 @@
             caputureDialog: false,
             imageDeleteDialog: false,
             jobDeleteDialog: false,
-            lightboxDialog: false,
+            lightBoxDialog: false,
             lightBoxImage: null,
             deleteImageId: null,
             deleteImageIndex: null,
@@ -286,7 +281,7 @@
             },
             showLightBox(image) {
                 this.lightBoxImage = image;
-                this.lightboxDialog = true;
+                this.lightBoxDialog = true;
             },
             getEmployees() {
                 axios.get('/employees/active')
