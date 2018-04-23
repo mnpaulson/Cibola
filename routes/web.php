@@ -21,6 +21,8 @@ Route::post('employees/delete', 'EmployeeController@delete')->name('employees.de
 Route::get('employees/index', 'EmployeeController@index')->name('employees.index');
 Route::get('employees/active', 'EmployeeController@active')->name('employees.active');
 Route::get('employees/outstandingJobs', 'EmployeeController@outstandingJobs')->name('employees.outstandingJobs');
+Route::get('employees/outstandingStats', 'EmployeeController@outstandingStats')->name('employees.outstandingStats');
+
 
 
 

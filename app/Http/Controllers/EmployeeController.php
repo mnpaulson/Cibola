@@ -68,4 +68,25 @@ class EmployeeController extends Controller
         return response()->json($employees);  
     }
 
+
+    public function outstandingStats(Request $request)
+    {
+        $employees = \App\Employee::with(['jobs' => function ($query) {
+            $query->select('id', 'estimate', 'due_date', 'completed_at', 'employee_id', 'customer_id', 'vital_date')            
+            ->whereNull('completed_at')
+            ->with(['customer' => function ($query) {
+                $query->select(DB::raw('id, CONCAT(fname, " ", lname) AS name'));
+            }])            
+            ->orderby('vital_date', 'asc')
+            ->orderby('due_date', 'desc');
+        }])
+        ->select('employees.id', 'employees.name')
+        ->where('active', 1)
+        ->get();
+
+        return response()->json($employees);  
+    }
+
+
+
 }

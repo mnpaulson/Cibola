@@ -108,11 +108,11 @@
         </v-flex>
         <v-flex xs12></v-flex>
         <template v-for="(image, index) in job.job_images" >
-            <v-flex d-flex :key="image.image" md4>
+            <v-flex d-flex class="xs12 sm12 md6 lg3 xl3" :key="image.image">
                 <transition name="component-fade" appear>                    
-                <v-card class="" width="400px">
+                <v-card>
                     <v-btn class="close-btn" dark small right absolute outline fab color="grey" @click="removeImage(index)"><v-icon class="fab-fix" dark>delete</v-icon></v-btn>                    
-                    <v-card-media contain :src="image.image" height="200px" @click="showLightBox(image.image)">
+                    <v-card-media :src="image.image" height="200px" @click="showLightBox(image.image)">
                     </v-card-media>
                     <v-text-field v-model="image.note" name="input-1" label=" Note" multi-line rows="5" no-resize></v-text-field>
                 </v-card>

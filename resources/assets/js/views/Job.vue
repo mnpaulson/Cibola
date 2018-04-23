@@ -4,11 +4,8 @@
         <customer-form :id.sync="customer_id"></customer-form>
     </v-layout>  
     <job-form v-show="job_id !== null || customer_id !== null" :job_id.sync="job_id" :customer_id.sync="customer_id" v-on:customerId="setCustomerId"></job-form>
-    <!-- <job-list v-if="job_id == null && customer_id == null"></job-list> -->
     <v-layout v-if="job_id == null && customer_id == null">
-        <v-flex row wrap>
-            <job-lookup></job-lookup>    
-        </v-flex>
+        <job-lookup></job-lookup>    
     </v-layout>
     <transition name="component-fade" appear>            
     <v-layout v-if="job_id == null && customer_id == null">    

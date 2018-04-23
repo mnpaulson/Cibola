@@ -6,7 +6,8 @@
 <v-layout row wrap>
     <job-lookup ></job-lookup>
 </v-layout>
-<v-layout row wrap class="">    
+<v-layout row wrap class="">
+    <employee-stats></employee-stats>  
     <!-- <customer-list></customer-list>
     <job-list></job-list> -->
     <!-- <employee-jobs></employee-jobs> -->

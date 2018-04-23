@@ -42,6 +42,7 @@ Vue.component('EmployeeForm', require('./components/EmployeeForm.vue'));
 Vue.component('CustomerList', require('./components/CustomerList.vue'));
 Vue.component('JobList', require('./components/JobList.vue'));
 Vue.component('EmployeeJobs', require('./components/EmployeeJobs.vue'));
+Vue.component('EmployeeStats', require('./components/EmployeeStats.vue'));
 Vue.component('Alert', require('./components/Alert.vue'));
 
 
