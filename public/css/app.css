@@ -118,3 +118,58 @@
      object-fit: contain;
 }
 
+* {
+  visibility: hidden !important;
+}
+
+.cb-print {
+  visibility: visible !important;
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  width: 8.5in;
+  height: 11in;
+  background-color: red;
+}
+
+.cb-print-job-top {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2in;
+  background-color: green;
+  border-bottom: 1px solid black;
+}
+
+.cb-print-element {
+  position: absolute !important;
+  visibility: visible !important;
+}
+
+.cb-print-blanks {
+  height: 0.5in;
+  width: 50%;
+  background-color: blue;
+}
+
+.cb-print-customer-info {
+  height: 1.5in;
+  top: 0.5in;
+  width: 50%;
+  background-color: purple;
+}
+
+.cb-print-name {
+  top: 0in;
+}
+
+.cb-print-phone {
+  height: 0.5in;
+  top: 0.5in;
+}
+
+.cb-print-email {
+  height: 0.5in;
+  top: 1in;
+}
+

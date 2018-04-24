@@ -212,7 +212,7 @@
 
         <transition name="component-lightbox" appear>                            
             <div v-if="lightBoxDialog" class="lightBoxWrapper" @click="lightBoxDialog = false">
-                <img src='https://placekitten.com/1280/1024' alt="" class="lightBoxImage">
+                <img :src='lightBoxImage' alt="" class="lightBoxImage">
             </div>
         </transition>
         

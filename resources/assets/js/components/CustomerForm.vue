@@ -77,7 +77,19 @@
         <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)" class="fab-up"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
       </v-card-text>
             <v-progress-linear v-show="loading" :indeterminate="true" class="mb-0"></v-progress-linear>      
-    </v-card>                                
+    </v-card>
+    <span class="cb-print">
+      <div class="cb-print-job-top cb-print-element">
+        <div class="cb-print-element cb-print-blanks">
+
+        </div>
+        <div class="cb-print-element cb-print-customer-info">
+          <div class="cb-print-element cb-print-name">{{ customer.fname }} {{ customer.lname }}</div>
+          <div class="cb-print-element cb-print-phone">{{ customer.phone }}</div>
+          <div class="cb-print-element cb-print-email">{{ customer.email }}</div>
+        </div>
+      </div>
+    </span>                                
   </v-flex>
 </template>
 

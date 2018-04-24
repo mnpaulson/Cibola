@@ -67015,6 +67015,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67801,7 +67813,33 @@ var render = function() {
           })
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "cb-print" }, [
+        _c("div", { staticClass: "cb-print-job-top cb-print-element" }, [
+          _c("div", { staticClass: "cb-print-element cb-print-blanks" }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "cb-print-element cb-print-customer-info" },
+            [
+              _c("div", { staticClass: "cb-print-element cb-print-name" }, [
+                _vm._v(
+                  _vm._s(_vm.customer.fname) + " " + _vm._s(_vm.customer.lname)
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "cb-print-element cb-print-phone" }, [
+                _vm._v(_vm._s(_vm.customer.phone))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "cb-print-element cb-print-email" }, [
+                _vm._v(_vm._s(_vm.customer.email))
+              ])
+            ]
+          )
+        ])
+      ])
     ],
     1
   )
@@ -69256,7 +69294,7 @@ var render = function() {
               [
                 _c("img", {
                   staticClass: "lightBoxImage",
-                  attrs: { src: "https://placekitten.com/1280/1024", alt: "" }
+                  attrs: { src: _vm.lightBoxImage, alt: "" }
                 })
               ]
             )
