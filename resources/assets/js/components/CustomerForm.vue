@@ -79,16 +79,14 @@
             <v-progress-linear v-show="loading" :indeterminate="true" class="mb-0"></v-progress-linear>      
     </v-card>
     <span class="cb-print">
-      <div class="cb-print-job-top cb-print-element">
         <div class="cb-print-element cb-print-blanks">
 
         </div>
         <div class="cb-print-element cb-print-customer-info">
-          <div class="cb-print-element cb-print-name">{{ customer.fname }} {{ customer.lname }}</div>
-          <div class="cb-print-element cb-print-phone">{{ customer.phone }}</div>
-          <div class="cb-print-element cb-print-email">{{ customer.email }}</div>
+          <v-icon class="cb-print-element cb-print-customer-icon">person</v-icon><span class="cb-print-element">{{ customer.fname }} {{ customer.lname }}</span><br>
+          <v-icon class="cb-print-element cb-print-customer-icon">phone</v-icon><span class="cb-print-element">{{ customer.phone }}</span> <br>
+          <v-icon class="cb-print-element cb-print-customer-icon">email</v-icon><span class="cb-print-element">{{ customer.email }}</span>
         </div>
-      </div>
     </span>                                
   </v-flex>
 </template>

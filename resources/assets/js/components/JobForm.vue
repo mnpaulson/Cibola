@@ -215,7 +215,19 @@
                 <img :src='lightBoxImage' alt="" class="lightBoxImage">
             </div>
         </transition>
-        
+        <span class="cb-print">
+            <div class="cb-print-element cb-print-note">
+                {{job.note}}
+            </div>
+            <div class="cb-print-element cb-print-images">
+                <template v-for="(image) in job.job_images">
+                    <div class="cb-print-element cb-print-image-cont" :key="image.image">
+                      <img :src='image.image' alt="" class="cb-print-image cb-print-element">
+                      <div class="cb-print-element cb-print-image-note">{{image.note}}</div>                   
+                    </div>
+                </template>
+            </div>
+        </span>    
     </v-layout>
 
 </template>

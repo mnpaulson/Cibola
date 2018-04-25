@@ -67025,8 +67025,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67816,29 +67814,46 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("span", { staticClass: "cb-print" }, [
-        _c("div", { staticClass: "cb-print-job-top cb-print-element" }, [
-          _c("div", { staticClass: "cb-print-element cb-print-blanks" }),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "cb-print-element cb-print-customer-info" },
-            [
-              _c("div", { staticClass: "cb-print-element cb-print-name" }, [
-                _vm._v(
-                  _vm._s(_vm.customer.fname) + " " + _vm._s(_vm.customer.lname)
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "cb-print-element cb-print-phone" }, [
-                _vm._v(_vm._s(_vm.customer.phone))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "cb-print-element cb-print-email" }, [
-                _vm._v(_vm._s(_vm.customer.email))
-              ])
-            ]
-          )
-        ])
+        _c("div", { staticClass: "cb-print-element cb-print-blanks" }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "cb-print-element cb-print-customer-info" },
+          [
+            _c(
+              "v-icon",
+              { staticClass: "cb-print-element cb-print-customer-icon" },
+              [_vm._v("person")]
+            ),
+            _c("span", { staticClass: "cb-print-element" }, [
+              _vm._v(
+                _vm._s(_vm.customer.fname) + " " + _vm._s(_vm.customer.lname)
+              )
+            ]),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "v-icon",
+              { staticClass: "cb-print-element cb-print-customer-icon" },
+              [_vm._v("phone")]
+            ),
+            _c("span", { staticClass: "cb-print-element" }, [
+              _vm._v(_vm._s(_vm.customer.phone))
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "v-icon",
+              { staticClass: "cb-print-element cb-print-customer-icon" },
+              [_vm._v("email")]
+            ),
+            _c("span", { staticClass: "cb-print-element" }, [
+              _vm._v(_vm._s(_vm.customer.email))
+            ])
+          ],
+          1
+        )
       ])
     ],
     1
@@ -67945,6 +67960,18 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -69299,6 +69326,43 @@ var render = function() {
               ]
             )
           : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "cb-print" }, [
+        _c("div", { staticClass: "cb-print-element cb-print-note" }, [
+          _vm._v("\n            " + _vm._s(_vm.job.note) + "\n        ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "cb-print-element cb-print-images" },
+          [
+            _vm._l(_vm.job.job_images, function(image) {
+              return [
+                _c(
+                  "div",
+                  {
+                    key: image.image,
+                    staticClass: "cb-print-element cb-print-image-cont"
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "cb-print-image cb-print-element",
+                      attrs: { src: image.image, alt: "" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "cb-print-element cb-print-image-note" },
+                      [_vm._v(_vm._s(image.note))]
+                    )
+                  ]
+                )
+              ]
+            })
+          ],
+          2
+        )
       ])
     ],
     2

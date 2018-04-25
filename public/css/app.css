@@ -120,6 +120,16 @@
 
 * {
   visibility: hidden !important;
+  margin: 0px;
+}
+
+body {
+  height: 11in;
+  overflow: hidden;
+}
+
+@page {
+  margin: 0mm;
 }
 
 .cb-print {
@@ -129,16 +139,6 @@
   left: 0px;
   width: 8.5in;
   height: 11in;
-  background-color: red;
-}
-
-.cb-print-job-top {
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 2in;
-  background-color: green;
-  border-bottom: 1px solid black;
 }
 
 .cb-print-element {
@@ -157,19 +157,48 @@
   top: 0.5in;
   width: 50%;
   background-color: purple;
+  font-size: 1.5em;
+  padding-left: 30px;
 }
 
-.cb-print-name {
+.cb-print-customer-icon {
+  left: 0px;
+}
+
+.cb-print-note {
   top: 0in;
+  left: 50%;
+  width: 50%;
+  height: 2in;
+  background-color: green;
 }
 
-.cb-print-phone {
-  height: 0.5in;
-  top: 0.5in;
+.cb-print-images {
+  top: 2in;
+  width: 100%;
+  height: 5.99in;
+  background-color: red;
+  -webkit-column-count: 2;
+          column-count: 2;
 }
 
-.cb-print-email {
-  height: 0.5in;
-  top: 1in;
+.cb-print-image-cont {
+  position: static !important;
+  height: 1.5in;
+  width: 100%;
+  background-color: pink;
+}
+
+.cb-print-image {
+  position: static !important;
+  float: left;
+  height: 100%;
+}
+
+.cb-print-image-note {
+  position: static !important;
+  height: 1.5in;
+  max-height: 1.5in;
+  overflow: hidden;
 }
 
