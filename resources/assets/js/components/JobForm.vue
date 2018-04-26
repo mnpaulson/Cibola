@@ -219,6 +219,10 @@
             <div class="cb-print-element cb-print-note">
                 {{job.note}}
             </div>
+            <div class="cb-print-element cb-print-estimate">
+                Estimate: ${{ job.estimate.toLocaleString() }} <br>
+                {{ job.est_note }}
+            </div>
             <div class="cb-print-element cb-print-images">
                 <template v-for="(image) in job.job_images">
                     <div class="cb-print-element cb-print-image-cont" :key="image.image">

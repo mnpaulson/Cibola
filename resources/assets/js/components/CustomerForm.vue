@@ -1,6 +1,23 @@
 <template>
-  <v-flex d-flex xs12 sm12 md4>                             
-    <v-card>      
+  <v-flex d-flex xs12 sm12 md4>  
+    <div v-if="isSearch">
+      <v-select
+          v-model="searchSelect"
+          :search-input.sync="search"
+          autocomplete
+          label="Customer Search"
+          cache-items
+          :items="fuseList"
+          item-text="name"
+          item-value="id"
+          autofocus
+          solo
+          prepend-icon="person"
+          append-icon="add_circle"
+          :append-icon-cb="newCustomerForm"
+        ></v-select>
+    </div>                           
+    <v-card  v-if="!isSearch">      
       <span v-show="isInfo" class="">          
         <v-btn style="z-index:0" class="close-btn" dark small right absolute outline fab color="grey" @click="clearCustomer()"><v-icon class="fab-fix" dark>close</v-icon></v-btn>
       </span>
@@ -10,7 +27,7 @@
       <v-card-text>
         <v-layout>
         <!-- <v-progress-circular v-if="loading" indeterminate color="primary"></v-progress-circular> -->
-        <v-flex v-if="isSearch" d-flex sm11>
+        <!-- <v-flex v-if="isSearch" d-flex sm11>
           <v-select
               v-model="searchSelect"
               :search-input.sync="search"
@@ -20,12 +37,13 @@
               :items="fuseList"
               item-text="name"
               item-value="id"
-              autofocus          
+              autofocus
+              solo       
             ></v-select>
-        </v-flex>
-        <v-flex d-flex>
+        </v-flex> -->
+        <!-- <v-flex d-flex>
             <v-btn style="z-index:0" v-show="isSearch" color="primary" fab dark small @click="setFormState(true)" class="new-cus-btn"><v-icon class="fab-fix">add</v-icon></v-btn>                    
-        </v-flex>
+        </v-flex> -->
         </v-layout>
         <v-flex v-if="isInfo">
           <router-link :to="{ path: `/customer/${customer.id}` }">          
@@ -46,22 +64,22 @@
         <v-form>
           <v-layout row wrap v-if="isForm">
             <v-flex xs12 sm6>
-              <v-text-field label="First Name" :rules="nameRules" required v-model="customer.fname" xs12 ></v-text-field>
+              <v-text-field  label="First Name" :rules="nameRules" required v-model="customer.fname" xs12 ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6>
-              <v-text-field label="Last Name" :rules="nameRules" required v-model="customer.lname" xs12 ></v-text-field>
+              <v-text-field append-icon="person" label="Last Name" :rules="nameRules" required v-model="customer.lname" xs12 ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6>
-              <v-text-field label="Phone Number" v-model="customer.phone" xs12 ></v-text-field>
+              <v-text-field append-icon="phone" label="Phone Number" v-model="customer.phone" xs12 ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6>
-              <v-text-field label="E-Mail" v-model="customer.email" xs12 ></v-text-field>
+              <v-text-field append-icon="mail" label="E-Mail" v-model="customer.email" xs12 ></v-text-field>
             </v-flex>
-            <v-flex xs12><v-text-field label="Street Address" v-model="customer.addr_st" xs12 ></v-text-field></v-flex>
-            <v-flex xs12 sm6><v-text-field label="City" v-model="customer.addr_city" xs12 ></v-text-field></v-flex>
-            <v-flex xs12 sm6><v-text-field label="Province" v-model="customer.addr_prov" xs12 ></v-text-field></v-flex>
-            <v-flex xs12 sm6><v-text-field label="Postal Code" v-model="customer.addr_postal" xs12 ></v-text-field></v-flex>
-            <v-flex xs12 sm6><v-text-field label="Country" v-model="customer.addr_country" xs12 ></v-text-field></v-flex>
+            <v-flex xs12><v-text-field  append-icon="home" label="Street Address" v-model="customer.addr_st" xs12 ></v-text-field></v-flex>
+            <v-flex xs12 sm8><v-text-field label="City" v-model="customer.addr_city" xs12 ></v-text-field></v-flex>
+            <v-flex xs12 sm4><v-text-field label="Province" v-model="customer.addr_prov" xs12 ></v-text-field></v-flex>
+            <v-flex xs12 sm3><v-text-field label="Postal Code" v-model="customer.addr_postal" xs12 ></v-text-field></v-flex>
+            <v-flex xs12 sm9><v-text-field label="Country" v-model="customer.addr_country" xs12 ></v-text-field></v-flex>
             
           </v-layout>
         </v-form>
@@ -71,10 +89,11 @@
           <v-flex d-flex row>
             <v-flex xs8 class="" v-show="customer.id == null"><v-btn xs6 block color="primary" @click="storeCustomer()">Create Customer</v-btn></v-flex>
             <v-flex xs8 class="" v-show="customer.id"><v-btn xs6 block  color="primary" @click="updateCustomer()">Save Changes</v-btn></v-flex>
-            <v-flex xs4 class="ml-2"><v-btn xs6 block color="error" @click="clearCustomer()">Cancel</v-btn></v-flex>
+            <v-flex xs4 class="ml-2"><v-btn xs6 block color="error" @click="setFormState(false)">Cancel</v-btn></v-flex>
           </v-flex>
         </div>
-        <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)" class="fab-up"><v-icon class="fab-fix" dark>edit</v-icon></v-btn>
+        <!-- <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)" class="fab-up"><v-icon class="fab-fix" dark>edit</v-icon></v-btn> -->
+        <v-btn v-show="isInfo" color="grey " flat small right absolute class="cus-edit-btn" @click="setFormState(true)">Edit</v-btn>
       </v-card-text>
             <v-progress-linear v-show="loading" :indeterminate="true" class="mb-0"></v-progress-linear>      
     </v-card>
@@ -225,6 +244,11 @@
           this.header = "Customer Details";
         }
         
+      },
+
+      //For use with search appended icon callback function
+      newCustomerForm() {
+        this.setFormState(true);
       },
 
       //Saves new customer to DB

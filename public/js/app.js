@@ -67025,6 +67025,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67163,6 +67182,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
 
+    //For use with search appended icon callback function
+    newCustomerForm: function newCustomerForm() {
+      this.setFormState(true);
+    },
+
+
     //Saves new customer to DB
     storeCustomer: function storeCustomer() {
       var _this3 = this;
@@ -67266,498 +67291,49 @@ var render = function() {
     "v-flex",
     { attrs: { "d-flex": "", xs12: "", sm12: "", md4: "" } },
     [
-      _c(
-        "v-card",
-        [
-          _c(
-            "span",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isInfo,
-                  expression: "isInfo"
-                }
-              ]
-            },
+      _vm.isSearch
+        ? _c(
+            "div",
             [
-              _c(
-                "v-btn",
-                {
-                  staticClass: "close-btn",
-                  staticStyle: { "z-index": "0" },
-                  attrs: {
-                    dark: "",
-                    small: "",
-                    right: "",
-                    absolute: "",
-                    outline: "",
-                    fab: "",
-                    color: "grey"
-                  },
-                  on: {
-                    click: function($event) {
-                      _vm.clearCustomer()
-                    }
+              _c("v-select", {
+                attrs: {
+                  "search-input": _vm.search,
+                  autocomplete: "",
+                  label: "Customer Search",
+                  "cache-items": "",
+                  items: _vm.fuseList,
+                  "item-text": "name",
+                  "item-value": "id",
+                  autofocus: "",
+                  solo: "",
+                  "prepend-icon": "person",
+                  "append-icon": "add_circle",
+                  "append-icon-cb": _vm.newCustomerForm
+                },
+                on: {
+                  "update:searchInput": function($event) {
+                    _vm.search = $event
                   }
                 },
-                [
-                  _c(
-                    "v-icon",
-                    { staticClass: "fab-fix", attrs: { dark: "" } },
-                    [_vm._v("close")]
-                  )
-                ],
-                1
-              )
+                model: {
+                  value: _vm.searchSelect,
+                  callback: function($$v) {
+                    _vm.searchSelect = $$v
+                  },
+                  expression: "searchSelect"
+                }
+              })
             ],
             1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-card-text",
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.isSearch
+        ? _c(
+            "v-card",
             [
               _c(
-                "v-layout",
-                [
-                  _vm.isSearch
-                    ? _c(
-                        "v-flex",
-                        { attrs: { "d-flex": "", sm11: "" } },
-                        [
-                          _c("v-select", {
-                            attrs: {
-                              "search-input": _vm.search,
-                              autocomplete: "",
-                              label: "Customer Search",
-                              "cache-items": "",
-                              items: _vm.fuseList,
-                              "item-text": "name",
-                              "item-value": "id",
-                              autofocus: ""
-                            },
-                            on: {
-                              "update:searchInput": function($event) {
-                                _vm.search = $event
-                              }
-                            },
-                            model: {
-                              value: _vm.searchSelect,
-                              callback: function($$v) {
-                                _vm.searchSelect = $$v
-                              },
-                              expression: "searchSelect"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { "d-flex": "" } },
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isSearch,
-                              expression: "isSearch"
-                            }
-                          ],
-                          staticClass: "new-cus-btn",
-                          staticStyle: { "z-index": "0" },
-                          attrs: {
-                            color: "primary",
-                            fab: "",
-                            dark: "",
-                            small: ""
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.setFormState(true)
-                            }
-                          }
-                        },
-                        [
-                          _c("v-icon", { staticClass: "fab-fix" }, [
-                            _vm._v("add")
-                          ])
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _vm.isInfo
-                ? _c(
-                    "v-flex",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          attrs: {
-                            to: { path: "/customer/" + _vm.customer.id }
-                          }
-                        },
-                        [
-                          _c(
-                            "h3",
-                            { staticClass: "headline mb-0" },
-                            [
-                              _c("v-icon", { attrs: { large: "" } }, [
-                                _vm._v("person")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", [_vm._v(_vm._s(_vm.customer.fname))]),
-                              _vm._v(" "),
-                              _c("span", [_vm._v(_vm._s(_vm.customer.lname))])
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "p",
-                        [
-                          _c("v-icon", [_vm._v("phone")]),
-                          _vm._v(" " + _vm._s(_vm.customer.phone) + " "),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("v-icon", [_vm._v("email")]),
-                          _vm._v(" " + _vm._s(_vm.customer.email) + " "),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("v-icon", [_vm._v("home")]),
-                          _vm._v(" " + _vm._s(_vm.customer.addr_st) + " "),
-                          _c("br"),
-                          _vm._v(
-                            "\n          " +
-                              _vm._s(_vm.customer.addr_city) +
-                              ", " +
-                              _vm._s(_vm.customer.addr_prov) +
-                              " " +
-                              _vm._s(_vm.customer.addr_postal) +
-                              " "
-                          ),
-                          _c("br"),
-                          _vm._v(
-                            "\n          " +
-                              _vm._s(_vm.customer.addr_country) +
-                              "\n        "
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "v-form",
-                [
-                  _vm.isForm
-                    ? _c(
-                        "v-layout",
-                        { attrs: { row: "", wrap: "" } },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  label: "First Name",
-                                  rules: _vm.nameRules,
-                                  required: "",
-                                  xs12: ""
-                                },
-                                model: {
-                                  value: _vm.customer.fname,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.customer, "fname", $$v)
-                                  },
-                                  expression: "customer.fname"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  label: "Last Name",
-                                  rules: _vm.nameRules,
-                                  required: "",
-                                  xs12: ""
-                                },
-                                model: {
-                                  value: _vm.customer.lname,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.customer, "lname", $$v)
-                                  },
-                                  expression: "customer.lname"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Phone Number", xs12: "" },
-                                model: {
-                                  value: _vm.customer.phone,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.customer, "phone", $$v)
-                                  },
-                                  expression: "customer.phone"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "E-Mail", xs12: "" },
-                                model: {
-                                  value: _vm.customer.email,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.customer, "email", $$v)
-                                  },
-                                  expression: "customer.email"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Street Address", xs12: "" },
-                                model: {
-                                  value: _vm.customer.addr_st,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.customer, "addr_st", $$v)
-                                  },
-                                  expression: "customer.addr_st"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "City", xs12: "" },
-                                model: {
-                                  value: _vm.customer.addr_city,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.customer, "addr_city", $$v)
-                                  },
-                                  expression: "customer.addr_city"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Province", xs12: "" },
-                                model: {
-                                  value: _vm.customer.addr_prov,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.customer, "addr_prov", $$v)
-                                  },
-                                  expression: "customer.addr_prov"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Postal Code", xs12: "" },
-                                model: {
-                                  value: _vm.customer.addr_postal,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.customer, "addr_postal", $$v)
-                                  },
-                                  expression: "customer.addr_postal"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "", sm6: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Country", xs12: "" },
-                                model: {
-                                  value: _vm.customer.addr_country,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.customer, "addr_country", $$v)
-                                  },
-                                  expression: "customer.addr_country"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div"),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.isForm,
-                      expression: "isForm"
-                    }
-                  ]
-                },
-                [
-                  _c(
-                    "v-flex",
-                    { attrs: { "d-flex": "", row: "" } },
-                    [
-                      _c(
-                        "v-flex",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.customer.id == null,
-                              expression: "customer.id == null"
-                            }
-                          ],
-                          attrs: { xs8: "" }
-                        },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { xs6: "", block: "", color: "primary" },
-                              on: {
-                                click: function($event) {
-                                  _vm.storeCustomer()
-                                }
-                              }
-                            },
-                            [_vm._v("Create Customer")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.customer.id,
-                              expression: "customer.id"
-                            }
-                          ],
-                          attrs: { xs8: "" }
-                        },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { xs6: "", block: "", color: "primary" },
-                              on: {
-                                click: function($event) {
-                                  _vm.updateCustomer()
-                                }
-                              }
-                            },
-                            [_vm._v("Save Changes")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { staticClass: "ml-2", attrs: { xs4: "" } },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { xs6: "", block: "", color: "error" },
-                              on: {
-                                click: function($event) {
-                                  _vm.clearCustomer()
-                                }
-                              }
-                            },
-                            [_vm._v("Cancel")]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
+                "span",
                 {
                   directives: [
                     {
@@ -67766,52 +67342,485 @@ var render = function() {
                       value: _vm.isInfo,
                       expression: "isInfo"
                     }
-                  ],
-                  staticClass: "fab-up",
-                  staticStyle: { "z-index": "0" },
-                  attrs: {
-                    dark: "",
-                    small: "",
-                    bottom: "",
-                    right: "",
-                    absolute: "",
-                    fab: "",
-                    color: "primary"
-                  },
-                  on: {
-                    click: function($event) {
-                      _vm.setFormState(true)
-                    }
-                  }
+                  ]
                 },
                 [
                   _c(
-                    "v-icon",
-                    { staticClass: "fab-fix", attrs: { dark: "" } },
-                    [_vm._v("edit")]
+                    "v-btn",
+                    {
+                      staticClass: "close-btn",
+                      staticStyle: { "z-index": "0" },
+                      attrs: {
+                        dark: "",
+                        small: "",
+                        right: "",
+                        absolute: "",
+                        outline: "",
+                        fab: "",
+                        color: "grey"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.clearCustomer()
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "v-icon",
+                        { staticClass: "fab-fix", attrs: { dark: "" } },
+                        [_vm._v("close")]
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
-              )
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c("v-layout"),
+                  _vm._v(" "),
+                  _vm.isInfo
+                    ? _c(
+                        "v-flex",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: { path: "/customer/" + _vm.customer.id }
+                              }
+                            },
+                            [
+                              _c(
+                                "h3",
+                                { staticClass: "headline mb-0" },
+                                [
+                                  _c("v-icon", { attrs: { large: "" } }, [
+                                    _vm._v("person")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(_vm._s(_vm.customer.fname))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(_vm._s(_vm.customer.lname))
+                                  ])
+                                ],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            [
+                              _c("v-icon", [_vm._v("phone")]),
+                              _vm._v(" " + _vm._s(_vm.customer.phone) + " "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("v-icon", [_vm._v("email")]),
+                              _vm._v(" " + _vm._s(_vm.customer.email) + " "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("v-icon", [_vm._v("home")]),
+                              _vm._v(" " + _vm._s(_vm.customer.addr_st) + " "),
+                              _c("br"),
+                              _vm._v(
+                                "\n          " +
+                                  _vm._s(_vm.customer.addr_city) +
+                                  ", " +
+                                  _vm._s(_vm.customer.addr_prov) +
+                                  " " +
+                                  _vm._s(_vm.customer.addr_postal) +
+                                  " "
+                              ),
+                              _c("br"),
+                              _vm._v(
+                                "\n          " +
+                                  _vm._s(_vm.customer.addr_country) +
+                                  "\n        "
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "v-form",
+                    [
+                      _vm.isForm
+                        ? _c(
+                            "v-layout",
+                            { attrs: { row: "", wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      label: "First Name",
+                                      rules: _vm.nameRules,
+                                      required: "",
+                                      xs12: ""
+                                    },
+                                    model: {
+                                      value: _vm.customer.fname,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.customer, "fname", $$v)
+                                      },
+                                      expression: "customer.fname"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "append-icon": "person",
+                                      label: "Last Name",
+                                      rules: _vm.nameRules,
+                                      required: "",
+                                      xs12: ""
+                                    },
+                                    model: {
+                                      value: _vm.customer.lname,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.customer, "lname", $$v)
+                                      },
+                                      expression: "customer.lname"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "append-icon": "phone",
+                                      label: "Phone Number",
+                                      xs12: ""
+                                    },
+                                    model: {
+                                      value: _vm.customer.phone,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.customer, "phone", $$v)
+                                      },
+                                      expression: "customer.phone"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "append-icon": "mail",
+                                      label: "E-Mail",
+                                      xs12: ""
+                                    },
+                                    model: {
+                                      value: _vm.customer.email,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.customer, "email", $$v)
+                                      },
+                                      expression: "customer.email"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "append-icon": "home",
+                                      label: "Street Address",
+                                      xs12: ""
+                                    },
+                                    model: {
+                                      value: _vm.customer.addr_st,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.customer, "addr_st", $$v)
+                                      },
+                                      expression: "customer.addr_st"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm8: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "City", xs12: "" },
+                                    model: {
+                                      value: _vm.customer.addr_city,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.customer, "addr_city", $$v)
+                                      },
+                                      expression: "customer.addr_city"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm4: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Province", xs12: "" },
+                                    model: {
+                                      value: _vm.customer.addr_prov,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.customer, "addr_prov", $$v)
+                                      },
+                                      expression: "customer.addr_prov"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm3: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Postal Code", xs12: "" },
+                                    model: {
+                                      value: _vm.customer.addr_postal,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.customer,
+                                          "addr_postal",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "customer.addr_postal"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm9: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Country", xs12: "" },
+                                    model: {
+                                      value: _vm.customer.addr_country,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.customer,
+                                          "addr_country",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "customer.addr_country"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isForm,
+                          expression: "isForm"
+                        }
+                      ]
+                    },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { "d-flex": "", row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.customer.id == null,
+                                  expression: "customer.id == null"
+                                }
+                              ],
+                              attrs: { xs8: "" }
+                            },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    xs6: "",
+                                    block: "",
+                                    color: "primary"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.storeCustomer()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Create Customer")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.customer.id,
+                                  expression: "customer.id"
+                                }
+                              ],
+                              attrs: { xs8: "" }
+                            },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    xs6: "",
+                                    block: "",
+                                    color: "primary"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.updateCustomer()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Save Changes")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { staticClass: "ml-2", attrs: { xs4: "" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { xs6: "", block: "", color: "error" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.setFormState(false)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Cancel")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isInfo,
+                          expression: "isInfo"
+                        }
+                      ],
+                      staticClass: "cus-edit-btn",
+                      attrs: {
+                        color: "grey ",
+                        flat: "",
+                        small: "",
+                        right: "",
+                        absolute: ""
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.setFormState(true)
+                        }
+                      }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-progress-linear", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.loading,
+                    expression: "loading"
+                  }
+                ],
+                staticClass: "mb-0",
+                attrs: { indeterminate: true }
+              })
             ],
             1
-          ),
-          _vm._v(" "),
-          _c("v-progress-linear", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.loading,
-                expression: "loading"
-              }
-            ],
-            staticClass: "mb-0",
-            attrs: { indeterminate: true }
-          })
-        ],
-        1
-      ),
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("span", { staticClass: "cb-print" }, [
         _c("div", { staticClass: "cb-print-element cb-print-blanks" }),
@@ -67960,6 +67969,10 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -69331,6 +69344,16 @@ var render = function() {
       _c("span", { staticClass: "cb-print" }, [
         _c("div", { staticClass: "cb-print-element cb-print-note" }, [
           _vm._v("\n            " + _vm._s(_vm.job.note) + "\n        ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cb-print-element cb-print-estimate" }, [
+          _vm._v(
+            "\n            Estimate: $" +
+              _vm._s(_vm.job.estimate.toLocaleString()) +
+              " "
+          ),
+          _c("br"),
+          _vm._v("\n            " + _vm._s(_vm.job.est_note) + "\n        ")
         ]),
         _vm._v(" "),
         _c(

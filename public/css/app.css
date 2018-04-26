@@ -17,6 +17,11 @@
   top: -5px !important;
 }
 
+.cus-edit-btn {
+  right: 0px !important;
+  bottom: 0px !important;
+}
+
 .redText > div > input {
   color: red !important;
 }
@@ -118,87 +123,104 @@
      object-fit: contain;
 }
 
-* {
-  visibility: hidden !important;
-  margin: 0px;
-}
+@media print {
+  * {
+    visibility: hidden !important;
+    margin: 0px;
+  }
 
-body {
-  height: 11in;
-  overflow: hidden;
-}
+  body {
+    height: 11in;
+    overflow: hidden;
+  }
 
 @page {
-  margin: 0mm;
+    margin: 0mm;
 }
 
-.cb-print {
-  visibility: visible !important;
-  position: absolute !important;
-  top: 0px;
-  left: 0px;
-  width: 8.5in;
-  height: 11in;
+  .cb-print {
+    visibility: visible !important;
+    position: absolute !important;
+    top: 0px;
+    left: 0px;
+    width: 8.5in;
+    height: 11in;
+  }
+
+  .cb-print-element {
+    position: absolute !important;
+    visibility: visible !important;
+  }
+
+  .cb-print-blanks {
+    height: 0.5in;
+    width: 50%;
+    background-color: blue;
+  }
+
+  .cb-print-customer-info {
+    height: 1.5in;
+    top: 0.5in;
+    width: 50%;
+    background-color: purple;
+    font-size: 1.5em;
+    padding-left: 30px;
+  }
+
+  .cb-print-customer-icon {
+    left: 0px;
+  }
+
+  .cb-print-note {
+    top: 0in;
+    left: 50%;
+    width: 50%;
+    height: 2in;
+    background-color: green;
+  }
+
+  .cb-print-estimate {
+    height: 1.5in;
+    top: 0.5in;
+    left: 35%;
+    width: 15%;
+  }
+
+  .cb-print-images {
+    top: 2in;
+    width: 100%;
+    height: 6in;
+    background-color: red;
+    -webkit-column-count: 2;
+            column-count: 2;
+    -webkit-column-fill: auto;
+            column-fill: auto;
+  }
+
+  .cb-print-image-cont {
+    position: static !important;
+    height: 1.5in;
+    width: 100%;
+    background-color: pink;
+  }
+
+  .cb-print-image {
+    position: static !important;
+    float: left;
+    height: 100%;
+  }
+
+  .cb-print-image-note {
+    position: static !important;
+    height: 1.5in;
+    max-height: 1.5in;
+    overflow: hidden;
+  }
 }
 
-.cb-print-element {
-  position: absolute !important;
-  visibility: visible !important;
-}
-
-.cb-print-blanks {
-  height: 0.5in;
-  width: 50%;
-  background-color: blue;
-}
-
-.cb-print-customer-info {
-  height: 1.5in;
-  top: 0.5in;
-  width: 50%;
-  background-color: purple;
-  font-size: 1.5em;
-  padding-left: 30px;
-}
-
-.cb-print-customer-icon {
-  left: 0px;
-}
-
-.cb-print-note {
-  top: 0in;
-  left: 50%;
-  width: 50%;
-  height: 2in;
-  background-color: green;
-}
-
-.cb-print-images {
-  top: 2in;
-  width: 100%;
-  height: 5.99in;
-  background-color: red;
-  -webkit-column-count: 2;
-          column-count: 2;
-}
-
-.cb-print-image-cont {
-  position: static !important;
-  height: 1.5in;
-  width: 100%;
-  background-color: pink;
-}
-
-.cb-print-image {
-  position: static !important;
-  float: left;
-  height: 100%;
-}
-
-.cb-print-image-note {
-  position: static !important;
-  height: 1.5in;
-  max-height: 1.5in;
-  overflow: hidden;
+@media screen {
+  .cb-print {
+    display: none !important;
+  }
 }
 
