@@ -108,7 +108,7 @@
         </v-flex>
         <v-flex xs12></v-flex>
         <template v-for="(image, index) in job.job_images" >
-            <v-flex d-flex class="xs12 sm12 md6 lg3 xl3" :key="image.image">
+            <v-flex d-flex class="xs12 sm12 md6 lg3 xl3" :key="image.id">
                 <transition name="component-fade" appear>                    
                 <v-card>
                     <v-btn class="close-btn" dark small right absolute outline fab color="grey" @click="removeImage(index)"><v-icon class="fab-fix" dark>delete</v-icon></v-btn>                    
@@ -219,18 +219,47 @@
             <div class="cb-print-element cb-print-note">
                 {{job.note}}
             </div>
+            <div class="cb-print-element cb-print-job-num">
+                <v-icon class="cb-print-element cb-print-work-icon">work</v-icon>{{ job.id }}
+            </div>
             <div class="cb-print-element cb-print-estimate">
-                Estimate: ${{ job.estimate.toLocaleString() }} <br>
-                {{ job.est_note }}
+                <div class="cb-print-est-amt"> Est: ${{ job.estimate}} </div><br>
+                <div class="cb-print-est-note"> {{ job.est_note }} </div>
+            </div>
+            <div :class="{cbPrintRed: job.vital_date}"  class="cb-print-element cb-print-due">
+                <v-icon class="cb-print-element cb-print-alarm-icon">alarm</v-icon>{{ job.due_date }}
             </div>
             <div class="cb-print-element cb-print-images">
                 <template v-for="(image) in job.job_images">
-                    <div class="cb-print-element cb-print-image-cont" :key="image.image">
+                    <div class="cb-print-element cb-print-image-cont" :key="image.id">
                       <img :src='image.image' alt="" class="cb-print-image cb-print-element">
                       <div class="cb-print-element cb-print-image-note">{{image.note}}</div>                   
                     </div>
                 </template>
             </div>
+            <img class="cb-print-logo cb-print-element" src="img/logo.png" alt="">
+            <div class="cb-print-element cb-print-cus-images">
+                <template v-for="(image) in job.job_images">
+                    <div class="cb-print-element cb-print-cus-img-cont" :key="image.id">
+                      <img :src='image.image' alt="" class="cb-print-cust-img cb-print-element">
+                    </div>
+                </template>
+          
+            </div>
+            <div class="cb-print-element cb-print-cus-job-info">
+                Date: {{ today }} {{ now }} <br>
+                Employee: {{ employeeList[job.employee_id - 1].name }} <br>
+                Phone: 403-320-0846 <br>
+                E-mail: goldmail@thegoldworks.com
+            </div>
+            <div class="cb-print-element cb-print-cus-estimate">
+                <div class="cb-print-est-amt"> Estimate: ${{ job.estimate}} </div><br>
+                <div class="cb-print-est-note"> {{ job.est_note }} </div>
+            </div>
+            <div class="cb-print-element cb-print-cus-warning">
+                The Goldworks is not responsible for any items held for over 90 days
+            </div>      
+            <div class="cb-test"></div>
         </span>    
     </v-layout>
 
@@ -455,6 +484,10 @@
                 }
 
                 return yyyy + "-" + mm + "-" + dd;
+            },
+            now() {
+                var now = new Date()
+                return now.getHours() + ":" + now.getMinutes();
             }
         }
     }

@@ -67044,6 +67044,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67823,7 +67827,33 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("span", { staticClass: "cb-print" }, [
-        _c("div", { staticClass: "cb-print-element cb-print-blanks" }),
+        _c("div", { staticClass: "cb-print-element cb-print-blanks" }, [
+          _c("div", { staticClass: "cb-print-top-box cb-print-top-flags" }, [
+            _c("span", { staticClass: "cb-print-top-text" }, [
+              _vm._v("EMR NA LM Check")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "cb-print-top-box cb-print-top-deposit" }, [
+            _c("span", { staticClass: "cb-print-top-text" }, [
+              _vm._v("Deposit")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "cb-print-top-box cb-print-top-gold-credit" },
+            [
+              _c("span", { staticClass: "cb-print-top-text" }, [
+                _vm._v("Gold Credit")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "cb-print-top-box cb-print-total" }, [
+            _c("span", { staticClass: "cb-print-top-text" }, [_vm._v("Total")])
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -67862,7 +67892,16 @@ var render = function() {
             ])
           ],
           1
-        )
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "cb-print-element cb-print-customer-name" }, [
+          _vm._v(
+            "Name: " +
+              _vm._s(_vm.customer.fname) +
+              " " +
+              _vm._s(_vm.customer.lname)
+          )
+        ])
       ])
     ],
     1
@@ -67969,6 +68008,35 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -68430,6 +68498,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             return yyyy + "-" + mm + "-" + dd;
+        },
+        now: function now() {
+            var now = new Date();
+            return now.getHours() + ":" + now.getMinutes();
         }
     }
 });
@@ -68848,7 +68920,7 @@ var render = function() {
           _c(
             "v-flex",
             {
-              key: image.image,
+              key: image.id,
               staticClass: "xs12 sm12 md6 lg3 xl3",
               attrs: { "d-flex": "" }
             },
@@ -69346,15 +69418,47 @@ var render = function() {
           _vm._v("\n            " + _vm._s(_vm.job.note) + "\n        ")
         ]),
         _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "cb-print-element cb-print-job-num" },
+          [
+            _c(
+              "v-icon",
+              { staticClass: "cb-print-element cb-print-work-icon" },
+              [_vm._v("work")]
+            ),
+            _vm._v(_vm._s(_vm.job.id) + "\n        ")
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "cb-print-element cb-print-estimate" }, [
-          _vm._v(
-            "\n            Estimate: $" +
-              _vm._s(_vm.job.estimate.toLocaleString()) +
-              " "
-          ),
+          _c("div", { staticClass: "cb-print-est-amt" }, [
+            _vm._v(" Est: $" + _vm._s(_vm.job.estimate) + " ")
+          ]),
           _c("br"),
-          _vm._v("\n            " + _vm._s(_vm.job.est_note) + "\n        ")
+          _vm._v(" "),
+          _c("div", { staticClass: "cb-print-est-note" }, [
+            _vm._v(" " + _vm._s(_vm.job.est_note) + " ")
+          ])
         ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "cb-print-element cb-print-due",
+            class: { cbPrintRed: _vm.job.vital_date }
+          },
+          [
+            _c(
+              "v-icon",
+              { staticClass: "cb-print-element cb-print-alarm-icon" },
+              [_vm._v("alarm")]
+            ),
+            _vm._v(_vm._s(_vm.job.due_date) + "\n        ")
+          ],
+          1
+        ),
         _vm._v(" "),
         _c(
           "div",
@@ -69365,7 +69469,7 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    key: image.image,
+                    key: image.id,
                     staticClass: "cb-print-element cb-print-image-cont"
                   },
                   [
@@ -69385,7 +69489,76 @@ var render = function() {
             })
           ],
           2
-        )
+        ),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "cb-print-logo cb-print-element",
+          attrs: { src: "img/logo.png", alt: "" }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "cb-print-element cb-print-cus-images" },
+          [
+            _vm._l(_vm.job.job_images, function(image) {
+              return [
+                _c(
+                  "div",
+                  {
+                    key: image.id,
+                    staticClass: "cb-print-element cb-print-cus-img-cont"
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "cb-print-cust-img cb-print-element",
+                      attrs: { src: image.image, alt: "" }
+                    })
+                  ]
+                )
+              ]
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "cb-print-element cb-print-cus-job-info" }, [
+          _vm._v(
+            "\n            Date: " +
+              _vm._s(_vm.today) +
+              " " +
+              _vm._s(_vm.now) +
+              " "
+          ),
+          _c("br"),
+          _vm._v(
+            "\n            Employee: " +
+              _vm._s(_vm.employeeList[_vm.job.employee_id - 1].name) +
+              " "
+          ),
+          _c("br"),
+          _vm._v("\n            Phone: 403-320-0846 "),
+          _c("br"),
+          _vm._v("\n            E-mail: goldmail@thegoldworks.com\n        ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cb-print-element cb-print-cus-estimate" }, [
+          _c("div", { staticClass: "cb-print-est-amt" }, [
+            _vm._v(" Estimate: $" + _vm._s(_vm.job.estimate) + " ")
+          ]),
+          _c("br"),
+          _vm._v(" "),
+          _c("div", { staticClass: "cb-print-est-note" }, [
+            _vm._v(" " + _vm._s(_vm.job.est_note) + " ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cb-print-element cb-print-cus-warning" }, [
+          _vm._v(
+            "\n            The Goldworks is not responsible for any items held for over 90 days\n        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cb-test" })
       ])
     ],
     2

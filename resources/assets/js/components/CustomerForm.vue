@@ -99,13 +99,17 @@
     </v-card>
     <span class="cb-print">
         <div class="cb-print-element cb-print-blanks">
-
+          <div class="cb-print-top-box cb-print-top-flags"><span class="cb-print-top-text">EMR NA LM Check</span></div>
+          <div class="cb-print-top-box cb-print-top-deposit"><span class="cb-print-top-text">Deposit</span></div>
+          <div class="cb-print-top-box cb-print-top-gold-credit"><span class="cb-print-top-text">Gold Credit</span></div>
+          <div class="cb-print-top-box cb-print-total"><span class="cb-print-top-text">Total</span></div>          
         </div>
         <div class="cb-print-element cb-print-customer-info">
           <v-icon class="cb-print-element cb-print-customer-icon">person</v-icon><span class="cb-print-element">{{ customer.fname }} {{ customer.lname }}</span><br>
           <v-icon class="cb-print-element cb-print-customer-icon">phone</v-icon><span class="cb-print-element">{{ customer.phone }}</span> <br>
           <v-icon class="cb-print-element cb-print-customer-icon">email</v-icon><span class="cb-print-element">{{ customer.email }}</span>
         </div>
+          <div class="cb-print-element cb-print-customer-name">Name: {{ customer.fname }} {{ customer.lname }}</div>        
     </span>                                
   </v-flex>
 </template>
