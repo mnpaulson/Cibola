@@ -138,7 +138,7 @@
                 <span>Print</span>
                 <v-icon>print</v-icon>
                 </v-btn>
-                <v-btn @click="caputureDialog = true" class="accent--text">
+                <v-btn @click="captureDialog = true" class="accent--text">
                 <span>Capture</span>
                 <v-icon>camera_alt</v-icon>
                 </v-btn>
@@ -149,14 +149,15 @@
             </v-bottom-nav>
 
 
-        <v-dialog v-model="caputureDialog" transition="dialog-transition" max-width="65%">
+        <v-dialog v-model="captureDialog" transition="dialog-transition" fullscreen >
             <v-card>
-                <v-flex d-flex xs12>
-                <div>
-                    <video ref="video" id="video" width="100%" height="100%" autoplay></video>                    
-                    <canvas v-show="false" ref="img" id="img" width="1280" height="1024"></canvas>
+                <!-- <v-flex d-flex xs12> -->
+                <div class="catpure-cont">
+                    <video v-show="!img" ref="video" id="video" width="100%" height="100%" autoplay></video>
+                    <img class="capture-error" v-show="img" :src="img">                            
+                    <!-- <canvas v-show="false" ref="img" id="img" width="1280" height="1024"></canvas> -->
                 </div>
-                </v-flex>
+                <!-- </v-flex> -->
                 <v-flex d-flex xs12>                    
                 <v-btn color="primary" @click="saveImage()">Capture</v-btn>
                 <v-btn color="error" @click="discardCapture()">discard</v-btn>
@@ -215,7 +216,7 @@
                 <img :src='lightBoxImage' alt="" class="lightBoxImage">
             </div>
         </transition>
-        <span class="cb-print">
+        <span v-if="job.id" class="cb-print">
             <div class="cb-print-element cb-print-note">
                 {{job.note}}
             </div>
@@ -248,7 +249,7 @@
             </div>
             <div class="cb-print-element cb-print-cus-job-info">
                 Date: {{ today }} {{ now }} <br>
-                Employee: {{ employeeList[job.employee_id - 1].name }} <br>
+                Employee: {{ employeeName }} <br>
                 Phone: 403-320-0846 <br>
                 E-mail: goldmail@thegoldworks.com
             </div>
@@ -259,7 +260,6 @@
             <div class="cb-print-element cb-print-cus-warning">
                 The Goldworks is not responsible for any items held for over 90 days
             </div>      
-            <div class="cb-test"></div>
         </span>    
     </v-layout>
 
@@ -275,7 +275,7 @@
             dateMenu: false,
             completeMenu: false,
             complete: false,
-            caputureDialog: false,
+            captureDialog: false,
             imageDeleteDialog: false,
             jobDeleteDialog: false,
             lightBoxDialog: false,
@@ -310,10 +310,10 @@
                     id: null
                 });
                 this.img = null;
-                this.caputureDialog = false;
+                this.captureDialog = false;
             },
             discardCapture() {
-                this.img = null;
+                this.captureDialog = false;
             },
             removeImage(index) {
                 if (this.job.job_images[index].id !== null) {
@@ -434,11 +434,13 @@
             this.video = this.$refs.video;
 
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                navigator.mediaDevices.getUserMedia({ video: true }).catch(stream => {
                     try {
                         this.video.srcObject = stream;
                     } catch (error) {
-                        this.video.src = URL.createObjectURL(stream);
+                        // this.video.src = URL.createObjectURL(stream);
+                        console.log('Could not create video stream');
+                        this.img = "img/webcamError.png";
                     }                   
                     this.video.play();
                 });
@@ -488,6 +490,13 @@
             now() {
                 var now = new Date()
                 return now.getHours() + ":" + now.getMinutes();
+            },
+            employeeName() {
+                if (this.employeeList[this.job.employee_id - 1]) {
+                    return this.employeeList[this.job.employee_id - 1].name;
+                } else {
+                    return null;
+                }
             }
         }
     }

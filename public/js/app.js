@@ -68286,7 +68286,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dateMenu: false,
             completeMenu: false,
             complete: false,
-            caputureDialog: false,
+            captureDialog: false,
             imageDeleteDialog: false,
             jobDeleteDialog: false,
             lightBoxDialog: false,
@@ -68322,10 +68322,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 id: null
             });
             this.img = null;
-            this.caputureDialog = false;
+            this.captureDialog = false;
         },
         discardCapture: function discardCapture() {
-            this.img = null;
+            this.captureDialog = false;
         },
         removeImage: function removeImage(index) {
             if (this.job.job_images[index].id !== null) {
@@ -68448,11 +68448,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.video = this.$refs.video;
 
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+            navigator.mediaDevices.getUserMedia({ video: true }).catch(function (stream) {
                 try {
                     _this7.video.srcObject = stream;
                 } catch (error) {
-                    _this7.video.src = URL.createObjectURL(stream);
+                    // this.video.src = URL.createObjectURL(stream);
+                    console.log('Could not create video stream');
+                    _this7.img = "img/webcamError.png";
                 }
                 _this7.video.play();
             });
@@ -68502,6 +68504,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         now: function now() {
             var now = new Date();
             return now.getHours() + ":" + now.getMinutes();
+        },
+        employeeName: function employeeName() {
+            if (this.employeeList[this.job.employee_id - 1]) {
+                return this.employeeList[this.job.employee_id - 1].name;
+            } else {
+                return null;
+            }
         }
     }
 });
@@ -69073,7 +69082,7 @@ var render = function() {
               staticClass: "accent--text",
               on: {
                 click: function($event) {
-                  _vm.caputureDialog = true
+                  _vm.captureDialog = true
                 }
               }
             },
@@ -69109,44 +69118,50 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { transition: "dialog-transition", "max-width": "65%" },
+          attrs: { transition: "dialog-transition", fullscreen: "" },
           model: {
-            value: _vm.caputureDialog,
+            value: _vm.captureDialog,
             callback: function($$v) {
-              _vm.caputureDialog = $$v
+              _vm.captureDialog = $$v
             },
-            expression: "caputureDialog"
+            expression: "captureDialog"
           }
         },
         [
           _c(
             "v-card",
             [
-              _c("v-flex", { attrs: { "d-flex": "", xs12: "" } }, [
-                _c("div", [
-                  _c("video", {
-                    ref: "video",
-                    attrs: {
-                      id: "video",
-                      width: "100%",
-                      height: "100%",
-                      autoplay: ""
+              _c("div", { staticClass: "catpure-cont" }, [
+                _c("video", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.img,
+                      expression: "!img"
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("canvas", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: false,
-                        expression: "false"
-                      }
-                    ],
-                    ref: "img",
-                    attrs: { id: "img", width: "1280", height: "1024" }
-                  })
-                ])
+                  ],
+                  ref: "video",
+                  attrs: {
+                    id: "video",
+                    width: "100%",
+                    height: "100%",
+                    autoplay: ""
+                  }
+                }),
+                _vm._v(" "),
+                _c("img", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.img,
+                      expression: "img"
+                    }
+                  ],
+                  staticClass: "capture-error",
+                  attrs: { src: _vm.img }
+                })
               ]),
               _vm._v(" "),
               _c(
@@ -69413,153 +69428,167 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _c("span", { staticClass: "cb-print" }, [
-        _c("div", { staticClass: "cb-print-element cb-print-note" }, [
-          _vm._v("\n            " + _vm._s(_vm.job.note) + "\n        ")
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "cb-print-element cb-print-job-num" },
-          [
+      _vm.job.id
+        ? _c("span", { staticClass: "cb-print" }, [
+            _c("div", { staticClass: "cb-print-element cb-print-note" }, [
+              _vm._v("\n            " + _vm._s(_vm.job.note) + "\n        ")
+            ]),
+            _vm._v(" "),
             _c(
-              "v-icon",
-              { staticClass: "cb-print-element cb-print-work-icon" },
-              [_vm._v("work")]
-            ),
-            _vm._v(_vm._s(_vm.job.id) + "\n        ")
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "cb-print-element cb-print-estimate" }, [
-          _c("div", { staticClass: "cb-print-est-amt" }, [
-            _vm._v(" Est: $" + _vm._s(_vm.job.estimate) + " ")
-          ]),
-          _c("br"),
-          _vm._v(" "),
-          _c("div", { staticClass: "cb-print-est-note" }, [
-            _vm._v(" " + _vm._s(_vm.job.est_note) + " ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "cb-print-element cb-print-due",
-            class: { cbPrintRed: _vm.job.vital_date }
-          },
-          [
-            _c(
-              "v-icon",
-              { staticClass: "cb-print-element cb-print-alarm-icon" },
-              [_vm._v("alarm")]
-            ),
-            _vm._v(_vm._s(_vm.job.due_date) + "\n        ")
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "cb-print-element cb-print-images" },
-          [
-            _vm._l(_vm.job.job_images, function(image) {
-              return [
+              "div",
+              { staticClass: "cb-print-element cb-print-job-num" },
+              [
                 _c(
-                  "div",
-                  {
-                    key: image.id,
-                    staticClass: "cb-print-element cb-print-image-cont"
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "cb-print-image cb-print-element",
-                      attrs: { src: image.image, alt: "" }
-                    }),
-                    _vm._v(" "),
+                  "v-icon",
+                  { staticClass: "cb-print-element cb-print-work-icon" },
+                  [_vm._v("work")]
+                ),
+                _vm._v(_vm._s(_vm.job.id) + "\n        ")
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "cb-print-element cb-print-estimate" }, [
+              _c("div", { staticClass: "cb-print-est-amt" }, [
+                _vm._v(" Est: $" + _vm._s(_vm.job.estimate) + " ")
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("div", { staticClass: "cb-print-est-note" }, [
+                _vm._v(" " + _vm._s(_vm.job.est_note) + " ")
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "cb-print-element cb-print-due",
+                class: { cbPrintRed: _vm.job.vital_date }
+              },
+              [
+                _c(
+                  "v-icon",
+                  { staticClass: "cb-print-element cb-print-alarm-icon" },
+                  [_vm._v("alarm")]
+                ),
+                _vm._v(_vm._s(_vm.job.due_date) + "\n        ")
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "cb-print-element cb-print-images" },
+              [
+                _vm._l(_vm.job.job_images, function(image) {
+                  return [
                     _c(
                       "div",
-                      { staticClass: "cb-print-element cb-print-image-note" },
-                      [_vm._v(_vm._s(image.note))]
+                      {
+                        key: image.id,
+                        staticClass: "cb-print-element cb-print-image-cont"
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "cb-print-image cb-print-element",
+                          attrs: { src: image.image, alt: "" }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "cb-print-element cb-print-image-note"
+                          },
+                          [_vm._v(_vm._s(image.note))]
+                        )
+                      ]
                     )
                   ]
-                )
-              ]
-            })
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "cb-print-logo cb-print-element",
-          attrs: { src: "img/logo.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "cb-print-element cb-print-cus-images" },
-          [
-            _vm._l(_vm.job.job_images, function(image) {
-              return [
-                _c(
-                  "div",
-                  {
-                    key: image.id,
-                    staticClass: "cb-print-element cb-print-cus-img-cont"
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "cb-print-cust-img cb-print-element",
-                      attrs: { src: image.image, alt: "" }
-                    })
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "cb-print-logo cb-print-element",
+              attrs: { src: "img/logo.png", alt: "" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "cb-print-element cb-print-cus-images" },
+              [
+                _vm._l(_vm.job.job_images, function(image) {
+                  return [
+                    _c(
+                      "div",
+                      {
+                        key: image.id,
+                        staticClass: "cb-print-element cb-print-cus-img-cont"
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "cb-print-cust-img cb-print-element",
+                          attrs: { src: image.image, alt: "" }
+                        })
+                      ]
+                    )
                   ]
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "cb-print-element cb-print-cus-job-info" },
+              [
+                _vm._v(
+                  "\n            Date: " +
+                    _vm._s(_vm.today) +
+                    " " +
+                    _vm._s(_vm.now) +
+                    " "
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n            Employee: " + _vm._s(_vm.employeeName) + " "
+                ),
+                _c("br"),
+                _vm._v("\n            Phone: 403-320-0846 "),
+                _c("br"),
+                _vm._v(
+                  "\n            E-mail: goldmail@thegoldworks.com\n        "
                 )
               ]
-            })
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "cb-print-element cb-print-cus-job-info" }, [
-          _vm._v(
-            "\n            Date: " +
-              _vm._s(_vm.today) +
-              " " +
-              _vm._s(_vm.now) +
-              " "
-          ),
-          _c("br"),
-          _vm._v(
-            "\n            Employee: " +
-              _vm._s(_vm.employeeList[_vm.job.employee_id - 1].name) +
-              " "
-          ),
-          _c("br"),
-          _vm._v("\n            Phone: 403-320-0846 "),
-          _c("br"),
-          _vm._v("\n            E-mail: goldmail@thegoldworks.com\n        ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "cb-print-element cb-print-cus-estimate" }, [
-          _c("div", { staticClass: "cb-print-est-amt" }, [
-            _vm._v(" Estimate: $" + _vm._s(_vm.job.estimate) + " ")
-          ]),
-          _c("br"),
-          _vm._v(" "),
-          _c("div", { staticClass: "cb-print-est-note" }, [
-            _vm._v(" " + _vm._s(_vm.job.est_note) + " ")
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "cb-print-element cb-print-cus-estimate" },
+              [
+                _c("div", { staticClass: "cb-print-est-amt" }, [
+                  _vm._v(" Estimate: $" + _vm._s(_vm.job.estimate) + " ")
+                ]),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "cb-print-est-note" }, [
+                  _vm._v(" " + _vm._s(_vm.job.est_note) + " ")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "cb-print-element cb-print-cus-warning" },
+              [
+                _vm._v(
+                  "\n            The Goldworks is not responsible for any items held for over 90 days\n        "
+                )
+              ]
+            )
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "cb-print-element cb-print-cus-warning" }, [
-          _vm._v(
-            "\n            The Goldworks is not responsible for any items held for over 90 days\n        "
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "cb-test" })
-      ])
+        : _vm._e()
     ],
     2
   )
