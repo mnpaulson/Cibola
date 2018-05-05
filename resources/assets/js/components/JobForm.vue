@@ -153,9 +153,9 @@
             <v-card>
                 <!-- <v-flex d-flex xs12> -->
                 <div class="catpure-cont">
-                    <video v-show="!img" ref="video" id="video" width="100%" height="100%" autoplay></video>
-                    <img class="capture-error" v-show="img" :src="img">                            
-                    <!-- <canvas v-show="false" ref="img" id="img" width="1280" height="1024"></canvas> -->
+                    <video  ref="video" id="video" width="100%" height="100%" autoplay></video>
+                    <!-- <img class="capture-error" v-show="img" :src="img">                             -->
+                    <canvas v-show="false" ref="img" id="img" width="1280" height="1024"></canvas>
                 </div>
                 <!-- </v-flex> -->
                 <v-flex d-flex xs12>                    
@@ -434,11 +434,11 @@
             this.video = this.$refs.video;
 
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true }).catch(stream => {
+                navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
                     try {
                         this.video.srcObject = stream;
                     } catch (error) {
-                        // this.video.src = URL.createObjectURL(stream);
+                        this.video.src = URL.createObjectURL(stream);
                         console.log('Could not create video stream');
                         this.img = "img/webcamError.png";
                     }                   
