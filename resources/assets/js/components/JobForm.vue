@@ -161,7 +161,7 @@
             <v-card>
                 <!-- <v-flex d-flex xs12> -->
                 <div class="catpure-cont">
-                    <video v-show="!img" ref="video" id="video" width="100%" height="100%" autoplay></video>
+                    <video v-show="!img" ref="video" id="video" width="1280px" height="1024px" autoplay></video>
                     <img class="capture-error" v-show="img" :src="img">                            
                     <!-- <canvas v-show="false" ref="img" id="img" width="1280" height="1024"></canvas> -->
                 </div>
