@@ -17,8 +17,8 @@ class CreateJobsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('customer_id');
-            $table->integer('employee_id')->nullable();
-            $table->float('estimate')->nullable();
+            $table->integer('employee_id')->default(1);
+            $table->float('estimate')->default(0);
             $table->string('est_note')->nullable();
             $table->text('note')->nullable();            
             $table->boolean('appraisal');

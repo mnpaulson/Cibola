@@ -4,13 +4,16 @@
             <transition name="component-fade" appear>
             <v-card>
                 <v-card-text>
+                    <v-form ref="jobForm" v-model="valid" lazy-validation>                    
                     <v-layout row wrap>
                         <v-flex row xs12 md6>
-                            <v-text-field v-model="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
+                            <v-text-field required :rules="estimateRules" v-model="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
                             <v-select
                             autocomplete
                             label="Employee Select"
                             cache-items
+                            required
+                            :rules="employeeRules"
                             prepend-icon="person_pin"
                             :items="employeeList"
                             v-model="job.employee_id"
@@ -101,6 +104,7 @@
                                 <v-text-field multi-line no-resize v-model="job.note" class="" label="Job Note"></v-text-field>                    
                         </v-flex>
                     </v-layout>
+                    </v-form>
                 </v-card-text>
                 <v-progress-linear v-show="loading" :indeterminate="true" class="mb-0"></v-progress-linear>                      
             </v-card>
@@ -126,11 +130,11 @@
                 :value="true"
                 class="elevation-1"
             >
-                <v-btn v-show="!job.id" @click="createJob()" class="primary--text">
+                <v-btn v-show="!job.id || job.id == 0" @click="createJob()" class="primary--text">
                 <span>Save Job</span>
                 <v-icon>save</v-icon>
                 </v-btn>
-                <v-btn v-show="job.id" @click="updateJob()" class="success--text">
+                <v-btn v-show="job.id && job.id !== 0" @click="updateJob()" class="success--text">
                 <span>Update Job</span>
                 <v-icon>save</v-icon>
                 </v-btn>
@@ -142,8 +146,12 @@
                 <span>Capture</span>
                 <v-icon>camera_alt</v-icon>
                 </v-btn>
-                <v-btn @click="jobDeleteDialog = true" class="error--text">
+                <v-btn v-show="job.id && job.id !== 0" @click="jobDeleteDialog = true" class="error--text">
                 <span>Delete Job</span>
+                <v-icon>delete</v-icon>
+                </v-btn>
+                <v-btn v-show="!job.id || job.id == 0" @click="$router.go(-1)" class="error--text">
+                <span>Discard Job</span>
                 <v-icon>delete</v-icon>
                 </v-btn>
             </v-bottom-nav>
@@ -269,6 +277,7 @@
 
     export default {
         data: () => ({
+            valid: true,
             loading: false,
             date: null,
             completeDate: null,
@@ -298,7 +307,17 @@
                 completed_at: null,
                 vital_date: false,
                 job_images: []
-            }
+            },
+            estimateRules: [
+                v => !!v || 'Estimate is required',
+                v => {
+                    var pattern = new RegExp(/^\d*(,\d+)*[\.]?\d*?$/);
+                    return pattern.test(v) || "Must be a valid number.";
+                }
+            ],
+            employeeRules: [
+                v => !!v || 'Select employee'
+            ]
         }),
         methods: {
             saveImage() {
@@ -338,6 +357,15 @@
                     });
             },
             createJob() {
+                this.$refs.jobForm.validate();
+                if (!this.customer_id) {
+                    this.store.setAlert(true, "error", "Please select a customer.");
+                    return;
+                }
+                if (!this.valid) {
+                    this.store.setAlert(true, "error", "Please fix required fields");
+                    return;
+                }
                 this.loading = true;                
                 axios.post('jobs/create', this.job)
                     .then((response) => {
@@ -358,6 +386,15 @@
                     });
             },
             updateJob() {
+                this.$refs.jobForm.validate();
+                if (!this.customer_id) {
+                    this.store.setAlert(true, "error", "Please select a customer.");
+                    return;
+                }
+                if (!this.valid) {
+                    this.store.setAlert(true, "error", "Please fix required fields");
+                    return;
+                }
                 this.loading = true;                
                 axios.post('jobs/update', this.job)
                     .then((response) => {
@@ -383,7 +420,7 @@
                         this.job.id = response.data.id;
                         this.job.customer_id = response.data.customer_id;
                         this.job.employee_id = response.data.employee_id;
-                        this.job.estimate = response.data.estimate;
+                        this.job.estimate = response.data.estimate.toLocaleString();
                         this.job.est_note = response.data.est_note;
                         this.job.note = response.data.note;                        
                         this.job.appraisal = response.data.appraisal;

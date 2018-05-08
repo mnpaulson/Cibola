@@ -33,6 +33,7 @@ import JobForm from './components/JobForm'
 import EmployeeForm from './components/EmployeeForm'
 import CustomerList from './components/CustomerList'
 import JobList from './components/JobList'
+import PageNotFound from './components/PageNotFound'
 
 
 Vue.component('CustomerForm', require('./components/CustomerForm.vue'));
@@ -44,6 +45,8 @@ Vue.component('JobList', require('./components/JobList.vue'));
 Vue.component('EmployeeJobs', require('./components/EmployeeJobs.vue'));
 Vue.component('EmployeeStats', require('./components/EmployeeStats.vue'));
 Vue.component('Alert', require('./components/Alert.vue'));
+Vue.component('PageNotFound', require('./components/PageNotFound.vue'));
+
 
 
 const router = new VueRouter({
@@ -88,6 +91,11 @@ const router = new VueRouter({
             path: '/employee',
             name: 'employee',
             component: Employee
+        },
+        {
+            path: '*',
+            name: 'pageNotFound',
+            component: PageNotFound
         }
     ],
 });

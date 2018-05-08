@@ -309,6 +309,7 @@
       },
 
       getCustomer(id) {
+        if (id == 0) return;
         this.customer.id = id;
         this.loading = true;                    
         axios.post('customers/show', this.customer)

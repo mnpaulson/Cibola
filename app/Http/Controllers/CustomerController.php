@@ -106,9 +106,14 @@ class CustomerController extends Controller
      */
     public function delete(Request $request)
     {
-        // $customer = \App\customer::find($request);
-        // $customer->delete();
-        \App\customer::destroy($request->id);
+
+        $cus = \App\Customer::where('id', $request->id)->first();
+        
+        $cus->jobs()
+        ->delete();
+        
+        $cus->destroy($request->id);
+        // \App\customer::destroy($request->id);
         echo response()->json($request->id);
     }
 }

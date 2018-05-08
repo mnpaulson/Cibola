@@ -45,9 +45,24 @@ class EmployeeController extends Controller
         return response()->json($employee->id);
     }
 
+    // Deletes employee and reassigns all jobs to employee 1
     public function delete(Request $request) 
     {
+        if ($request->id == 1) {
+            trigger_error("You can not delete employee 1");
+        }
+
+        $emps = \App\Employee::where('id', $request->id)->first();
+        
+        $emps->jobs()
+        ->where('employee_id', $request->id)
+        ->update(['employee_id' => 1]);
+
+
         \App\Employee::destroy($request->id);
+        
+
+        
         echo response()->json($request->id);
     }
 

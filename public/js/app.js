@@ -2394,6 +2394,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_CustomerList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_CustomerList__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_JobList__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_JobList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_JobList__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_PageNotFound__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_PageNotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_PageNotFound__);
 
 __webpack_require__(19);
 
@@ -2430,6 +2432,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuet
 
 
 
+
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('CustomerForm', __webpack_require__(11));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobLookup', __webpack_require__(12));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobForm', __webpack_require__(13));
@@ -2439,6 +2442,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobList', __webpack_requi
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EmployeeJobs', __webpack_require__(81));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EmployeeStats', __webpack_require__(84));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Alert', __webpack_require__(87));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('PageNotFound', __webpack_require__(95));
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     // mode: 'history',
@@ -2474,6 +2478,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         path: '/employee',
         name: 'employee',
         component: __WEBPACK_IMPORTED_MODULE_9__views_Employee___default.a
+    }, {
+        path: '*',
+        name: 'pageNotFound',
+        component: __WEBPACK_IMPORTED_MODULE_16__components_PageNotFound___default.a
     }]
 });
 
@@ -65517,6 +65525,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65804,15 +65813,23 @@ var render = function() {
                                           ]
                                         ),
                                         _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-left" },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.item.employee.name)
+                                        props.item.employee
+                                          ? _c(
+                                              "td",
+                                              { staticClass: "text-xs-left" },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    props.item.employee.name
+                                                  )
+                                                )
+                                              ]
                                             )
-                                          ]
-                                        ),
+                                          : _c(
+                                              "td",
+                                              { staticClass: "text-xs-left" },
+                                              [_vm._v("Unassigned")]
+                                            ),
                                         _vm._v(" "),
                                         _c(
                                           "td",
@@ -66703,7 +66720,7 @@ var render = function() {
                 ),
                 _c("br"),
                 _vm._v(
-                  "\n                This will also remove them from any associated jobs.\n            "
+                  "\n                This will also delete all of this customer's jobs.\n            "
                 )
               ]),
               _vm._v(" "),
@@ -67248,6 +67265,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getCustomer: function getCustomer(id) {
       var _this5 = this;
 
+      if (id == 0) return;
       this.customer.id = id;
       this.loading = true;
       axios.post('customers/show', this.customer).then(function (response) {
@@ -67937,12 +67955,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      job: null
+      job: null,
+      valid: false,
+      jobRules: [function (v) {
+        var pattern = new RegExp(/^\d*$/);
+        return pattern.test(v) || "Not a valid job number";
+      }]
     };
   },
   methods: {
     searchJob: function searchJob() {
-      this.$router.push('job/' + this.job);
+      if (this.valid) this.$router.push('job/' + this.job);
+    },
+    newJob: function newJob() {
+      this.$router.push('job/0/0');
     }
   }
 });
@@ -67965,12 +67991,24 @@ var render = function() {
         [
           _c(
             "v-form",
-            { on: { submit: _vm.searchJob } },
+            {
+              on: { submit: _vm.searchJob },
+              model: {
+                value: _vm.valid,
+                callback: function($$v) {
+                  _vm.valid = $$v
+                },
+                expression: "valid"
+              }
+            },
             [
               _c("v-text-field", {
                 attrs: {
+                  rules: _vm.jobRules,
                   "prepend-icon": "work",
                   solo: "",
+                  "append-icon": "add_circle",
+                  "append-icon-cb": _vm.newJob,
                   label: "Enter Job Number",
                   xs12: ""
                 },
@@ -68275,11 +68313,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            valid: true,
             loading: false,
             date: null,
             completeDate: null,
@@ -68309,7 +68356,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 completed_at: null,
                 vital_date: false,
                 job_images: []
-            }
+            },
+            estimateRules: [function (v) {
+                return !!v || 'Estimate is required';
+            }, function (v) {
+                var pattern = new RegExp(/^\d*(,\d+)*[\.]?\d*?$/);
+                return pattern.test(v) || "Must be a valid number.";
+            }],
+            employeeRules: [function (v) {
+                return !!v || 'Select employee';
+            }]
         };
     },
     methods: {
@@ -68352,6 +68408,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createJob: function createJob() {
             var _this2 = this;
 
+            this.$refs.jobForm.validate();
+            if (!this.customer_id) {
+                this.store.setAlert(true, "error", "Please select a customer.");
+                return;
+            }
+            if (!this.valid) {
+                this.store.setAlert(true, "error", "Please fix required fields");
+                return;
+            }
             this.loading = true;
             axios.post('jobs/create', this.job).then(function (response) {
                 _this2.job.id = response.data.id;
@@ -68372,6 +68437,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         updateJob: function updateJob() {
             var _this3 = this;
 
+            this.$refs.jobForm.validate();
+            if (!this.customer_id) {
+                this.store.setAlert(true, "error", "Please select a customer.");
+                return;
+            }
+            if (!this.valid) {
+                this.store.setAlert(true, "error", "Please fix required fields");
+                return;
+            }
             this.loading = true;
             axios.post('jobs/update', this.job).then(function (response) {
                 _this3.job.id = response.data.id;
@@ -68396,7 +68470,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this4.job.id = response.data.id;
                 _this4.job.customer_id = response.data.customer_id;
                 _this4.job.employee_id = response.data.employee_id;
-                _this4.job.estimate = response.data.estimate;
+                _this4.job.estimate = response.data.estimate.toLocaleString();
                 _this4.job.est_note = response.data.est_note;
                 _this4.job.note = response.data.note;
                 _this4.job.appraisal = response.data.appraisal;
@@ -68542,131 +68616,282 @@ var render = function() {
                     "v-card-text",
                     [
                       _c(
-                        "v-layout",
-                        { attrs: { row: "", wrap: "" } },
+                        "v-form",
+                        {
+                          ref: "jobForm",
+                          attrs: { "lazy-validation": "" },
+                          model: {
+                            value: _vm.valid,
+                            callback: function($$v) {
+                              _vm.valid = $$v
+                            },
+                            expression: "valid"
+                          }
+                        },
                         [
                           _c(
-                            "v-flex",
-                            { attrs: { row: "", xs12: "", md6: "" } },
+                            "v-layout",
+                            { attrs: { row: "", wrap: "" } },
                             [
-                              _c("v-text-field", {
-                                attrs: {
-                                  label: "Est",
-                                  "prepend-icon": "attach_money"
-                                },
-                                model: {
-                                  value: _vm.job.estimate,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.job, "estimate", $$v)
-                                  },
-                                  expression: "job.estimate"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("v-select", {
-                                attrs: {
-                                  autocomplete: "",
-                                  label: "Employee Select",
-                                  "cache-items": "",
-                                  "prepend-icon": "person_pin",
-                                  items: _vm.employeeList,
-                                  "item-text": "name",
-                                  "item-value": "id"
-                                },
-                                model: {
-                                  value: _vm.job.employee_id,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.job, "employee_id", $$v)
-                                  },
-                                  expression: "job.employee_id"
-                                }
-                              }),
-                              _vm._v(" "),
                               _c(
-                                "v-menu",
-                                {
-                                  ref: "dateMenu",
-                                  attrs: {
-                                    lazy: "",
-                                    "close-on-content-click": false,
-                                    transition: "scale-transition",
-                                    "offset-y": "",
-                                    "full-width": "",
-                                    "nudge-right": 40,
-                                    "min-width": "290px",
-                                    "return-value": _vm.date
-                                  },
-                                  on: {
-                                    "update:returnValue": function($event) {
-                                      _vm.date = $event
-                                    }
-                                  },
-                                  model: {
-                                    value: _vm.dateMenu,
-                                    callback: function($$v) {
-                                      _vm.dateMenu = $$v
-                                    },
-                                    expression: "dateMenu"
-                                  }
-                                },
+                                "v-flex",
+                                { attrs: { row: "", xs12: "", md6: "" } },
                                 [
                                   _c("v-text-field", {
-                                    class: { redText: _vm.job.vital_date },
                                     attrs: {
-                                      slot: "activator",
-                                      label: "Due Date",
-                                      "prepend-icon": "event",
-                                      readonly: ""
+                                      required: "",
+                                      rules: _vm.estimateRules,
+                                      label: "Est",
+                                      "prepend-icon": "attach_money"
                                     },
-                                    slot: "activator",
                                     model: {
-                                      value: _vm.job.due_date,
+                                      value: _vm.job.estimate,
                                       callback: function($$v) {
-                                        _vm.$set(_vm.job, "due_date", $$v)
+                                        _vm.$set(_vm.job, "estimate", $$v)
                                       },
-                                      expression: "job.due_date"
+                                      expression: "job.estimate"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("v-select", {
+                                    attrs: {
+                                      autocomplete: "",
+                                      label: "Employee Select",
+                                      "cache-items": "",
+                                      required: "",
+                                      rules: _vm.employeeRules,
+                                      "prepend-icon": "person_pin",
+                                      items: _vm.employeeList,
+                                      "item-text": "name",
+                                      "item-value": "id"
+                                    },
+                                    model: {
+                                      value: _vm.job.employee_id,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.job, "employee_id", $$v)
+                                      },
+                                      expression: "job.employee_id"
                                     }
                                   }),
                                   _vm._v(" "),
                                   _c(
-                                    "v-date-picker",
+                                    "v-menu",
                                     {
-                                      attrs: { "no-title": "", scrollable: "" },
+                                      ref: "dateMenu",
+                                      attrs: {
+                                        lazy: "",
+                                        "close-on-content-click": false,
+                                        transition: "scale-transition",
+                                        "offset-y": "",
+                                        "full-width": "",
+                                        "nudge-right": 40,
+                                        "min-width": "290px",
+                                        "return-value": _vm.date
+                                      },
+                                      on: {
+                                        "update:returnValue": function($event) {
+                                          _vm.date = $event
+                                        }
+                                      },
                                       model: {
-                                        value: _vm.job.due_date,
+                                        value: _vm.dateMenu,
                                         callback: function($$v) {
-                                          _vm.$set(_vm.job, "due_date", $$v)
+                                          _vm.dateMenu = $$v
                                         },
-                                        expression: "job.due_date"
+                                        expression: "dateMenu"
                                       }
                                     },
                                     [
-                                      _c("v-spacer"),
+                                      _c("v-text-field", {
+                                        class: { redText: _vm.job.vital_date },
+                                        attrs: {
+                                          slot: "activator",
+                                          label: "Due Date",
+                                          "prepend-icon": "event",
+                                          readonly: ""
+                                        },
+                                        slot: "activator",
+                                        model: {
+                                          value: _vm.job.due_date,
+                                          callback: function($$v) {
+                                            _vm.$set(_vm.job, "due_date", $$v)
+                                          },
+                                          expression: "job.due_date"
+                                        }
+                                      }),
                                       _vm._v(" "),
                                       _c(
-                                        "v-btn",
+                                        "v-date-picker",
                                         {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.dateMenu = false
-                                            }
+                                          attrs: {
+                                            "no-title": "",
+                                            scrollable: ""
+                                          },
+                                          model: {
+                                            value: _vm.job.due_date,
+                                            callback: function($$v) {
+                                              _vm.$set(_vm.job, "due_date", $$v)
+                                            },
+                                            expression: "job.due_date"
                                           }
                                         },
-                                        [_vm._v("Cancel")]
-                                      ),
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.dateMenu = false
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Cancel")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.$refs.dateMenu.save(
+                                                    _vm.date
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("OK")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-menu",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: _vm.complete,
+                                          expression: "complete"
+                                        }
+                                      ],
+                                      ref: "completeMenu",
+                                      attrs: {
+                                        lazy: "",
+                                        "close-on-content-click": false,
+                                        transition: "scale-transition",
+                                        "offset-y": "",
+                                        "full-width": "",
+                                        "nudge-right": 40,
+                                        "min-width": "290px",
+                                        "return-value": _vm.date
+                                      },
+                                      on: {
+                                        "update:returnValue": function($event) {
+                                          _vm.date = $event
+                                        }
+                                      },
+                                      model: {
+                                        value: _vm.completeMenu,
+                                        callback: function($$v) {
+                                          _vm.completeMenu = $$v
+                                        },
+                                        expression: "completeMenu"
+                                      }
+                                    },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          slot: "activator",
+                                          label: "Completed Date",
+                                          "prepend-icon": "event",
+                                          readonly: ""
+                                        },
+                                        slot: "activator",
+                                        model: {
+                                          value: _vm.job.completed_at,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              _vm.job,
+                                              "completed_at",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "job.completed_at"
+                                        }
+                                      }),
                                       _vm._v(" "),
                                       _c(
-                                        "v-btn",
+                                        "v-date-picker",
                                         {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.$refs.dateMenu.save(_vm.date)
-                                            }
+                                          attrs: {
+                                            "no-title": "",
+                                            scrollable: ""
+                                          },
+                                          model: {
+                                            value: _vm.job.completed_at,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.job,
+                                                "completed_at",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "job.completed_at"
                                           }
                                         },
-                                        [_vm._v("OK")]
+                                        [
+                                          _c("v-spacer"),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.completeMenu = false
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Cancel")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                flat: "",
+                                                color: "primary"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.$refs.completeMenu.save(
+                                                    _vm.completeDate
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("OK")]
+                                          )
+                                        ],
+                                        1
                                       )
                                     ],
                                     1
@@ -68676,220 +68901,130 @@ var render = function() {
                               ),
                               _vm._v(" "),
                               _c(
-                                "v-menu",
-                                {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: _vm.complete,
-                                      expression: "complete"
-                                    }
-                                  ],
-                                  ref: "completeMenu",
-                                  attrs: {
-                                    lazy: "",
-                                    "close-on-content-click": false,
-                                    transition: "scale-transition",
-                                    "offset-y": "",
-                                    "full-width": "",
-                                    "nudge-right": 40,
-                                    "min-width": "290px",
-                                    "return-value": _vm.date
-                                  },
-                                  on: {
-                                    "update:returnValue": function($event) {
-                                      _vm.date = $event
-                                    }
-                                  },
-                                  model: {
-                                    value: _vm.completeMenu,
-                                    callback: function($$v) {
-                                      _vm.completeMenu = $$v
-                                    },
-                                    expression: "completeMenu"
-                                  }
-                                },
+                                "v-flex",
+                                { attrs: { row: "", xs12: "", md6: "" } },
                                 [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      slot: "activator",
-                                      label: "Completed Date",
-                                      "prepend-icon": "event",
-                                      readonly: ""
-                                    },
-                                    slot: "activator",
-                                    model: {
-                                      value: _vm.job.completed_at,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.job, "completed_at", $$v)
-                                      },
-                                      expression: "job.completed_at"
-                                    }
-                                  }),
-                                  _vm._v(" "),
                                   _c(
-                                    "v-date-picker",
-                                    {
-                                      attrs: { "no-title": "", scrollable: "" },
-                                      model: {
-                                        value: _vm.job.completed_at,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.job, "completed_at", $$v)
-                                        },
-                                        expression: "job.completed_at"
-                                      }
-                                    },
+                                    "v-layout",
+                                    { attrs: { row: "", wrap: "" } },
                                     [
-                                      _c("v-spacer"),
-                                      _vm._v(" "),
                                       _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.completeMenu = false
+                                        "v-flex",
+                                        { attrs: { xs12: "" } },
+                                        [
+                                          _c("v-text-field", {
+                                            staticClass: "mt-2 est-note-align",
+                                            attrs: {
+                                              "multi-line": "",
+                                              "no-resize": "",
+                                              rows: "3",
+                                              label: "Estimate Details"
+                                            },
+                                            model: {
+                                              value: _vm.job.est_note,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.job,
+                                                  "est_note",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "job.est_note"
                                             }
-                                          }
-                                        },
-                                        [_vm._v("Cancel")]
+                                          })
+                                        ],
+                                        1
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.$refs.completeMenu.save(
-                                                _vm.completeDate
-                                              )
+                                        "v-flex",
+                                        { attrs: { xs5: "" } },
+                                        [
+                                          _c("v-checkbox", {
+                                            attrs: { label: "Appraisal" },
+                                            model: {
+                                              value: _vm.job.appraisal,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.job,
+                                                  "appraisal",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "job.appraisal"
                                             }
-                                          }
-                                        },
-                                        [_vm._v("OK")]
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        { attrs: { xs5: "" } },
+                                        [
+                                          _c("v-checkbox", {
+                                            attrs: { label: "Vital Date" },
+                                            model: {
+                                              value: _vm.job.vital_date,
+                                              callback: function($$v) {
+                                                _vm.$set(
+                                                  _vm.job,
+                                                  "vital_date",
+                                                  $$v
+                                                )
+                                              },
+                                              expression: "job.vital_date"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        { attrs: { xs5: "" } },
+                                        [
+                                          _c("v-checkbox", {
+                                            attrs: { label: "Complete" },
+                                            model: {
+                                              value: _vm.complete,
+                                              callback: function($$v) {
+                                                _vm.complete = $$v
+                                              },
+                                              expression: "complete"
+                                            }
+                                          })
+                                        ],
+                                        1
                                       )
                                     ],
                                     1
                                   )
                                 ],
                                 1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { row: "", xs12: "", md6: "" } },
-                            [
+                              ),
+                              _vm._v(" "),
                               _c(
-                                "v-layout",
-                                { attrs: { row: "", wrap: "" } },
+                                "v-flex",
+                                { attrs: { xs12: "" } },
                                 [
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        staticClass: "mt-2 est-note-align",
-                                        attrs: {
-                                          "multi-line": "",
-                                          "no-resize": "",
-                                          rows: "3",
-                                          label: "Estimate Details"
-                                        },
-                                        model: {
-                                          value: _vm.job.est_note,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.job, "est_note", $$v)
-                                          },
-                                          expression: "job.est_note"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "" } },
-                                    [
-                                      _c("v-checkbox", {
-                                        attrs: { label: "Appraisal" },
-                                        model: {
-                                          value: _vm.job.appraisal,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.job, "appraisal", $$v)
-                                          },
-                                          expression: "job.appraisal"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "" } },
-                                    [
-                                      _c("v-checkbox", {
-                                        attrs: { label: "Vital Date" },
-                                        model: {
-                                          value: _vm.job.vital_date,
-                                          callback: function($$v) {
-                                            _vm.$set(_vm.job, "vital_date", $$v)
-                                          },
-                                          expression: "job.vital_date"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs5: "" } },
-                                    [
-                                      _c("v-checkbox", {
-                                        attrs: { label: "Complete" },
-                                        model: {
-                                          value: _vm.complete,
-                                          callback: function($$v) {
-                                            _vm.complete = $$v
-                                          },
-                                          expression: "complete"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "multi-line": "",
+                                      "no-resize": "",
+                                      label: "Job Note"
+                                    },
+                                    model: {
+                                      value: _vm.job.note,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.job, "note", $$v)
+                                      },
+                                      expression: "job.note"
+                                    }
+                                  })
                                 ],
                                 1
                               )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs12: "" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  "multi-line": "",
-                                  "no-resize": "",
-                                  label: "Job Note"
-                                },
-                                model: {
-                                  value: _vm.job.note,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.job, "note", $$v)
-                                  },
-                                  expression: "job.note"
-                                }
-                              })
                             ],
                             1
                           )
@@ -69020,8 +69155,8 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: !_vm.job.id,
-                  expression: "!job.id"
+                  value: !_vm.job.id || _vm.job.id == 0,
+                  expression: "!job.id || job.id == 0"
                 }
               ],
               staticClass: "primary--text",
@@ -69046,8 +69181,8 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm.job.id,
-                  expression: "job.id"
+                  value: _vm.job.id && _vm.job.id !== 0,
+                  expression: "job.id && job.id !== 0"
                 }
               ],
               staticClass: "success--text",
@@ -69097,6 +69232,14 @@ var render = function() {
           _c(
             "v-btn",
             {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.job.id && _vm.job.id !== 0,
+                  expression: "job.id && job.id !== 0"
+                }
+              ],
               staticClass: "error--text",
               on: {
                 click: function($event) {
@@ -69106,6 +69249,32 @@ var render = function() {
             },
             [
               _c("span", [_vm._v("Delete Job")]),
+              _vm._v(" "),
+              _c("v-icon", [_vm._v("delete")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.job.id || _vm.job.id == 0,
+                  expression: "!job.id || job.id == 0"
+                }
+              ],
+              staticClass: "error--text",
+              on: {
+                click: function($event) {
+                  _vm.$router.go(-1)
+                }
+              }
+            },
+            [
+              _c("span", [_vm._v("Discard Job")]),
               _vm._v(" "),
               _c("v-icon", [_vm._v("delete")])
             ],
@@ -71169,6 +71338,77 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(96)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\PageNotFound.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-23607015", Component.options)
+  } else {
+    hotAPI.reload("data-v-23607015", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("404")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-23607015", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

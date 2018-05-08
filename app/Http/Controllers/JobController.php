@@ -34,9 +34,13 @@ class JobController extends Controller
     {
         $job = new Job;
 
+        if ($request->customer_id == 0) {
+            trigger_error("Customer cannot be blank");
+        }
+
         $job->customer_id = $request->customer_id;
-        $job->employee_id = $request->employee_id;
-        $job->estimate = $request->estimate;
+        if ($request->employee_id) $job->employee_id = $request->employee_id;
+        if ($request->estimate) $job->estimate = str_replace(',', '', $request->estimate);
         $job->est_note = $request->est_note;
         $job->note = $request->note;
         $job->appraisal = $request->appraisal;        
@@ -87,9 +91,13 @@ class JobController extends Controller
 
         $job = \App\Job::where('id', $request->id)->first();
 
+        if ($request->customer_id == 0) {
+            trigger_error("Customer cannot be blank");
+        }
+
         $job->customer_id = $request->customer_id;
         $job->employee_id = $request->employee_id;
-        $job->estimate = $request->estimate;
+        $job->estimate = str_replace(',', '', $request->estimate);
         $job->est_note = $request->est_note;
         $job->note = $request->note;
         $job->appraisal = $request->appraisal;        

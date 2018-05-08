@@ -88,7 +88,7 @@
                 </v-toolbar>
                 <v-card-text>
                     Are you sure you want to delete this customer? <br>
-                    This will also remove them from any associated jobs.
+                    This will also delete all of this customer's jobs.
                 </v-card-text>
                 <v-card-actions>
                     <v-btn color="error"  @click.stop="deleteCustomer()">

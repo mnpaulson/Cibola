@@ -12,6 +12,11 @@ class EmployeeTableSeeder extends Seeder
     public function run()
     {
         DB::table('employees')->insert([
+            'name' => 'Unassigned',
+            'active' => true,
+        ]);
+
+        DB::table('employees')->insert([
             'name' => 'Graham',
             'active' => true,
         ]);

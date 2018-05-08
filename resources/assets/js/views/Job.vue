@@ -35,7 +35,8 @@
                                 <td class="text-xs-left">{{ props.item.id }}</td>
                                 <td class="text-xs-right">${{ props.item.estimate.toLocaleString() }}</td>
                                 <td class="text-xs-left">{{ props.item.customer.fname }} {{ props.item.customer.lname }}</td>
-                                <td class="text-xs-left">{{ props.item.employee.name }}</td>                                                        
+                                <td class="text-xs-left" v-if="props.item.employee">{{ props.item.employee.name }}</td>
+                                <td class="text-xs-left" v-else>Unassigned</td>                                                                                                                                                
                                 <td class="text-xs-left">{{ props.item.created_at }}</td>
                                 <td class="text-xs-left" v-bind:class="{'vital-date': props.item.vital_date && !props.item.completed_at}">{{ props.item.due_date }}</td>
                                 <td class="text-xs-left">{{ props.item.completed_at }}</td>                                
