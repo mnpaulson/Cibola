@@ -15,7 +15,9 @@
     }),
     methods: {
       searchJob() {
-        this.$router.push('job/' + this.job);
+        if (Number.isInteger(parseInt(this.job))) {
+          this.$router.push('job/' + this.job);
+        }
       }
     }
   }

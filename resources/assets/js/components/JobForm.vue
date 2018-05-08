@@ -112,7 +112,7 @@
                 <transition name="component-fade" appear>                    
                 <v-card>
                     <v-btn class="close-btn" dark small right absolute outline fab color="grey" @click="removeImage(index)"><v-icon class="fab-fix" dark>delete</v-icon></v-btn>                    
-                    <v-card-media :src="image.image" height="200px" @click="showLightBox(image.image)">
+                    <v-card-media contain :src="image.image" height="200px" @click="showLightBox(image.image)">
                     </v-card-media>
                     <v-text-field v-model="image.note" name="input-1" label=" Note" multi-line rows="5" no-resize></v-text-field>
                 </v-card>
@@ -153,7 +153,7 @@
             <v-card>
                 <!-- <v-flex d-flex xs12> -->
                 <div class="catpure-cont">
-                    <video  ref="video" id="video" width="100%" height="100%" autoplay></video>
+                    <video  ref="video" id="video" width="1280px" height="1024px" autoplay></video>
                     <!-- <img class="capture-error" v-show="img" :src="img">                             -->
                     <canvas v-show="false" ref="img" id="img" width="1280" height="1024"></canvas>
                 </div>
@@ -440,11 +440,34 @@
                     } catch (error) {
                         this.video.src = URL.createObjectURL(stream);
                         console.log('Could not create video stream');
-                        this.img = "img/webcamError.png";
+                        // this.img = "img/webcamError.png";
                     }                   
                     this.video.play();
                 });
             }
+            // const input = document.querySelector('input[type="range"]');
+            // var imageCapture;
+            // navigator.mediaDevices.getUserMedia({video: true})
+            //     .then(mediaStream => {
+            //         document.querySelector('video').srcObject = mediaStream;
+
+            //         const track = mediaStream.getVideoTracks()[0];
+            //         imageCapture = new ImageCapture(track);
+
+            //         return imageCapture.getPhotoCapabilities();
+            //         })
+            //     .then(photoCapabilities => {
+            //         const settings = imageCapture.track.getSettings();
+
+            //         input.min = photoCapabilities.imageWidth.min;
+            //         input.max = photoCapabilities.imageWidth.max;
+            //         input.step = photoCapabilities.imageWidth.step;
+
+            //         return imageCapture.getPhotoSettings();
+            //     })
+            //     .then(photoSettings => {
+            //         input.value = photoSettings.imageWidth;
+            //     })
         },
         props: {
             customer_id: Number,

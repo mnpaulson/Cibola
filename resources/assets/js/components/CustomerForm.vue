@@ -87,9 +87,9 @@
         </div>
         <div v-show="isForm">
           <v-flex d-flex row>
-            <v-flex xs8 class="" v-show="customer.id == null"><v-btn xs6 block color="primary" @click="storeCustomer()">Create Customer</v-btn></v-flex>
+            <v-flex xs8 class="" v-show="customer.id == null || customer.id == 0"><v-btn xs6 block color="primary" @click="storeCustomer()">Create Customer</v-btn></v-flex>
             <v-flex xs8 class="" v-show="customer.id"><v-btn xs6 block  color="primary" @click="updateCustomer()">Save Changes</v-btn></v-flex>
-            <v-flex xs4 class="ml-2"><v-btn xs6 block color="error" @click="setFormState(false)">Cancel</v-btn></v-flex>
+            <v-flex xs4 class="ml-2"><v-btn xs6 block color="error" @click="clearForm()">Cancel</v-btn></v-flex>
           </v-flex>
         </div>
         <!-- <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)" class="fab-up"><v-icon class="fab-fix" dark>edit</v-icon></v-btn> -->
@@ -226,7 +226,7 @@
           } else {
             this.header = "Add New Customer";
           }
-        } else if (this.id == null){
+        } else if (this.id == null || this.id == 0){
           this.isForm = false;
           this.isSearch = true;
           this.isInfo = false;
@@ -248,6 +248,25 @@
           this.header = "Customer Details";
         }
         
+      },
+
+      clearForm() {
+        if(this.customer.id == null) {
+          this.customer.fname = null;
+          this.customer.lname = null;
+          this.customer.phone = null;
+          this.customer.email = null;
+          this.customer.addr_st = null;
+          this.customer.addr_city = null;
+          this.customer.addr_prov = null;
+          this.customer.addr_postal = null;
+          this.customer.addr_country = null;
+          this.customer.id = null;
+          this.fuseList = [];
+          this.searchSelect = null;
+        }
+        this.setFormState(false);
+
       },
 
       //For use with search appended icon callback function
