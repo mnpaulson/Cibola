@@ -7,7 +7,7 @@
                     <v-form ref="jobForm" v-model="valid" lazy-validation>                    
                     <v-layout row wrap>
                         <v-flex row xs12 md6>
-                            <v-text-field required :rules="estimateRules" v-model="job.estimate" label="Est" prepend-icon="attach_money"></v-text-field>
+                            <v-text-field required :rules="estimateRules" v-model="job.estimate" label="Estimate" prepend-icon="attach_money"></v-text-field>
                             <v-select
                             autocomplete
                             label="Employee Select"

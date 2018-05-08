@@ -67042,29 +67042,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -67179,7 +67156,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         } else {
           this.header = "Add New Customer";
         }
-      } else if (this.id == null) {
+      } else if (this.id == null || this.id == 0) {
         this.isForm = false;
         this.isSearch = true;
         this.isInfo = false;
@@ -67261,6 +67238,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.setFormState(false);
       this.fuseList = [];
       this.searchSelect = null;
+    },
+    clearForm: function clearForm() {
+      if (this.customer.id == null) {
+        this.customer.fname = null;
+        this.customer.lname = null;
+        this.customer.phone = null;
+        this.customer.email = null;
+        this.customer.addr_st = null;
+        this.customer.addr_city = null;
+        this.customer.addr_prov = null;
+        this.customer.addr_postal = null;
+        this.customer.addr_country = null;
+        this.customer.id = null;
+        this.fuseList = [];
+        this.searchSelect = null;
+      }
+      this.setFormState(false);
     },
     getCustomer: function getCustomer(id) {
       var _this5 = this;
@@ -67403,8 +67397,6 @@ var render = function() {
               _c(
                 "v-card-text",
                 [
-                  _c("v-layout"),
-                  _vm._v(" "),
                   _vm.isInfo
                     ? _c(
                         "v-flex",
@@ -67709,8 +67701,11 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.customer.id == null,
-                                  expression: "customer.id == null"
+                                  value:
+                                    _vm.customer.id == null ||
+                                    _vm.customer.id == 0,
+                                  expression:
+                                    "customer.id == null || customer.id == 0"
                                 }
                               ],
                               attrs: { xs8: "" }
@@ -67780,7 +67775,7 @@ var render = function() {
                                   attrs: { xs6: "", block: "", color: "error" },
                                   on: {
                                     click: function($event) {
-                                      _vm.setFormState(false)
+                                      _vm.clearForm()
                                     }
                                   }
                                 },
@@ -68641,7 +68636,7 @@ var render = function() {
                                     attrs: {
                                       required: "",
                                       rules: _vm.estimateRules,
-                                      label: "Est",
+                                      label: "Estimate",
                                       "prepend-icon": "attach_money"
                                     },
                                     model: {
@@ -69313,8 +69308,8 @@ var render = function() {
                   ref: "video",
                   attrs: {
                     id: "video",
-                    width: "100%",
-                    height: "100%",
+                    width: "1280px",
+                    height: "1024px",
                     autoplay: ""
                   }
                 }),

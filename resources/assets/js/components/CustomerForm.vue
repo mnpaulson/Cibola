@@ -21,30 +21,7 @@
       <span v-show="isInfo" class="">          
         <v-btn style="z-index:0" class="close-btn" dark small right absolute outline fab color="grey" @click="clearCustomer()"><v-icon class="fab-fix" dark>close</v-icon></v-btn>
       </span>
-      <!-- <v-toolbar color="indigo" dark clipped-left flat>
-        <v-toolbar-title>{{ header }}</v-toolbar-title>
-      </v-toolbar> -->
       <v-card-text>
-        <v-layout>
-        <!-- <v-progress-circular v-if="loading" indeterminate color="primary"></v-progress-circular> -->
-        <!-- <v-flex v-if="isSearch" d-flex sm11>
-          <v-select
-              v-model="searchSelect"
-              :search-input.sync="search"
-              autocomplete
-              label="Customer Search"
-              cache-items
-              :items="fuseList"
-              item-text="name"
-              item-value="id"
-              autofocus
-              solo       
-            ></v-select>
-        </v-flex> -->
-        <!-- <v-flex d-flex>
-            <v-btn style="z-index:0" v-show="isSearch" color="primary" fab dark small @click="setFormState(true)" class="new-cus-btn"><v-icon class="fab-fix">add</v-icon></v-btn>                    
-        </v-flex> -->
-        </v-layout>
         <v-flex v-if="isInfo">
           <router-link :to="{ path: `/customer/${customer.id}` }">          
             <h3 class="headline mb-0">
@@ -87,9 +64,9 @@
         </div>
         <div v-show="isForm">
           <v-flex d-flex row>
-            <v-flex xs8 class="" v-show="customer.id == null"><v-btn xs6 block color="primary" @click="storeCustomer()">Create Customer</v-btn></v-flex>
+            <v-flex xs8 class="" v-show="customer.id == null || customer.id == 0"><v-btn xs6 block color="primary" @click="storeCustomer()">Create Customer</v-btn></v-flex>
             <v-flex xs8 class="" v-show="customer.id"><v-btn xs6 block  color="primary" @click="updateCustomer()">Save Changes</v-btn></v-flex>
-            <v-flex xs4 class="ml-2"><v-btn xs6 block color="error" @click="setFormState(false)">Cancel</v-btn></v-flex>
+            <v-flex xs4 class="ml-2"><v-btn xs6 block color="error" @click="clearForm()">Cancel</v-btn></v-flex>
           </v-flex>
         </div>
         <!-- <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)" class="fab-up"><v-icon class="fab-fix" dark>edit</v-icon></v-btn> -->
@@ -226,7 +203,7 @@
           } else {
             this.header = "Add New Customer";
           }
-        } else if (this.id == null){
+        } else if (this.id == null || this.id == 0){
           this.isForm = false;
           this.isSearch = true;
           this.isInfo = false;
@@ -307,7 +284,23 @@
         this.searchSelect = null;
         
       },
-
+      clearForm() {
+        if(this.customer.id == null) {
+          this.customer.fname = null;
+          this.customer.lname = null;
+          this.customer.phone = null;
+          this.customer.email = null;
+          this.customer.addr_st = null;
+          this.customer.addr_city = null;
+          this.customer.addr_prov = null;
+          this.customer.addr_postal = null;
+          this.customer.addr_country = null;
+          this.customer.id = null;
+          this.fuseList = [];
+          this.searchSelect = null;
+        }
+        this.setFormState(false);
+      },
       getCustomer(id) {
         if (id == 0) return;
         this.customer.id = id;
