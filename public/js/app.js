@@ -2394,7 +2394,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_CustomerList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_CustomerList__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_JobList__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_JobList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_JobList__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_PageNotFound__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_PageNotFound__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_PageNotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_PageNotFound__);
 
 __webpack_require__(19);
@@ -2442,7 +2442,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('JobList', __webpack_requi
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EmployeeJobs', __webpack_require__(81));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('EmployeeStats', __webpack_require__(84));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Alert', __webpack_require__(87));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('PageNotFound', __webpack_require__(95));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('PageNotFound', __webpack_require__(119));
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     // mode: 'history',
@@ -49033,6 +49033,7 @@ function validateAttachTarget(val) {
   methods: {
     save: function save(value) {
       this.originalValue = value;
+      this.$emit('update:returnValue', value);
       this.isActive = false;
     }
   }
@@ -52604,7 +52605,7 @@ function Vuetify(Vue, args) {
   }, args));
 }
 
-Vuetify.version = '1.0.12';
+Vuetify.version = '1.0.11';
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Vuetify);
@@ -54477,8 +54478,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         children.push(this.$createElement(__WEBPACK_IMPORTED_MODULE_1__VProgressCircular__["a" /* default */], {
           props: {
             indeterminate: true,
-            size: 23,
-            width: 2
+            size: 26
           }
         }));
       } else {
@@ -62945,12 +62945,6 @@ __WEBPACK_IMPORTED_MODULE_0__VTabs__["a" /* default */].install = function insta
       transitionTime: 300
     };
   },
-
-
-  watch: {
-    tabs: 'onResize'
-  },
-
   mounted: function mounted() {
     this.checkIcons();
   },
@@ -68517,11 +68511,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.video = this.$refs.video;
 
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true }).catch(function (stream) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
                 try {
                     _this7.video.srcObject = stream;
                 } catch (error) {
-                    // this.video.src = URL.createObjectURL(stream);
+                    _this7.video.src = URL.createObjectURL(stream);
                     console.log('Could not create video stream');
                     _this7.img = "img/webcamError.png";
                 }
@@ -69297,14 +69291,6 @@ var render = function() {
             [
               _c("div", { staticClass: "catpure-cont" }, [
                 _c("video", {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.img,
-                      expression: "!img"
-                    }
-                  ],
                   ref: "video",
                   attrs: {
                     id: "video",
@@ -69314,17 +69300,17 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("img", {
+                _c("canvas", {
                   directives: [
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.img,
-                      expression: "img"
+                      value: false,
+                      expression: "false"
                     }
                   ],
-                  staticClass: "capture-error",
-                  attrs: { src: _vm.img }
+                  ref: "img",
+                  attrs: { id: "img", width: "1280", height: "1024" }
                 })
               ]),
               _vm._v(" "),
@@ -71339,7 +71325,31 @@ if (false) {
 /* 92 */,
 /* 93 */,
 /* 94 */,
-/* 95 */
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -71347,7 +71357,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(96)
+var __vue_template__ = __webpack_require__(120)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -71386,7 +71396,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 96 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

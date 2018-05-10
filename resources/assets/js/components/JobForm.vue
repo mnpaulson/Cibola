@@ -161,7 +161,7 @@
             <v-card>
                 <!-- <v-flex d-flex xs12> -->
                 <div class="catpure-cont">
-                    <video  ref="video" id="video" width="1280px" height="1024px" autoplay></video>
+                    <video ref="video" id="video" width="1280px" height="1024px" autoplay></video>
                     <!-- <img class="capture-error" v-show="img" :src="img">                             -->
                     <canvas v-show="false" ref="img" id="img" width="1280" height="1024"></canvas>
                 </div>
@@ -471,19 +471,17 @@
             this.video = this.$refs.video;
 
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-                        try {
-                            this.video.srcObject = stream;
-                        } catch (error) {
-                            this.video.src = URL.createObjectURL(stream);
-                            console.log('Could not create video stream');
-                            this.img = "img/webcamError.png";
+                navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                    try {
+                        this.video.srcObject = stream;
+                    } catch (error) {
+                        this.video.src = URL.createObjectURL(stream);
+                        console.log('Could not create video stream');
+                        this.img = "img/webcamError.png";
 
-                        }                   
-                        this.video.play();
-                    });
-                }
+                    }                   
+                    this.video.play();
+                });
             }
         },
         props: {
