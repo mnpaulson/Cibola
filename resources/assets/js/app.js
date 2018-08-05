@@ -27,12 +27,14 @@ import Home from './views/Home'
 import Customer from './views/Customer'
 import Admin from './views/Admin'
 import Employee from './views/Employee'
+import GoldCredit from './views/GoldCredit'
 import CustomerForm from './components/CustomerForm'
 import JobLookup from './components/JobLookup'
 import JobForm from './components/JobForm'
 import EmployeeForm from './components/EmployeeForm'
 import CustomerList from './components/CustomerList'
 import JobList from './components/JobList'
+import GoldcreditForm from './components/GoldcreditForm'
 import PageNotFound from './components/PageNotFound'
 
 
@@ -45,6 +47,7 @@ Vue.component('JobList', require('./components/JobList.vue'));
 Vue.component('EmployeeJobs', require('./components/EmployeeJobs.vue'));
 Vue.component('EmployeeStats', require('./components/EmployeeStats.vue'));
 Vue.component('Alert', require('./components/Alert.vue'));
+Vue.component('GoldcreditForm', require('./components/GoldcreditForm.vue'));
 Vue.component('PageNotFound', require('./components/PageNotFound.vue'));
 
 
@@ -91,6 +94,11 @@ const router = new VueRouter({
             path: '/employee',
             name: 'employee',
             component: Employee
+        },        
+        {
+            path: '/goldcredit',
+            name: 'goldcredits',
+            component: GoldCredit
         },
         {
             path: '*',

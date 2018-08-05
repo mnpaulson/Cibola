@@ -22,7 +22,7 @@
   bottom: 0px !important;
 }
 
-.redText > div > input {
+.redText > div.v-input__control > div.v-input__slot > div.v-text-field__slot input {
   color: red !important;
 }
 
@@ -138,6 +138,10 @@
   * {
     visibility: hidden !important;
     margin: 0px;
+  }
+
+  .v-content {
+    padding: 0px !important;
   }
 
   body {

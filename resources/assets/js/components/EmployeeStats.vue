@@ -10,7 +10,7 @@
      <template slot="items" slot-scope="props">
          <td>{{ props.item.name }}</td>
          <td>{{ props.item.count }}</td>
-         <td>${{ props.item.total.toLocaleString() }}</td>
+         <td>${{ props.item.total }}</td>
          <td><v-tooltip right><span slot="activator">{{ props.item.wait }}</span><span>{{ props.item.days }} Days</span></v-tooltip></td>
      </template>
     </v-data-table>
@@ -48,17 +48,20 @@
             axios
                 .get("/employees/outstandingStats")
                 .then(response => {
-                    this.stats = response.data;
-                    this.stats.forEach(emp => {
-                        emp.wait = emp.jobs[0].due_date;
-                        emp.count = emp.jobs.length;
-                        emp.total = 0;
-                        emp.jobs.forEach(job => {
-                            emp.total += job.estimate;
-                        })
-                        emp.days = this.compareDate(emp.wait);
-                        delete emp.jobs;
-                    });                    
+                    response.data.forEach(emp => {
+                        if(emp.jobs[0]) {
+                            emp.wait = emp.jobs[0].due_date;
+                            emp.count = emp.jobs.length;
+                            emp.total = 0;
+                            emp.jobs.forEach(job => {
+                                emp.total += job.estimate;
+                            })
+                            emp.total = emp.total.toLocaleString();
+                            emp.days = this.compareDate(emp.wait);
+                            delete emp.jobs;
+                        }
+                    }); 
+                    this.$set(this, 'stats', response.data);                                       
                 })
                 .catch(error => {
                     console.log(error);

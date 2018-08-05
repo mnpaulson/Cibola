@@ -1,10 +1,9 @@
 <template>
   <v-flex d-flex xs12 sm12 md4>  
     <div v-if="isSearch">
-      <v-select
+      <v-autocomplete
           v-model="searchSelect"
           :search-input.sync="search"
-          autocomplete
           label="Customer Search"
           cache-items
           :items="fuseList"
@@ -12,10 +11,10 @@
           item-value="id"
           autofocus
           solo
-          prepend-icon="person"
+          prepend-inner-icon="person"
           append-icon="add_circle"
-          :append-icon-cb="newCustomerForm"
-        ></v-select>
+          @click:append="newCustomerForm"
+        ></v-autocomplete>
     </div>                           
     <v-card  v-if="!isSearch">      
       <span v-show="isInfo" class="">          

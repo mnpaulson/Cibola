@@ -8,8 +8,7 @@
                     <v-layout row wrap>
                         <v-flex row xs12 md6>
                             <v-text-field required :rules="estimateRules" v-model="job.estimate" label="Estimate" prepend-icon="attach_money"></v-text-field>
-                            <v-select
-                            autocomplete
+                            <v-autocomplete
                             label="Employee Select"
                             cache-items
                             required
@@ -19,11 +18,11 @@
                             v-model="job.employee_id"
                             item-text="name"
                             item-value="id"
-                            ></v-select>
+                            ></v-autocomplete>
                             <v-menu
                             ref="dateMenu"
                             lazy
-                            :close-on-content-click="false"
+                            :close-on-content-click="true"
                             v-model="dateMenu"
                             transition="scale-transition"
                             offset-y
@@ -49,7 +48,7 @@
                             <v-menu
                             ref="completeMenu"
                             lazy
-                            :close-on-content-click="false"
+                            :close-on-content-click="true"
                             v-model="completeMenu"
                             transition="scale-transition"
                             offset-y
@@ -78,7 +77,7 @@
                         <v-flex row xs12 md6>
                             <v-layout row wrap>   
                             <v-flex xs12>                 
-                                <v-text-field multi-line no-resize rows="3" v-model="job.est_note" class="mt-2 est-note-align" label="Estimate Details"></v-text-field>
+                                <v-textarea no-resize rows="3" v-model="job.est_note" class="mt-2 est-note-align" label="Estimate Details"></v-textarea>
                             </v-flex>
                             <v-flex xs5>                                     
                                 <v-checkbox
@@ -101,7 +100,7 @@
                             </v-layout>             
                         </v-flex>
                         <v-flex xs12>
-                                <v-text-field multi-line no-resize v-model="job.note" class="" label="Job Note"></v-text-field>                    
+                                <v-textarea no-resize v-model="job.note" class="" label="Job Note"></v-textarea>                    
                         </v-flex>
                     </v-layout>
                     </v-form>
@@ -118,7 +117,7 @@
                     <v-btn class="close-btn" dark small right absolute outline fab color="grey" @click="removeImage(index)"><v-icon class="fab-fix" dark>delete</v-icon></v-btn>                    
                     <v-card-media :src="image.image" height="200px" @click="showLightBox(image.image)">
                     </v-card-media>
-                    <v-text-field v-model="image.note" name="input-1" label=" Note" multi-line rows="5" no-resize></v-text-field>
+                    <v-textarea v-model="image.note" name="input-1" label=" Note" multi-line rows="5" no-resize></v-textarea>
                 </v-card>
                 </transition>
             </v-flex>
@@ -128,29 +127,30 @@
             <v-bottom-nav
                 fixed
                 :value="true"
+                :app="true"
                 class="elevation-1"
             >
-                <v-btn v-show="!job.id || job.id == 0" @click="createJob()" class="primary--text">
+                <v-btn v-show="!job.id || job.id == 0" @click="createJob()" class="v-btn--active primary--text">
                 <span>Save Job</span>
                 <v-icon>save</v-icon>
                 </v-btn>
-                <v-btn v-show="job.id && job.id !== 0" @click="updateJob()" class="success--text">
+                <v-btn v-show="job.id && job.id !== 0" @click="updateJob()" class="v-btn--active success--text">
                 <span>Update Job</span>
                 <v-icon>save</v-icon>
                 </v-btn>
-                <v-btn class="info--text">
+                <v-btn class="v-btn--active info--text">
                 <span>Print</span>
                 <v-icon>print</v-icon>
                 </v-btn>
-                <v-btn @click="captureDialog = true" class="accent--text">
+                <v-btn @click="captureDialog = true" class="v-btn--active accent--text">
                 <span>Capture</span>
                 <v-icon>camera_alt</v-icon>
                 </v-btn>
-                <v-btn v-show="job.id && job.id !== 0" @click="jobDeleteDialog = true" class="error--text">
+                <v-btn v-show="job.id && job.id !== 0" @click="jobDeleteDialog = true" class="v-btn--active error--text">
                 <span>Delete Job</span>
                 <v-icon>delete</v-icon>
                 </v-btn>
-                <v-btn v-show="!job.id || job.id == 0" @click="$router.go(-1)" class="error--text">
+                <v-btn v-show="!job.id || job.id == 0" @click="$router.go(-1)" class="v-btn--active error--text">
                 <span>Discard Job</span>
                 <v-icon>delete</v-icon>
                 </v-btn>
