@@ -31,7 +31,7 @@
         </v-list-tile>
         <v-list-tile :to="{ name: 'goldcredits' }">
           <v-list-tile-action>
-            <v-icon>folder</v-icon>
+            <v-icon>credit_card</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Gold Credits</v-list-tile-title>

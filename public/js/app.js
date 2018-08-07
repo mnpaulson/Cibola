@@ -67899,7 +67899,7 @@ var render = function() {
                 [
                   _c(
                     "v-list-tile-action",
-                    [_c("v-icon", [_vm._v("folder")])],
+                    [_c("v-icon", [_vm._v("credit_card")])],
                     1
                   ),
                   _vm._v(" "),
@@ -73988,8 +73988,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -74026,12 +74024,14 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
-        [_c("goldcredit-form")],
-        1
-      )
+      _c("goldcredit-form", {
+        attrs: { customer_id: _vm.customer_id },
+        on: {
+          "update:customer_id": function($event) {
+            _vm.customer_id = $event
+          }
+        }
+      })
     ],
     1
   )
@@ -74103,39 +74103,94 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-layout",
-    { attrs: { row: "", wrap: "" } },
+    "transition",
+    { attrs: { name: "component-fade", appear: "" } },
     [
       _c(
-        "v-flex",
-        { attrs: { "d-flex": "", xs12: "", lg8: "", xl6: "" } },
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
         [
           _c(
-            "transition",
-            { attrs: { name: "component-fade", appear: "" } },
+            "v-flex",
+            { attrs: { "d-flex": "", xs12: "", lg8: "", xl6: "" } },
             [
               _c(
                 "v-card",
                 [
-                  _c("v-autocomplete", {
-                    attrs: {
-                      label: "Employee Select",
-                      "cache-items": "",
-                      required: "",
-                      rules: _vm.employeeRules,
-                      "prepend-icon": "person_pin",
-                      items: _vm.employeeList,
-                      "item-text": "name",
-                      "item-value": "id"
-                    },
-                    model: {
-                      value: _vm.credit.employee_id,
-                      callback: function($$v) {
-                        _vm.$set(_vm.credit, "employee_id", $$v)
-                      },
-                      expression: "credit.employee_id"
-                    }
-                  })
+                  _c(
+                    "v-form",
+                    { ref: "goldcreditForm", attrs: { "lazy-validation": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "" } },
+                        [
+                          _c("v-autocomplete", {
+                            attrs: {
+                              label: "Employee Select",
+                              "cache-items": "",
+                              required: "",
+                              rules: _vm.employeeRules,
+                              "prepend-icon": "person_pin",
+                              items: _vm.employeeList,
+                              "item-text": "name",
+                              "item-value": "id"
+                            },
+                            model: {
+                              value: _vm.credit.employee_id,
+                              callback: function($$v) {
+                                _vm.$set(_vm.credit, "employee_id", $$v)
+                              },
+                              expression: "credit.employee_id"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "d-flex": "", xs12: "", lg8: "", xl6: "" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { "d-flex": "", xs6: "", md3: "" } },
+                    [
+                      _c("v-autocomplete", {
+                        attrs: {
+                          label: "Item Select",
+                          "cache-items": "",
+                          items: _vm.itemList,
+                          "item-text": "name",
+                          "item-value": "id"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs6: "", md3: "" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: { label: "Multiplier", box: "" }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -74187,12 +74242,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             employeeList: [],
             employee: null,
+            itemList: [],
             credit: {
                 id: null,
                 employee_id: null,
@@ -74202,6 +74281,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 goldDate: null,
                 creditValue: null
             },
+            items: [],
             employeeRules: [function (v) {
                 return !!v || 'Select employee';
             }]
@@ -74216,10 +74296,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        getValues: function getValues() {
+            var _this2 = this;
+
+            axios.get('/values/gettype?type_id=1').then(function (response) {
+                _this2.itemList = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
     },
     mounted: function mounted() {
         this.getEmployees();
+        this.getValues();
+    },
+
+    props: {
+        customer_id: Number,
+        goldcredit_id: Number
+    },
+    watch: {
+        customer_id: function customer_id(val) {
+            if (!isNaN(this.customer_id) && this.customer_id !== null) {
+                this.credit.customer_id = val;
+            }
+        }
     }
 });
 

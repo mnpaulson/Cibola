@@ -3,9 +3,7 @@
     <v-layout row wrap>
         <customer-form :id.sync="customer_id"></customer-form>
     </v-layout>
-    <v-layout row wrap>
-        <goldcredit-form></goldcredit-form>
-    </v-layout>
+    <goldcredit-form :customer_id.sync="customer_id"></goldcredit-form>
     </div>
 </template>
 

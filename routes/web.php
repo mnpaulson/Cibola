@@ -23,9 +23,6 @@ Route::get('employees/active', 'EmployeeController@active')->name('employees.act
 Route::get('employees/outstandingJobs', 'EmployeeController@outstandingJobs')->name('employees.outstandingJobs');
 Route::get('employees/outstandingStats', 'EmployeeController@outstandingStats')->name('employees.outstandingStats');
 
-
-
-
 //Job Routes
 Route::post('jobs/create', 'JobController@create')->name('jobs.create');
 Route::post('jobs/update', 'JobController@update')->name('jobs.update');
@@ -37,11 +34,19 @@ Route::get('jobs/recentJobsList', 'JobController@recentJobsList')->name('jobs.re
 Route::post('jobs/allJobsDetails', 'JobController@allJobsDetails')->name('jobs.allJobsDetails');
 Route::post('jobs/complete', 'JobController@complete')->name('jobs.complete');
 Route::post('jobs/uncomplete', 'JobController@uncomplete')->name('jobs.uncomplete');
-
-
-
-
 Route::post('job_images/delete', 'Job_imageController@delete')->name('jobs.delete');
+
+
+//Value Routes
+Route::post('values/create', 'ValueController@create')->name('values.create');
+Route::post('values/update', 'ValueController@update')->name('values.update');
+Route::post('values/delete', 'ValueController@delete')->name('values.delete');
+Route::get('values/index', 'ValueController@index')->name('values.index');
+Route::get('values/active', 'ValueController@active')->name('values.active');
+Route::get('values/gettype', 'ValueController@gettype')->name('values.getType');
+
+
+
 
 
 
