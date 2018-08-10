@@ -55,18 +55,18 @@
                         </v-flex>
                         <v-flex row xs12 md2>
                                 <v-text-field
+                                    v-model="credit.goldCAD"
                                     label="Gold CAD"
                                 ></v-text-field>
                                 <v-text-field
-                                    label="Gold USD"
-                                ></v-text-field>
-                                <v-text-field
-                                    label="Exchange"
-                                ></v-text-field>
-                                <v-text-field
+                                    v-model="credit.platCAD"
                                     label="Platinum"
                                 ></v-text-field>
-                             <v-btn flat color="primary"><v-icon>refresh</v-icon>{{lastGoldValues}}</v-btn>
+                                <v-text-field
+                                    v-model="credit.exchange"
+                                    label="Exchange"
+                                ></v-text-field>
+                             <v-btn flat color="primary" @click="getNewGoldValue"><v-icon>refresh</v-icon>{{lastGoldValues}}</v-btn>
                         </v-flex>
                     </v-layout>
                     </v-form>
@@ -90,9 +90,10 @@
                                             label="Item Select"
                                             cache-items
                                             :items="valueList"
+                                            :return-object=true
                                             item-text="name"
                                             item-value="id"
-                                            v-model="item.item"
+                                            v-model="item.itemObj"
                                         ></v-autocomplete>
                                     </v-flex>
                                     <v-flex xs6 md3>
@@ -105,6 +106,13 @@
                                         <v-text-field
                                             v-model="item.multiplier"
                                             label="*"
+                                            disabled
+                                        ></v-text-field>
+                                    </v-flex>
+                                    <v-flex xs6 md1>
+                                        <v-text-field
+                                            v-model="item.markup"
+                                            label="Markup"
                                             disabled
                                         ></v-text-field>
                                     </v-flex>
@@ -138,8 +146,9 @@
                 employee_id: null,
                 customer_id: null,
                 goldCAD: null,
-                goldUSD: null,
-                goldDate: null,
+                exchange: null,
+                platCAD: null,
+                metalPriceDate: null,
                 creditDate: null,
                 creditValue: null,
                 used: false
@@ -173,13 +182,51 @@
             },
             // Adds a new blank item to list
             newItem() {
-                this.itemList.push({
+                var list = {
                     id: null,
                     item: null,
+                    itemObj: null,
                     weight: null,
                     multiplier: null,
+                    markup: 0.75,
                     value: null
-                });
+                };
+                var newList = this.itemList;
+                newList.push(list);
+                this.$set(this, 'itemList', newList);
+            },
+            //Gets the value of gold in grams
+            getNewGoldValue() {
+                axios.get('/values/getGoldValue')
+                    .then((response) => {
+                        console.log(response);
+                        var goldOz = response.data[0];
+                        this.credit.exchange = this.round(response.data[1], 2);
+
+                        var goldG = goldOz / 31.1;
+                        this.credit.goldCAD = this.round(goldG, 2);
+                        this.getNewPlatValue();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+            getNewPlatValue() {
+                axios.get('/values/getPlatValue')
+                    .then((response) => {
+                        // console.log(response);
+                        var platOz = response.data;
+                        platOz = platOz * this.credit.exchange;
+                        var platG = platOz / 31.1;
+                        this.credit.platCAD = this.round(platG, 2);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+            //Round number to desired decimals
+            round(value, decimals) {
+                return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
             }
         },
         mounted() {
@@ -195,6 +242,21 @@
                 if (!isNaN(this.customer_id) && this.customer_id !== null) {
                     this.credit.customer_id = val;
                 }
+            },
+            //Calculate values on changes
+            itemList: {
+                handler: function (list) {
+                    list.forEach(function(e) {
+                        console.log('hi');
+                        if (e.itemObj) {
+                            e.multiplier = e.itemObj.value1;
+                            // e.markup = e.itemObj.value2;
+                            e.item = e.itemObj.id;
+                        }
+                        e.value = e.weight * e.multiplier * e.markup;
+                    });
+                },
+                deep: true
             },
         }
     }

@@ -73471,6 +73471,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -73486,8 +73494,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 employee_id: null,
                 customer_id: null,
                 goldCAD: null,
-                goldUSD: null,
-                goldDate: null,
+                exchange: null,
+                platCAD: null,
+                metalPriceDate: null,
                 creditDate: null,
                 creditValue: null,
                 used: false
@@ -73524,13 +73533,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // Adds a new blank item to list
         newItem: function newItem() {
-            this.itemList.push({
+            var list = {
                 id: null,
                 item: null,
+                itemObj: null,
                 weight: null,
                 multiplier: null,
+                markup: 0.75,
                 value: null
+            };
+            var newList = this.itemList;
+            newList.push(list);
+            this.$set(this, 'itemList', newList);
+        },
+
+        //Gets the value of gold in grams
+        getNewGoldValue: function getNewGoldValue() {
+            var _this3 = this;
+
+            axios.get('/values/getGoldValue').then(function (response) {
+                console.log(response);
+                var goldOz = response.data[0];
+                _this3.credit.exchange = _this3.round(response.data[1], 2);
+
+                var goldG = goldOz / 31.1;
+                _this3.credit.goldCAD = _this3.round(goldG, 2);
+                _this3.getNewPlatValue();
+            }).catch(function (error) {
+                console.log(error);
             });
+        },
+        getNewPlatValue: function getNewPlatValue() {
+            var _this4 = this;
+
+            axios.get('/values/getPlatValue').then(function (response) {
+                // console.log(response);
+                var platOz = response.data;
+                platOz = platOz * _this4.credit.exchange;
+                var platG = platOz / 31.1;
+                _this4.credit.platCAD = _this4.round(platG, 2);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+
+        //Round number to desired decimals
+        round: function round(value, decimals) {
+            return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
         }
     },
     mounted: function mounted() {
@@ -73547,6 +73596,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!isNaN(this.customer_id) && this.customer_id !== null) {
                 this.credit.customer_id = val;
             }
+        },
+
+        //Calculate values on changes
+        itemList: {
+            handler: function handler(list) {
+                list.forEach(function (e) {
+                    console.log('hi');
+                    if (e.itemObj) {
+                        e.multiplier = e.itemObj.value1;
+                        // e.markup = e.itemObj.value2;
+                        e.item = e.itemObj.id;
+                    }
+                    e.value = e.weight * e.multiplier * e.markup;
+                });
+            },
+            deep: true
         }
     }
 });
@@ -73755,24 +73820,44 @@ var render = function() {
                                   { attrs: { row: "", xs12: "", md2: "" } },
                                   [
                                     _c("v-text-field", {
-                                      attrs: { label: "Gold CAD" }
+                                      attrs: { label: "Gold CAD" },
+                                      model: {
+                                        value: _vm.credit.goldCAD,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.credit, "goldCAD", $$v)
+                                        },
+                                        expression: "credit.goldCAD"
+                                      }
                                     }),
                                     _vm._v(" "),
                                     _c("v-text-field", {
-                                      attrs: { label: "Gold USD" }
+                                      attrs: { label: "Platinum" },
+                                      model: {
+                                        value: _vm.credit.platCAD,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.credit, "platCAD", $$v)
+                                        },
+                                        expression: "credit.platCAD"
+                                      }
                                     }),
                                     _vm._v(" "),
                                     _c("v-text-field", {
-                                      attrs: { label: "Exchange" }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("v-text-field", {
-                                      attrs: { label: "Platinum" }
+                                      attrs: { label: "Exchange" },
+                                      model: {
+                                        value: _vm.credit.exchange,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.credit, "exchange", $$v)
+                                        },
+                                        expression: "credit.exchange"
+                                      }
                                     }),
                                     _vm._v(" "),
                                     _c(
                                       "v-btn",
-                                      { attrs: { flat: "", color: "primary" } },
+                                      {
+                                        attrs: { flat: "", color: "primary" },
+                                        on: { click: _vm.getNewGoldValue }
+                                      },
                                       [
                                         _c("v-icon", [_vm._v("refresh")]),
                                         _vm._v(_vm._s(_vm.lastGoldValues))
@@ -73850,15 +73935,16 @@ var render = function() {
                                         label: "Item Select",
                                         "cache-items": "",
                                         items: _vm.valueList,
+                                        "return-object": true,
                                         "item-text": "name",
                                         "item-value": "id"
                                       },
                                       model: {
-                                        value: item.item,
+                                        value: item.itemObj,
                                         callback: function($$v) {
-                                          _vm.$set(item, "item", $$v)
+                                          _vm.$set(item, "itemObj", $$v)
                                         },
-                                        expression: "item.item"
+                                        expression: "item.itemObj"
                                       }
                                     })
                                   ],
@@ -73895,6 +73981,24 @@ var render = function() {
                                           _vm.$set(item, "multiplier", $$v)
                                         },
                                         expression: "item.multiplier"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { xs6: "", md1: "" } },
+                                  [
+                                    _c("v-text-field", {
+                                      attrs: { label: "Markup", disabled: "" },
+                                      model: {
+                                        value: item.markup,
+                                        callback: function($$v) {
+                                          _vm.$set(item, "markup", $$v)
+                                        },
+                                        expression: "item.markup"
                                       }
                                     })
                                   ],

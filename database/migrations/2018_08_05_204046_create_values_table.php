@@ -17,7 +17,8 @@ class CreateValuesTable extends Migration
             $table->increments('id');
             $table->integer('type_id');
             $table->string('name');
-            $table->string('value')->nullable();
+            $table->string('value1')->nullable();
+            $table->string('value2')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

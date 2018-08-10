@@ -44,6 +44,10 @@ Route::post('values/delete', 'ValueController@delete')->name('values.delete');
 Route::get('values/index', 'ValueController@index')->name('values.index');
 Route::get('values/active', 'ValueController@active')->name('values.active');
 Route::get('values/gettype', 'ValueController@gettype')->name('values.getType');
+Route::get('values/getGoldValue', 'ValueController@getGoldValue')->name('values.getGoldValue');
+Route::get('values/getPlatValue', 'ValueController@getPlatValue')->name('values.getPlatValue');
+
+
 
 
 

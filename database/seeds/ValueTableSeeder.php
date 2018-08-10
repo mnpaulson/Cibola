@@ -20,67 +20,67 @@ class ValueTableSeeder extends Seeder
         DB::table('values')->insert([
                 'type_id' => 1,
                 'name' => '9k',
-                'value' => '0.375'
+                'value1' => '0.375'
         ]);
 
         DB::table('values')->insert([
                 'type_id' => 1,
                 'name' => '10k',
-                'value' => '0.417'
+                'value1' => '0.417'
         ]);
 
         DB::table('values')->insert([
             'type_id' => 1,
             'name' => '12k',
-            'value' => '0.5'
+            'value1' => '0.5'
         ]);
         
         DB::table('values')->insert([
             'type_id' => 1,
             'name' => '14k',
-            'value' => '0.585'
+            'value1' => '0.585'
         ]);
 
         DB::table('values')->insert([
             'type_id' => 1,
             'name' => '18k',
-            'value' => '0.75'
+            'value1' => '0.75'
         ]);
 
         DB::table('values')->insert([
             'type_id' => 1,
             'name' => '20k',
-            'value' => '0.833'
+            'value1' => '0.833'
         ]);
 
         DB::table('values')->insert([
             'type_id' => 1,
             'name' => '22k',
-            'value' => '0.916'
+            'value1' => '0.916'
         ]);
 
         DB::table('values')->insert([
             'type_id' => 1,
             'name' => '24k',
-            'value' => '1'
+            'value1' => '1'
         ]);
 
         DB::table('values')->insert([
             'type_id' => 1,
             'name' => 'Diamonds',
-            'value' => '300'
+            'value1' => '300'
         ]);
 
         DB::table('values')->insert([
             'type_id' => 1,
             'name' => 'Platinum',
-            'value' => '0.95'
+            'value1' => '0.95'
         ]);
 
         DB::table('values')->insert([
             'type_id' => 1,
             'name' => 'Other',
-            'value' => '5'
+            'value1' => '5'
         ]);
     }
 }
