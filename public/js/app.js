@@ -73539,7 +73539,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 itemObj: null,
                 weight: null,
                 multiplier: null,
-                markup: 0.75,
+                markup: null,
                 value: null
             };
             var newList = this.itemList;
@@ -73552,7 +73552,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             axios.get('/values/getGoldValue').then(function (response) {
-                console.log(response);
+                // console.log(response);
                 var goldOz = response.data[0];
                 _this3.credit.exchange = _this3.round(response.data[1], 2);
 
@@ -73602,15 +73602,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         itemList: {
             handler: function handler(list) {
                 list.forEach(function (e) {
-                    console.log('hi');
+                    var metal;
                     if (e.itemObj) {
                         e.multiplier = e.itemObj.value1;
-                        // e.markup = e.itemObj.value2;
+                        e.markup = e.itemObj.value2;
                         e.item = e.itemObj.id;
+                        if (e.itemObj.value3 === "Gold") {
+                            metal = this.credit.goldCAD;
+                        } else if (e.itemObj.value3 === "Platinum") {
+                            metal = this.credit.platCAD;
+                        } else {
+                            metal = 1;
+                        }
                     }
-                    e.value = e.weight * e.multiplier * e.markup;
-                });
+
+                    e.value = e.weight * e.multiplier * e.markup * metal;
+                }.bind(this));
             },
+
             deep: true
         }
     }
@@ -73831,7 +73840,7 @@ var render = function() {
                                     }),
                                     _vm._v(" "),
                                     _c("v-text-field", {
-                                      attrs: { label: "Platinum" },
+                                      attrs: { label: "Platinum CAD" },
                                       model: {
                                         value: _vm.credit.platCAD,
                                         callback: function($$v) {

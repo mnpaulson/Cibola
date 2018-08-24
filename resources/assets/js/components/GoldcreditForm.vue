@@ -60,7 +60,7 @@
                                 ></v-text-field>
                                 <v-text-field
                                     v-model="credit.platCAD"
-                                    label="Platinum"
+                                    label="Platinum CAD"
                                 ></v-text-field>
                                 <v-text-field
                                     v-model="credit.exchange"
@@ -188,7 +188,7 @@
                     itemObj: null,
                     weight: null,
                     multiplier: null,
-                    markup: 0.75,
+                    markup: null,
                     value: null
                 };
                 var newList = this.itemList;
@@ -199,7 +199,7 @@
             getNewGoldValue() {
                 axios.get('/values/getGoldValue')
                     .then((response) => {
-                        console.log(response);
+                        // console.log(response);
                         var goldOz = response.data[0];
                         this.credit.exchange = this.round(response.data[1], 2);
 
@@ -245,16 +245,24 @@
             },
             //Calculate values on changes
             itemList: {
-                handler: function (list) {
+                handler(list) {
                     list.forEach(function(e) {
-                        console.log('hi');
+                        var metal;
                         if (e.itemObj) {
                             e.multiplier = e.itemObj.value1;
-                            // e.markup = e.itemObj.value2;
+                            e.markup = e.itemObj.value2;
                             e.item = e.itemObj.id;
+                            if (e.itemObj.value3 === "Gold" ) {
+                                metal = this.credit.goldCAD;
+                            } else if (e.itemObj.value3 === "Platinum" ) {
+                                metal = this.credit.platCAD;
+                            } else {
+                                metal = 1;
+                            }
                         }
-                        e.value = e.weight * e.multiplier * e.markup;
-                    });
+
+                        e.value = e.weight * e.multiplier * e.markup * metal;
+                    }.bind(this));
                 },
                 deep: true
             },

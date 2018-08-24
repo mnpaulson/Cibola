@@ -19,6 +19,7 @@ class CreateValuesTable extends Migration
             $table->string('name');
             $table->string('value1')->nullable();
             $table->string('value2')->nullable();
+            $table->string('value3')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

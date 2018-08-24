@@ -36,6 +36,7 @@ class ValueController extends Controller
         $value->type_id = $request->type_id;
         $value->value1 = $request->value1;
         $value->value2 = $request->value2;
+        $value->value3 = $request->value3;
         $value->active = true;
 
         $value->save();
@@ -51,6 +52,7 @@ class ValueController extends Controller
         $value->name = $request->name;
         $value->value1 = $request->value1;
         $value->value2 = $request->value2;
+        $value->value3 = $request->value3;
         $value->active = $request->active;
 
         $value->save();
