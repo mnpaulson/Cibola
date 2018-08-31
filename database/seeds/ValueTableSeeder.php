@@ -108,5 +108,18 @@ class ValueTableSeeder extends Seeder
             'value2' => '1',
             'value3' => 'Other'
         ]);
+
+        DB::table('values')->insert([
+            'type_id' => 2,
+            'name' => 'GoldCAD',
+            'value1' => '0',
+        ]);
+
+        DB::table('values')->insert([
+            'type_id' => 2,
+            'name' => 'PlatCAD',
+            'value1' => '0',
+        ]);
+
     }
 }

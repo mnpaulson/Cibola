@@ -79,7 +79,12 @@ class ValueController extends Controller
         $CAD = $response->items[0]->xauPrice;
         $USD = $response->items[1]->xauPrice;
         $exchange = $CAD / $USD;
+        $CAD = $CAD / 31.1;
         $data = [$CAD, $exchange];
+
+        $value = \App\Value::where('name', 'GoldCAD')->first();
+        $value->value1 = $CAD;
+        $value->save();
 
         echo json_encode($data);
         // echo $response->items[0]->xauPrice;
@@ -89,12 +94,24 @@ class ValueController extends Controller
     public function getPlatValue()
     {
         $text = [];
-        $crawler = Goutte::request('GET', 'https://www.apmex.com/spotprices/platinum-price');
-        $text = $crawler->filter('.current')->each(function ($node, $text) {
-            return $node->text();
-        });
-        // print_r($text);
-        echo substr($text[2], 1);
+        //Uncomment to return to ampex source (gets USD Price)
+        // $crawler = Goutte::request('GET', 'https://www.apmex.com/spotprices/platinum-price');
+        // $text = $crawler->filter('.current')->each(function ($node, $text) {
+        //     return $node->text();
+        // });
+        // $plat = substr($text[2], 1);
+        // $plat = $plat / 31.1;
+        $r = file_get_contents('https://www.goldbroker.com/api/spot-prices?metal=XPT&currency=CAD&boundaries=1');
+        $response = json_decode($r);
+        $length = count($response->_embedded->spot_prices);
+        $plat = $response->_embedded->spot_prices[$length - 2]->value;
+        $plat = $plat / 31.1;
+
+        $value = \App\Value::where('name', 'PlatCAD')->first();
+        $value->value1 = $plat;
+        $value->save();
+
+        echo $plat;
     }
 
 }

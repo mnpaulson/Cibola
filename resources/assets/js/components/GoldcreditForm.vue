@@ -21,6 +21,7 @@
                             ></v-autocomplete>
                             <v-text-field
                                 label="Total Value"
+                                v-model="credit.total"
                                 prepend-icon="attach_money"
                             ></v-text-field>
                             <v-menu
@@ -56,17 +57,20 @@
                         <v-flex row xs12 md2>
                                 <v-text-field
                                     v-model="credit.goldCAD"
-                                    label="Gold CAD"
+                                    label="Gold (g)"
                                 ></v-text-field>
                                 <v-text-field
                                     v-model="credit.platCAD"
-                                    label="Platinum CAD"
+                                    label="Platinum (g)"
                                 ></v-text-field>
-                                <v-text-field
+                                <!-- <v-text-field
                                     v-model="credit.exchange"
                                     label="Exchange"
-                                ></v-text-field>
+                                ></v-text-field> -->
                              <v-btn flat color="primary" @click="getNewGoldValue"><v-icon>refresh</v-icon>{{lastGoldValues}}</v-btn>
+                        </v-flex>
+                        <v-flex row xs12 md12>
+                            <v-textarea no-resize v-model="credit.note" class="" label="Credit Note"></v-textarea>                    
                         </v-flex>
                     </v-layout>
                     </v-form>
@@ -74,12 +78,7 @@
                 </v-card>
         </v-flex>
     </v-layout>
-        <v-layout row wrap>
-            <v-flex d-flex xs12 lg2 xl2>
-                <v-btn color="primary" @click="newItem">Add Item</v-btn>
-            </v-flex>
-        </v-layout>
-        <template v-for="item in itemList">
+        <template v-for="(item, index) in itemList">
             <v-layout row wrap :key="item.id">
                 <v-flex d-flex xs12 lg8 xl6>
                         <v-card>
@@ -99,7 +98,7 @@
                                     <v-flex xs6 md3>
                                         <v-text-field
                                             v-model="item.weight"
-                                            label="Weight/Amount"
+                                            label="Weight(g)/Amount"
                                         ></v-text-field>
                                     </v-flex>
                                     <v-flex xs6 md1>
@@ -122,12 +121,20 @@
                                             label="Value"
                                         ></v-text-field>
                                     </v-flex>
+                                    <v-flex xs6 md1>
+                                        <v-btn class="close-btn" dark small right absolute outline fab color="grey" @click="removeItem(index)"><v-icon class="fab-fix" dark>delete</v-icon></v-btn>                    
+                                    </v-flex>
                                 </v-layout>
                             </v-card-text>
                         </v-card>
                 </v-flex>
             </v-layout>
         </template>
+         <v-layout row wrap>
+            <v-flex d-flex xs12 lg2 xl2>
+                <v-btn color="primary" @click="newItem">Add Item</v-btn>
+            </v-flex>
+        </v-layout>
             <v-bottom-nav
                 fixed
                 :value="true"
@@ -201,18 +208,19 @@
                 employee_id: null,
                 customer_id: null,
                 goldCAD: null,
-                exchange: null,
+                // exchange: null,
                 platCAD: null,
                 metalPriceDate: null,
                 creditDate: null,
                 creditValue: null,
-                used: false
+                used: false,
+                note: null
             },
             items: [],
             employeeRules: [
                 v => !!v || 'Select employee'
             ],
-            lastGoldValues: "2018-08-08 3:29PM"
+            lastGoldValues: ""
         }),
         methods: {
             //Gets employee list
@@ -230,6 +238,21 @@
                 axios.get('/values/gettype?type_id=1')
                     .then((response) => {
                         this.valueList = response.data;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                axios.get('/values/gettype?type_id=2')
+                    .then((response) => {
+                        response.data.forEach(function(v){
+                            if (v.name === 'GoldCAD') {
+                                this.credit.goldCAD = this.round(v.value1, 2);
+                                this.lastGoldValues = v.updated_at;
+                            } else if (v.name === 'PlatCAD') {
+                                this.credit.platCAD = this.round(v.value1, 2);
+                            }
+                        }.bind(this));
+                        this.credit.goldCAD
                     })
                     .catch((error) => {
                         console.log(error);
@@ -255,10 +278,8 @@
                 axios.get('/values/getGoldValue')
                     .then((response) => {
                         // console.log(response);
-                        var goldOz = response.data[0];
-                        this.credit.exchange = this.round(response.data[1], 2);
-
-                        var goldG = goldOz / 31.1;
+                        var goldG = response.data[0];
+                        // this.credit.exchange = this.round(response.data[1], 2);
                         this.credit.goldCAD = this.round(goldG, 2);
                         this.getNewPlatValue();
                     })
@@ -269,11 +290,10 @@
             getNewPlatValue() {
                 axios.get('/values/getPlatValue')
                     .then((response) => {
-                        // console.log(response);
-                        var platOz = response.data;
-                        platOz = platOz * this.credit.exchange;
-                        var platG = platOz / 31.1;
+                        var platG = response.data;
+                        // platG = platG * this.credit.exchange;
                         this.credit.platCAD = this.round(platG, 2);
+                        this.lastGoldValues = this.today + " " + this.now;
                     })
                     .catch((error) => {
                         console.log(error);
@@ -297,6 +317,10 @@
             },
             //Get credit
             getCredit(id) {
+
+            },
+            //Deletes credit item
+            removeItem(index) {
 
             }
         },
@@ -322,7 +346,8 @@
             //Calculate values on changes
             itemList: {
                 handler(list) {
-                    list.forEach(function(e) {
+                    var total = 0;
+                    list.forEach(function(e){
                         var metal;
                         if (e.itemObj) {
                             e.multiplier = e.itemObj.value1;
@@ -337,11 +362,36 @@
                             }
                         }
 
-                        e.value = e.weight * e.multiplier * e.markup * metal;
+                        if (e.weight && e.multiplier && e.markup) e.value = this.round(e.weight * e.multiplier * e.markup * metal, 2);
+                        else e.value = 0;
+                        total += e.value;
                     }.bind(this));
+                    this.credit.total = total;
                 },
                 deep: true
             },
+        },
+        computed: {
+            today() {
+                // Date = new Date();
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = (1+today.getMonth());
+                var dd = today.getDate();
+
+                if (mm < 10 ) {
+                    mm = "0" + mm;
+                }
+                if (dd < 10 ) {
+                    dd = "0" + dd;
+                }
+
+                return yyyy + "-" + mm + "-" + dd;
+            },
+            now() {
+                var now = new Date()
+                return now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+            }
         }
     }
 </script>

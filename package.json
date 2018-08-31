@@ -29,6 +29,6 @@
     "vue-cropperjs": "^2.2.1",
     "vue-fuse": "^1.5.2",
     "vue-web-cam": "^1.2.3",
-    "vuetify": "^1.1.10"
+    "vuetify": "^1.2.1"
   }
 }
