@@ -15,8 +15,8 @@ class ValueTableSeeder extends Seeder
         DB::table('values')->insert([
                 'type_id' => 1,
                 'name' => '8k',
-                'value1' => '0.375',
-                'value2' => '0.75',
+                'value1' => '0.333',
+                'value2' => '0.6',
                 'value3' => 'Gold'
 
         ]);
@@ -25,7 +25,7 @@ class ValueTableSeeder extends Seeder
                 'type_id' => 1,
                 'name' => '9k',
                 'value1' => '0.375',
-                'value2' => '0.75',
+                'value2' => '0.6',
                 'value3' => 'Gold'
         ]);
 
@@ -33,7 +33,7 @@ class ValueTableSeeder extends Seeder
                 'type_id' => 1,
                 'name' => '10k',
                 'value1' => '0.417',
-                'value2' => '0.75',
+                'value2' => '0.6',
                 'value3' => 'Gold'
         ]);
 
@@ -41,7 +41,7 @@ class ValueTableSeeder extends Seeder
             'type_id' => 1,
             'name' => '12k',
             'value1' => '0.5',
-            'value2' => '0.75',
+            'value2' => '0.6',
             'value3' => 'Gold'
         ]);
         
@@ -49,7 +49,7 @@ class ValueTableSeeder extends Seeder
             'type_id' => 1,
             'name' => '14k',
             'value1' => '0.585',
-            'value2' => '0.75',
+            'value2' => '0.6',
             'value3' => 'Gold'
         ]);
 
@@ -57,7 +57,7 @@ class ValueTableSeeder extends Seeder
             'type_id' => 1,
             'name' => '18k',
             'value1' => '0.75',
-            'value2' => '0.75',
+            'value2' => '0.6',
             'value3' => 'Gold'
         ]);
 
@@ -65,7 +65,7 @@ class ValueTableSeeder extends Seeder
             'type_id' => 1,
             'name' => '20k',
             'value1' => '0.833',
-            'value2' => '0.75',
+            'value2' => '0.6',
             'value3' => 'Gold'
         ]);
 
@@ -73,7 +73,7 @@ class ValueTableSeeder extends Seeder
             'type_id' => 1,
             'name' => '22k',
             'value1' => '0.916',
-            'value2' => '0.75',
+            'value2' => '0.6',
             'value3' => 'Gold'
         ]);
 
@@ -97,7 +97,7 @@ class ValueTableSeeder extends Seeder
             'type_id' => 1,
             'name' => 'Platinum',
             'value1' => '0.95',
-            'value2' => '0.75',
+            'value2' => '0.4',
             'value3' => 'Platinum'
         ]);
 

@@ -73479,6 +73479,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -73489,6 +73543,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             itemList: [],
             date: false,
             dateMenu: false,
+            creditDeleteDialog: false,
             credit: {
                 id: null,
                 employee_id: null,
@@ -73580,7 +73635,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //Round number to desired decimals
         round: function round(value, decimals) {
             return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
-        }
+        },
+
+        //Create new gold credit
+        createCredit: function createCredit() {
+            console.log("todo: createCredit");
+        },
+
+        //Update existing gold credit
+        updateCredit: function updateCredit() {
+            console.log("todo: updateCredit");
+        },
+
+        //Delete current credit
+        deleteCredit: function deleteCredit() {
+            console.log("todo: deletecredit");
+        },
+
+        //Get credit
+        getCredit: function getCredit(id) {}
     },
     mounted: function mounted() {
         this.getEmployees();
@@ -73595,6 +73668,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         customer_id: function customer_id(val) {
             if (!isNaN(this.customer_id) && this.customer_id !== null) {
                 this.credit.customer_id = val;
+            }
+        },
+        goldcredit_id: function goldcredit_id(val) {
+            if (!isNaN(this.goldcredit_id) && this.goldcredit_id !== null) {
+                this.getCredit(this.goldcredit_id);
             }
         },
 
@@ -74047,7 +74125,253 @@ var render = function() {
               1
             )
           ]
-        })
+        }),
+        _vm._v(" "),
+        _c(
+          "v-bottom-nav",
+          {
+            staticClass: "elevation-1",
+            attrs: { fixed: "", value: true, app: true }
+          },
+          [
+            _c(
+              "v-btn",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.credit.id || _vm.credit.id == 0,
+                    expression: "!credit.id || credit.id == 0"
+                  }
+                ],
+                staticClass: "v-btn--active primary--text",
+                on: {
+                  click: function($event) {
+                    _vm.createCredit()
+                  }
+                }
+              },
+              [
+                _c("span", [_vm._v("Save Credit")]),
+                _vm._v(" "),
+                _c("v-icon", [_vm._v("save")])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-btn",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.credit.id && _vm.credit.id !== 0,
+                    expression: "credit.id && credit.id !== 0"
+                  }
+                ],
+                staticClass: "v-btn--active success--text",
+                on: {
+                  click: function($event) {
+                    _vm.updateCredit()
+                  }
+                }
+              },
+              [
+                _c("span", [_vm._v("Update Credit")]),
+                _vm._v(" "),
+                _c("v-icon", [_vm._v("save")])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-btn",
+              { staticClass: "v-btn--active info--text" },
+              [
+                _c("span", [_vm._v("Print")]),
+                _vm._v(" "),
+                _c("v-icon", [_vm._v("print")])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-btn",
+              {
+                staticClass: "v-btn--active accent--text",
+                on: {
+                  click: function($event) {
+                    _vm.captureDialog = true
+                  }
+                }
+              },
+              [
+                _c("span", [_vm._v("Capture")]),
+                _vm._v(" "),
+                _c("v-icon", [_vm._v("camera_alt")])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-btn",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.credit.id && _vm.credit.id !== 0,
+                    expression: "credit.id && credit.id !== 0"
+                  }
+                ],
+                staticClass: "v-btn--active error--text",
+                on: {
+                  click: function($event) {
+                    _vm.creditDeleteDialog = true
+                  }
+                }
+              },
+              [
+                _c("span", [_vm._v("Delete Credit")]),
+                _vm._v(" "),
+                _c("v-icon", [_vm._v("delete")])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-btn",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.credit.id || _vm.credit.id == 0,
+                    expression: "!credit.id || credit.id == 0"
+                  }
+                ],
+                staticClass: "v-btn--active error--text",
+                on: {
+                  click: function($event) {
+                    _vm.$router.go(-1)
+                  }
+                }
+              },
+              [
+                _c("span", [_vm._v("Discard Credit")]),
+                _vm._v(" "),
+                _c("v-icon", [_vm._v("delete")])
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "v-dialog",
+          {
+            attrs: { "max-width": "500px" },
+            model: {
+              value: _vm.creditDeleteDialog,
+              callback: function($$v) {
+                _vm.creditDeleteDialog = $$v
+              },
+              expression: "creditDeleteDialog"
+            }
+          },
+          [
+            _c(
+              "v-card",
+              [
+                _c(
+                  "v-toolbar",
+                  {
+                    attrs: {
+                      color: "error",
+                      dark: "",
+                      "clipped-left": "",
+                      flat: ""
+                    }
+                  },
+                  [
+                    _c(
+                      "v-toolbar-title",
+                      [
+                        _c("v-icon", [_vm._v("warning")]),
+                        _vm._v("Delete Credit")
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("v-card-text", [
+                  _vm._v(
+                    "\n                Are you sure you want to delete this Credit? "
+                  ),
+                  _c("br"),
+                  _vm._v(
+                    "\n                This will also delete all images attached to this Credit "
+                  ),
+                  _c("br"),
+                  _vm._v(
+                    "\n                This action is not reversable\n            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "v-card-actions",
+                  [
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: { color: "error" },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.deleteCredit()
+                          }
+                        }
+                      },
+                      [
+                        _c("v-icon", [_vm._v("delete")]),
+                        _vm._v("\n                    Delete\n                ")
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: { color: "primary", right: "", absolute: "" },
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.creditDeleteDialog = false
+                          }
+                        }
+                      },
+                      [
+                        _c("v-icon", [_vm._v("cancel")]),
+                        _vm._v(
+                          "\n                    Cancel\n                    "
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
       ],
       2
     )

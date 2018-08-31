@@ -128,6 +128,60 @@
                 </v-flex>
             </v-layout>
         </template>
+            <v-bottom-nav
+                fixed
+                :value="true"
+                :app="true"
+                class="elevation-1"
+            >
+                <v-btn v-show="!credit.id || credit.id == 0" @click="createCredit()" class="v-btn--active primary--text">
+                <span>Save Credit</span>
+                <v-icon>save</v-icon>
+                </v-btn>
+                <v-btn v-show="credit.id && credit.id !== 0" @click="updateCredit()" class="v-btn--active success--text">
+                <span>Update Credit</span>
+                <v-icon>save</v-icon>
+                </v-btn>
+                <v-btn class="v-btn--active info--text">
+                <span>Print</span>
+                <v-icon>print</v-icon>
+                </v-btn>
+                <v-btn @click="captureDialog = true" class="v-btn--active accent--text">
+                <span>Capture</span>
+                <v-icon>camera_alt</v-icon>
+                </v-btn>
+                <v-btn v-show="credit.id && credit.id !== 0" @click="creditDeleteDialog = true" class="v-btn--active error--text">
+                <span>Delete Credit</span>
+                <v-icon>delete</v-icon>
+                </v-btn>
+                <v-btn v-show="!credit.id || credit.id == 0" @click="$router.go(-1)" class="v-btn--active error--text">
+                <span>Discard Credit</span>
+                <v-icon>delete</v-icon>
+                </v-btn>
+            </v-bottom-nav>
+
+            <v-dialog v-model="creditDeleteDialog" max-width="500px">
+            <v-card>
+                <v-toolbar color="error" dark clipped-left flat>
+                    <v-toolbar-title><v-icon>warning</v-icon>Delete Credit</v-toolbar-title>
+                </v-toolbar>
+                <v-card-text>
+                    Are you sure you want to delete this Credit? <br>
+                    This will also delete all images attached to this Credit <br>
+                    This action is not reversable
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn color="error"  @click.stop="deleteCredit()">
+                        <v-icon>delete</v-icon>
+                        Delete
+                    </v-btn>                    
+                    <v-btn color="primary" right absolute @click.stop="creditDeleteDialog=false">
+                        <v-icon>cancel</v-icon>
+                        Cancel
+                        </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </div>
     </transition>
 </template>
@@ -141,6 +195,7 @@
             itemList: [],
             date: false,
             dateMenu: false,
+            creditDeleteDialog: false,
             credit: {
                 id: null,
                 employee_id: null,
@@ -227,6 +282,22 @@
             //Round number to desired decimals
             round(value, decimals) {
                 return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+            },
+            //Create new gold credit
+            createCredit() {
+                console.log("todo: createCredit");
+            },
+            //Update existing gold credit
+            updateCredit() {
+                console.log("todo: updateCredit");
+            },
+            //Delete current credit
+            deleteCredit() {
+                console.log("todo: deletecredit");
+            },
+            //Get credit
+            getCredit(id) {
+
             }
         },
         mounted() {
@@ -241,6 +312,11 @@
             customer_id (val) {
                 if (!isNaN(this.customer_id) && this.customer_id !== null) {
                     this.credit.customer_id = val;
+                }
+            },
+            goldcredit_id (val) {
+                if (!isNaN(this.goldcredit_id) && this.goldcredit_id !== null) {
+                    this.getCredit(this.goldcredit_id);
                 }
             },
             //Calculate values on changes
