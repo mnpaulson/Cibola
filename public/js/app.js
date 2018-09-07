@@ -70831,6 +70831,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -70863,6 +70869,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addr_prov: null,
         addr_postal: null,
         addr_country: null,
+        note: null,
         id: null
       },
 
@@ -70959,6 +70966,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.customer.addr_prov = null;
         this.customer.addr_postal = null;
         this.customer.addr_country = null;
+        this.customer.note = null;
         this.customer.id = null;
       } else {
         this.isForm = false;
@@ -71022,6 +71030,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.customer.addr_prov = null;
       this.customer.addr_postal = null;
       this.customer.addr_country = null;
+      this.customer.note = null;
       this.customer.id = null;
       this.$emit('update:id', null);
       this.setFormState(false);
@@ -71039,6 +71048,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.customer.addr_prov = null;
         this.customer.addr_postal = null;
         this.customer.addr_country = null;
+        this.customer.note = null;
         this.customer.id = null;
         this.fuseList = [];
         this.searchSelect = null;
@@ -71051,6 +71061,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (id == 0) return;
       this.customer.id = id;
       this.loading = true;
+      this.isSearch = false;
       axios.post('customers/show', this.customer).then(function (response) {
         _this5.customer.fname = response.data[0].fname;
         _this5.customer.lname = response.data[0].lname;
@@ -71061,6 +71072,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this5.customer.addr_prov = response.data[0].addr_prov;
         _this5.customer.addr_postal = response.data[0].addr_postal;
         _this5.customer.addr_country = response.data[0].addr_country;
+        _this5.customer.note = response.data[0].note;
         _this5.setFormState(false);
         _this5.loading = false;
       }).catch(function (error) {
@@ -71094,7 +71106,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-flex",
-    { attrs: { "d-flex": "", xs12: "", sm12: "", md4: "" } },
+    { attrs: { "d-flex": "", xs12: "", sm12: "", md6: "" } },
     [
       _vm.isSearch
         ? _c(
@@ -71187,66 +71199,101 @@ var render = function() {
                 [
                   _vm.isInfo
                     ? _c(
-                        "v-flex",
+                        "v-layout",
+                        { attrs: { row: "", wrap: "" } },
                         [
                           _c(
-                            "router-link",
-                            {
-                              attrs: {
-                                to: { path: "/customer/" + _vm.customer.id }
-                              }
-                            },
+                            "v-flex",
+                            { attrs: { xs12: "", md6: "" } },
                             [
                               _c(
-                                "h3",
-                                { staticClass: "headline mb-0" },
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: { path: "/customer/" + _vm.customer.id }
+                                  }
+                                },
                                 [
-                                  _c("v-icon", { attrs: { large: "" } }, [
-                                    _vm._v("person")
-                                  ]),
+                                  _c(
+                                    "h3",
+                                    { staticClass: "headline mb-0" },
+                                    [
+                                      _c("v-icon", { attrs: { large: "" } }, [
+                                        _vm._v("person")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v(_vm._s(_vm.customer.fname))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v(_vm._s(_vm.customer.lname))
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                [
+                                  _c("v-icon", [_vm._v("phone")]),
+                                  _vm._v(
+                                    " " + _vm._s(_vm.customer.phone) + " "
+                                  ),
+                                  _c("br"),
                                   _vm._v(" "),
-                                  _c("span", [
-                                    _vm._v(_vm._s(_vm.customer.fname))
-                                  ]),
+                                  _c("v-icon", [_vm._v("email")]),
+                                  _vm._v(
+                                    " " + _vm._s(_vm.customer.email) + " "
+                                  ),
+                                  _c("br"),
                                   _vm._v(" "),
-                                  _c("span", [
-                                    _vm._v(_vm._s(_vm.customer.lname))
-                                  ])
+                                  _c("v-icon", [_vm._v("home")]),
+                                  _vm._v(
+                                    " " + _vm._s(_vm.customer.addr_st) + " "
+                                  ),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n            " +
+                                      _vm._s(_vm.customer.addr_city) +
+                                      ", " +
+                                      _vm._s(_vm.customer.addr_prov) +
+                                      " " +
+                                      _vm._s(_vm.customer.addr_postal) +
+                                      " "
+                                  ),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n            " +
+                                      _vm._s(_vm.customer.addr_country) +
+                                      "\n          "
+                                  )
                                 ],
                                 1
                               )
-                            ]
+                            ],
+                            1
                           ),
                           _vm._v(" "),
                           _c(
-                            "p",
+                            "v-flex",
+                            { attrs: { xs12: "", md6: "" } },
                             [
-                              _c("v-icon", [_vm._v("phone")]),
-                              _vm._v(" " + _vm._s(_vm.customer.phone) + " "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c("v-icon", [_vm._v("email")]),
-                              _vm._v(" " + _vm._s(_vm.customer.email) + " "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c("v-icon", [_vm._v("home")]),
-                              _vm._v(" " + _vm._s(_vm.customer.addr_st) + " "),
-                              _c("br"),
-                              _vm._v(
-                                "\n          " +
-                                  _vm._s(_vm.customer.addr_city) +
-                                  ", " +
-                                  _vm._s(_vm.customer.addr_prov) +
-                                  " " +
-                                  _vm._s(_vm.customer.addr_postal) +
-                                  " "
-                              ),
-                              _c("br"),
-                              _vm._v(
-                                "\n          " +
-                                  _vm._s(_vm.customer.addr_country) +
-                                  "\n        "
-                              )
+                              _c("v-textarea", {
+                                attrs: {
+                                  "no-resize": "",
+                                  label: "Customer Notes"
+                                },
+                                model: {
+                                  value: _vm.customer.note,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.customer, "note", $$v)
+                                  },
+                                  expression: "customer.note"
+                                }
+                              })
                             ],
                             1
                           )
@@ -71577,6 +71624,34 @@ var render = function() {
                       )
                     ],
                     1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isInfo,
+                          expression: "isInfo"
+                        }
+                      ],
+                      staticClass: "cus-save-btn",
+                      attrs: {
+                        color: "blue ",
+                        flat: "",
+                        small: "",
+                        right: "",
+                        absolute: ""
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.updateCustomer()
+                        }
+                      }
+                    },
+                    [_vm._v("Save Note")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -72461,7 +72536,6 @@ var render = function() {
                                     {
                                       ref: "dateMenu",
                                       attrs: {
-                                        lazy: "",
                                         "close-on-content-click": true,
                                         transition: "scale-transition",
                                         "offset-y": "",
@@ -72573,7 +72647,6 @@ var render = function() {
                                       ],
                                       ref: "completeMenu",
                                       attrs: {
-                                        lazy: "",
                                         "close-on-content-click": true,
                                         transition: "scale-transition",
                                         "offset-y": "",
@@ -72885,7 +72958,7 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-card-media", {
+                      _c("v-img", {
                         attrs: { src: image.image, height: "200px" },
                         on: {
                           click: function($event) {

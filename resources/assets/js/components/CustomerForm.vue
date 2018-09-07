@@ -1,5 +1,5 @@
 <template>
-  <v-flex d-flex xs12 sm12 md4>  
+  <v-flex d-flex xs12 sm12 md6>  
     <div v-if="isSearch">
       <v-autocomplete
           v-model="searchSelect"
@@ -21,22 +21,27 @@
         <v-btn style="z-index:0" class="close-btn" dark small right absolute outline fab color="grey" @click="clearCustomer()"><v-icon class="fab-fix" dark>close</v-icon></v-btn>
       </span>
       <v-card-text>
-        <v-flex v-if="isInfo">
-          <router-link :to="{ path: `/customer/${customer.id}` }">          
-            <h3 class="headline mb-0">
-              <v-icon large>person</v-icon>
-              <span>{{ customer.fname }}</span>
-              <span>{{ customer.lname }}</span>
-            </h3>
-          </router-link>
-          <p>
-            <v-icon>phone</v-icon> {{ customer.phone }} <br>
-            <v-icon>email</v-icon> {{ customer.email }} <br>
-            <v-icon>home</v-icon> {{ customer.addr_st }} <br>
-            {{ customer.addr_city }}, {{ customer.addr_prov }} {{ customer.addr_postal }} <br>
-            {{ customer.addr_country }}
-          </p>
-        </v-flex>   
+        <v-layout v-if="isInfo" row wrap>
+          <v-flex xs12 md6>
+            <router-link :to="{ path: `/customer/${customer.id}` }">          
+              <h3 class="headline mb-0">
+                <v-icon large>person</v-icon>
+                <span>{{ customer.fname }}</span>
+                <span>{{ customer.lname }}</span>
+              </h3>
+            </router-link>
+            <p>
+              <v-icon>phone</v-icon> {{ customer.phone }} <br>
+              <v-icon>email</v-icon> {{ customer.email }} <br>
+              <v-icon>home</v-icon> {{ customer.addr_st }} <br>
+              {{ customer.addr_city }}, {{ customer.addr_prov }} {{ customer.addr_postal }} <br>
+              {{ customer.addr_country }}
+            </p>
+          </v-flex>
+          <v-flex xs12 md6>
+            <v-textarea no-resize v-model="customer.note" class="" label="Customer Notes"></v-textarea>                                
+          </v-flex>
+        </v-layout>
         <v-form>
           <v-layout row wrap v-if="isForm">
             <v-flex xs12 sm6>
@@ -69,6 +74,7 @@
           </v-flex>
         </div>
         <!-- <v-btn style="z-index:0" v-show="isInfo" dark small bottom right absolute fab color="primary" @click="setFormState(true)" class="fab-up"><v-icon class="fab-fix" dark>edit</v-icon></v-btn> -->
+        <v-btn v-show="isInfo" color="blue " flat small right absolute class="cus-save-btn" @click="updateCustomer()">Save Note</v-btn>
         <v-btn v-show="isInfo" color="grey " flat small right absolute class="cus-edit-btn" @click="setFormState(true)">Edit</v-btn>
       </v-card-text>
             <v-progress-linear v-show="loading" :indeterminate="true" class="mb-0"></v-progress-linear>      
@@ -121,6 +127,7 @@
         addr_prov: null,
         addr_postal: null,
         addr_country: null,
+        note: null,
         id: null
       },
 
@@ -216,6 +223,7 @@
           this.customer.addr_prov = null;
           this.customer.addr_postal = null;
           this.customer.addr_country = null;
+          this.customer.note = null;
           this.customer.id = null;
         } else {
           this.isForm = false;
@@ -276,6 +284,7 @@
         this.customer.addr_prov = null;
         this.customer.addr_postal = null;
         this.customer.addr_country = null;
+        this.customer.note = null;
         this.customer.id = null;
         this.$emit('update:id', null);
         this.setFormState(false);
@@ -294,6 +303,7 @@
           this.customer.addr_prov = null;
           this.customer.addr_postal = null;
           this.customer.addr_country = null;
+          this.customer.note = null;
           this.customer.id = null;
           this.fuseList = [];
           this.searchSelect = null;
@@ -303,7 +313,8 @@
       getCustomer(id) {
         if (id == 0) return;
         this.customer.id = id;
-        this.loading = true;                    
+        this.loading = true;
+        this.isSearch = false;                    
         axios.post('customers/show', this.customer)
           .then((response) => {
             this.customer.fname = response.data[0].fname;
@@ -315,6 +326,7 @@
             this.customer.addr_prov = response.data[0].addr_prov;
             this.customer.addr_postal = response.data[0].addr_postal;
             this.customer.addr_country = response.data[0].addr_country;
+            this.customer.note = response.data[0].note;
             this.setFormState(false);
             this.loading = false;                        
           })

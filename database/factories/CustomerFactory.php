@@ -12,6 +12,7 @@ $factory->define(App\Customer::class, function (Faker $faker) {
        'addr_city' => $faker->city,
        'addr_prov' => $faker->stateAbbr,
        'addr_postal' => $faker->postcode,
-       'addr_country' => $faker->country
+       'addr_country' => $faker->country,
+       'note' => $faker->text($maxNbChars = 200)
     ];
 });

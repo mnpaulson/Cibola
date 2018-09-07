@@ -53,6 +53,7 @@ class CustomerController extends Controller
         $customer->addr_prov = $request->addr_prov;
         $customer->addr_postal = $request->addr_postal;
         $customer->addr_country = $request->addr_country;
+        $customer->note = $request->note;
 
         $customer->save();
         return response()->json($customer->id);
@@ -92,7 +93,8 @@ class CustomerController extends Controller
         $customer->addr_city = $request->addr_city;
         $customer->addr_prov = $request->addr_prov;
         $customer->addr_postal = $request->addr_postal;
-        $customer->addr_country = $request->addr_country; 
+        $customer->addr_country = $request->addr_country;
+        $customer->note = $request->note;
 
         $customer->save();
         return response()->json($customer->id);

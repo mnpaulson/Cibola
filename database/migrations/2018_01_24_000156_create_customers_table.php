@@ -25,6 +25,7 @@ class CreateCustomersTable extends Migration
             $table->string('addr_prov')->nullable();
             $table->string('addr_postal')->nullable();
             $table->string('addr_country')->nullable();
+            $table->text('note')->nullable();            
         });
     }
 

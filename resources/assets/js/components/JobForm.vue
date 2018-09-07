@@ -21,7 +21,7 @@
                             ></v-autocomplete>
                             <v-menu
                             ref="dateMenu"
-                            lazy
+                            
                             :close-on-content-click="true"
                             v-model="dateMenu"
                             transition="scale-transition"
@@ -47,7 +47,7 @@
                             </v-menu>
                             <v-menu
                             ref="completeMenu"
-                            lazy
+                            
                             :close-on-content-click="true"
                             v-model="completeMenu"
                             transition="scale-transition"
@@ -115,8 +115,8 @@
                 <transition name="component-fade" appear>                    
                 <v-card>
                     <v-btn class="close-btn" dark small right absolute outline fab color="grey" @click="removeImage(index)"><v-icon class="fab-fix" dark>delete</v-icon></v-btn>                    
-                    <v-card-media :src="image.image" height="200px" @click="showLightBox(image.image)">
-                    </v-card-media>
+                    <v-img :src="image.image" height="200px" @click="showLightBox(image.image)">
+                    </v-img>
                     <v-textarea v-model="image.note" name="input-1" label=" Note" multi-line rows="5" no-resize></v-textarea>
                 </v-card>
                 </transition>
