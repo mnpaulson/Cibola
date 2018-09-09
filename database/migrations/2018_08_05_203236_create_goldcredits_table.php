@@ -18,10 +18,11 @@ class CreateGoldcreditsTable extends Migration
             $table->integer('customer_id');
             $table->integer('employee_id')->default(1);
             $table->float('gold_cad');
-            $table->float('gold_usd');
+            $table->float('plat_cad');
             $table->date('gold_date');
             $table->float('credit_value');
-            $table->text('note')->nullable();           
+            $table->text('note')->nullable(); 
+            $table->boolean('used')->default(false);          
             $table->timestamps();
         });
     }

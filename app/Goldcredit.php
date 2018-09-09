@@ -23,4 +23,9 @@ class Goldcredit extends Model
         return $this->belongsTo('App\Employee');
     }
 
+    public function credit_items() 
+    {
+        return $this->hasMany('App\CreditItem');
+    }
+
 }
