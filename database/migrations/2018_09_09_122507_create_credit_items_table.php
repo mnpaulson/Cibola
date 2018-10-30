@@ -15,6 +15,7 @@ class CreateCreditItemsTable extends Migration
     {
         Schema::create('credit_items', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('goldcredit_id');
             $table->integer('itemId');
             $table->float('markup');
             $table->float('multiplier');

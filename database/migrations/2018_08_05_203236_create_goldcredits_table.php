@@ -20,7 +20,6 @@ class CreateGoldcreditsTable extends Migration
             $table->float('gold_cad');
             $table->float('plat_cad');
             $table->date('gold_date');
-            $table->float('credit_value');
             $table->text('note')->nullable(); 
             $table->boolean('used')->default(false);          
             $table->timestamps();

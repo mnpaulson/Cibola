@@ -26,10 +26,9 @@ class GoldcreditController extends Controller
 
         $credit->customer_id = $request->customer_id;
         $credit->employee_id = $request->employee_id;
-        $credit->gold_cad = $request->gold_cad;
-        $credit->plat_cad = $request->plat_cad;
-        $credit->gold_date = $request->gold_date;
-        $credit->credit_value = $request->credit_value;
+        $credit->gold_cad = $request->goldCAD;
+        $credit->plat_cad = $request->platCAD;
+        $credit->gold_date = $request->metalPriceDate;
         $credit->note = $request->note;
         $credit->used = $request->used;
 
@@ -52,18 +51,21 @@ class GoldcreditController extends Controller
                 //Prepare CreditItem object
                 $CreditItem = new CreditItem([
                     'markup' => $creditItem["markup"],
-                    'itemId' => $creditItem["itemId"],
+                    'itemId' => $creditItem["id"],
                     'multiplier' => $creditItem["multiplier"],
                     'value' => $creditItem["value"],
                     'weight' => $creditItem["weight"]
                 ]);
 
                 //Save CreditItem to DB
-                $job->CreditItems()->save($CreditItem);
-                array_push($image_ids, $CreditItem->id);            
+                $credit->credit_items()->save($CreditItem);
+                array_push($creditItem_ids, $CreditItem->id);            
 
             }
-        }   
+        }
+        
+        return response()->json(['id' => $credit->id, 'item_ids' => $creditItem_ids]);
+        
     }
 
     public function update(Request $request) 

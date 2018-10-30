@@ -48,7 +48,7 @@ Route::get('values/getGoldValue', 'ValueController@getGoldValue')->name('values.
 Route::get('values/getPlatValue', 'ValueController@getPlatValue')->name('values.getPlatValue');
 
 //Gold Credit Routes
-Route::post('goldcredit/create', 'GoldController@create')->name('goldcredit.create');
+Route::post('goldcredit/create', 'GoldCreditController@create')->name('goldcredit.create');
 
 
 
