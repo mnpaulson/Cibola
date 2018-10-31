@@ -28,4 +28,9 @@ class Goldcredit extends Model
         return $this->hasMany('App\CreditItem');
     }
 
+    public function credit_images()
+    {
+        return $this->hasMany('App\Credit_image');
+    }
+
 }

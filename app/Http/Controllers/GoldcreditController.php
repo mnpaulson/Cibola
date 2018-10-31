@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Goldcredit;
 use App\CreditItem;
-use Illuminate\Support\Facades\DB;
+use App\Credit_image;
+// use Illuminate\Support\Facades\DB;
+use Storage;
+use DB;
 
 class GoldcreditController extends Controller
 {
@@ -32,18 +35,12 @@ class GoldcreditController extends Controller
         $credit->note = $request->note;
         $credit->used = $request->used;
 
-        // $credit->markup = $request->markup;
-        // $credit->itemId = $request->itemId;
-        // $credit->multiplier = $request->multiplier;
-        // $credit->value = $request->value;
-        // $credit->weight = $request->weight;
-
         $credit->save();
         
-        $creditItems = $request->creditItems;
+        //Save Items
+        $creditItems = $request->credit_items;
         $creditItem_ids = array();
         
-        // Save credit items WIP
         if (sizeof($creditItems))
         {     
             foreach ($creditItems as $key =>$creditItem) 
@@ -51,7 +48,7 @@ class GoldcreditController extends Controller
                 //Prepare CreditItem object
                 $CreditItem = new CreditItem([
                     'markup' => $creditItem["markup"],
-                    'itemId' => $creditItem["id"],
+                    'itemId' => $creditItem["item"],
                     'multiplier' => $creditItem["multiplier"],
                     'value' => $creditItem["value"],
                     'weight' => $creditItem["weight"]
@@ -63,8 +60,59 @@ class GoldcreditController extends Controller
 
             }
         }
+
+        //Save Images
+        $images = $request->credit_images;
+        $image_ids = array();
         
-        return response()->json(['id' => $credit->id, 'item_ids' => $creditItem_ids]);
+        // Save images
+        if (sizeof($images))
+        {
+            $nextId = DB::table('credit_images')->max('id') + 1;                
+            foreach ($images as $key => $image) 
+            {
+
+                if (!is_null($image["id"])) 
+                {
+                    $credit_image = new Credit_image;
+                    $credit_image = Credit_image::where('id', $image["id"])->first();
+                    if (is_null($image["note"])) $image["note"] = "";
+                    $credit_image->note = $image["note"];
+        
+                } 
+                else 
+                {
+
+                    //Get proper file stream
+                    $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
+                    
+                    //set filename
+                    $filename = "public/credit" . $credit->id . "-" . $nextId++ . ".png";
+
+                    while (file_exists(public_path() . $filename)) {
+                        $filename = "public/credit" . $credit->id . "-" . $nextId++ . ".png";                    
+                    }
+
+                    //Write image to disk
+                    Storage::disk('local')->put($filename, base64_decode($image["image"]));
+
+                    //Get file url
+                    $url = Storage::url($filename);
+
+                    //Prepare Credit_image object
+                    $credit_image = new Credit_image(['image' => $url, 'note' => $image["note"]]);
+
+                }
+
+                //Save Credit_image to DB
+                $credit->credit_images()->save($credit_image);
+                array_push($image_ids, $credit_image->id);
+
+            }
+
+        }  
+        
+        return response()->json(['id' => $credit->id, 'item_ids' => $creditItem_ids, 'image_ids' => $image_ids]);
         
     }
 
@@ -93,6 +141,27 @@ class GoldcreditController extends Controller
         \App\Value::destroy($request->id);
         
         echo response()->json($request->id);
+    }
+
+    public function show(Request $request)
+    {
+        $credit = \App\Goldcredit::where('id', $request->id)->first();
+        $credit->credit_images;
+        $credit->credit_items;        
+        return response()->json($credit);
+    }
+
+    public function allCreditsDetails(Request $request)
+    {
+        $order = "";
+        if ($request->descending) $desc = 'desc';
+        else $desc = 'asc';
+        $credit = \App\Goldcredit::with('customer')
+        ->with('employee')
+        ->orderBy($request->sortBy, $desc)        
+        ->paginate($request->rowsPerPage);   
+
+        return response()->json($credit);  
     }
 
 }
