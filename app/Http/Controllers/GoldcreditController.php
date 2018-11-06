@@ -122,11 +122,8 @@ class GoldcreditController extends Controller
 
         $credit = \App\Goldcredit::where('id', $request->id)->first();
 
-        $credit->name = $request->name;
-        $credit->value1 = $request->value1;
-        $credit->value2 = $request->value2;
-        $credit->value3 = $request->value3;
-        $credit->active = $request->active;
+        $credit->note = $request->note;
+        $credit->used = $request->used;
 
         $credit->save();
         return response()->json($credit->id);
@@ -135,12 +132,21 @@ class GoldcreditController extends Controller
     // Deletes Value and reassigns all jobs to Value 1
     public function delete(Request $request) 
     {
-
-        $emps = \App\Value::where('id', $request->id)->first();
-
-        \App\Value::destroy($request->id);
+        $credit = \App\Goldcredit::where('id', $request->id)->first();
         
-        echo response()->json($request->id);
+        $images = $credit->credit_images;
+        
+        // Save images
+        if (sizeof($images))
+        {
+            foreach ($images as $key => $image) 
+            {
+             if (file_exists(public_path() . $image->image)) unlink(public_path() . $image->image);
+            }
+        }
+        \App\credit_image::where('goldcredit_id', $request->id)->delete();
+        \App\creditItem::where('goldcredit_id', $request->id)->delete();       
+        $credit->delete(); 
     }
 
     public function show(Request $request)

@@ -49,6 +49,8 @@ Route::get('values/getPlatValue', 'ValueController@getPlatValue')->name('values.
 
 //Gold Credit Routes
 Route::post('goldcredit/create', 'GoldCreditController@create')->name('goldcredit.create');
+Route::post('goldcredit/delete', 'GoldCreditController@delete')->name('goldcredit.delete');
+Route::post('goldcredit/update', 'GoldCreditController@update')->name('goldcredit.update');
 Route::post('goldcredit/show', 'GoldCreditController@show')->name('goldcredit.show');
 Route::post('goldcredit/allCreditsDetails', 'GoldCreditController@allCreditsDetails')->name('goldcredit.allCreditsDetails');
 
