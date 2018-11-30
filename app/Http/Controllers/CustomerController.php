@@ -20,7 +20,7 @@ class CustomerController extends Controller
 
     public function searchList()
     {
-        $customers = Customer::all(['fname', 'lname', 'id']);
+        $customers = Customer::all(['fname', 'lname', 'id', 'phone']);
         return response()->json($customers);
     }
 

@@ -169,5 +169,11 @@ class GoldcreditController extends Controller
 
         return response()->json($credit);  
     }
+    
+    public function customerCredits(Request $request) 
+    {
+        $credits = \App\Goldcredit::where('customer_id', $request->id)->get();
+        return response()->json($credits);
+    }
 
 }

@@ -53,6 +53,7 @@ Route::post('goldcredit/delete', 'GoldCreditController@delete')->name('goldcredi
 Route::post('goldcredit/update', 'GoldCreditController@update')->name('goldcredit.update');
 Route::post('goldcredit/show', 'GoldCreditController@show')->name('goldcredit.show');
 Route::post('goldcredit/allCreditsDetails', 'GoldCreditController@allCreditsDetails')->name('goldcredit.allCreditsDetails');
+Route::post('goldcredit/customerCredits', 'GoldCreditController@customerCredits')->name('goldcredit.customerCredits');
 
 
 
