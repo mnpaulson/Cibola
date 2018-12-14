@@ -24,7 +24,7 @@ class ValueController extends Controller
 
     public function getType(Request $request)
     {
-        $value = Value::where('type_id', $request->type_id)->get();
+        $value = Value::where('type_id', $request->type_id)->where('active', 1)->get();
         return response()->json($value);
     }
 
@@ -37,7 +37,7 @@ class ValueController extends Controller
         $value->value1 = $request->value1;
         $value->value2 = $request->value2;
         $value->value3 = $request->value3;
-        $value->active = true;
+        $value->active = $request->active;
 
         $value->save();
         return response()->json($value->id);

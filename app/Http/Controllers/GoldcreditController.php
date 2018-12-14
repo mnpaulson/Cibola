@@ -122,6 +122,7 @@ class GoldcreditController extends Controller
 
         $credit = \App\Goldcredit::where('id', $request->id)->first();
 
+        $credit->customer_id = $request->customer;
         $credit->note = $request->note;
         $credit->used = $request->used;
 
