@@ -39,8 +39,7 @@ class JobController extends Controller
         }
 
         $job->customer_id = $request->customer_id;
-        if ($request->employee_id) $job->employee_id = $request->employee_id;
-        else $job->employee_id = 1;
+        $job->employee_id = $request->employee_id;
         if ($request->estimate) $job->estimate = str_replace(',', '', $request->estimate);
         else $job->estimate = 0;
         $job->est_note = $request->est_note;
@@ -99,7 +98,8 @@ class JobController extends Controller
 
         $job->customer_id = $request->customer_id;
         $job->employee_id = $request->employee_id;
-        $job->estimate = str_replace(',', '', $request->estimate);
+        if ($request->estimate) $job->estimate = str_replace(',', '', $request->estimate);
+        else $job->estimate = 0;
         $job->est_note = $request->est_note;
         $job->note = $request->note;
         $job->appraisal = $request->appraisal;        

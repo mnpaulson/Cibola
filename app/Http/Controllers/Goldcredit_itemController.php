@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CreditItem;
 
-class Job_imageController extends Controller
+class Goldcredit_itemController extends Controller
 {
 
     public function index()
