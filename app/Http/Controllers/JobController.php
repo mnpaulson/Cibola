@@ -42,6 +42,7 @@ class JobController extends Controller
         $job->employee_id = $request->employee_id;
         if ($request->estimate) $job->estimate = str_replace(',', '', $request->estimate);
         else $job->estimate = 0;
+        $job->deposit = $request->deposit;
         $job->est_note = $request->est_note;
         $job->note = $request->note;
         $job->appraisal = $request->appraisal;        
@@ -100,6 +101,7 @@ class JobController extends Controller
         $job->employee_id = $request->employee_id;
         if ($request->estimate) $job->estimate = str_replace(',', '', $request->estimate);
         else $job->estimate = 0;
+        $job->deposit = $request->deposit;
         $job->est_note = $request->est_note;
         $job->note = $request->note;
         $job->appraisal = $request->appraisal;        
