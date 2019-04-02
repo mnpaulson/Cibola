@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Goldcredit extends Model
 {
-    protected $fillable = ['credit_value', 'gold_date', 'gold_usd', 'gold_cad', 'note'];
+    protected $fillable = ['credit_value', 'gold_date', 'gold_usd', 'gold_cad', 'note', 'credit_type'];
     
     public function goldcredit()
     {

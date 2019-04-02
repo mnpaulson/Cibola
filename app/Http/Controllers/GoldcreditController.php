@@ -34,6 +34,7 @@ class GoldcreditController extends Controller
         $credit->gold_date = $request->metalPriceDate;
         $credit->note = $request->note;
         $credit->used = $request->used;
+        $credit->credit_type = $request->credit_type;
 
         $credit->save();
         
@@ -125,6 +126,8 @@ class GoldcreditController extends Controller
         $credit->customer_id = $request->customer;
         $credit->note = $request->note;
         $credit->used = $request->used;
+        $credit->credit_type = $request->credit_type;
+        
 
         $credit->save();
         return response()->json($credit->id);

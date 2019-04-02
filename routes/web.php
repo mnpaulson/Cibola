@@ -35,6 +35,8 @@ Route::post('jobs/allJobsDetails', 'JobController@allJobsDetails')->name('jobs.a
 Route::post('jobs/complete', 'JobController@complete')->name('jobs.complete');
 Route::post('jobs/uncomplete', 'JobController@uncomplete')->name('jobs.uncomplete');
 Route::post('job_images/delete', 'Job_imageController@delete')->name('job_images.delete');
+Route::get('jobs/stats', 'JobController@stats')->name('jobs.stats');
+
 
 
 //Value Routes

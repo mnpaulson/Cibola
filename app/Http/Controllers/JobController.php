@@ -7,6 +7,9 @@ use App\Job;
 use App\Job_image;
 use Storage;
 use DB;
+use Carbon\Carbon;
+use stdClass;
+use DateTime;
 
 class JobController extends Controller
 {
@@ -22,7 +25,7 @@ class JobController extends Controller
         $job = \App\Job::with('job_images')
             ->with('customer')
             ->orderBy('updated_at', 'desc')
-            ->take(10)
+            ->take(13)
             ->get();    
 
    
@@ -231,6 +234,60 @@ class JobController extends Controller
         $job->save();
 
         return response()->json($job->id);
+    }
+
+    public function stats()
+    {
+        // $jobs = \App\Job::whereMonth('created_at', Carbon::now()->format('m'))
+        // ->select('estimate', 'created_at')
+        // ->get();
+
+        $stats = new stdClass();
+        $date = getdate();
+        $dateString = $date['year'] . '-' . $date['mon']  . '-' .  $date['mday'];
+        $dateObj = new DateTime($dateString);
+
+        $stats->monthTotals = array();
+        $stats->monthNames = array();
+        $stats->monthJobs = array();
+
+
+        for ($i = 0; $i < 12; $i++)
+        {
+
+            $total = \App\Job::whereMonth('created_at', $dateObj->format('m'))
+                ->whereYear('created_at', $dateObj->format('Y'))
+                ->sum('estimate');
+
+            $count = \App\Job::whereMonth('created_at', $dateObj->format('m'))
+                ->whereYear('created_at', $dateObj->format('Y'))
+                ->count();
+            
+            array_push($stats->monthTotals, $total);
+            array_push($stats->monthNames, $dateObj->format('F'));
+            array_push($stats->monthJobs, $count);
+            // array_push($stats->monthNames, $dateObj->format('Y-M'));
+
+
+            $dateObj = $dateObj->modify('first day of last month');
+        }
+
+
+        /*
+        Aug, Sept, Oct,
+        Nov, Dec, Jan,
+        Feb, Mar, Apr, 
+        May, Jun, Jul, 
+        */
+
+
+        $stats->monthTotals = array_reverse($stats->monthTotals);
+        $stats->monthNames = array_reverse($stats->monthNames);
+        $stats->monthJobs = array_reverse($stats->monthJobs);
+
+
+        return response()->json($stats);
+
     }
 
 }
