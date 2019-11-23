@@ -37,8 +37,6 @@ Route::post('jobs/uncomplete', 'JobController@uncomplete')->name('jobs.uncomplet
 Route::post('job_images/delete', 'Job_imageController@delete')->name('job_images.delete');
 Route::get('jobs/stats', 'JobController@stats')->name('jobs.stats');
 
-
-
 //Value Routes
 Route::post('values/create', 'ValueController@create')->name('values.create');
 Route::post('values/update', 'ValueController@update')->name('values.update');
@@ -57,6 +55,10 @@ Route::post('goldcredit/show', 'GoldCreditController@show')->name('goldcredit.sh
 Route::post('goldcredit/allCreditsDetails', 'GoldCreditController@allCreditsDetails')->name('goldcredit.allCreditsDetails');
 Route::post('goldcredit/customerCredits', 'GoldCreditController@customerCredits')->name('goldcredit.customerCredits');
 
+//CustomSheet Routes
+Route::post('customsheet/create', 'CustomSheetController@create')->name('customsheets.create');
+Route::post('customsheet/show', 'CustomSheetController@show')->name('customsheets.show');
+Route::post('customsheet/customerCustomSheets', 'CustomSheetController@customerCustomSheets')->name('customsheets.customerCustomSheets');
 
 
 
