@@ -14,6 +14,11 @@ class CustomSheet extends Model
         return $this->belongsTo(CustomSheet::class);
     }
 
+    public function customer()
+    {
+        return $this->belongsTo('App\Customer');
+    }
+
     public function employee()
     {
         return $this->belongsTo('App\Employee');

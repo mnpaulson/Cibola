@@ -81,83 +81,127 @@ class CustomSheetController extends Controller
 
     public function update(Request $request) 
     {
-        // $customSheet = new CustomSheet;
+        $customSheet = new CustomSheet;
 
-        // $customSheet = \App\CustomSheet::where('id', $request->id)->first();
+        //check customer id
+        if ($request->customer_id == 0) {
+            trigger_error("Customer cannot be blank");
+        }
 
-        // if ($request->customer_id == 0) {
-        //     trigger_error("Customer cannot be blank");
-        // }
+        //update custom sheet
+        if (isset($request->customSheet_id) && $request->customSheet_id !== 0)
+        {
+            // DB::table('custom_sheets')
+            // ->where('id', $request->customSheet_id)
+            // ->update([
+            //     'name' => $request->name,
+            //     'note' => $request->note
+            // ]);
+            $customSheet = CustomSheet::where('id', $request->customSheet_id)->first();
+            $customSheet->name = $request->name;
+            $customSheet->note = $request->note;
+            $customSheet->save();
+        } 
+        else
+        {
+            return "No Custom sheet found to update";
+        }
 
-        // $customSheet->customer_id = $request->customer_id;
-        // $customSheet->employee_id = $request->employee_id;
-        // if ($request->estimate) $customSheet->estimate = str_replace(',', '', $request->estimate);
-        // else $customSheet->estimate = 0;
-        // $customSheet->deposit = $request->deposit;
-        // $customSheet->est_note = $request->est_note;
-        // $customSheet->note = $request->note;
-        // $customSheet->appraisal = $request->appraisal;        
-        // $customSheet->due_date = $request->due_date;
-        // $customSheet->completed_at = $request->completed_at;
-        // $customSheet->vital_date = $request->vital_date;        
+        $newEstimates = array();
 
+        foreach ($request->estimates as $key => $estimate)
+        {
+            $newEstVals = array();
+            //Update Estimates
+            if (isset($estimate['id']))
+            {
 
-        // $customSheet->save();
+                $estimateToUpdate = estimate::where('id', $estimate['id'])->first();
 
-        // $images = $request->CustomSheet_images;
-        // $image_ids = array();
-        
-        // // Save images
-        // if (sizeof($images))
-        // {
-        //     $nextId = DB::table('CustomSheet_images')->max('id') + 1;                
-        //     foreach ($images as $key => $image) 
-        //     {
+                $estimateToUpdate->name = $estimate['name'];
+                $estimateToUpdate->note = $estimate['note'];
+                $estimateToUpdate->isPrimary = $estimate['isPrimary'];
 
-        //         if (!is_null($image["id"])) 
-        //         {
-        //             $customSheet_image = new CustomSheet_image;
-        //             $customSheet_image = CustomSheet_image::where('id', $image["id"])->first();
-        //             if (is_null($image["note"])) $image["note"] = "";
-        //             $customSheet_image->note = $image["note"];
-        
-        //         } 
-        //         else 
-        //         {
-
-        //             //Get proper file stream
-        //             $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
-                    
-        //             //set filename
-        //             $filename = "public/CustomSheet" . $customSheet->id . "-" . $nextId++ . ".png";
-
-        //             while (file_exists(public_path() . $filename)) {
-        //                 $filename = "public/CustomSheet" . $customSheet->id . "-" . $nextId++ . ".png";                    
-        //             }
-
-        //             //Write image to disk
-        //             Storage::disk('local')->put($filename, base64_decode($image["image"]));
-
-        //             //Get file url
-        //             $url = Storage::url($filename);
-
-        //             //Prepare CustomSheet_image object
-        //             $customSheet_image = new CustomSheet_image(['image' => $url, 'note' => $image["note"]]);
-
-        //         }
-
-        //         //Save CustomSheet_image to DB
-        //         $customSheet->CustomSheet_images()->save($customSheet_image);
-        //         array_push($image_ids, $customSheet_image->id);
-
-        //     }
+                // DB::table('estimates')
+                // ->where('id', $estimate->id)
+                // ->update([
+                //     'name' => $estimate->name,
+                //     'note' => $estimate->note,
+                //     'isPrimary' => $estimate->isPrimary
+                // ]);
+                
+                //Est values loop
+                foreach ($estimate['estValues'] as $k => $val)
+                {
+                    //Update est values
+                    if (isset($val['id']))
+                    {
 
 
+                        DB::table('est_values')
+                        ->where('id', $val['id'])
+                        ->update([
+                            'name' => $val['name'],
+                            'priceType' => $val['priceType'],
+                            'type'=> $val['type'],
+                            'pricePer' => $val['pricePer'],
+                            'amt' => $val['amt']
+                        ]);
 
 
-        // }        
+                    }
+                    //new Est values
+                    else 
+                    {
+                        $v = new EstValue([
+                            'type' => $val['type'],
+                            'name' => $val['name'],
+                            'amt' => $val['amt'],
+                            'pricePer' => $val['pricePer'],
+                            'priceType' => $val['priceType']
+                        ]);
 
-        // return response()->json(['id' => $customSheet->id, 'image_ids' => $image_ids]);
+                        array_push($newEstVals, $v);
+                    }
+
+                    $estimateToUpdate->EstValues()->saveMany($newEstVals);
+                    $estimateToUpdate->save();
+                }
+                
+            }
+            //New Estimate
+            else
+            {
+                $newEstVals = array();
+
+                $e = new Estimate([
+                    'name' => $estimate['name'],
+                    'note' => $estimate['note'],
+                    'isPrimary' => $estimate['isPrimary']
+                ]);
+
+                foreach($estimate['estValues'] as $k => $val)
+                {
+                    $v = new EstValue([
+                        'type' => $val['type'],
+                        'name' => $val['name'],
+                        'amt' => $val['amt'],
+                        'pricePer' => $val['pricePer'],
+                        'priceType' => $val['priceType']
+                    ]);
+                    array_push($newEstVals, $v);
+                }
+
+                array_push($newEstimates, $newEstVals);
+
+                $customSheet->estimates()->save($e);
+                $e->EstValues()->saveMany($newEstVals);
+            }
+        }
+
+
+        $customSheet->estimatesWithValues;
+        return response()->json($customSheet);
     }
 
     public function delete(Request $request) 
@@ -193,5 +237,17 @@ class CustomSheetController extends Controller
         return response()->json($customSheets);
     }
 
+    public function allCustomSheetDetails(Request $request)
+    {
+        $order = "";
+        if ($request->descending) $desc = 'desc';
+        else $desc = 'asc';
+        $customSheet = \App\CustomSheet::with('customer')
+        ->orderBy($request->sortBy, $desc)        
+        ->paginate($request->rowsPerPage);   
+        // $customSheet->estimatesWithValues;
+
+        return response()->json($customSheet);  
+    }
 
 }
