@@ -203,21 +203,19 @@ class CustomSheetController extends Controller
 
     public function delete(Request $request) 
     {
-        // $customSheet = \App\CustomSheet::where('id', $request->id)->first();
-        
-        // $images = $customSheet->CustomSheet_images;
-        
-        // // Save images
-        // if (sizeof($images))
-        // {
-        //     $nextId = DB::table('CustomSheet_images')->max('id') + 1;                
-        //     foreach ($images as $key => $image) 
-        //     {
-        //      if (file_exists(public_path() . $image->image)) unlink(public_path() . $image->image);
-        //     }
-        // }
-        // \App\CustomSheet_image::where('CustomSheet_id', $request->id)->delete();       
-        // $customSheet->delete();        
+        $customSheet = CustomSheet::where('id', $request->customSheet_id)->first();
+
+        $estimates = Estimate::where('custom_sheet_id', $customSheet->id)->get();
+
+        foreach($estimates as $e => $val) 
+        {
+            EstValue::where('estimate_id', $val->id)->delete();
+            $val->delete();
+        }
+
+        // $estimates->delete();
+
+        $customSheet->delete();        
     }
 
     public function show(Request $request)
