@@ -104,6 +104,13 @@ class CustomSheetController extends Controller
             return "No Custom sheet found to update";
         }
 
+        foreach ($request->estimatesToDelete as $delEst)
+        {
+            $e = Estimate::where('id', $delEst)->first()->delete();
+            $v = EstValue::where('estimate_id', $delEst)->delete();
+
+        }
+
         $newEstimates = array();
 
         foreach ($request->estimates as $key => $estimate)
@@ -118,15 +125,12 @@ class CustomSheetController extends Controller
                 $estimateToUpdate->name = $estimate['name'];
                 $estimateToUpdate->note = $estimate['note'];
                 $estimateToUpdate->isPrimary = $estimate['isPrimary'];
-
-                // DB::table('estimates')
-                // ->where('id', $estimate->id)
-                // ->update([
-                //     'name' => $estimate->name,
-                //     'note' => $estimate->note,
-                //     'isPrimary' => $estimate->isPrimary
-                // ]);
                 
+                foreach ($estimate['estValuesToDelete'] as $es)
+                {
+                    $v = EstValue::where('id', $es)->delete();
+                }
+
                 //Est values loop
                 foreach ($estimate['estValues'] as $k => $val)
                 {
@@ -177,7 +181,8 @@ class CustomSheetController extends Controller
                     $estimateToUpdate->EstValues()->saveMany($newEstVals);
                     $estimateToUpdate->save();
                 }
-                
+                $estimateToUpdate->EstValues()->saveMany($newEstVals);
+                $estimateToUpdate->save();
             }
             //New Estimate
             else
