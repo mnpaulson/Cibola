@@ -12,7 +12,8 @@ class ValueController extends Controller
 
     public function index()
     {
-        $value = Value::all();
+        // $value = Value::all();
+        $value = Value::orderBy('name')->get();
         return response()->json($value);
     }
 
@@ -24,7 +25,7 @@ class ValueController extends Controller
 
     public function getType(Request $request)
     {
-        $value = Value::where('type_id', $request->type_id)->where('active', 1)->get();
+        $value = Value::where('type_id', $request->type_id)->where('active', 1)->orderBy('value2', 'desc')->get();
         return response()->json($value);
     }
 
@@ -37,6 +38,8 @@ class ValueController extends Controller
         $value->value1 = $request->value1;
         $value->value2 = $request->value2;
         $value->value3 = $request->value3;
+        $value->discount = $request->discount;
+        $value->markup = $request->markup;
         $value->active = $request->active;
 
         $value->save();
@@ -53,6 +56,8 @@ class ValueController extends Controller
         $value->value1 = $request->value1;
         $value->value2 = $request->value2;
         $value->value3 = $request->value3;
+        $value->discount = $request->discount;
+        $value->markup = $request->markup;
         $value->active = $request->active;
 
         $value->save();

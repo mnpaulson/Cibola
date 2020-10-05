@@ -21,7 +21,7 @@ class CreateEstValuesTable extends Migration
             $table->string('type');
             $table->string('priceType')->nullable();
             $table->float('amt')->default(0);
-            $table->float('pricePer')->default(0);
+            $table->float('basePrice')->default(0);
         });
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EstValue extends Model
 {
-    protected $fillable = ['name', 'type', 'priceType', 'amt', 'pricePer'];
+    protected $fillable = ['name', 'type', 'priceType', 'amt', 'basePrice', 'markup', 'discount', 'priceModifier'];
 
     public function estValue()
     {

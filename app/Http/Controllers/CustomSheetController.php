@@ -58,8 +58,11 @@ class CustomSheetController extends Controller
                     'type' => $val['type'],
                     'name' => $val['name'],
                     'amt' => $val['amt'],
-                    'pricePer' => $val['pricePer'],
-                    'priceType' => $val['priceType']
+                    'basePrice' => $val['basePrice'],
+                    'priceType' => $val['priceType'],
+                    'markup' => $val['markup'],
+                    'discount' => $val['discount'],
+                    'priceModifier' => $val['priceModifier']
                 ]);
                 array_push($est_vals, $v);
             }
@@ -91,12 +94,6 @@ class CustomSheetController extends Controller
         //update custom sheet
         if (isset($request->customSheet_id) && $request->customSheet_id !== 0)
         {
-            // DB::table('custom_sheets')
-            // ->where('id', $request->customSheet_id)
-            // ->update([
-            //     'name' => $request->name,
-            //     'note' => $request->note
-            // ]);
             $customSheet = CustomSheet::where('id', $request->customSheet_id)->first();
             $customSheet->name = $request->name;
             $customSheet->note = $request->note;
@@ -141,11 +138,14 @@ class CustomSheetController extends Controller
                         DB::table('est_values')
                         ->where('id', $val['id'])
                         ->update([
+                            'type' => $val['type'],
                             'name' => $val['name'],
+                            'amt' => $val['amt'],
+                            'basePrice' => $val['basePrice'],
                             'priceType' => $val['priceType'],
-                            'type'=> $val['type'],
-                            'pricePer' => $val['pricePer'],
-                            'amt' => $val['amt']
+                            'markup' => $val['markup'],
+                            'discount' => $val['discount'],
+                            'priceModifier' => $val['priceModifier']
                         ]);
 
 
@@ -157,11 +157,21 @@ class CustomSheetController extends Controller
                             'type' => $val['type'],
                             'name' => $val['name'],
                             'amt' => $val['amt'],
-                            'pricePer' => $val['pricePer'],
-                            'priceType' => $val['priceType']
+                            'basePrice' => $val['basePrice'],
+                            'priceType' => $val['priceType'],
+                            'markup' => $val['markup'],
+                            'discount' => $val['discount'],
+                            'priceModifier' => $val['priceModifier']
                         ]);
 
                         array_push($newEstVals, $v);
+                    }
+
+                    foreach ($estimate['estValuesToDelete'] as $k => $val)
+                    {
+                        DB::table('est_values')
+                        ->where('id', $val)
+                        ->delete();
                     }
 
                     $estimateToUpdate->EstValues()->saveMany($newEstVals);
@@ -186,8 +196,11 @@ class CustomSheetController extends Controller
                         'type' => $val['type'],
                         'name' => $val['name'],
                         'amt' => $val['amt'],
-                        'pricePer' => $val['pricePer'],
-                        'priceType' => $val['priceType']
+                        'basePrice' => $val['basePrice'],
+                        'priceType' => $val['priceType'],
+                        'markup' => $val['markup'],
+                        'discount' => $val['discount'],
+                        'priceModifier' => $val['priceModifier']
                     ]);
                     array_push($newEstVals, $v);
                 }
@@ -199,6 +212,13 @@ class CustomSheetController extends Controller
             }
         }
 
+
+        foreach ($request->estimatesToDelete as $etd => $val)
+        {
+            DB::table('estimates')
+            ->where('id', $val)
+            ->delete();
+        }
 
         $customSheet->estimatesWithValues;
         return response()->json($customSheet);
