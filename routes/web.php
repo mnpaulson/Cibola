@@ -59,6 +59,7 @@ Route::post('goldcredit/customerCredits', 'GoldCreditController@customerCredits'
 Route::post('customsheet/create', 'CustomSheetController@create')->name('customsheets.create');
 Route::post('customsheet/update', 'CustomSheetController@update')->name('customsheets.update');
 Route::post('customsheet/show', 'CustomSheetController@show')->name('customsheets.show');
+Route::post('customsheet/delete', 'CustomSheetController@delete')->name('customsheets.delete');
 Route::post('customsheet/customerCustomSheets', 'CustomSheetController@customerCustomSheets')->name('customsheets.customerCustomSheets');
 Route::post('customsheet/allCustomSheetDetails', 'CustomSheetController@allCustomSheetDetails')->name('customsheets.allCustomSheetDetails');
 
