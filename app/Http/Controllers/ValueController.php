@@ -25,7 +25,10 @@ class ValueController extends Controller
 
     public function getType(Request $request)
     {
-        $value = Value::where('type_id', $request->type_id)->where('active', 1)->orderBy('value2', 'desc')->get();
+        $order;
+        if ($request->type_id == 4) $order = 'order';
+        else $order = 'value2';
+        $value = Value::where('type_id', $request->type_id)->where('active', 1)->orderBy($order, 'asc')->get();
         return response()->json($value);
     }
 
