@@ -40,6 +40,8 @@ class ValueController extends Controller
         $value->value3 = $request->value3;
         $value->discount = $request->discount;
         $value->markup = $request->markup;
+        $value->default = $request->default;
+        $value->order = $request->order;
         $value->active = $request->active;
 
         $value->save();
@@ -58,6 +60,8 @@ class ValueController extends Controller
         $value->value3 = $request->value3;
         $value->discount = $request->discount;
         $value->markup = $request->markup;
+        $value->default = $request->default;
+        $value->order = $request->order;
         $value->active = $request->active;
 
         $value->save();
