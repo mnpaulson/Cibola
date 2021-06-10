@@ -38,4 +38,9 @@ class CustomSheet extends Model
     {
         return $this->estimates()->with('EstValues');
     }
+
+    public function custom_images() 
+    {
+        return $this->hasMany('App\Custom_image');
+    }
 }

@@ -62,6 +62,8 @@ Route::post('customsheet/show', 'CustomSheetController@show')->name('customsheet
 Route::post('customsheet/delete', 'CustomSheetController@delete')->name('customsheets.delete');
 Route::post('customsheet/customerCustomSheets', 'CustomSheetController@customerCustomSheets')->name('customsheets.customerCustomSheets');
 Route::post('customsheet/allCustomSheetDetails', 'CustomSheetController@allCustomSheetDetails')->name('customsheets.allCustomSheetDetails');
+Route::post('custom_images/delete', 'Custom_imageController@delete')->name('custom_images.delete');
+
 
 
 

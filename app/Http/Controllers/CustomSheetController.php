@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CustomSheet;
 use App\Estimate;
 use App\EstValue;
+use App\Custom_image;
 use Storage;
 use DB;
 use Carbon\Carbon;
@@ -20,19 +21,6 @@ class CustomSheetController extends Controller
         $customSheet = CustomSheet::all();
         return response()->json($customSheet);
     }
-
-    // public function recentCustomSheetsList()
-    // {
-    //     $customSheet = \App\CustomSheet::with('CustomSheet_images')
-    //         ->with('customer')
-    //         ->orderBy('updated_at', 'desc')
-    //         ->take(13)
-    //         ->get();    
-
-   
-
-    //     return response()->json($customSheet);
-    // }
 
     public function create(Request $request) 
     {
@@ -79,7 +67,42 @@ class CustomSheetController extends Controller
         }
 
         $customSheet->estimatesWithValues;
+
+        $images = $request->custom_images;
+        $image_ids = array();
+        
+        // Save images
+        if (sizeof($images))
+        {     
+        $nextId = DB::table('custom_images')->max('id') + 1;        
+            foreach ($images as $key => $image) 
+            {
+                //Get proper file stream
+                $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
+                
+                //set filename
+                $filename = "public/custom" . $customSheet->id . "-" . $nextId++ . ".png";
+
+                //Write image to disk
+                Storage::disk('local')->put($filename, base64_decode($image["image"]));
+
+                //Get file url
+                $url = Storage::url($filename);
+
+                //Prepare custom_image object
+                $custom_image = new Custom_image(['image' => $url, 'note' => $image["note"]]);
+
+                //Save custom_image to DB
+                $customSheet->custom_images()->save($custom_image);
+                array_push($image_ids, $custom_image->id);            
+
+            }
+        }      
+
+        $customSheet->estimatesWithValues;
+        $customSheet->custom_images;        
         return response()->json($customSheet);
+        // return response()->json(['customSheet' => $customSheet, 'image_ids' => $image_ids]);
     }
 
     public function update(Request $request) 
@@ -225,7 +248,57 @@ class CustomSheetController extends Controller
             ->delete();
         }
 
+        $images = $request->custom_images;
+        $image_ids = array();
+        
+        // Save images
+        if (sizeof($images))
+        {
+            $nextId = DB::table('custom_images')->max('id') + 1;                
+            foreach ($images as $key => $image) 
+            {
+
+                if (!is_null($image["id"])) 
+                {
+                    $custom_image = new Custom_image;
+                    $custom_image = Custom_image::where('id', $image["id"])->first();
+                    if (is_null($image["note"])) $image["note"] = "";
+                    $custom_image->note = $image["note"];
+        
+                } 
+                else 
+                {
+
+                    //Get proper file stream
+                    $image["image"] = substr($image["image"], strpos($image["image"], ",")+1);
+                    
+                    //set filename
+                    $filename = "public/custom" . $customSheet->id . "-" . $nextId++ . ".png";
+
+                    while (file_exists(public_path() . $filename)) {
+                        $filename = "public/custom" . $customSheet->id . "-" . $nextId++ . ".png";                    
+                    }
+
+                    //Write image to disk
+                    Storage::disk('local')->put($filename, base64_decode($image["image"]));
+
+                    //Get file url
+                    $url = Storage::url($filename);
+
+                    //Prepare Custom_image object
+                    $custom_image = new Custom_image(['image' => $url, 'note' => $image["note"]]);
+
+                }
+
+                //Save Custom_image to DB
+                $customSheet->custom_images()->save($custom_image);
+                array_push($image_ids, $custom_image->id);
+
+            }
+        }       
+
         $customSheet->estimatesWithValues;
+        $customSheet->custom_images;        
         return response()->json($customSheet);
     }
 
@@ -235,6 +308,18 @@ class CustomSheetController extends Controller
         
         $customSheet->estValues()->delete();
         $customSheet->estimates()->delete();
+        $images = $customSheet->custom_images;
+        
+        // Save images
+        if (sizeof($images))
+        {
+            $nextId = DB::table('custom_images')->max('id') + 1;                
+            foreach ($images as $key => $image) 
+            {
+             if (file_exists(public_path() . $image->image)) unlink(public_path() . $image->image);
+            }
+        }
+        \App\Custom_image::where('custom_sheet_id', $request->id)->delete();     
             
         $customSheet->delete();
     }
@@ -242,8 +327,8 @@ class CustomSheetController extends Controller
     public function show(Request $request)
     {
         $customSheet = \App\CustomSheet::where('id', $request->id)->first();
-        // $customSheet->estimates;
-        $customSheet->estimatesWithValues;        
+        $customSheet->estimatesWithValues;
+        $customSheet->custom_images;        
         return response()->json($customSheet);
     }
 
