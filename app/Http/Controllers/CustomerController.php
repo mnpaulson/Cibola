@@ -54,6 +54,7 @@ class CustomerController extends Controller
         $customer->addr_postal = $request->addr_postal;
         $customer->addr_country = $request->addr_country;
         $customer->note = $request->note;
+        $customer->noteVisibility = $request->noteVisibility;
 
         $customer->save();
         return response()->json($customer->id);
@@ -95,6 +96,7 @@ class CustomerController extends Controller
         $customer->addr_postal = $request->addr_postal;
         $customer->addr_country = $request->addr_country;
         $customer->note = $request->note;
+        $customer->noteVisibility = $request->noteVisibility;
 
         $customer->save();
         return response()->json($customer->id);
